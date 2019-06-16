@@ -1,11 +1,26 @@
 #include <iostream>
+#include "util\shaderutility.h"
 #include <GLFW/glfw3.h>
 
 using namespace std;
 
-int main(void)
+GLuint program;
+
+void initialise()
+{
+	cout << glewInit() << endl;
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
+	ShaderUtility shaderUtility;
+	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
+	glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
+}
+
+int main(int argc, char **argv)
 {
 	GLFWwindow* window;
+	glutInit(&argc, argv);
 
 	/* Initialize the library */
 	if (!glfwInit())
@@ -21,6 +36,8 @@ int main(void)
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+
+	initialise();
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

@@ -132,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\shaders\fragmentshader.glsl" />
+    <None Include="src\shaders\vertexshader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\shaderutility.h" />
