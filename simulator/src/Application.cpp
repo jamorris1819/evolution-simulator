@@ -7,28 +7,33 @@
 #include "render\polygon.h"
 #include "render\vertexarrayobject.h"
 #include "entities\drawnentity.h"
+#include "render\camera.h"
 
 using namespace std;
 
 GLuint program;
 
 DrawnEntity* de;
+Camera* cam;
 
 void initialiseEntites() {
 	vector<Vertex> vertices;
-	vertices.push_back(Vertex(-0.5f, 0.5f));
-	vertices.push_back(Vertex(-0.5f, -0.5f));
-	vertices.push_back(Vertex(0.5f, -0.5f));
-	vertices.push_back(Vertex(0.5f, 0.5f));
+	vertices.push_back(Vertex(-50.0f, 50.0f));
+	vertices.push_back(Vertex(-50.0f, -50.0f));
+	vertices.push_back(Vertex(50.0f, -50.0f));
+	vertices.push_back(Vertex(50.0f, 50.0f));
 
 	PolygonR* pol;
 	pol = new PolygonR(program);
 	pol->setVertices(vertices);
 	pol->load();
 
-	de = new DrawnEntity(glm::vec3(0, 0, 0));
+	de = new DrawnEntity(glm::vec3(200, 200, 0));
 	de->setPolygon(pol);
 	de->setVelocity(glm::vec3(1, 0, 0));
+
+	cam = new Camera(glm::vec2(0, 0), program);
+	cam->initialise();
 }
 
 void initialise()
@@ -51,7 +56,8 @@ void render() {
 }
 
 void update() {
-	de->update(0.01f);
+	// TODO: Add deltatime
+	de->update(0.1f);
 }
 
 int main(int argc, char **argv)
@@ -88,6 +94,7 @@ int main(int argc, char **argv)
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
+		
 
 		/* Poll for and process events */
 		glfwPollEvents();

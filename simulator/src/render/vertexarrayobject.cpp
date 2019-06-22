@@ -125,22 +125,14 @@ void VertexArrayObject::render(glm::mat4 matrix)
 {
 	if (!enabled)
 		return;
+
+	// Attach model matrix to shader.
 	GLuint uModel = glGetUniformLocation(shaderId, "uModel");
 	glUniformMatrix4fv(uModel, 1, GL_TRUE, &matrix[0][0]);
-	GLuint uView = glGetUniformLocation(shaderId, "uView");
-	glm::mat4 a = glm::ortho(0.0f,
-		640.0f,
-		0.0f,
-		480.0f,
-		-1.0f,   // zNear
-		1.0f   // zFar
-	);
 
-	glUniformMatrix4fv(uView, 1, GL_TRUE, &a[0][0]);
-
+	// Bind vertex and render polygon.
 	glBindVertexArray(vao[0]);
 	glDrawArrays(GL_POLYGON, 0, dataSize);
-
 	glBindVertexArray(0);
 }
 
