@@ -1,18 +1,19 @@
 #include "vertexarrayobject.h"
-#include "polygon.h"
+#include "polygonData.h"
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
+#include "glm\gtc\matrix_transform.hpp"
 
 
 
-VertexArrayObject::VertexArrayObject(Polygon* polygon)
+VertexArrayObject::VertexArrayObject(PolygonData* polygonData)
 {
 	enabled = false;
 
-	if (polygon == nullptr)
+	if (polygonData == nullptr)
 		return;
 
-	this->polygon = polygon;
+	this->polygonData = polygonData;
 	vao[0] = 0;
 	enabled = true;
 }
@@ -52,7 +53,7 @@ void VertexArrayObject::allocateMemory(int amount)
 
 void VertexArrayObject::load()
 {
-	process(polygon->getVertices(), polygon->getIndices().data(), polygon->getVertexCount());
+	process(polygonData->getVertices(), polygonData->getIndices().data(), polygonData->getVertexCount());
 }
 
 void VertexArrayObject::load(float* vertices, float* indices, int count)
@@ -72,14 +73,13 @@ void VertexArrayObject::process(float* vertices, float* indices, int count)
 	setIndexData(indices, dataSize);
 
 	int vPositionLocation = glGetAttribLocation(shaderId, "vPosition");
-	int vNormalLocation = glGetAttribLocation(shaderId, "vNormal");
 	int vColourLocation = glGetAttribLocation(shaderId, "vColour");
 
 	glEnableVertexAttribArray(vPositionLocation);
 	glVertexAttribPointer(vPositionLocation, 2, GL_FLOAT, false, vertexDataCount * sizeof(float), nullptr);
 
-	glEnableVertexAttribArray(vNormalLocation);
-	glVertexAttribPointer(vNormalLocation, 3, GL_FLOAT, true, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(vColourLocation);
+	glVertexAttribPointer(vColourLocation, 2, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
 
 	glBindVertexArray(0);
 	enabled = true;
@@ -127,8 +127,20 @@ void VertexArrayObject::render(glm::mat4 matrix)
 		return;
 	GLuint uModel = glGetUniformLocation(shaderId, "uModel");
 	glUniformMatrix4fv(uModel, 1, GL_TRUE, &matrix[0][0]);
+	GLuint uView = glGetUniformLocation(shaderId, "uView");
+	glm::mat4 a = glm::ortho(0.0f,
+		640.0f,
+		0.0f,
+		480.0f,
+		-1.0f,   // zNear
+		1.0f   // zFar
+	);
+
+	glUniformMatrix4fv(uView, 1, GL_TRUE, &a[0][0]);
+
 	glBindVertexArray(vao[0]);
-	glDrawArrays(GL_TRIANGLES, 0, dataSize);
+	glDrawArrays(GL_POLYGON, 0, dataSize);
+
 	glBindVertexArray(0);
 }
 

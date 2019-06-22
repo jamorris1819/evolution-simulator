@@ -123,8 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\util\shaderutility.cpp" />
+    <ClCompile Include="src\entities\drawnentity.cpp" />
+    <ClCompile Include="src\entities\entity.cpp" />
     <ClCompile Include="src\render\polygon.cpp" />
+    <ClCompile Include="src\util\shaderutility.cpp" />
+    <ClCompile Include="src\render\polygondata.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\render\vertex.cpp" />
     <ClCompile Include="src\render\triangle.cpp" />
@@ -136,8 +139,11 @@
     <None Include="src\shaders\vertexshader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\util\shaderutility.h" />
+    <ClInclude Include="src\entities\drawnentity.h" />
+    <ClInclude Include="src\entities\entity.h" />
     <ClInclude Include="src\render\polygon.h" />
+    <ClInclude Include="src\util\shaderutility.h" />
+    <ClInclude Include="src\render\polygondata.h" />
     <ClInclude Include="src\render\vertex.h" />
     <ClInclude Include="src\render\triangle.h" />
     <ClInclude Include="src\render\vertexarrayobject.h" />

@@ -27,10 +27,19 @@
     <ClCompile Include="src\render\vertexarrayobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\polygon.cpp">
+    <ClCompile Include="src\util\shaderutility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\shaderutility.cpp">
+    <ClCompile Include="src\entities\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\drawnentity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\polygondata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\polygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,10 +58,19 @@
     <ClInclude Include="src\render\vertexarrayobject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\polygon.h">
+    <ClInclude Include="src\util\shaderutility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\shaderutility.h">
+    <ClInclude Include="src\entities\entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\drawnentity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\polygondata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\polygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

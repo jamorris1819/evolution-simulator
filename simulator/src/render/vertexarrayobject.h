@@ -3,12 +3,12 @@
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 
-class Polygon;
+class PolygonData;
 
 class VertexArrayObject
 {
 public:
-	VertexArrayObject(Polygon* polygon);
+	VertexArrayObject(PolygonData* polygonData);
 	~VertexArrayObject();
 	void initialise();
 	void load();
@@ -16,7 +16,7 @@ public:
 	void render(glm::mat4 matrix);
 	void unload();
 	void setShader(GLuint shaderId);
-	Polygon* polygon;
+	PolygonData* polygonData;
 private:
 	void generateArrays();
 	void allocateMemory(int amount);

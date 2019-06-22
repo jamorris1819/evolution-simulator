@@ -1,23 +1,22 @@
 #pragma once
-
+#include "GL/glew.h"
 #include <vector>
+#include "vertex.h"
 #include "triangle.h"
+#include "vertexarrayobject.h"
+#include "polygondata.h"
 
-class Polygon
+using namespace std;
+
+class PolygonR : public PolygonData
 {
 public:
-	Polygon();
-	~Polygon();
-	float* getVertices();
-	void setVertices(std::vector<Vertex> data);
-	std::vector<float> & getIndices();
-	//void load();
-	//void unload();
-	int getVertexCount();
-protected:
-	std::vector<Triangle> triangles;
-	std::vector<Vertex> vertices;
-	std::vector<float> indices;
-	int vertexCount;
-	float* floatData;
+	PolygonR(GLuint shaderID);
+	~PolygonR();
+	void load();
+	void unload();
+	void render(glm::mat4 matrix);
+	GLuint shaderID;
+	VertexArrayObject* vao;
+
 };

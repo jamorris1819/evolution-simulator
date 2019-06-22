@@ -13,6 +13,7 @@ Vertex::~Vertex()
 Vertex::Vertex(float x, float y)
 {
 	setPosition(glm::vec2(x, y));
+	setColour(glm::vec3(1, 0, 0));
 }
 
 
