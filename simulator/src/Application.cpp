@@ -15,6 +15,8 @@ using namespace std;
 GLuint program;
 GLFWwindow* window;
 float lastTime;
+float width = 1920.0f;
+float height = 1080.0f;
 
 DrawnEntity* de;
 Camera* cam;
@@ -37,7 +39,7 @@ void initialiseEntities() {
 	de->setPolygon(pol);
 
 	cam = new Camera(glm::vec2(0, 0), program);
-	cam->initialise(640.0f, 480.0f, 100.0f);
+	cam->initialise(width, height, 100.0f);
 }
 
 double getTime()
@@ -54,7 +56,7 @@ void initialise()
 	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
 	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
 	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
-	glViewport(0, 0, 640, 480);
+	glViewport(0, 0, width, height);
 
 	ShaderUtility shaderUtility;
 	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
@@ -90,18 +92,16 @@ int main(int argc, char **argv)
 		return -1;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "Evolution Simulator", NULL, NULL);
+	window = glfwCreateWindow(width, height, "Evolution Simulator", NULL, NULL);
+	glfwSetWindowPos(window, (3440.0f - width) / 2, (1440.0f - height) / 2);
 	if (!window)
 	{
 		glfwTerminate();
 		return -1;
 	}
-
 	
-
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
-	
 
 	initialise();
 
