@@ -35,7 +35,6 @@ void initialiseEntities() {
 
 	de = new DrawnEntity(glm::vec3(200, 200, 0));
 	de->setPolygon(pol);
-	//de->setVelocity(glm::vec3(100, 0, 0));
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(640.0f, 480.0f, 100.0f);
@@ -51,7 +50,10 @@ double getTime()
 
 void initialise()
 {
-	cout << glewInit() << endl;
+	cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
+	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
+	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
+	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
 	glViewport(0, 0, 640, 480);
 
 	ShaderUtility shaderUtility;

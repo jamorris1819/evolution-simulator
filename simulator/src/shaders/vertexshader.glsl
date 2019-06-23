@@ -7,7 +7,7 @@ uniform mat4 uProjection;
 in vec2 vPosition;
 in vec3 vColour;
 
-flat out vec3 oColour;
+out vec3 oColour;
  
 void main(void)
 {	
