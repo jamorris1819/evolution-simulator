@@ -59,6 +59,7 @@ void initialise()
 	lastTime = getTime();
 	Input::initialise();
 	glfwSetKeyCallback(window, Input::keyCallback);
+	glfwSetScrollCallback(window, Input::scrollCallback);
 	initialiseEntities();
 }
 

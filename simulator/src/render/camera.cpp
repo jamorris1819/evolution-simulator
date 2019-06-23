@@ -11,6 +11,9 @@ Camera::Camera(glm::vec2 position, GLuint shaderID)
 
 void Camera::initialise(float width, float height, float speed)
 {
+	this->width = width;
+	this->height = height;
+
 	projection = glm::ortho(
 		0.0f,		// Left
 		width,		// Right
@@ -20,6 +23,10 @@ void Camera::initialise(float width, float height, float speed)
 		1.0f		// Far
 	);
 	moveSpeed = speed;
+	zoom = 1.0f;
+
+	minZoom = 0.2f;
+	maxZoom = 2.0f;
 
 	align();
 }
@@ -41,30 +48,66 @@ void Camera::align()
 	glUniformMatrix4fv(uProjection, 1, GL_TRUE, &projection[0][0]);
 }
 
-void Camera::update(double deltaTime)
+bool Camera::handleMovement(double deltaTime)
 {
 	bool alignmentNeeded = false;
+	float zoomMoveSpeed = moveSpeed / zoom;
 
 	if (Input::isDown(GLFW_KEY_D)) {
-		this->position.x -= deltaTime * moveSpeed;
+		this->position.x -= deltaTime * zoomMoveSpeed;
 		alignmentNeeded = true;
 	}
 
 	if (Input::isDown(GLFW_KEY_A)) {
-		this->position.x += deltaTime * moveSpeed;
+		this->position.x += deltaTime * zoomMoveSpeed;
 		alignmentNeeded = true;
 	}
 
 	if (Input::isDown(GLFW_KEY_W)) {
-		this->position.y -= deltaTime * moveSpeed;
+		this->position.y -= deltaTime * zoomMoveSpeed;
 		alignmentNeeded = true;
 	}
 
 	if (Input::isDown(GLFW_KEY_S)) {
-		this->position.y += deltaTime * moveSpeed;
+		this->position.y += deltaTime * zoomMoveSpeed;
 		alignmentNeeded = true;
 	}
 
+	return alignmentNeeded;
+}
+
+bool Camera::handleZoom(double deltaTime)
+{
+	if (Input::scrollUp()) zoom *= 1.1f;
+	else if (Input::scrollDown()) zoom *= 0.9f;
+	else return false;
+
+	// Lock the zoom to the camera's limits.
+	zoom = glm::clamp(zoom, minZoom, maxZoom);
+
+	// Calculate the new viewport size.
+	float zoomWidth = width / zoom;
+	float zoomHeight = (height / width) * zoomWidth;
+
+	// Create the new projection.
+	projection = glm::ortho(
+		width - zoomWidth,		// Left
+		zoomWidth,				// Right
+		height - zoomHeight,	// Bottom
+		zoomHeight,				// Top
+		-1.0f,					// Near
+		1.0f					// Far
+	);
+
+	return true;
+}
+
+void Camera::update(double deltaTime)
+{
+	bool alignmentNeeded = false;
+	alignmentNeeded = handleMovement(deltaTime) || alignmentNeeded;
+	alignmentNeeded = handleZoom(deltaTime) || alignmentNeeded;
+	
 	// If a change has been made to the viewport, send these changes to the shader.
 	if(alignmentNeeded) align();
 }

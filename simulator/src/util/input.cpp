@@ -4,6 +4,8 @@
 
 std::map<int, int> Input::keyMap;
 bool Input::updated;
+bool Input::scrolledUp;
+bool Input::scrolledDown;
 
 Input::Input()
 {
@@ -16,6 +18,16 @@ void Input::initialise()
 	updated = false;
 }
 
+// Check to see if a change has been made.
+bool Input::pollChange()
+{
+	bool temp = updated;
+	updated = false;
+	return temp;
+}
+
+/// Key related methods.
+
 void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	std::map<int, int>::iterator it = keyMap.find(key);
@@ -27,14 +39,6 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
 	}
 
 	updated = true;
-}
-
-// Check to see if a change has been made.
-bool Input::pollChange()
-{
-	bool temp = updated;
-	updated = false;
-	return temp;
 }
 
 bool Input::isDown(int key)
@@ -51,4 +55,26 @@ bool Input::isUp(int key)
 	if (it != keyMap.end())
 		return it->second == GLFW_RELEASE;
 	return false;
+}
+
+/// Mouse related methods.
+
+void Input::scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	scrolledUp = yoffset > 0;
+	scrolledDown = yoffset < 0;
+}
+
+bool Input::scrollDown()
+{
+	bool temp = scrolledDown;
+	scrolledDown = false;
+	return temp;
+}
+
+bool Input::scrollUp()
+{
+	bool temp = scrolledUp;
+	scrolledUp = false;
+	return temp;
 }
