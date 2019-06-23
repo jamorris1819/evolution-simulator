@@ -9,9 +9,11 @@ public:
 	Camera(glm::vec2 position, GLuint shaderID);
 	glm::mat4 view;
 	bool enabled;
-	void initialise();
+	void initialise(float width, float height, float speed);
 	void align();
 	void update(double deltaTime);
 protected:
+	float moveSpeed;
 	glm::vec2 position;
+	glm::mat4 projection;
 };

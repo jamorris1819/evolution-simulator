@@ -85,7 +85,7 @@ void DrawnEntity::render()
 		polygon->render(getMatrix());
 }
 
-void DrawnEntity::update(float deltaTime)
+void DrawnEntity::update(double deltaTime)
 {
-	setPosition(getPosition() + (getVelocity() * deltaTime));
+	setPosition(getPosition() + (getVelocity() * glm::vec3(deltaTime, deltaTime, 0)));
 }

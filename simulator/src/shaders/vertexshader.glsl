@@ -11,7 +11,7 @@ flat out vec3 oColour;
  
 void main(void)
 {	
-	gl_Position = vec4(vPosition, 0, 1) * uModel * uProjection;
+	gl_Position = vec4(vPosition, 0, 1) * uModel * uView * uProjection;
 
 	oColour = vColour;
 }

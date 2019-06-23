@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -127,6 +127,7 @@
     <ClCompile Include="src\entities\entity.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
     <ClCompile Include="src\render\polygon.cpp" />
+    <ClCompile Include="src\util\input.cpp" />
     <ClCompile Include="src\util\shaderutility.cpp" />
     <ClCompile Include="src\render\polygondata.cpp" />
     <ClCompile Include="src\Application.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="src\entities\entity.h" />
     <ClInclude Include="src\render\camera.h" />
     <ClInclude Include="src\render\polygon.h" />
+    <ClInclude Include="src\util\input.h" />
     <ClInclude Include="src\util\shaderutility.h" />
     <ClInclude Include="src\render\polygondata.h" />
     <ClInclude Include="src\render\vertex.h" />

@@ -27,7 +27,7 @@ public:
 	void setScale(glm::vec3 scale);
 	void setRotation(glm::quat rotation);
 	void setPolygon(PolygonR *polygon);
-	void update(float deltaTime);
+	void update(double deltaTime);
 	void render();
 
 protected:

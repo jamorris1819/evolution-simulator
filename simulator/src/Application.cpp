@@ -8,15 +8,18 @@
 #include "render\vertexarrayobject.h"
 #include "entities\drawnentity.h"
 #include "render\camera.h"
+#include "util\input.h"
 
 using namespace std;
 
 GLuint program;
+GLFWwindow* window;
+float lastTime;
 
 DrawnEntity* de;
 Camera* cam;
 
-void initialiseEntites() {
+void initialiseEntities() {
 	vector<Vertex> vertices;
 	vertices.push_back(Vertex(-50.0f, 50.0f));
 	vertices.push_back(Vertex(-50.0f, -50.0f));
@@ -30,25 +33,33 @@ void initialiseEntites() {
 
 	de = new DrawnEntity(glm::vec3(200, 200, 0));
 	de->setPolygon(pol);
-	de->setVelocity(glm::vec3(1, 0, 0));
+	//de->setVelocity(glm::vec3(100, 0, 0));
 
 	cam = new Camera(glm::vec2(0, 0), program);
-	cam->initialise();
+	cam->initialise(640.0f, 480.0f, 100.0f);
+}
+
+double getTime()
+{
+	SYSTEMTIME time;
+	GetSystemTime(&time);
+	WORD x = time.wHour * 24 * 60 * 60 * 1000 + time.wMinute * 60 * 1000 + time.wSecond * 1000 + time.wMilliseconds;
+	return x;
 }
 
 void initialise()
 {
 	cout << glewInit() << endl;
-	//glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
 	glViewport(0, 0, 640, 480);
 
 	ShaderUtility shaderUtility;
 	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
-	glPolygonMode(GL_FRONT_AND_BACK, GL_POLYGON);
+	glPolygonMode(GL_FRONT, GL_POLYGON);
 	
-
-	initialiseEntites();
+	lastTime = getTime();
+	Input::initialise();
+	glfwSetKeyCallback(window, Input::keyCallback);
+	initialiseEntities();
 }
 
 void render() {
@@ -56,13 +67,17 @@ void render() {
 }
 
 void update() {
-	// TODO: Add deltatime
-	de->update(0.1f);
+	double currentTime = getTime();
+	double elapsedTime = currentTime - lastTime;
+	double deltaTime = elapsedTime * 0.001;
+	lastTime = currentTime;
+
+	cam->update(deltaTime);
+	de->update(deltaTime);
 }
 
 int main(int argc, char **argv)
 {
-	GLFWwindow* window;
 	glutInit(&argc, argv);
 
 	/* Initialize the library */
@@ -77,8 +92,11 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+	
+
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+	
 
 	initialise();
 
@@ -91,6 +109,7 @@ int main(int argc, char **argv)
 
 		update();
 		render();
+
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
