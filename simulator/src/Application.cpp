@@ -21,7 +21,9 @@ Camera* cam;
 
 void initialiseEntities() {
 	vector<Vertex> vertices;
-	vertices.push_back(Vertex(-50.0f, 50.0f));
+	Vertex v(-50.0f, 50.0f);
+	v.setColour(glm::vec3(0, 0, 1));
+	vertices.push_back(v);
 	vertices.push_back(Vertex(-50.0f, -50.0f));
 	vertices.push_back(Vertex(50.0f, -50.0f));
 	vertices.push_back(Vertex(50.0f, 50.0f));

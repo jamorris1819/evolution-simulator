@@ -10,10 +10,17 @@ PolygonData::PolygonData()
 
 PolygonData::~PolygonData()
 {
+	if (floatData != nullptr) {
+		delete floatData;
+		floatData = nullptr;
+	}
 }
 
 void PolygonData::generateFloatData() {
-	if (floatData != nullptr) delete floatData;
+	if (floatData != nullptr) {
+		delete floatData;
+		floatData = nullptr;
+	}
 
 	// Put all vertex information into one large array, ready for use by OpenGL.
 	int numOfProperties = 5;

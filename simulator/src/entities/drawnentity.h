@@ -15,6 +15,7 @@ class DrawnEntity : public Entity
 public:
 	DrawnEntity(glm::vec3 position);
 	DrawnEntity(glm::vec3 position, glm::vec3 scale);
+	~DrawnEntity();
 	bool enabled;
 	glm::vec3 & getPosition();
 	glm::vec3 & getVelocity();
@@ -29,6 +30,7 @@ public:
 	void setPolygon(PolygonR *polygon);
 	void update(double deltaTime);
 	void render();
+	void unload();
 
 protected:
 	glm::vec3 position;

@@ -20,6 +20,11 @@ DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity()
 	setRotation(glm::quat());
 }
 
+DrawnEntity::~DrawnEntity()
+{
+	delete polygon;
+}
+
 glm::vec3& DrawnEntity::getPosition()
 {
 	return position;
@@ -88,4 +93,9 @@ void DrawnEntity::render()
 void DrawnEntity::update(double deltaTime)
 {
 	setPosition(getPosition() + (getVelocity() * glm::vec3(deltaTime, deltaTime, 0)));
+}
+
+void DrawnEntity::unload()
+{
+	polygon->unload();
 }

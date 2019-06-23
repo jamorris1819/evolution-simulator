@@ -21,6 +21,7 @@ VertexArrayObject::VertexArrayObject(PolygonData* polygonData)
 
 VertexArrayObject::~VertexArrayObject()
 {
+	// Polygon Data is deleted by the Polygon class at the same time as this being called.
 }
 
 void VertexArrayObject::initialise()
@@ -79,7 +80,7 @@ void VertexArrayObject::process(float* vertices, float* indices, int count)
 	glVertexAttribPointer(vPositionLocation, 2, GL_FLOAT, false, vertexDataCount * sizeof(float), nullptr);
 
 	glEnableVertexAttribArray(vColourLocation);
-	glVertexAttribPointer(vColourLocation, 2, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
+	glVertexAttribPointer(vColourLocation, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
 
 	glBindVertexArray(0);
 	enabled = true;
