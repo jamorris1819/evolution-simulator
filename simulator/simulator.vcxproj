@@ -143,6 +143,7 @@
     <ClCompile Include="src\render\ui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\render\ui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\render\ui\imgui_widgets.cpp" />
+    <ClCompile Include="src\render\ui\menu.cpp" />
     <ClCompile Include="src\util\input.cpp" />
     <ClCompile Include="src\util\shaderutility.cpp" />
     <ClCompile Include="src\render\polygondata.cpp" />
@@ -1445,6 +1446,7 @@
     <ClInclude Include="src\render\ui\imstb_rectpack.h" />
     <ClInclude Include="src\render\ui\imstb_textedit.h" />
     <ClInclude Include="src\render\ui\imstb_truetype.h" />
+    <ClInclude Include="src\render\ui\menu.h" />
     <ClInclude Include="src\util\input.h" />
     <ClInclude Include="src\util\shaderutility.h" />
     <ClInclude Include="src\render\polygondata.h" />

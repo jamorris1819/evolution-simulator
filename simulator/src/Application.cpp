@@ -9,9 +9,7 @@
 #include "render\camera.h"
 #include "util\input.h"
 
-#include "render\ui\imgui.h"
-#include "render\ui\imgui_impl_glfw.h"
-#include "render\ui\imgui_impl_opengl3.h"
+#include "render\ui\menu.h"
 
 using namespace std;
 
@@ -68,6 +66,8 @@ void initialise()
 	glfwSetKeyCallback(window, Input::keyCallback);
 	glfwSetScrollCallback(window, Input::scrollCallback);
 	initialiseEntities();
+
+	Menu::initialise(window);
 }
 
 void render() {
@@ -112,13 +112,13 @@ int main(int argc, char **argv)
 
 	initialise();
 
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	ImGui::StyleColorsDark();
+	//IMGUI_CHECKVERSION();
+	//ImGui::CreateContext();
+	//ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//ImGui::StyleColorsDark();
 
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init();
+	//ImGui_ImplGlfw_InitForOpenGL(window, true);
+	//ImGui_ImplOpenGL3_Init();
 	bool showDemo = true;
 	glfwSwapInterval(1);
 	/* Loop until the user closes the window */
@@ -127,18 +127,19 @@ int main(int argc, char **argv)
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
+		//ImGui_ImplOpenGL3_NewFrame();
+		//ImGui_ImplGlfw_NewFrame();
+		//ImGui::NewFrame();
 
-		ImGui::ShowDemoWindow(&showDemo);
+		//ImGui::ShowDemoWindow(&showDemo);
 
 		update();
 		render();
 
+		Menu::renderUI();
 
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		//ImGui::Render();
+		//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -149,9 +150,9 @@ int main(int argc, char **argv)
 	}
 
 	glfwTerminate();
-
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
+	Menu::destroy();
+	//ImGui_ImplOpenGL3_Shutdown();
+	//ImGui_ImplGlfw_Shutdown();
+	//ImGui::DestroyContext();
 	return 0;
 }
