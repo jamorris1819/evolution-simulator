@@ -1,6 +1,5 @@
 #include <iostream>
 #include "util\shaderutility.h"
-#include <GLFW/glfw3.h>
 #include <vector>
 #include "render\vertex.h"
 #include "render\polygondata.h"
@@ -9,6 +8,10 @@
 #include "entities\drawnentity.h"
 #include "render\camera.h"
 #include "util\input.h"
+
+#include "render\ui\imgui.h"
+#include "render\ui\imgui_impl_glfw.h"
+#include "render\ui\imgui_impl_opengl3.h"
 
 using namespace std;
 
@@ -44,15 +47,13 @@ void initialiseEntities() {
 
 double getTime()
 {
-	SYSTEMTIME time;
-	GetSystemTime(&time);
-	WORD x = time.wHour * 24 * 60 * 60 * 1000 + time.wMinute * 60 * 1000 + time.wSecond * 1000 + time.wMilliseconds;
-	return x;
+	return 0;
 }
 
 void initialise()
 {
 	cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
+	cout << "GLFW Version " << glfwGetVersionString() << endl;
 	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
 	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
 	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
@@ -78,18 +79,24 @@ void update() {
 	double elapsedTime = currentTime - lastTime;
 	double deltaTime = elapsedTime * 0.001;
 	lastTime = currentTime;
+	deltaTime = 0.013;
 
 	cam->update(deltaTime);
 	de->update(deltaTime);
 }
 
+void error_callback(int error, const char* description)
+{
+	fprintf(stderr, "Error: %s\n", description);
+}
+
 int main(int argc, char **argv)
 {
-	glutInit(&argc, argv);
-
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+
+	glfwSetErrorCallback(error_callback);
 
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(width, height, "Evolution Simulator", NULL, NULL);
@@ -105,16 +112,33 @@ int main(int argc, char **argv)
 
 	initialise();
 
-	glUseProgram(program);
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplOpenGL3_Init();
+	bool showDemo = true;
+	glfwSwapInterval(1);
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		ImGui::ShowDemoWindow(&showDemo);
+
 		update();
 		render();
 
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -125,5 +149,9 @@ int main(int argc, char **argv)
 	}
 
 	glfwTerminate();
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 	return 0;
 }
