@@ -11,6 +11,8 @@
 
 #include "render\ui\menu.h"
 #include "genetics\gene.h"
+#include "genetics\genotype.h"
+#include "genetics\genemarker.h"
 
 using namespace std;
 
@@ -42,6 +44,8 @@ void initialiseEntities() {
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 100.0f);
+
+	std::cout << ToString(GeneMarker::GM_COLOUR_R) << std::endl;
 }
 
 double getTime()
@@ -70,14 +74,11 @@ void initialise()
 
 	Menu::initialise(window);
 
-	while (true) {
-		Gene<double>* size = new Gene<double>(10, 0);
-		size->setDominant(true);
-
-		Gene<double>* clone = size->clone();
-
-		delete size;
-		delete clone;
+	for (int i = 0; i < 100000; i++) {
+		Genotype* a = new Genotype(true);
+		//Gene<int>* g = a->getGene<int>(GeneMarker::GM_SIZE, 0);
+		delete a;
+		//delete size;
 	}
 }
 

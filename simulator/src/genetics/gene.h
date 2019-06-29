@@ -1,9 +1,14 @@
 #pragma once
+
+#include "genemarker.h"
+#include "base.h"
+
 template<class T>
-class Gene
+class Gene : public Base
 {
 public:
 	Gene(T value, int order);
+	Gene(T value, GeneMarker marker);
 	~Gene();
 	void setValue(T value);
 	void enable();
@@ -26,6 +31,14 @@ template<class T> Gene<T>::Gene(T value, int order)
 	dominant = true;
 	enabled = true;
 	this->order = order;
+
+	typeInt = std::is_same_v<T, int>;
+	typeBool = std::is_same_v<T, bool>;
+}
+
+template<class T> Gene<T>::Gene(T value, GeneMarker marker)
+{
+	Gene(value, (int)marker);
 }
 
 template<class T> Gene<T>::~Gene()
@@ -68,5 +81,6 @@ template<class T> Gene<T>* Gene<T>::clone()
 	clone->setDominant(dominant);
 	clone->enabled = enabled;
 
+	std::cout << "b" << std::endl;
 	return clone;
 }

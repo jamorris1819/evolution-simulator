@@ -72,6 +72,15 @@
     <ClCompile Include="src\render\ui\menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\genetics\gene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\genetics\genotype.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\genetics\base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1367,6 +1376,7 @@
     <None Include="packages\glm.0.9.9.500\build\native\include\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="src\genetics\base.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\render\vertex.h">
@@ -2174,6 +2184,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\ui\menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\genetics\gene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\genetics\genemarker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\genetics\genotype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
