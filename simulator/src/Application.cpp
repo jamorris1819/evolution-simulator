@@ -10,6 +10,7 @@
 #include "util\input.h"
 
 #include "render\ui\menu.h"
+#include "genetics\gene.h"
 
 using namespace std;
 
@@ -68,6 +69,16 @@ void initialise()
 	initialiseEntities();
 
 	Menu::initialise(window);
+
+	while (true) {
+		Gene<double>* size = new Gene<double>(10, 0);
+		size->setDominant(true);
+
+		Gene<double>* clone = size->clone();
+
+		delete size;
+		delete clone;
+	}
 }
 
 void render() {

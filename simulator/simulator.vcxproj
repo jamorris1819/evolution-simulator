@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\genetics\gene.cpp" />
     <ClCompile Include="packages\glm.0.9.9.500\build\native\include\glm\detail\glm.cpp" />
     <ClCompile Include="src\entities\drawnentity.cpp" />
     <ClCompile Include="src\entities\entity.cpp" />
@@ -1184,6 +1185,7 @@
     <None Include="src\shaders\vertexshader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\genetics\gene.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut_ext.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut_std.h" />

@@ -1,4 +1,5 @@
 #include "menu.h"
+#include <iostream>
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -11,6 +12,8 @@ void Menu::initialise(GLFWwindow* window)
 
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init();
+
+	std::cout << "ImGui has initialised successfully" << std::endl;
 }
 
 void Menu::renderMenuBar()
