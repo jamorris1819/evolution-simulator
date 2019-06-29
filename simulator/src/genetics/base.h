@@ -7,4 +7,7 @@ public:
 	Base* clone();
 	bool typeInt;
 	bool typeBool;
+	bool dominant;
+	bool enabled;
+	int order;
 };

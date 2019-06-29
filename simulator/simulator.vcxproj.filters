@@ -75,10 +75,10 @@
     <ClCompile Include="src\genetics\gene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\genetics\genotype.cpp">
+    <ClCompile Include="src\genetics\base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\genetics\base.cpp">
+    <ClCompile Include="src\genetics\genome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2192,7 +2192,7 @@
     <ClInclude Include="src\genetics\genemarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\genetics\genotype.h">
+    <ClInclude Include="src\genetics\genome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -137,7 +137,7 @@
     <ClCompile Include="packages\glm.0.9.9.500\build\native\include\glm\detail\glm.cpp" />
     <ClCompile Include="src\entities\drawnentity.cpp" />
     <ClCompile Include="src\entities\entity.cpp" />
-    <ClCompile Include="src\genetics\genotype.cpp" />
+    <ClCompile Include="src\genetics\genome.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
     <ClCompile Include="src\render\polygon.cpp" />
     <ClCompile Include="src\render\ui\imgui.cpp" />
@@ -1442,7 +1442,7 @@
     <ClInclude Include="src\entities\drawnentity.h" />
     <ClInclude Include="src\entities\entity.h" />
     <ClInclude Include="src\genetics\genemarker.h" />
-    <ClInclude Include="src\genetics\genotype.h" />
+    <ClInclude Include="src\genetics\genome.h" />
     <ClInclude Include="src\render\camera.h" />
     <ClInclude Include="src\render\polygon.h" />
     <ClInclude Include="src\render\ui\imconfig.h" />

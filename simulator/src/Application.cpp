@@ -11,7 +11,7 @@
 
 #include "render\ui\menu.h"
 #include "genetics\gene.h"
-#include "genetics\genotype.h"
+#include "genetics\genome.h"
 #include "genetics\genemarker.h"
 
 using namespace std;
@@ -74,12 +74,12 @@ void initialise()
 
 	Menu::initialise(window);
 
-	for (int i = 0; i < 100000; i++) {
-		Genotype* a = new Genotype(true);
+	//for (int i = 0; i < 100000; i++) {
+		Genome* a = new Genome(true);
 		//Gene<int>* g = a->getGene<int>(GeneMarker::GM_SIZE, 0);
-		delete a;
+		Menu::focusGenome(a);
 		//delete size;
-	}
+	//}
 }
 
 void render() {

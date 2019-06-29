@@ -19,9 +19,6 @@ public:
 	T getValue();
 private:
 	T value;
-	bool dominant;
-	bool enabled;
-	int order;
 };
 
 template<class T> Gene<T>::Gene(T value, int order)
