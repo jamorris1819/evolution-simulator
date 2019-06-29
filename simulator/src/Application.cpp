@@ -13,6 +13,7 @@
 #include "genetics\gene.h"
 #include "genetics\genome.h"
 #include "genetics\genemarker.h"
+#include <ctime>
 
 using namespace std;
 

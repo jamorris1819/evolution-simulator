@@ -26,7 +26,17 @@ void Menu::initialise(GLFWwindow* window)
 	std::cout << "ImGui has initialised successfully" << std::endl;
 }
 
-void Menu::renderGenome()
+void Menu::renderGenomeDescription()
+{
+	ImGui::TextWrapped("The genome is a structure that contains genetic information about the creature. The genome is comprised of 2 strands of DNA which feature a sequence of genes. A gene may be responsible for the creature's speed or colour, for example. View the 'traits' section to see how these genes determine the creature's characteristics.");
+	ImGui::Text("The genes represented are:");
+	ImGui::Spacing();
+	for (int i = 0; i < (int)GeneMarker::GENE_COUNT; i++) {
+		ImGui::BulletText(ToString((GeneMarker)i));
+	}
+}
+
+void Menu::renderGenomeDetails()
 {
 	ImGui::LabelText("Strand B", "Strand A");
 	int strandLength = selectedGenome->strandLength;
@@ -49,8 +59,8 @@ void Menu::renderGenome()
 		// Title
 		ImGui::Text(geneName);
 
-		if (enabled) ImGui::TextColored(ImVec4(0.000f, 0.520f, 0.031f, 1.000f), "ENABLED");
-		else ImGui::TextColored(ImVec4(0.819f, 0.000f, 0.000f, 1.000f), "DISABLED");
+		if (dominant) ImGui::TextColored(ImVec4(0.000f, 0.520f, 0.031f, 1.000f), "DOMINANT");
+		else ImGui::TextColored(ImVec4(0.819f, 0.000f, 0.000f, 1.000f), "RECESSIVE");
 
 		ImGui::Text("Value: ");
 		ImGui::SameLine();
@@ -63,11 +73,35 @@ void Menu::renderGenome()
 			ImGui::Text(((Gene<bool>*)base)->getValue() ? "TRUE" : "FALSE");
 		}
 
-		ImGui::Text(dominant ? "DOMINANT" : "RECESSIVE");
-
 		ImGui::NextColumn();
 	}
 	ImGui::Columns(1);
+}
+
+void Menu::renderTraitsDetails()
+{
+	ImGui::LabelText("Trait", "Value");
+	ImGui::Separator();
+
+	// SIZE
+	int size = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SIZE);
+	ImGui::DragInt("Size", &size); 
+
+	// COLOUR
+	float colour[3] = {
+		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_R) / 255.0f,
+		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_G) / 255.0f,
+		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_B) / 255.0f
+	};
+	ImGui::ColorEdit3("Colour", colour);
+
+	// MOVEMENT SPEED
+	int movementSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_MOVEMENT);
+	ImGui::DragInt("Movement Speed", &movementSpeed);
+
+	// ROTATION SPEED
+	int rotationSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_ROTATION);
+	ImGui::DragInt("Rotation Speed", &rotationSpeed);
 }
 
 void Menu::renderCreatureWindow()
@@ -82,6 +116,7 @@ void Menu::renderCreatureWindow()
 	ImGui::BeginChild("left pane", ImVec2(150, 0), true);
 	std::vector<const char*> options;
 	options.push_back("Genome");
+	options.push_back("Traits");
 	options.push_back("Test");
 	for (int i = 0; i < options.size(); i++)
 	{
@@ -102,6 +137,9 @@ void Menu::renderCreatureWindow()
 	case 0:
 		title = "Viewing Genome";
 		break;
+	case 1:
+		title = "Viewing Traits";
+		break;
 	default:
 		title = "DEFAULT";
 			break;
@@ -113,27 +151,20 @@ void Menu::renderCreatureWindow()
 	{
 		if (ImGui::BeginTabItem("Description"))
 		{
-			if (selected == 0) {
-				ImGui::TextWrapped("The genome is a structure that contains genetic information about the creature. The genome is comprised of 2 strands of DNA which feature a sequence of genes. A gene may be responsible for the creature's speed or colour, for example. The genes represented are:");
-				ImGui::Spacing();
-				for (int i = 0; i < (int)GeneMarker::GENE_COUNT; i++) {
-					ImGui::BulletText(ToString((GeneMarker)i));
-				}
-			}
+			if (selected == 0 && selectedGenome != nullptr) renderGenomeDescription();
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Details"))
 		{
-			if (selected == 0 && selectedGenome != nullptr) renderGenome();
+			if (selected == 0 && selectedGenome != nullptr) renderGenomeDetails();
+			if (selected == 1 && selectedGenome != nullptr) renderTraitsDetails();
 
 			ImGui::EndTabItem();
 		}
 		ImGui::EndTabBar();
 	}
 	ImGui::EndChild();
-	if (ImGui::Button("Revert")) {}
-	ImGui::SameLine();
-	if (ImGui::Button("Save")) {}
+	if (ImGui::Button("Close")) {}
 	ImGui::EndGroup();
 
 	ImGui::End();

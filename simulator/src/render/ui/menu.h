@@ -12,7 +12,9 @@ public:
 private:
 	Menu();
 	static void renderMenuBar();
-	static void renderGenome();
+	static void renderGenomeDescription();
+	static void renderGenomeDetails();
+	static void renderTraitsDetails();
 	static void renderCreatureWindow();
 	static bool* bWindowCreature;
 	static Genome* selectedGenome;

@@ -2,6 +2,7 @@
 
 #include "genemarker.h"
 #include "base.h"
+#include <ctime>
 
 template<class T>
 class Gene : public Base
@@ -25,7 +26,7 @@ template<class T> Gene<T>::Gene(T value, int order)
 {
 	setValue(value);
 
-	dominant = true;
+	dominant =  (int)(rand() % 4) != 0;	// 1 in 4 change of being false.
 	enabled = true;
 	this->order = order;
 
