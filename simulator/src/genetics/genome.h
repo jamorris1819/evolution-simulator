@@ -74,6 +74,20 @@ template<class T> T Genome::getGeneValue(int order)
 			value = weight > 0.5 ? valA : valB;
 		}
 	}
+	else if (std::is_same_v<T, float>) {
+		float valA = geneA->getValue();
+		float valB = geneB->getValue();
+
+		// If one gene is dominant over the other, take that value.
+		if (domA && !domB) value = valA;
+		else if (!domA && domB) value = valB;
+		else {
+			// If both genes are either dominant OR recessive.
+			// Use weight to determine final value.
+			float delta = valB - valA;
+			value = valA + weight * delta;
+		}
+	}
 	else {
 		std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
 	}
@@ -83,6 +97,6 @@ template<class T> T Genome::getGeneValue(int order)
 
 template<class T> T Genome::getGeneValue(GeneMarker marker)
 {
-	return getGeneValue((int)marker);
+	return getGeneValue<T>((int)marker);
 }
 

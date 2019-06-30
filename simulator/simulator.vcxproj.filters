@@ -84,6 +84,9 @@
     <ClCompile Include="include\noise\FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\creature\body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2199,6 +2202,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\noise\FastNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\creature\body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,6 +10,12 @@ enum class GeneMarker
 	GM_SPEED_MOVEMENT,
 	GM_SPEED_ROTATION,
 
+	// Body genes
+	GM_BODY_STEPS,
+	GM_BODY_MUTATION_RATE,
+	GM_BODY_OFFSETX,
+	GM_BODY_OFFSETY,
+
 	// Leave at end for count.
 	GENE_COUNT
 };
@@ -24,6 +30,10 @@ inline const char* geneMarkerToString(GeneMarker v)
 	case GeneMarker::GM_COLOUR_B: return "COLOUR B";
 	case GeneMarker::GM_SPEED_MOVEMENT: return "SPEED MOVEMENT";
 	case GeneMarker::GM_SPEED_ROTATION: return "SPEED ROTATION";
+	case GeneMarker::GM_BODY_STEPS: return "BODY STEPS";
+	case GeneMarker::GM_BODY_MUTATION_RATE: return "BODY MUTATION RATE";
+	case GeneMarker::GM_BODY_OFFSETX: return "BODY OFFSET X";
+	case GeneMarker::GM_BODY_OFFSETY: return "BODY OFFSET Y";
 	default:      return "UNKNOWN GENE";
 	}
 }
@@ -38,6 +48,7 @@ inline std::tuple<int, int> geneMarkerLimits(GeneMarker v)
 	case GeneMarker::GM_COLOUR_B: return std::tuple<int, int>(0, 255);
 	case GeneMarker::GM_SPEED_MOVEMENT: return std::tuple<int, int>(5, 50);
 	case GeneMarker::GM_SPEED_ROTATION: return std::tuple<int, int>(5, 50);
+	case GeneMarker::GM_BODY_STEPS: return std::tuple<int, int>(6, 20);
 	default:      return std::tuple<int, int>(0, 0); // no limits
 	}
 }

@@ -9,6 +9,7 @@
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
+Body* Menu::selectedBody;
 
 void Menu::initialise(GLFWwindow* window)
 {
@@ -72,6 +73,9 @@ void Menu::renderGenomeDetails()
 		else if (base->typeBool) {
 			ImGui::Text(((Gene<bool>*)base)->getValue() ? "TRUE" : "FALSE");
 		}
+		else if (base->typeFloat) {
+			ImGui::Text(std::to_string(((Gene<float>*)base)->getValue()).c_str());
+		}
 
 		ImGui::NextColumn();
 	}
@@ -104,6 +108,53 @@ void Menu::renderTraitsDetails()
 	ImGui::DragInt("Rotation Speed", &rotationSpeed);
 }
 
+void Menu::renderBodyDetails()
+{
+	ImGui::LabelText("Attribute", "Value");
+	ImGui::Separator();
+
+	// SEED
+	ImGui::DragInt("Seed", &selectedBody->seed);
+
+	// STEPS
+	ImGui::DragInt("Steps", &selectedBody->steps);
+
+	// FREQUENCY
+	ImGui::DragFloat("Frequency", &selectedBody->frequency);
+
+	// STRIDE
+	ImGui::DragInt("Stride X", &selectedBody->strideX);
+	ImGui::DragInt("Stride Y", &selectedBody->strideY);
+
+	// OFFSET
+	ImGui::DragFloat("Offset X", &selectedBody->offsetX);
+	ImGui::DragFloat("Offset Y", &selectedBody->offsetY);
+
+	// OCTAVES
+	ImGui::DragInt("Octaves", &selectedBody->octaves);
+
+	// LENGTH / WIDTH
+	ImGui::DragFloat("Length", &selectedBody->length);
+	ImGui::DragFloat("Width", &selectedBody->width);
+}
+
+void Menu::triggerBodyRegen()
+{
+	selectedBody->unload();
+	selectedBody->addParameters(
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS),
+		5,
+		5,
+		selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX),
+		selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY),
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_R),
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_G),
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_B)
+	);
+	selectedBody->generate();
+	selectedBody->load();
+}
+
 void Menu::renderCreatureWindow()
 {
 	ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
@@ -117,7 +168,7 @@ void Menu::renderCreatureWindow()
 	std::vector<const char*> options;
 	options.push_back("Genome");
 	options.push_back("Traits");
-	options.push_back("Test");
+	options.push_back("Body");
 	for (int i = 0; i < options.size(); i++)
 	{
 		char label[128];
@@ -140,6 +191,9 @@ void Menu::renderCreatureWindow()
 	case 1:
 		title = "Viewing Traits";
 		break;
+	case 2:
+		title = "Viewing Body";
+		break;
 	default:
 		title = "DEFAULT";
 			break;
@@ -158,13 +212,16 @@ void Menu::renderCreatureWindow()
 		{
 			if (selected == 0 && selectedGenome != nullptr) renderGenomeDetails();
 			if (selected == 1 && selectedGenome != nullptr) renderTraitsDetails();
+			if (selected == 2 && selectedBody != nullptr) renderBodyDetails();
 
 			ImGui::EndTabItem();
 		}
 		ImGui::EndTabBar();
 	}
 	ImGui::EndChild();
-	if (ImGui::Button("Close")) { selectedGenome->mutate(); }
+	if (ImGui::Button("Mutate")) { selectedGenome->mutate(); triggerBodyRegen(); }
+	ImGui::SameLine();
+	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::EndGroup();
 
 	ImGui::End();
@@ -214,4 +271,9 @@ void Menu::destroy()
 void Menu::focusGenome(Genome* genome)
 {
 	selectedGenome = genome;
+}
+
+void Menu::focusBody(Body* body)
+{
+	selectedBody = body;
 }

@@ -2,8 +2,6 @@
 #include "util\shaderutility.h"
 #include <vector>
 #include "render\vertex.h"
-#include "render\polygondata.h"
-#include "render\polygon.h"
 #include "render\vertexarrayobject.h"
 #include "entities\drawnentity.h"
 #include "render\camera.h"
@@ -26,41 +24,19 @@ float height = 1080.0f;
 double* frequency;
 
 DrawnEntity* de;
+Body* body;
 Camera* cam;
 
 void initialiseEntities() {
-	FastNoise noise;
-	noise.SetSeed(10);
-	noise.SetNoiseType(FastNoise::SimplexFractal);
-	noise.SetFractalOctaves(8);
-	noise.SetFrequency(0.5);
-	int sides = 8;
-	double step = 3.1415 / sides;
+	body = new Body(program);
+	body->addParameters(8, (int)FastNoise::Simplex, 4,0,0, 1, 0, 0);
+	body->generate();
+	body->load();
 
-	// Basic creature generation.
-	vector<Vertex> vertices;
-	for (int i = 0; i <= sides; i++) {
-		Vertex v(glm::sin(i * step), glm::cos(i * step));
-		float size = (noise.GetNoise(i * 4, i * 2) + 1) / 2.0f;
-		v.multiply(80.0f);
-		v.multiply(size);
-		vertices.push_back(v);
-	}
-
-	int size = vertices.size();
-	for (int i = 0; i < size; i++) {
-		Vertex v = vertices[size - i - 1];
-		v.setPosition(glm::vec2(-1.0f, 1.0f) * v.getPosition());
-		vertices.push_back(v);
-	}
-
-	PolygonR* pol;
-	pol = new PolygonR(program);
-	pol->setVertices(vertices);
-	pol->load();
+	Menu::focusBody(body);
 
 	de = new DrawnEntity(glm::vec3(200, 200, 0));
-	de->setPolygon(pol);
+	de->setPolygon(body);
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 100.0f);
@@ -115,6 +91,13 @@ void update() {
 
 	cam->update(deltaTime);
 	de->update(deltaTime);
+
+	// test evolution
+
+	/*body->unload();
+	body->offsetX += deltaTime * 0.1f;
+	body->generate();
+	body->load();*/
 }
 
 void error_callback(int error, const char* description)

@@ -36,6 +36,7 @@ template<class T> Gene<T>::Gene(T value, int order)
 
 	typeInt = std::is_same_v<T, int>;
 	typeBool = std::is_same_v<T, bool>;
+	typeFloat = std::is_same_v<T, float>;
 
 	std::tuple<int, int> limits = geneMarkerLimits((GeneMarker)order);
 	lowerLimit = std::get<0>(limits);
@@ -116,20 +117,36 @@ template<class T> void Gene<T>::mutate()
 		else if (number < mutationChance[0] + mutationChance[1]) {
 			// We need to change a value.
 			number = rand() % 10;
-			float fNumber;
-			int changeAmount;
-			if (number < 3) {
-				// Major change
-				changeAmount = 100;
+			std::tuple<int, int> limits = geneMarkerLimits((GeneMarker)order);
+			if (lowerLimit < upperLimit) {
+				float range = upperLimit - lowerLimit;
+				if (number < 3) {
+					// Major change
+					range /= 10.0f;
+				}
+				else {	
+					// Minor change
+					range /= 40.0f;
+				}
+				number = rand() % 2 == 0 ? range : -range;
+				setValue(getValue() + number);
 			}
 			else {
-				// Minor change
-				changeAmount = 30;
+				float fNumber;
+				int changeAmount;
+				if (number < 3) {
+					// Major change
+					changeAmount = 100;
+				}
+				else {
+					// Minor change
+					changeAmount = 30;
+				}
+				number = rand() % changeAmount;
+				number -= changeAmount / 2;
+				fNumber = 1.0f + ((float)number / (float)changeAmount);
+				setValue((int)(glm::floor(value * fNumber)));
 			}
-			number = rand() % changeAmount;
-			number -= changeAmount / 2;
-			fNumber = 1.0f + ((float)number / (float)changeAmount);
-			setValue((int)(glm::floor(value * fNumber)));
 		}
 	}
 	else if (typeBool) {
@@ -147,6 +164,43 @@ template<class T> void Gene<T>::mutate()
 		else if (number < mutationChance[0] + mutationChance[1]) {
 			// We need to flip the value.
 			value = !value;
+		}
+	}
+	else if (typeFloat) {
+		/*
+		Types of mutation:	- Toggle gene dominance
+		- Value change
+		- Minor change
+		- Major change
+		*/
+		int total = 25;
+		int mutationChance[3] = {
+			5,
+			20,
+		};
+
+		int number = rand() % total;
+		if (number < mutationChance[0]) {
+			// Toggle gene dominance.
+			setDominant(!getDominant());
+		}
+		else if (number < mutationChance[0] + mutationChance[1]) {
+			// We need to change a value.
+			number = rand() % 10;
+			float fNumber;
+			int changeAmount;
+			if (number < 3) {
+				// Major change
+				changeAmount = 100;
+			}
+			else {
+				// Minor change
+				changeAmount = 30;
+			}
+			number = rand() % changeAmount;
+			number -= changeAmount / 2;
+			fNumber = 1.0f + ((float)number / (float)changeAmount);
+			setValue((int)(value + 0.0025f));
 		}
 	}
 	else {

@@ -55,36 +55,64 @@ void Genome::generate()
 	// COLOUR R
 	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
-	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_COLOUR_R));
-	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_COLOUR_R));
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_R));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_R));
 	delete spread;
 
 	// COLOUR G
 	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
-	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_COLOUR_G));
-	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_COLOUR_G));
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_G));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_G));
 	delete spread;
 
 	// COLOUR B
 	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
-	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_COLOUR_B));
-	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_COLOUR_B));
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_B));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_B));
 	delete spread;
 
 	// SPEED MOVEMENT
 	spread = new int;
 	position = generateInt(20, 10, 5, 15, spread);
-	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_SPEED_MOVEMENT));
-	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_SPEED_MOVEMENT));
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SPEED_MOVEMENT));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SPEED_MOVEMENT));
 	delete spread;
 
-	// SPEED MOVEMENT
+	// SPEED ROTATION
 	spread = new int;
 	position = generateInt(15, 5, 5, 10, spread);
-	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_SPEED_ROTATION));
-	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_SPEED_ROTATION));
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SPEED_ROTATION));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SPEED_ROTATION));
+	delete spread;
+
+	// BODY STEPS
+	spread = new int;
+	position = generateInt(10, 4, 3, 6, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));
+	delete spread;
+
+	// BODY MUTATION RATE
+	spread = new int;
+	position = generateInt(15, 5, 5, 10, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
+	delete spread;
+
+	// BODY OFFSET X
+	spread = new int;
+	position = generateInt(0, 5000, 5, 10, spread);
+	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETX));
+	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETX));
+	delete spread;
+
+	// BODY OFFSET Y
+	spread = new int;
+	position = generateInt(0, 5000, 5, 10, spread);
+	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETY));
+	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	delete spread;
 }
 
@@ -105,6 +133,10 @@ Genome* Genome::clone()
 			clonedGenome->strandA.push_back(((Gene<bool>*)strandA[i])->clone());
 			clonedGenome->strandB.push_back(((Gene<bool>*)strandB[i])->clone());
 		}
+		else if (gene->typeFloat) {
+			clonedGenome->strandA.push_back(((Gene<float>*)strandA[i])->clone());
+			clonedGenome->strandB.push_back(((Gene<float>*)strandB[i])->clone());
+		}
 		else {
 			std::cerr << "Unknown type - could not be cloned" << std::endl;
 		}
@@ -124,6 +156,9 @@ void Genome::mutate()
 			else if (base->typeBool) {
 				((Gene<bool>*)base)->mutate();
 			}
+			else if (base->typeFloat) {
+				((Gene<float>*)base)->mutate();
+			}
 			else {
 				std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
 			}
@@ -136,6 +171,9 @@ void Genome::mutate()
 			}
 			else if (base->typeBool) {
 				((Gene<bool>*)base)->mutate();
+			}
+			else if (base->typeFloat) {
+				((Gene<float>*)base)->mutate();
 			}
 			else {
 				std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
