@@ -81,6 +81,9 @@
     <ClCompile Include="src\genetics\genome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\noise\FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2193,6 +2196,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\genetics\genome.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\noise\FastNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

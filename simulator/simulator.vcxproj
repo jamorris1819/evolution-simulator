@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\noise\FastNoise.cpp" />
     <ClCompile Include="src\genetics\base.cpp" />
     <ClCompile Include="src\genetics\gene.cpp" />
     <ClCompile Include="packages\glm.0.9.9.500\build\native\include\glm\detail\glm.cpp" />
@@ -1188,6 +1189,7 @@
     <None Include="src\shaders\vertexshader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\noise\FastNoise.h" />
     <ClInclude Include="src\genetics\gene.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut_ext.h" />

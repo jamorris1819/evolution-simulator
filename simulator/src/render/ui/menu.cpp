@@ -164,7 +164,7 @@ void Menu::renderCreatureWindow()
 		ImGui::EndTabBar();
 	}
 	ImGui::EndChild();
-	if (ImGui::Button("Close")) {}
+	if (ImGui::Button("Close")) { selectedGenome->mutate(); }
 	ImGui::EndGroup();
 
 	ImGui::End();

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "glm\glm.hpp"
-#include <ctime>
 
 Genome::Genome(bool fill)
 {
@@ -111,4 +110,29 @@ Genome* Genome::clone()
 	}
 
 	return clonedGenome;
+}
+
+void Genome::mutate()
+{
+	for (int i = 0; i < strandLength; i++) {
+		if (rand() % 10 == 0) {
+			Base* base = strandA[i];
+			if (base->typeInt) {
+				((Gene<int>*)base)->mutate();
+			}
+			else if (base->typeBool) {
+				((Gene<bool>*)base)->mutate();
+			}
+		}
+
+		if (rand() % 10 == 0) {
+			Base* base = strandB[i];
+			if (base->typeInt) {
+				((Gene<int>*)base)->mutate();
+			}
+			else if (base->typeBool) {
+				((Gene<bool>*)base)->mutate();
+			}
+		}
+	}
 }

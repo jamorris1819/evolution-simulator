@@ -14,6 +14,7 @@
 #include "genetics\genome.h"
 #include "genetics\genemarker.h"
 #include <ctime>
+#include "noise\FastNoise.h"
 
 using namespace std;
 
@@ -22,18 +23,36 @@ GLFWwindow* window;
 float lastTime;
 float width = 1920.0f;
 float height = 1080.0f;
+double* frequency;
 
 DrawnEntity* de;
 Camera* cam;
 
 void initialiseEntities() {
+	FastNoise noise;
+	noise.SetSeed(10);
+	noise.SetNoiseType(FastNoise::SimplexFractal);
+	noise.SetFractalOctaves(8);
+	noise.SetFrequency(0.5);
+	int sides = 8;
+	double step = 3.1415 / sides;
+
+	// Basic creature generation.
 	vector<Vertex> vertices;
-	Vertex v(-50.0f, 50.0f);
-	v.setColour(glm::vec3(0, 0, 1));
-	vertices.push_back(v);
-	vertices.push_back(Vertex(-50.0f, -50.0f));
-	vertices.push_back(Vertex(50.0f, -50.0f));
-	vertices.push_back(Vertex(50.0f, 50.0f));
+	for (int i = 0; i <= sides; i++) {
+		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		float size = (noise.GetNoise(i * 4, i * 2) + 1) / 2.0f;
+		v.multiply(80.0f);
+		v.multiply(size);
+		vertices.push_back(v);
+	}
+
+	int size = vertices.size();
+	for (int i = 0; i < size; i++) {
+		Vertex v = vertices[size - i - 1];
+		v.setPosition(glm::vec2(-1.0f, 1.0f) * v.getPosition());
+		vertices.push_back(v);
+	}
 
 	PolygonR* pol;
 	pol = new PolygonR(program);

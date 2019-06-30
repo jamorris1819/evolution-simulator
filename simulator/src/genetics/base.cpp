@@ -4,6 +4,6 @@
 Base::Base() {}
 Base* Base::clone()
 {
-	std::cout << "a" << std::endl;
+	// todo
 	return this;
 }

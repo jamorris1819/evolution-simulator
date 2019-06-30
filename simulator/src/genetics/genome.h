@@ -11,6 +11,7 @@ public:
 	~Genome();
 	Genome* clone();
 	void generate();
+	void mutate();
 	int generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	template<class T> Gene<T>* getGene(int order, bool mainStrand);
 	template<class T> Gene<T>* getGene(GeneMarker marker, bool mainStrand);
@@ -31,7 +32,7 @@ template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand)
 
 template<class T> Gene<T>* Genome::getGene(GeneMarker marker, bool mainStrand)
 {
-	return getGene<T>((int)marker, strand);
+	return getGene<T>((int)marker, mainStrand);
 }
 
 template<class T> T Genome::getGeneValue(int order)
@@ -81,3 +82,4 @@ template<class T> T Genome::getGeneValue(GeneMarker marker)
 {
 	return getGeneValue((int)marker);
 }
+
