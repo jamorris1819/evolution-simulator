@@ -3,6 +3,7 @@
 #include "genemarker.h"
 #include "base.h"
 #include <ctime>
+#include "glm\glm.hpp"
 
 template<class T>
 class Gene : public Base
@@ -21,6 +22,8 @@ public:
 	T getValue();
 private:
 	T value;
+	T upperLimit;
+	T lowerLimit;
 };
 
 template<class T> Gene<T>::Gene(T value, int order)
@@ -33,6 +36,10 @@ template<class T> Gene<T>::Gene(T value, int order)
 
 	typeInt = std::is_same_v<T, int>;
 	typeBool = std::is_same_v<T, bool>;
+
+	std::tuple<int, int> limits = geneMarkerLimits((GeneMarker)order);
+	lowerLimit = std::get<0>(limits);
+	upperLimit = std::get<1>(limits);
 }
 
 template<class T> Gene<T>::Gene(T value, GeneMarker marker)
@@ -46,7 +53,9 @@ template<class T> Gene<T>::~Gene()
 
 template<class T> void Gene<T>::setValue(T value)
 {
-	this->value = value;
+	T newVal = value;
+	if (upperLimit > lowerLimit) newVal = glm::clamp(newVal, lowerLimit, upperLimit);
+	this->value = newVal;
 }
 
 template<class T> T Gene<T>::getValue()
@@ -85,6 +94,7 @@ template<class T> Gene<T>* Gene<T>::clone()
 
 template<class T> void Gene<T>::mutate()
 {
+	// TODO: refactor
 	if (typeInt) {
 		/*
 			Types of mutation:	- Toggle gene dominance
@@ -119,7 +129,27 @@ template<class T> void Gene<T>::mutate()
 			number = rand() % changeAmount;
 			number -= changeAmount / 2;
 			fNumber = 1.0f + ((float)number / (float)changeAmount);
-			value = (int)(glm::floor(value * fNumber));
+			setValue((int)(glm::floor(value * fNumber)));
 		}
+	}
+	else if (typeBool) {
+		int total = 25;
+		int mutationChance[3] = {
+			5,
+			20,
+		};
+
+		int number = rand() % total;
+		if (number < mutationChance[0]) {
+			// Toggle gene dominance.
+			setDominant(!getDominant());
+		}
+		else if (number < mutationChance[0] + mutationChance[1]) {
+			// We need to flip the value.
+			value = !value;
+		}
+	}
+	else {
+		std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
 	}
 }

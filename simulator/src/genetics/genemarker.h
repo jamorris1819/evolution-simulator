@@ -1,4 +1,5 @@
 #pragma once
+#include <tuple>
 
 enum class GeneMarker
 {
@@ -13,7 +14,7 @@ enum class GeneMarker
 	GENE_COUNT
 };
 
-inline const char* ToString(GeneMarker v)
+inline const char* geneMarkerToString(GeneMarker v)
 {
 	switch (v)
 	{
@@ -24,5 +25,19 @@ inline const char* ToString(GeneMarker v)
 	case GeneMarker::GM_SPEED_MOVEMENT: return "SPEED MOVEMENT";
 	case GeneMarker::GM_SPEED_ROTATION: return "SPEED ROTATION";
 	default:      return "UNKNOWN GENE";
+	}
+}
+
+inline std::tuple<int, int> geneMarkerLimits(GeneMarker v)
+{
+	switch (v)
+	{
+	case GeneMarker::GM_SIZE:   return std::tuple<int, int>(0, 75);
+	case GeneMarker::GM_COLOUR_R:
+	case GeneMarker::GM_COLOUR_G:
+	case GeneMarker::GM_COLOUR_B: return std::tuple<int, int>(0, 255);
+	case GeneMarker::GM_SPEED_MOVEMENT: return std::tuple<int, int>(5, 50);
+	case GeneMarker::GM_SPEED_ROTATION: return std::tuple<int, int>(5, 50);
+	default:      return std::tuple<int, int>(0, 0); // no limits
 	}
 }

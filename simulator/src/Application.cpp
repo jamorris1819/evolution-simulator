@@ -65,7 +65,7 @@ void initialiseEntities() {
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 100.0f);
 
-	std::cout << ToString(GeneMarker::GM_COLOUR_R) << std::endl;
+	std::cout << geneMarkerToString(GeneMarker::GM_COLOUR_R) << std::endl;
 }
 
 double getTime()

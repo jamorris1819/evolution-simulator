@@ -32,7 +32,7 @@ void Menu::renderGenomeDescription()
 	ImGui::Text("The genes represented are:");
 	ImGui::Spacing();
 	for (int i = 0; i < (int)GeneMarker::GENE_COUNT; i++) {
-		ImGui::BulletText(ToString((GeneMarker)i));
+		ImGui::BulletText(geneMarkerToString((GeneMarker)i));
 	}
 }
 
@@ -46,7 +46,7 @@ void Menu::renderGenomeDetails()
 	for (int i = 0; i < 2 * strandLength; i++)
 	{
 		int index = (int)(glm::floor(i / 2));
-		const char* geneName = ToString((GeneMarker)index);
+		const char* geneName = geneMarkerToString((GeneMarker)index);
 		std::vector<Base*> strand = i % 2 == 0 ? selectedGenome->strandA : selectedGenome->strandB;
 		Base* base = strand[index];
 		bool enabled = strand[index]->enabled;

@@ -86,8 +86,6 @@ void Genome::generate()
 	strandA.push_back(new Gene<int>(glm::clamp(position - *spread, 0, 255), (int)GeneMarker::GM_SPEED_ROTATION));
 	strandB.push_back(new Gene<int>(glm::clamp(position + *spread, 0, 255), (int)GeneMarker::GM_SPEED_ROTATION));
 	delete spread;
-
-
 }
 
 Genome* Genome::clone()
@@ -107,6 +105,9 @@ Genome* Genome::clone()
 			clonedGenome->strandA.push_back(((Gene<bool>*)strandA[i])->clone());
 			clonedGenome->strandB.push_back(((Gene<bool>*)strandB[i])->clone());
 		}
+		else {
+			std::cerr << "Unknown type - could not be cloned" << std::endl;
+		}
 	}
 
 	return clonedGenome;
@@ -123,6 +124,9 @@ void Genome::mutate()
 			else if (base->typeBool) {
 				((Gene<bool>*)base)->mutate();
 			}
+			else {
+				std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
+			}
 		}
 
 		if (rand() % 10 == 0) {
@@ -132,6 +136,9 @@ void Genome::mutate()
 			}
 			else if (base->typeBool) {
 				((Gene<bool>*)base)->mutate();
+			}
+			else {
+				std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
 			}
 		}
 	}

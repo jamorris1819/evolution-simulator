@@ -74,6 +74,9 @@ template<class T> T Genome::getGeneValue(int order)
 			value = weight > 0.5 ? valA : valB;
 		}
 	}
+	else {
+		std::cerr << "Gene could not be mutated as it is an unknown type" << std::endl;
+	}
 
 	return value;
 }
