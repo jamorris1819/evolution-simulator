@@ -82,6 +82,11 @@ void Menu::renderGenomeDetails()
 	ImGui::Columns(1);
 }
 
+void Menu::renderTraitsDescription()
+{
+	ImGui::TextWrapped("The traits of a creature are determined from the genome. A creature will have 2 genes relating to size, for example. A weighted average is taken of the 2 values to determine the traits of the creature.");
+}
+
 void Menu::renderTraitsDetails()
 {
 	ImGui::LabelText("Trait", "Value");
@@ -106,6 +111,11 @@ void Menu::renderTraitsDetails()
 	// ROTATION SPEED
 	int rotationSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_ROTATION);
 	ImGui::DragInt("Rotation Speed", &rotationSpeed);
+}
+
+void Menu::renderBodyDescription()
+{
+	ImGui::TextWrapped("The variables that affect the body shape & size are determined through the genome. Here you can view the body traits derived from the genome.");
 }
 
 void Menu::renderBodyDetails()
@@ -206,6 +216,8 @@ void Menu::renderCreatureWindow()
 		if (ImGui::BeginTabItem("Description"))
 		{
 			if (selected == 0 && selectedGenome != nullptr) renderGenomeDescription();
+			if (selected == 1 && selectedGenome != nullptr) renderTraitsDescription();
+			if (selected == 2 && selectedBody != nullptr) renderBodyDescription();
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Details"))

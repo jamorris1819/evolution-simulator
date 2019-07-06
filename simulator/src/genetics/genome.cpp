@@ -89,7 +89,7 @@ void Genome::generate()
 
 	// BODY STEPS
 	spread = new int;
-	position = generateInt(10, 4, 3, 6, spread);
+	position = generateInt(10, 2, 0, 2, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));
 	delete spread;
@@ -103,14 +103,14 @@ void Genome::generate()
 
 	// BODY OFFSET X
 	spread = new int;
-	position = generateInt(0, 5000, 5, 10, spread);
+	position = generateInt(0, 5000, 0, 1, spread);
 	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETX));
 	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETX));
 	delete spread;
 
 	// BODY OFFSET Y
 	spread = new int;
-	position = generateInt(0, 5000, 5, 10, spread);
+	position = generateInt(0, 5000, 0, 1, spread);
 	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	delete spread;

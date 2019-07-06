@@ -5,7 +5,7 @@
 
 #define PI 3.14159265359
 
-Body::Body(GLuint shader) : PolygonR(shader)
+Body::Body(GLuint shader, b2World* world) : PolygonR(shader)
 {
 	seed = 0;
 	strideX = 1;
@@ -15,6 +15,7 @@ Body::Body(GLuint shader) : PolygonR(shader)
 	length = 1.0f;
 	width = 1.0f;
 	frequency = 0.25f;
+	this->world = world;
 }
 
 Body::~Body()
@@ -32,6 +33,17 @@ void Body::addParameters(int steps, int noiseType, int octaves, float offsetX, f
 	this->r = r;
 	this->g = g;
 	this->b = b;
+}
+
+glm::vec2 Body::getPosition()
+{
+	b2Vec2 position = physicsBody->GetPosition();
+	return glm::vec2(position.x, position.y);
+}
+
+void Body::setPosition(glm::vec2 position)
+{
+	physicsBody->SetTransform(b2Vec2(position.x, position.y), physicsBody->GetAngle());
 }
 
 void Body::generate()
@@ -76,4 +88,51 @@ void Body::generate()
 	}
 
 	setVertices(vertices);
+
+
+
+
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(300.0f, 500.0f);
+
+	// Call the body factory which allocates memory for the ground body
+	// from a pool and creates the ground box shape (also from a pool).
+	// The body is also added to the world.
+	b2Body* groundBody = world->CreateBody(&groundBodyDef);
+
+	// Define the ground box shape.
+	b2PolygonShape groundBox;
+
+	// The extents are the half-widths of the box.
+	groundBox.SetAsBox(50.0f, 10.0f);
+
+	// Add the ground fixture to the ground body.
+	groundBody->CreateFixture(&groundBox, 0.0f);
+
+
+
+
+
+
+
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(300.0f, 300.0f);
+	physicsBody = world->CreateBody(&bodyDef);
+
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(1.0f, 1.0f);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+
+	// Set the box density to be non-zero, so it will be dynamic.
+	fixtureDef.density = 10.0f;
+
+	// Override the default friction.
+	fixtureDef.friction = 10.0f;
+
+	// Add the shape to the body.
+	physicsBody->CreateFixture(&fixtureDef);
+	physicsBody->SetLinearDamping(1.0f);
 }

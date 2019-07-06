@@ -52,7 +52,7 @@ PolygonR* DrawnEntity::getPolygon()
 
 glm::mat4 DrawnEntity::getMatrix() const
 {
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), position);
+	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(body->getPosition(), 0.0f));
 	glm::mat4 rotation = glm::rotate(translate, (float)glm::radians(0.0), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glm::mat4 matrix = translate * rotation;
@@ -84,15 +84,20 @@ void DrawnEntity::setPolygon(PolygonR* polygon)
 	this->polygon = polygon;
 }
 
+void DrawnEntity::setBody(Body* body)
+{
+	this->body = body;
+}
+
 void DrawnEntity::render()
 {
 	if (enabled)
-		polygon->render(getMatrix());
+		body->render(getMatrix());
 }
 
 void DrawnEntity::update(double deltaTime)
 {
-	setPosition(getPosition() + (getVelocity() * glm::vec3(deltaTime, deltaTime, 0)));
+	setPosition(glm::vec3(body->getPosition(), 0.0f));
 }
 
 void DrawnEntity::unload()

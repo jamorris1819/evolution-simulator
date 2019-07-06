@@ -13,6 +13,7 @@
 #include "genetics\genemarker.h"
 #include <ctime>
 #include "noise\FastNoise.h"
+#include "Box2D\Box2D.h"
 
 using namespace std;
 
@@ -26,17 +27,20 @@ double* frequency;
 DrawnEntity* de;
 Body* body;
 Camera* cam;
+b2World* world;
 
 void initialiseEntities() {
-	body = new Body(program);
+	body = new Body(program, world);
 	body->addParameters(8, (int)FastNoise::Simplex, 4,0,0, 1, 0, 0);
 	body->generate();
 	body->load();
+	body->setPosition(glm::vec2(400, 400));
 
 	Menu::focusBody(body);
 
 	de = new DrawnEntity(glm::vec3(200, 200, 0));
 	de->setPolygon(body);
+	de->setBody(body);
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 100.0f);
@@ -66,6 +70,8 @@ void initialise()
 	Input::initialise();
 	glfwSetKeyCallback(window, Input::keyCallback);
 	glfwSetScrollCallback(window, Input::scrollCallback);
+	b2Vec2 gravity(0.0f, 0.0f);
+	world = new b2World(gravity);
 	initialiseEntities();
 
 	Menu::initialise(window);
@@ -91,6 +97,11 @@ void update() {
 
 	cam->update(deltaTime);
 	de->update(deltaTime);
+	world->Step(1.0f / 60.0f, 6, 2);
+
+	if (Input::isDown(GLFW_KEY_E)) {
+		de->body->physicsBody->ApplyLinearImpulse(b2Vec2(0.0f, 100.0f), de->body->physicsBody->GetWorldCenter(), true);
+	}
 
 	// test evolution
 
@@ -110,6 +121,9 @@ int main(int argc, char **argv)
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+
+	B2_NOT_USED(argc);
+	B2_NOT_USED(argv);
 
 	glfwSetErrorCallback(error_callback);
 

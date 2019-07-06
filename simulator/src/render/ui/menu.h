@@ -16,7 +16,9 @@ private:
 	static void renderMenuBar();
 	static void renderGenomeDescription();
 	static void renderGenomeDetails();
+	static void renderTraitsDescription();
 	static void renderTraitsDetails();
+	static void renderBodyDescription();
 	static void renderBodyDetails();
 	static void renderCreatureWindow();
 	static void triggerBodyRegen();

@@ -5,6 +5,7 @@
 #include "glm/gtx/transform.hpp"
 #include "GL/glew.h"
 #include "../render/polygon.h"
+#include "../creature/body.h"
 #include "entity.h"
 
 using namespace std;
@@ -28,9 +29,11 @@ public:
 	void setScale(glm::vec3 scale);
 	void setRotation(glm::quat rotation);
 	void setPolygon(PolygonR *polygon);
+	void setBody(Body *body);
 	void update(double deltaTime);
 	void render();
 	void unload();
+	Body* body;
 
 protected:
 	glm::vec3 position;

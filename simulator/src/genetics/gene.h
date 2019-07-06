@@ -200,7 +200,7 @@ template<class T> void Gene<T>::mutate()
 			number = rand() % changeAmount;
 			number -= changeAmount / 2;
 			fNumber = 1.0f + ((float)number / (float)changeAmount);
-			setValue((int)(value + 0.0025f));
+			setValue(value + 0.025f);
 		}
 	}
 	else {
