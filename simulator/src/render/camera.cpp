@@ -14,11 +14,13 @@ void Camera::initialise(float width, float height, float speed)
 	this->width = width;
 	this->height = height;
 
+	ppm = 64; // Pixels per metre.
+
 	projection = glm::ortho(
 		0.0f,		// Left
-		width,		// Right
+		width / ppm,		// Right
 		0.0f,		// Bottom
-		height,		// Top
+		height / ppm,		// Top
 		-1.0f,		// Near
 		1.0f		// Far
 	);
@@ -91,10 +93,10 @@ bool Camera::handleZoom(double deltaTime)
 
 	// Create the new projection.
 	projection = glm::ortho(
-		width - zoomWidth,		// Left
-		zoomWidth,				// Right
-		height - zoomHeight,	// Bottom
-		zoomHeight,				// Top
+		(width - zoomWidth) / ppm,		// Left
+		zoomWidth / ppm,				// Right
+		(height - zoomHeight) / ppm,	// Bottom
+		zoomHeight / ppm,				// Top
 		-1.0f,					// Near
 		1.0f					// Far
 	);

@@ -21,13 +21,13 @@ public:
 	glm::vec3 & getPosition();
 	glm::vec3 & getVelocity();
 	glm::vec3 & getScale();
-	glm::quat & getRotation();
+	float & getRotation();
 	PolygonR* getPolygon();
 	glm::mat4 getMatrix() const;
 	void setPosition(glm::vec3 position);
 	void setVelocity(glm::vec3 velocity);
 	void setScale(glm::vec3 scale);
-	void setRotation(glm::quat rotation);
+	void setRotation(float rotation);
 	void setPolygon(PolygonR *polygon);
 	void setBody(Body *body);
 	void update(double deltaTime);
@@ -39,6 +39,6 @@ protected:
 	glm::vec3 position;
 	glm::vec3 velocity;
 	glm::vec3 scale;
-	glm::quat rotation;
+	float rotation;
 	PolygonR* polygon;
 };

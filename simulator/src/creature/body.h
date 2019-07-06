@@ -2,15 +2,16 @@
 #include "../render/polygon.h"
 #include "Box2D\Box2D.h"
 #include "glm\vec2.hpp"
+#include <vector>
 
 class Body : public PolygonR {
 public:
 	Body(GLuint shader, b2World* world);
 	~Body();
 	void addParameters(int steps, int noiseType, int octaves, float offsetX, float offsetY, int r, int g, int b);
-	b2Body* physicsBody;
-	b2World* world;
+	void unload();
 	glm::vec2 getPosition();
+	float getRotation();
 	void setPosition(glm::vec2 position);
 	void generate();
 	int seed;
@@ -27,4 +28,10 @@ public:
 	int r;
 	int g;
 	int b;
+
+private:
+	void generateBodyPoints();
+	void generatePhysicsBody();
+	b2Body* physicsBody;
+	b2World* world;
 };

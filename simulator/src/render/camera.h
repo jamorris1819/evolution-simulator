@@ -15,6 +15,7 @@ public:
 	bool handleMovement(double deltaTime);
 	bool handleZoom(double deltaTime);
 protected:
+	int ppm;
 	float minZoom;
 	float maxZoom;
 	float width;

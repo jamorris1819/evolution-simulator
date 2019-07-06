@@ -8,7 +8,7 @@ DrawnEntity::DrawnEntity(glm::vec3 position) : Entity()
 	setPosition(position);
 	setVelocity(glm::vec3(0, 0, 0));
 	setScale(glm::vec3(1, 1, 1));
-	setRotation(glm::quat());
+	setRotation(0);
 }
 
 DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity()
@@ -17,7 +17,7 @@ DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity()
 	setPosition(position);
 	setVelocity(glm::vec3(0, 0, 0));
 	setScale(scale);
-	setRotation(glm::quat());
+	setRotation(0);
 }
 
 DrawnEntity::~DrawnEntity()
@@ -40,7 +40,7 @@ glm::vec3& DrawnEntity::getScale()
 	return scale;
 }
 
-glm::quat& DrawnEntity::getRotation()
+float& DrawnEntity::getRotation()
 {
 	return rotation;
 }
@@ -52,11 +52,12 @@ PolygonR* DrawnEntity::getPolygon()
 
 glm::mat4 DrawnEntity::getMatrix() const
 {
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(body->getPosition(), 0.0f));
-	glm::mat4 rotation = glm::rotate(translate, (float)glm::radians(0.0), glm::vec3(0.0f, 1.0f, 0.0f));
+	// Create translation matrix.
+	glm::mat4 matrix = glm::translate(glm::mat4(1.0f), glm::vec3(body->getPosition(), 0.0f));
+	// Apply rotation matrix.
+	matrix = glm::rotate(matrix, body->getRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
 
-	glm::mat4 matrix = translate * rotation;
-	return translate;
+	return matrix;
 }
 
 void DrawnEntity::setPosition(glm::vec3 position)
@@ -74,7 +75,7 @@ void DrawnEntity::setScale(glm::vec3 scale)
 	this->scale = scale;
 }
 
-void DrawnEntity::setRotation(glm::quat rotation)
+void DrawnEntity::setRotation(float rotation)
 {
 	this->rotation = rotation;
 }

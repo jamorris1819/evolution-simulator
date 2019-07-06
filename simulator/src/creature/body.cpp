@@ -20,7 +20,6 @@ Body::Body(GLuint shader, b2World* world) : PolygonR(shader)
 
 Body::~Body()
 {
-
 }
 
 void Body::addParameters(int steps, int noiseType, int octaves, float offsetX, float offsetY, int r, int g, int b)
@@ -41,12 +40,27 @@ glm::vec2 Body::getPosition()
 	return glm::vec2(position.x, position.y);
 }
 
+float Body::getRotation()
+{
+	float a = physicsBody->GetAngle();
+	return a;
+}
+
 void Body::setPosition(glm::vec2 position)
 {
 	physicsBody->SetTransform(b2Vec2(position.x, position.y), physicsBody->GetAngle());
 }
 
 void Body::generate()
+{
+	// Generate the shape of the body.
+	generateBodyPoints();
+
+	// Generate physics body.
+	generatePhysicsBody();
+}
+
+void Body::generateBodyPoints()
 {
 	FastNoise noise;
 	noise.SetSeed(seed);
@@ -63,14 +77,13 @@ void Body::generate()
 	for (int i = 0; i <= sides; i++) {
 		Vertex v(glm::sin(i * step), glm::cos(i * step));
 		float size = (noise.GetNoise((i * strideX) + offsetX, (i * strideY) + offsetY) + 1) / 2.0f;
-		v.multiply(80.0f);
 		v.multiply(size);
 		vertices.push_back(v);
 	}
 
 	// Copy and flip the vertices so they're mirrored.
 	int size = vertices.size();
-	for (int i = 0; i < size; i++) {
+	for (int i = 1; i < size; i++) {
 		Vertex v = vertices[size - i - 1];
 		v.setPosition(glm::vec2(-1.0f, 1.0f) * v.getPosition());
 		vertices.push_back(v);
@@ -88,51 +101,43 @@ void Body::generate()
 	}
 
 	setVertices(vertices);
+}
 
-
-
-
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(300.0f, 500.0f);
-
-	// Call the body factory which allocates memory for the ground body
-	// from a pool and creates the ground box shape (also from a pool).
-	// The body is also added to the world.
-	b2Body* groundBody = world->CreateBody(&groundBodyDef);
-
-	// Define the ground box shape.
-	b2PolygonShape groundBox;
-
-	// The extents are the half-widths of the box.
-	groundBox.SetAsBox(50.0f, 10.0f);
-
-	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
-
-
-
-
-
-
-
+void Body::generatePhysicsBody()
+{
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(300.0f, 300.0f);
+	bodyDef.position.Set(20.0f, 10.0f);
+	bodyDef.angle = 1.0f;
 	physicsBody = world->CreateBody(&bodyDef);
 
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
+	// Create the triangles for this body.
+	for (int i = 0; i < vertices.size() - 1; i++) {
+		// Get vertices.
+		Vertex v1 = vertices[i];
+		Vertex v2 = vertices[i + 1];
+		b2Vec2 vert[3];
 
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
+		// Assign shape's vertices.
+		vert[0].Set(v1.getPosition().x, v1.getPosition().y);
+		vert[1].Set(0.0f, 0.0f);
+		vert[2].Set(v2.getPosition().x, v2.getPosition().y);
+		
+		b2PolygonShape shape;
+		shape.Set(vert, 3);
 
-	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 10.0f;
-
-	// Override the default friction.
-	fixtureDef.friction = 10.0f;
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &shape;
+		fixtureDef.density = 10.0f;
+		fixtureDef.restitution = 0.6f;
+		physicsBody->CreateFixture(&fixtureDef);
+	}
 
 	// Add the shape to the body.
-	physicsBody->CreateFixture(&fixtureDef);
 	physicsBody->SetLinearDamping(1.0f);
+}
+
+void Body::unload()
+{
+	physicsBody->GetWorld()->DestroyBody(physicsBody);
 }
