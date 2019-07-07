@@ -115,7 +115,6 @@ void Body::generatePhysicsBody()
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(20.0f, 10.0f);
-	//bodyDef.angle = 1.0f;
 	physicsBody = world->CreateBody(&bodyDef);
 
 	// Create the triangles for this body.
@@ -135,13 +134,13 @@ void Body::generatePhysicsBody()
 
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &shape;
-		fixtureDef.density = 40.0f;
+		fixtureDef.density = 10.0f;
 		fixtureDef.restitution = 0.6f;
 		physicsBody->CreateFixture(&fixtureDef);
 	}
 
 	// Apply some settings to the new body.
-	physicsBody->SetLinearDamping(1.0f);
+	physicsBody->SetLinearDamping(2.0f);
 	physicsBody->SetAngularDamping(1.0f);
 }
 
@@ -153,16 +152,16 @@ void Body::unload()
 void Body::moveForward()
 {
 	physicsBody->ApplyForceToCenter(
-		b2Vec2(sin(-getRotation()) * 40.0f, cos(getRotation()) * 40.0f),
+		b2Vec2(sin(-getRotation()) * 60.0f, cos(getRotation()) * 60.0f),
 		true);
 }
 
 void Body::turnLeft()
 {
-	physicsBody->ApplyAngularImpulse(-0.4f, true);
+	physicsBody->ApplyAngularImpulse(0.4f, true);
 }
 
 void Body::turnRight()
 {
-	physicsBody->ApplyAngularImpulse(0.4f, true);
+	physicsBody->ApplyAngularImpulse(-0.4f, true);
 }

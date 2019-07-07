@@ -14,6 +14,7 @@
 #include <ctime>
 #include "noise\FastNoise.h"
 #include "Box2D\Box2D.h"
+#include "creature\creature.h"
 
 using namespace std;
 
@@ -24,28 +25,22 @@ float width = 1920.0f;
 float height = 1080.0f;
 double* frequency;
 
-DrawnEntity* de;
+Creature* creature;
 Body* body;
 Camera* cam;
 b2World* world;
 
 void initialiseEntities() {
-	body = new Body(program, world);
-	body->addParameters(8, (int)FastNoise::Simplex, 4,0,0, 1, 0, 0);
-	body->generate();
-	body->load();
-	body->setPosition(glm::vec2(400, 400));
+	creature = new Creature(program, world, glm::vec2(0, 0));
+	Genome* gen = new Genome(true);
+	creature->setGenome(gen);
+	creature->generate();
 
-	Menu::focusBody(body);
-
-	de = new DrawnEntity(glm::vec3(200, 200, 0));
-	de->setPolygon(body);
-	de->setBody(body);
+	Menu::focusBody(creature->body);
+	Menu::focusGenome(gen);
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 100.0f);
-
-	std::cout << geneMarkerToString(GeneMarker::GM_COLOUR_R) << std::endl;
 }
 
 double getTime()
@@ -95,6 +90,9 @@ void initialise()
 	
 	lastTime = getTime();
 
+	// Initialise UI.
+	Menu::initialise(window);
+
 	initialiseBox2D();
 	initialiseEntities();
 
@@ -103,19 +101,15 @@ void initialise()
 	glfwSetKeyCallback(window, Input::keyCallback);
 	glfwSetScrollCallback(window, Input::scrollCallback);
 	
-	// Initialise UI.
-	Menu::initialise(window);
 
 	//for (int i = 0; i < 100000; i++) {
-		Genome* a = new Genome(true);
 		//Gene<int>* g = a->getGene<int>(GeneMarker::GM_SIZE, 0);
-		Menu::focusGenome(a);
 		//delete size;
 	//}
 }
 
 void render() {
-	de->render();
+	creature->render();
 }
 
 void update() {
@@ -127,17 +121,23 @@ void update() {
 	deltaTime = 0.013;
 
 	cam->update(deltaTime);
-	de->update(deltaTime);
+	//de->update(deltaTime);
+	creature->update(deltaTime);
 
 	// Update the physics simulation.
 	world->Step(1.0f / 60.0f, 6, 2);
 
-	if (Input::isDown(GLFW_KEY_E)) {
-		de->body->moveForward();
+	// Debug creature controller.
+	if (Input::isDown(GLFW_KEY_UP)) {
+		//de->body->moveForward();
 	}
 
-	if (Input::isDown(GLFW_KEY_Q)) {
-		de->body->turnLeft();
+	if (Input::isDown(GLFW_KEY_LEFT)) {
+		//de->body->turnLeft();
+	}
+
+	if (Input::isDown(GLFW_KEY_RIGHT)) {
+		//de->body->turnRight();
 	}
 
 	// test evolution
