@@ -53,27 +53,13 @@ double getTime()
 	return 0;
 }
 
-void initialise()
+void initialiseBox2D()
 {
-	cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
-	cout << "GLFW Version " << glfwGetVersionString() << endl;
-	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
-	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
-	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
-	glViewport(0, 0, width, height);
-
-	ShaderUtility shaderUtility;
-	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
-	glPolygonMode(GL_FRONT, GL_POLYGON);
-	
-	lastTime = getTime();
-	Input::initialise();
-	glfwSetKeyCallback(window, Input::keyCallback);
-	glfwSetScrollCallback(window, Input::scrollCallback);
-	b2Vec2 gravity(0.0f, -10.0f);
+	b2Vec2 gravity(0.0f, 0.0f);
 	world = new b2World(gravity);
-	initialiseEntities();
 
+
+	// DEBUG BELOW.
 	b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(20.0f, 0.0f);
 
@@ -90,8 +76,34 @@ void initialise()
 
 	// Add the ground fixture to the ground body.
 	groundBody->CreateFixture(&groundBox, 0.0f);
+}
 
+void initialise()
+{
+	// Output some data to screen.
+	cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
+	cout << "GLFW Version " << glfwGetVersionString() << endl;
+	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
+	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
+	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
+	glViewport(0, 0, width, height);
 
+	// Set up shaders.
+	ShaderUtility shaderUtility;
+	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
+	glPolygonMode(GL_FRONT, GL_POLYGON);
+	
+	lastTime = getTime();
+
+	initialiseBox2D();
+	initialiseEntities();
+
+	// Initialise input handler.
+	Input::initialise();
+	glfwSetKeyCallback(window, Input::keyCallback);
+	glfwSetScrollCallback(window, Input::scrollCallback);
+	
+	// Initialise UI.
 	Menu::initialise(window);
 
 	//for (int i = 0; i < 100000; i++) {
@@ -107,6 +119,7 @@ void render() {
 }
 
 void update() {
+	// Calculate delta time.
 	double currentTime = getTime();
 	double elapsedTime = currentTime - lastTime;
 	double deltaTime = elapsedTime * 0.001;
@@ -115,10 +128,16 @@ void update() {
 
 	cam->update(deltaTime);
 	de->update(deltaTime);
+
+	// Update the physics simulation.
 	world->Step(1.0f / 60.0f, 6, 2);
 
 	if (Input::isDown(GLFW_KEY_E)) {
-		//de->body->physicsBody->ApplyLinearImpulse(b2Vec2(0.0f, 100.0f), de->body->physicsBody->GetWorldCenter(), true);
+		de->body->moveForward();
+	}
+
+	if (Input::isDown(GLFW_KEY_Q)) {
+		de->body->turnLeft();
 	}
 
 	// test evolution
@@ -159,38 +178,22 @@ int main(int argc, char **argv)
 
 	initialise();
 
-	//IMGUI_CHECKVERSION();
-	//ImGui::CreateContext();
-	//ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//ImGui::StyleColorsDark();
-
-	//ImGui_ImplGlfw_InitForOpenGL(window, true);
-	//ImGui_ImplOpenGL3_Init();
 	bool showDemo = true;
 	glfwSwapInterval(1);
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//ImGui_ImplOpenGL3_NewFrame();
-		//ImGui_ImplGlfw_NewFrame();
-		//ImGui::NewFrame();
-
-		//ImGui::ShowDemoWindow(&showDemo);
-
 		update();
 		render();
 
 		Menu::renderUI();
 
-		//ImGui::Render();
-		//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
-		
 
 		/* Poll for and process events */
 		glfwPollEvents();
@@ -198,8 +201,5 @@ int main(int argc, char **argv)
 
 	glfwTerminate();
 	Menu::destroy();
-	//ImGui_ImplOpenGL3_Shutdown();
-	//ImGui_ImplGlfw_Shutdown();
-	//ImGui::DestroyContext();
 	return 0;
 }

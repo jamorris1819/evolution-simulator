@@ -13,6 +13,13 @@ public:
 	glm::vec2 getPosition();
 	float getRotation();
 	void setPosition(glm::vec2 position);
+	void setRotation(float rotation);
+	b2Body* getPhysicsBody();
+
+	void moveForward();
+	void turnLeft();
+	void turnRight();
+
 	void generate();
 	int seed;
 	int steps;

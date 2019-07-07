@@ -42,13 +42,22 @@ glm::vec2 Body::getPosition()
 
 float Body::getRotation()
 {
-	float a = physicsBody->GetAngle();
-	return a;
+	return physicsBody->GetAngle();
 }
 
 void Body::setPosition(glm::vec2 position)
 {
 	physicsBody->SetTransform(b2Vec2(position.x, position.y), physicsBody->GetAngle());
+}
+
+void Body::setRotation(float rotation)
+{
+	physicsBody->SetTransform(physicsBody->GetPosition(), rotation);
+}
+
+b2Body* Body::getPhysicsBody()
+{
+	return physicsBody;
 }
 
 void Body::generate()
@@ -88,11 +97,8 @@ void Body::generateBodyPoints()
 		v.setPosition(glm::vec2(-1.0f, 1.0f) * v.getPosition());
 		vertices.push_back(v);
 	}
-	//offsetX += 0.01f;
-	//offsetY += 0.01f;
 
 	// Scale body width length/width.
-
 	for (int i = 0; i < vertices.size(); i++) {
 		Vertex v = vertices[i];
 		v.setPosition(glm::vec2(-width, length) * v.getPosition());
@@ -100,6 +106,7 @@ void Body::generateBodyPoints()
 		vertices[i] = v;
 	}
 
+	// Assign these vertices to the polygon model.
 	setVertices(vertices);
 }
 
@@ -108,7 +115,7 @@ void Body::generatePhysicsBody()
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(20.0f, 10.0f);
-	bodyDef.angle = 1.0f;
+	//bodyDef.angle = 1.0f;
 	physicsBody = world->CreateBody(&bodyDef);
 
 	// Create the triangles for this body.
@@ -128,16 +135,34 @@ void Body::generatePhysicsBody()
 
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &shape;
-		fixtureDef.density = 10.0f;
+		fixtureDef.density = 40.0f;
 		fixtureDef.restitution = 0.6f;
 		physicsBody->CreateFixture(&fixtureDef);
 	}
 
-	// Add the shape to the body.
+	// Apply some settings to the new body.
 	physicsBody->SetLinearDamping(1.0f);
+	physicsBody->SetAngularDamping(1.0f);
 }
 
 void Body::unload()
 {
 	physicsBody->GetWorld()->DestroyBody(physicsBody);
+}
+
+void Body::moveForward()
+{
+	physicsBody->ApplyForceToCenter(
+		b2Vec2(sin(-getRotation()) * 40.0f, cos(getRotation()) * 40.0f),
+		true);
+}
+
+void Body::turnLeft()
+{
+	physicsBody->ApplyAngularImpulse(-0.4f, true);
+}
+
+void Body::turnRight()
+{
+	physicsBody->ApplyAngularImpulse(0.4f, true);
 }
