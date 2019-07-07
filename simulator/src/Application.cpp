@@ -40,7 +40,7 @@ void initialiseEntities() {
 	Menu::focusGenome(gen);
 
 	cam = new Camera(glm::vec2(0, 0), program);
-	cam->initialise(width, height, 100.0f);
+	cam->initialise(width, height, 20.0f);
 }
 
 double getTime()

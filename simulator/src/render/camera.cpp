@@ -28,7 +28,7 @@ void Camera::initialise(float width, float height, float speed)
 	zoom = 1.0f;
 
 	minZoom = 0.2f;
-	maxZoom = 2.0f;
+	maxZoom = 1.9f;
 
 	align();
 }
@@ -80,8 +80,8 @@ bool Camera::handleMovement(double deltaTime)
 
 bool Camera::handleZoom(double deltaTime)
 {
-	if (Input::scrollUp()) zoom *= 1.1f;
-	else if (Input::scrollDown()) zoom *= 0.9f;
+	if (Input::scrollUp()) zoom += 0.1f;
+	else if (Input::scrollDown()) zoom -= 0.1f;
 	else return false;
 
 	// Lock the zoom to the camera's limits.
