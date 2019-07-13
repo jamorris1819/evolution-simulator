@@ -141,6 +141,9 @@
     <ClCompile Include="src\entities\drawnentity.cpp" />
     <ClCompile Include="src\entities\entity.cpp" />
     <ClCompile Include="src\genetics\genome.cpp" />
+    <ClCompile Include="src\neural\connectiongene.cpp" />
+    <ClCompile Include="src\neural\neuralgenome.cpp" />
+    <ClCompile Include="src\neural\nodegene.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
     <ClCompile Include="src\render\polygon.cpp" />
     <ClCompile Include="src\render\ui\imgui.cpp" />
@@ -1449,6 +1452,9 @@
     <ClInclude Include="src\entities\entity.h" />
     <ClInclude Include="src\genetics\genemarker.h" />
     <ClInclude Include="src\genetics\genome.h" />
+    <ClInclude Include="src\neural\connectiongene.h" />
+    <ClInclude Include="src\neural\neuralgenome.h" />
+    <ClInclude Include="src\neural\nodegene.h" />
     <ClInclude Include="src\render\camera.h" />
     <ClInclude Include="src\render\polygon.h" />
     <ClInclude Include="src\render\ui\imconfig.h" />

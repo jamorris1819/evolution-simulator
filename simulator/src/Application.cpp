@@ -15,6 +15,7 @@
 #include "noise\FastNoise.h"
 #include "Box2D\Box2D.h"
 #include "creature\creature.h"
+#include "neural\neuralgenome.h"
 
 using namespace std;
 
@@ -38,6 +39,9 @@ void initialiseEntities() {
 
 	Menu::focusBody(creature->body);
 	Menu::focusGenome(gen);
+
+	NeuralGenome neural(1, 1);
+	float* res = neural.evaluate(new float[3]{ 1 });
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
