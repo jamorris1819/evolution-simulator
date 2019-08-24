@@ -155,7 +155,6 @@ void Menu::renderNeuralNetDescription()
 	ImGui::TextWrapped("some Neural Net description here...");
 }
 
-// work in progress
 void Menu::renderNeuralNetDetails()
 {
 	if (selectedNeuralGenome == nullptr)

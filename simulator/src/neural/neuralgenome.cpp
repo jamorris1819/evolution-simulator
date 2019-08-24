@@ -48,7 +48,8 @@ float NeuralGenome::recurseNetwork(int node, float *inputs)
 	for (it = connections.begin(); it != connections.end(); it++)
 	{
 		ConnectionGene connGene = it->second;
-		if (connGene.getOutputNode() == node) genes.push_back(connGene);
+		if (connGene.getOutputNode() == node)
+			genes.push_back(connGene);
 	}
 
 	for (int i = 0; i < genes.size(); i++) {
@@ -68,3 +69,17 @@ float NeuralGenome::recurseNetwork(int node, float *inputs)
 	return toReturn;
 }
 
+int NeuralGenome::getNodeCount()
+{
+	return nodes.size();
+}
+
+std::map<int, ConnectionGene> NeuralGenome::getConnections()
+{
+	return connections;
+}
+
+std::map<int, NodeGene> NeuralGenome::getNodes()
+{
+	return nodes;
+}

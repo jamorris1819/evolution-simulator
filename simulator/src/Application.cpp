@@ -30,6 +30,7 @@ Creature* creature;
 Body* body;
 Camera* cam;
 b2World* world;
+NeuralGenome* neuralGenome;
 
 void initialiseEntities() {
 	creature = new Creature(program, world, glm::vec2(0, 0));
@@ -37,11 +38,14 @@ void initialiseEntities() {
 	creature->setGenome(gen);
 	creature->generate();
 
+	neuralGenome = new NeuralGenome(5, 1);
+	float* res = neuralGenome->evaluate(new float[5]{ 1, 1, 1, 1, 1 });
+
 	Menu::focusBody(creature->body);
 	Menu::focusGenome(gen);
+	Menu::focusNeuralGenome(neuralGenome);
 
-	NeuralGenome neural(1, 1);
-	float* res = neural.evaluate(new float[3]{ 1 });
+
 
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);

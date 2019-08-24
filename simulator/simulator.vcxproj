@@ -142,6 +142,7 @@
     <ClCompile Include="src\entities\entity.cpp" />
     <ClCompile Include="src\genetics\genome.cpp" />
     <ClCompile Include="src\neural\connectiongene.cpp" />
+    <ClCompile Include="src\neural\netdata.cpp" />
     <ClCompile Include="src\neural\neuralgenome.cpp" />
     <ClCompile Include="src\neural\nodegene.cpp" />
     <ClCompile Include="src\render\camera.cpp" />
@@ -1453,6 +1454,7 @@
     <ClInclude Include="src\genetics\genemarker.h" />
     <ClInclude Include="src\genetics\genome.h" />
     <ClInclude Include="src\neural\connectiongene.h" />
+    <ClInclude Include="src\neural\netdata.h" />
     <ClInclude Include="src\neural\neuralgenome.h" />
     <ClInclude Include="src\neural\nodegene.h" />
     <ClInclude Include="src\render\camera.h" />

@@ -99,6 +99,9 @@
     <ClCompile Include="src\neural\neuralgenome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\neural\netdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2229,6 +2232,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\neural\neuralgenome.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\neural\netdata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
