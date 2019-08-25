@@ -3,6 +3,9 @@
 #include "neuralgenome.h"
 #include <vector>
 
+int NeuralGenome::innovationNumber = 0;
+
+
 NeuralGenome::NeuralGenome(int inputs, int outputs)
 {
 	// Create input nodes.
@@ -18,20 +21,20 @@ NeuralGenome::NeuralGenome(int inputs, int outputs)
 	}
 
 	// Create connections.
-	for (int i = 0; i < inputs; i++) {
+	/*for (int i = 0; i < inputs; i++) {
 		for (int j = 0; j < outputs; j++) {
 			bool enabled = i != 0;
 			double weight = 1.0;// (((double)rand() / (RAND_MAX)) * 2.0) - 1.0;
 			ConnectionGene connectionGene(i, inputs + j, enabled, weight, connections.size());
 			connections.insert(std::make_pair(connections.size(), connectionGene));
 		}
-	}
+	}*/
 
 	inputCount = inputs;
 	outputCount = outputs;
 
 	// Add hidden node.
-	NodeGene nodeGene(NodeType::HIDDEN);
+	/*NodeGene nodeGene(NodeType::HIDDEN);
 	nodes.insert(std::make_pair(nodes.size(), nodeGene));
 
 	ConnectionGene connectionGene(0, 2, true, -1.0, connections.size());
@@ -115,7 +118,68 @@ std::map<int, ConnectionGene> NeuralGenome::getConnections()
 	return connections;
 }
 
+
+
 std::map<int, NodeGene> NeuralGenome::getNodes()
 {
 	return nodes;
+}
+
+bool NeuralGenome::tryAddConnection(int& fromNode, int& toNode)
+{
+	bool hiddenNodesExist = getNodeCount() > inputCount + outputCount;	// If there are hidden nodes in this neural network.
+	bool useHiddenNode = hiddenNodesExist && rand() % 2 == 0;			// If we want to involve a hidden node in this connection.
+
+	if (useHiddenNode) {
+		bool startOnHidden = rand() % 2 == 0;
+		int hiddenNodeCount = getNodeCount() - inputCount - outputCount;
+		int hiddenNodeToUse = rand() % hiddenNodeCount;
+
+		if (startOnHidden) {
+			fromNode = hiddenNodeToUse;						// hidden node
+			toNode = inputCount + (rand() % outputCount);	// an output node
+		}
+		else {
+			toNode = hiddenNodeToUse;
+			fromNode = rand() % 2 == 0										// randomly choose:
+				? rand() % inputCount										// input node
+				: inputCount + outputCount + (rand() % hiddenNodeCount);	// hidden node
+		}
+	}
+	else {
+		fromNode = rand() % inputCount;					// input node
+		toNode = inputCount + (rand() % outputCount);	// output node
+	}
+
+	// Check if these nodes already have a connection.
+	for (int j = 0; j < connections.size(); j++) {
+		ConnectionGene connGene = connections[j];
+		if ((connGene.getInputNode() == fromNode && connGene.getOutputNode() == toNode)
+			|| (connGene.getInputNode() == toNode && connGene.getOutputNode() == fromNode)) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+// Mutates the genome by creating a new connection between 2 random nodes.
+void NeuralGenome::mutateAddConnection()
+{
+	int fromNode = 0;
+	int toNode = 0;
+	bool canMutate = false;
+
+	for (int i = 0; i < 5; i++) {
+		canMutate = canMutate || tryAddConnection(fromNode, toNode);
+		if (canMutate) break;
+	}
+
+	if (!canMutate) return;
+
+	double weight = (((double)rand() / (RAND_MAX)) * 2.0) - 1.0;
+
+	// Create the connection
+	ConnectionGene gene(fromNode, toNode, true, weight, 0);
+	connections.insert(std::make_pair(connections.size(), gene));
 }

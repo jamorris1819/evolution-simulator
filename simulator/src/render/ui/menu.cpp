@@ -12,7 +12,7 @@ bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
 Body* Menu::selectedBody;
 NeuralGenome* Menu::selectedNeuralGenome;
-NetData Menu::netData;
+NetData* Menu::netData;
 
 void Menu::initialise(GLFWwindow* window)
 {
@@ -198,8 +198,8 @@ void Menu::renderNeuralNetDetails()
 	int outputNodeCount = selectedNeuralGenome->outputCount;
 	int totalNodeCount = selectedNeuralGenome->getNodeCount() - inputNodeCount - outputNodeCount;
 
-	std::vector<NodeData> nodes = netData.getNodes();
-	std::vector<ConnectionData> connections = netData.getConnections();
+	std::vector<NodeData> nodes = netData->getNodes();
+	std::vector<ConnectionData> connections = netData->getConnections();
 	std::map<int, NodeGene> n = selectedNeuralGenome->getNodes();
 
 	x = p.x + 16.0f, y = p.y + 16.0f;
@@ -329,6 +329,8 @@ void Menu::renderCreatureWindow()
 	if (ImGui::Button("Mutate")) { selectedGenome->mutate(); triggerBodyRegen(); }
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
+	ImGui::SameLine();
+	if (ImGui::Button("Add neural connection")) { selectedNeuralGenome->mutateAddConnection(); focusNeuralGenome(selectedNeuralGenome); }
 	ImGui::EndGroup();
 
 	ImGui::End();
@@ -388,6 +390,10 @@ void Menu::focusBody(Body* body)
 // This brings the neural genome into focus and calculates appropriate info in order to render.
 void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 {
+	if (netData != nullptr)
+		delete netData;
+
+	netData = new NetData();
 	selectedNeuralGenome = neuralGenome;
 	std::map<int, NodeGene> nodeGenes = neuralGenome->getNodes();
 	std::map<int, ConnectionGene> connectionGenes = neuralGenome->getConnections();
@@ -410,7 +416,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 		connectionData.enabled = it2->second.getEnabled();
 		connectionData.weight = it2->second.getWeight();
 
-		netData.addConnection(connectionData);
+		netData->addConnection(connectionData);
 	}
 
 	// Create the node info (position + type).
@@ -437,8 +443,8 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 			vector<int> hiddenNodeConnections;
 
 			// Iterate through all connections and find which nodes this node connects to.
-			for (int j = 0; j < netData.getConnections().size(); j++) {
-				ConnectionData connection = netData.getConnections()[j];
+			for (int j = 0; j < netData->getConnections().size(); j++) {
+				ConnectionData connection = netData->getConnections()[j];
 				if (connection.to == i) hiddenNodeConnections.push_back(connection.from);
 				if (connection.from == i) hiddenNodeConnections.push_back(connection.to);
 			}
@@ -451,7 +457,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 			int toDrawY = 0;
 
 			for (int x = 0; x < hiddenNodeConnections.size(); x++) {
-				NodeData toNode = netData.getNodes()[hiddenNodeConnections[x]];
+				NodeData toNode = netData->getNodes()[hiddenNodeConnections[x]];
 				toDrawX += (toNode.x) / hiddenNodeConnections.size();
 				toDrawY += (toNode.y) / hiddenNodeConnections.size();
 			}
@@ -467,7 +473,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 			nodeData.type = NodeType::OUTPUT;
 		}
 
-		netData.addNode(nodeData);
+		netData->addNode(nodeData);
 		i++;
 	}
 }

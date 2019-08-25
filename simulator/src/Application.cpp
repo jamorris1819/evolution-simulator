@@ -38,7 +38,7 @@ void initialiseEntities() {
 	creature->setGenome(gen);
 	creature->generate();
 
-	neuralGenome = new NeuralGenome(1, 1);
+	neuralGenome = new NeuralGenome(5, 3);
 
 	creature->setNeuralGenome(neuralGenome);
 

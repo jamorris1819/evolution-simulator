@@ -31,5 +31,5 @@ private:
 	static Genome* selectedGenome;
 	static Body* selectedBody;
 	static NeuralGenome* selectedNeuralGenome;
-	static NetData netData;
+	static NetData* netData;
 };

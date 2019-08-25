@@ -3,6 +3,7 @@
 
 class ConnectionGene {
 public:
+	ConnectionGene();
 	ConnectionGene(int input, int output, bool enabled, float weight, int innovation);
 	int getInputNode();
 	int getOutputNode();

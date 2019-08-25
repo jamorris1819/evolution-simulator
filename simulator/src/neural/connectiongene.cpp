@@ -1,5 +1,14 @@
 #include "connectiongene.h"
 
+ConnectionGene::ConnectionGene()
+{
+	inputNode = 0;
+	outputNode = 0;
+	this->enabled = true;
+	this->weight = 1.0;
+	this->innovation = 0;
+}
+
 ConnectionGene::ConnectionGene(int input, int output, bool enabled, float weight, int innovation)
 {
 	inputNode = input;
