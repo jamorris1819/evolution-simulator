@@ -16,7 +16,7 @@ public:
 	void setRotation(float rotation);
 	b2Body* getPhysicsBody();
 
-	void moveForward();
+	void moveForward(float power);
 	void turnLeft();
 	void turnRight();
 

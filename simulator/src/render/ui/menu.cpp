@@ -175,46 +175,31 @@ void Menu::renderNeuralNetDetails()
 	int inputNodeCount = selectedNeuralGenome->inputCount;
 	int outputNodeCount = selectedNeuralGenome->outputCount;
 	int totalNodeCount = selectedNeuralGenome->getNodeCount() - inputNodeCount - outputNodeCount;
-	std::map<int, ConnectionGene> connections = selectedNeuralGenome->getConnections();
 
-	x = p.x + 4.0f, y = p.y + 4.0f;
+	std::vector<NodeData> nodes = netData.getNodes();
+	std::vector<ConnectionData> connections = netData.getConnections();
+	std::map<int, NodeGene> n = selectedNeuralGenome->getNodes();
 
-	// Render the input nodes.
-	for (int i = 0; i < inputNodeCount; i++) {
+	x = p.x + 16.0f, y = p.y + 16.0f;
+
+	// Render the input + ouptut nodes.
+	for (int i = 0; i < nodes.size(); i++) {
+		NodeData node = nodes[i];
+
 		draw_list->AddCircleFilled(ImVec2(
-			x + (size * 0.5f),	// start x
-			y + (size * 0.5f)	// start y
-			+ (i * (size + spacing))), // y offset
+			x + node.x,	// start x
+			y + node.y),	// start y
 			size * 0.5f, col, 20);
 	}
-
-	//float offset = (inputNodeCount * (sz + spacing)) / (outputNodeCount + 1);
-	float inputHeight = (inputNodeCount + 1) * (size + spacing);
-	float padOffset = (inputHeight) / (outputNodeCount + 1);
-	padOffset -= size * 0.5f;
-	// Render the output nodes.
-	for (int i = 0; i < outputNodeCount; i++) {
-		draw_list->AddCircleFilled(ImVec2(
-			x + outputNodeOffset + (size * 0.5f), // start x
-			y + (size * 0.5f) // start y
-			+ (i * (size + spacing)) // y offset
-			+ padOffset - (size * 0.5f)),
-			size * 0.5f, col, 20);
-	}
-
-	x = p.x + 4.0f, y = p.y + 4.0f;
 
 	// Render the connections.
-	std::map<int, ConnectionGene>::iterator it;
-	for (it = connections.begin(); it != connections.end(); it++) {
-		int inputNode = it->second.getInputNode();
-		int outputNode = it->second.getOutputNode();
+	for (int j = 0; j < connections.size(); j++) {
+		ConnectionData connection = connections[j];
+		if (!connection.enabled) continue;
 
-		//x = p.x + 4.0f, y = p.y + 4.0f;
-
-		if (inputNode < inputNodeCount && outputNode < outputNodeCount + inputNodeCount) {
-			draw_list->AddLine(ImVec2(x, y), ImVec2(1000, 1000), col, 10.0f);
-		}
+		draw_list->AddLine(ImVec2( x + nodes[connection.from].x, y + nodes[connection.from].y),
+			ImVec2(x + nodes[connection.to].x, y + nodes[connection.to].y),
+			col, 3.0f);
 	}
 }
 
@@ -366,6 +351,7 @@ void Menu::focusBody(Body* body)
 	selectedBody = body;
 }
 
+// This brings the neural genome into focus and calculates appropriate info in order to render.
 void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 {
 	selectedNeuralGenome = neuralGenome;
@@ -379,9 +365,22 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 	int inputNodeCount = selectedNeuralGenome->inputCount;
 	int outputNodeCount = selectedNeuralGenome->outputCount;
 	int totalNodeCount = selectedNeuralGenome->getNodeCount() - inputNodeCount - outputNodeCount;
+	
+	
+	// Create connection info.
+	std::map<int, ConnectionGene>::iterator it2;
+	for (it2 = connectionGenes.begin(); it2 != connectionGenes.end(); it2++) {
+		ConnectionData connectionData;
+		connectionData.from = it2->second.getInputNode();
+		connectionData.to = it2->second.getOutputNode();
+		connectionData.enabled = it2->second.getEnabled();
 
-	// Create the node info.
+		netData.addConnection(connectionData);
+	}
+
+	// Create the node info (position + type).
 	std::map<int, NodeGene>::iterator it;
+	int i = 0;
 	for (it = nodeGenes.begin(); it != nodeGenes.end(); it++) {
 		int order = it->first;
 		NodeData nodeData;
@@ -389,7 +388,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 		// If this is an input node.
 		if (order < inputNodeCount)	{
 			nodeData.x = 0;
-			nodeData.y = inputCount++;
+			nodeData.y = (inputCount++) * 36;
 			nodeData.type = NodeType::INPUT;
 		}
 		else if(order >= inputNodeCount + outputNodeCount) {
@@ -397,29 +396,43 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 			nodeData.x = 1;
 			nodeData.y = hiddenCount++;
 			nodeData.type = NodeType::HIDDEN;
-			continue;
+
+			// As this is a hidden node, we need to calculate where it should be.
+			
+			vector<int> hiddenNodeConnections;
+
+			// Iterate through all connections and find which nodes this node connects to.
+			for (int j = 0; j < netData.getConnections().size(); j++) {
+				ConnectionData connection = netData.getConnections()[j];
+				if (connection.to == i) hiddenNodeConnections.push_back(connection.from);
+				if (connection.from == i) hiddenNodeConnections.push_back(connection.to);
+			}
+
+			// TODO: make this less error prone.
+			if (hiddenNodeConnections.size() == 0) continue;
+
+			// Calculate the average position of connected nodes.
+			int toDrawX = 0;
+			int toDrawY = 0;
+
+			for (int x = 0; x < hiddenNodeConnections.size(); x++) {
+				NodeData toNode = netData.getNodes()[hiddenNodeConnections[x]];
+				toDrawX += (toNode.x) / hiddenNodeConnections.size();
+				toDrawY += (toNode.y) / hiddenNodeConnections.size();
+			}
+
+			// This average becomes our hidden node's position.
+			nodeData.x = toDrawX;
+			nodeData.y = toDrawY;
 		}
 		else {
 			// This is an output node.
-			nodeData.x = 2;
-			nodeData.y = outputCount++;
+			nodeData.x = 400;
+			nodeData.y = (outputCount++) * 36;
 			nodeData.type = NodeType::OUTPUT;
 		}
 
 		netData.addNode(nodeData);
+		i++;
 	}
-
-	// Create connection info.
-	std::map<int, ConnectionGene>::iterator it2;
-	for (it2 = connectionGenes.begin(); it2 != connectionGenes.end(); it2++) {
-		ConnectionData connectionData;
-		NodeData n1 = netData.getNodes()[it2->second.getInputNode()];
-		NodeData n2 = netData.getNodes()[it2->second.getOutputNode()];
-		connectionData.fx = n1.x;
-		connectionData.fy = n1.y;
-		connectionData.tx = n2.x;
-		connectionData.ty = n2.y;
-	}
-
-	int a = 3;
 }

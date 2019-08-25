@@ -33,3 +33,8 @@ int ConnectionGene::getInnovation()
 {
 	return innovation;
 }
+
+void ConnectionGene::setEnabled(bool enabled)
+{
+	this->enabled = enabled;
+}

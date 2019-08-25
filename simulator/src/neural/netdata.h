@@ -11,10 +11,8 @@ public:
 
 class ConnectionData {
 public:
-	int fx;
-	int fy;
-	int tx;
-	int ty;
+	int from;
+	int to;
 	float weight;
 	bool enabled;
 };

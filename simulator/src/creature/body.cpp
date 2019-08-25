@@ -141,7 +141,7 @@ void Body::generatePhysicsBody()
 
 	// Apply some settings to the new body.
 	physicsBody->SetLinearDamping(2.0f);
-	physicsBody->SetAngularDamping(1.0f);
+	physicsBody->SetAngularDamping(5.0f);
 }
 
 void Body::unload()
@@ -149,10 +149,11 @@ void Body::unload()
 	physicsBody->GetWorld()->DestroyBody(physicsBody);
 }
 
-void Body::moveForward()
+void Body::moveForward(float power)
 {
+	float force = 60.0f * power;
 	physicsBody->ApplyForceToCenter(
-		b2Vec2(sin(-getRotation()) * 60.0f, cos(getRotation()) * 60.0f),
+		b2Vec2(sin(-getRotation()) * force, cos(getRotation()) * force),
 		true);
 }
 

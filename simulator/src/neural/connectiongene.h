@@ -9,6 +9,8 @@ public:
 	float getWeight();
 	bool getEnabled();
 	int getInnovation();
+	float evaluate(float input);
+	void setEnabled(bool enabled);
 private:
 	int inputNode;
 	int outputNode;

@@ -38,8 +38,9 @@ void initialiseEntities() {
 	creature->setGenome(gen);
 	creature->generate();
 
-	neuralGenome = new NeuralGenome(5, 1);
-	float* res = neuralGenome->evaluate(new float[5]{ 1, 1, 1, 1, 1 });
+	neuralGenome = new NeuralGenome(4, 3);
+
+	creature->setNeuralGenome(neuralGenome);
 
 	Menu::focusBody(creature->body);
 	Menu::focusGenome(gen);
@@ -137,15 +138,15 @@ void update() {
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
-		//de->body->moveForward();
+		creature->body->moveForward(1.0f);
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
-		//de->body->turnLeft();
+		creature->body->turnLeft();
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
-		//de->body->turnRight();
+		creature->body->turnRight();
 	}
 
 	// test evolution

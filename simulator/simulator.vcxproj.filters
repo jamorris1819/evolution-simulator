@@ -2237,5 +2237,8 @@
     <ClInclude Include="src\neural\netdata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\render\ui\netrender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
