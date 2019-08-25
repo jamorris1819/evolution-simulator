@@ -6,6 +6,7 @@
 #include <vector>
 #include "glm\glm.hpp"
 #include <string>
+#include "../src/neural/nodegene.h"
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
@@ -155,6 +156,23 @@ void Menu::renderNeuralNetDescription()
 	ImGui::TextWrapped("some Neural Net description here...");
 }
 
+ImVec4 lerpColour(ImVec4 col1, ImVec4 col2, float x)
+{
+	ImVec4 delta = ImVec4(
+		(col2.x - col1.x) * x,
+		(col2.y - col1.y) * x,
+		(col2.z - col1.z) * x,
+		(col2.w - col1.w) * x
+	);
+
+	return ImVec4(
+		col1.x + delta.x,
+		col1.y + delta.y,
+		col1.z + delta.z,
+		col1.w + delta.w
+	);
+}
+
 // work in progress
 void Menu::renderNeuralNetDetails()
 {
@@ -163,10 +181,14 @@ void Menu::renderNeuralNetDetails()
 
 	ImDrawList* draw_list = ImGui::GetWindowDrawList();
 	static ImVec4 colf = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+
+	// Define colours.
+	static ImVec4 cRed = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+	static ImVec4 cGreen = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+
 	const ImU32 col = ImColor(colf);
 	const ImVec2 p = ImGui::GetCursorScreenPos();
 	float x = p.x + 4.0f, y = p.y + 4.0f;
-
 
 	static float size = 24.0f;
 	float spacing = 10.0f;
@@ -182,24 +204,36 @@ void Menu::renderNeuralNetDetails()
 
 	x = p.x + 16.0f, y = p.y + 16.0f;
 
-	// Render the input + ouptut nodes.
-	for (int i = 0; i < nodes.size(); i++) {
-		NodeData node = nodes[i];
-
-		draw_list->AddCircleFilled(ImVec2(
-			x + node.x,	// start x
-			y + node.y),	// start y
-			size * 0.5f, col, 20);
-	}
-
 	// Render the connections.
 	for (int j = 0; j < connections.size(); j++) {
 		ConnectionData connection = connections[j];
 		if (!connection.enabled) continue;
 
+		// Calculate colour + size.
+		float connectionWeight = connections.at(j).weight;
+		ImColor connectionColour = connectionWeight > 0 ? cGreen : cRed;
+		float connectionStrength = abs(connectionWeight * 5.0f);
+
+		// Render connection.
 		draw_list->AddLine(ImVec2( x + nodes[connection.from].x, y + nodes[connection.from].y),
 			ImVec2(x + nodes[connection.to].x, y + nodes[connection.to].y),
-			col, 3.0f);
+			connectionColour,
+			connectionStrength);
+	}
+
+	// Render the input + ouptut nodes.
+	for (int i = 0; i < nodes.size(); i++) {
+		NodeData node = nodes[i];
+
+		// Calculate colour.
+		double val = n.at(i).getValue();
+
+		draw_list->AddCircleFilled(ImVec2(
+			x + node.x,	// start x
+			y + node.y),	// start y
+			size * 0.5f,
+			ImColor(lerpColour(cRed, cGreen, val)),
+			20);
 	}
 }
 
@@ -374,6 +408,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 		connectionData.from = it2->second.getInputNode();
 		connectionData.to = it2->second.getOutputNode();
 		connectionData.enabled = it2->second.getEnabled();
+		connectionData.weight = it2->second.getWeight();
 
 		netData.addConnection(connectionData);
 	}

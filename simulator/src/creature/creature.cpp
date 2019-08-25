@@ -59,15 +59,21 @@ void Creature::update(double deltaTime)
 	internalClock += deltaTime;
 
 	if (neuralGenome == nullptr) return;
-	return;
+
 	// Think
-	float* inputs = new float[4]{ (float)sin(internalClock), (float)cos(internalClock + 1), (float)cos(internalClock + 10), 1 };
+	float* inputs = new float[4]{ 
+		((float)sin(internalClock) + 1.0f) / 2.0f,
+		((float)sin(internalClock) + 1.0f) / 2.0f,
+		((float)sin(internalClock) + 1.0f) / 2.0f,
+		((float)sin(internalClock) + 1.0f) / 2.0f
+	};
+
 	float* decision = neuralGenome->evaluate(inputs);
 	delete inputs;
 
 	// Process decision.
-	cout << decision << endl;
-
+	cout << decision[0] << endl;
+	return;
 	if (decision[0] > 0.85f) body->turnLeft();
 	if (decision[1] > 0.85f) body->turnRight();
 	if (decision[2] > 0.25f) {

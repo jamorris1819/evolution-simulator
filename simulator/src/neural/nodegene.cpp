@@ -5,6 +5,7 @@
 NodeGene::NodeGene(NodeType type)
 {
 	nodeType = type;
+	tempValue = 0;
 }
 
 NodeGene::~NodeGene()
@@ -15,4 +16,14 @@ NodeGene::~NodeGene()
 NodeType NodeGene::getType()
 {
 	return nodeType;
+}
+
+double NodeGene::getValue()
+{
+	return tempValue;
+}
+
+void NodeGene::setValue(double value)
+{
+	tempValue = value;
 }

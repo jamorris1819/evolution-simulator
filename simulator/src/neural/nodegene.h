@@ -13,7 +13,7 @@ public:
 	~NodeGene();
 	NodeType getType();
 	double getValue();
-	void resetTemp();
+	void setValue(double val);
 private:
 	double tempValue;
 	bool useTemp;
