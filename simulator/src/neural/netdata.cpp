@@ -16,12 +16,12 @@ void NetData::addConnection(ConnectionData data)
 }
 
 
-std::vector<NodeData> NetData::getNodes()
+std::vector<NodeData> &NetData::getNodes()
 {
 	return nodeData;
 }
 
-std::vector<ConnectionData> NetData::getConnections()
+std::vector<ConnectionData> &NetData::getConnections()
 {
 	return connectionData;
 }

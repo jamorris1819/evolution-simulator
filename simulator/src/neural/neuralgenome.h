@@ -18,6 +18,7 @@ public:
 	std::map<int, NodeGene> getNodes();
 	std::map<int, ConnectionGene> getConnections();
 	void mutateAddConnection();
+	void mutateAddNode();
 private:
 	std::map<int, NodeGene> nodes;
 	std::map<int, ConnectionGene> connections;

@@ -22,8 +22,8 @@ public:
 	NetData();
 	void addNode(NodeData data);
 	void addConnection(ConnectionData data);
-	std::vector<NodeData> getNodes();
-	std::vector<ConnectionData> getConnections();
+	std::vector<NodeData>& getNodes();
+	std::vector<ConnectionData>& getConnections();
 private:
 	std::vector<NodeData> nodeData;
 	std::vector<ConnectionData> connectionData;

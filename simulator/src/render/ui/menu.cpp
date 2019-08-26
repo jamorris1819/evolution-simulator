@@ -331,6 +331,8 @@ void Menu::renderCreatureWindow()
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();
 	if (ImGui::Button("Add neural connection")) { selectedNeuralGenome->mutateAddConnection(); focusNeuralGenome(selectedNeuralGenome); }
+	ImGui::SameLine();
+	if (ImGui::Button("Add neural node")) { selectedNeuralGenome->mutateAddNode(); focusNeuralGenome(selectedNeuralGenome); }
 	ImGui::EndGroup();
 
 	ImGui::End();
@@ -439,32 +441,7 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 			nodeData.type = NodeType::HIDDEN;
 
 			// As this is a hidden node, we need to calculate where it should be.
-			
-			vector<int> hiddenNodeConnections;
-
-			// Iterate through all connections and find which nodes this node connects to.
-			for (int j = 0; j < netData->getConnections().size(); j++) {
-				ConnectionData connection = netData->getConnections()[j];
-				if (connection.to == i) hiddenNodeConnections.push_back(connection.from);
-				if (connection.from == i) hiddenNodeConnections.push_back(connection.to);
-			}
-
-			// TODO: make this less error prone.
-			if (hiddenNodeConnections.size() == 0) continue;
-
-			// Calculate the average position of connected nodes.
-			int toDrawX = 0;
-			int toDrawY = 0;
-
-			for (int x = 0; x < hiddenNodeConnections.size(); x++) {
-				NodeData toNode = netData->getNodes()[hiddenNodeConnections[x]];
-				toDrawX += (toNode.x) / hiddenNodeConnections.size();
-				toDrawY += (toNode.y) / hiddenNodeConnections.size();
-			}
-
-			// This average becomes our hidden node's position.
-			nodeData.x = toDrawX;
-			nodeData.y = toDrawY;
+			// However we must do it after all nodes have been created.
 		}
 		else {
 			// This is an output node.
@@ -476,4 +453,36 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 		netData->addNode(nodeData);
 		i++;
 	}
+
+	// Calculate the positions for hidden nodes. 
+	for (int i = inputCount + outputCount; i < netData->getNodes().size(); i++) {
+
+		vector<int> hiddenNodeConnections;
+
+		// Iterate through all connections and find which nodes this node connects to.
+		for (int j = 0; j < netData->getConnections().size(); j++) {
+			ConnectionData connection = netData->getConnections()[j];
+			if (connection.to == i) hiddenNodeConnections.push_back(connection.from);
+			if (connection.from == i) hiddenNodeConnections.push_back(connection.to);
+		}
+
+		// TODO: make this less error prone.
+		if (hiddenNodeConnections.size() == 0) continue;
+
+		// Calculate the average position of connected nodes.
+		int toDrawX = 0;
+		int toDrawY = 0;
+
+		for (int x = 0; x < hiddenNodeConnections.size(); x++) {
+			NodeData toNode = netData->getNodes()[hiddenNodeConnections[x]];
+			toDrawX += (toNode.x) / hiddenNodeConnections.size();
+			toDrawY += (toNode.y) / hiddenNodeConnections.size();
+		}
+
+		// This average becomes our hidden node's position.
+		netData->getNodes()[i].x = toDrawX;
+		netData->getNodes()[i].y = toDrawY;
+	}
+
+	int a = 3;
 }
