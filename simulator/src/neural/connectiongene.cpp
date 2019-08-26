@@ -9,7 +9,7 @@ ConnectionGene::ConnectionGene()
 	this->innovation = 0;
 }
 
-ConnectionGene::ConnectionGene(int input, int output, bool enabled, float weight, int innovation)
+ConnectionGene::ConnectionGene(int input, int output, bool enabled, double weight, int innovation)
 {
 	inputNode = input;
 	outputNode = output;
@@ -28,7 +28,7 @@ int ConnectionGene::getOutputNode()
 	return outputNode;
 }
 
-float ConnectionGene::getWeight()
+double ConnectionGene::getWeight()
 {
 	return weight;
 }
@@ -46,4 +46,9 @@ int ConnectionGene::getInnovation()
 void ConnectionGene::setEnabled(bool enabled)
 {
 	this->enabled = enabled;
+}
+
+void ConnectionGene::setWeight(double weight)
+{
+	this->weight = weight;
 }

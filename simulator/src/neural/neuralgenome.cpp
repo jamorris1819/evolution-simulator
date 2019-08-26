@@ -176,7 +176,7 @@ void NeuralGenome::mutateAddConnection()
 
 	if (!canMutate) return;
 
-	double weight = (((double)rand() / (RAND_MAX)) * 2.0) - 1.0;
+	double weight = randomWeight();;
 
 	// Create the connection
 	ConnectionGene gene(fromNode, toNode, true, weight, 0);
@@ -186,11 +186,7 @@ void NeuralGenome::mutateAddConnection()
 // Mutates the genome by creating a new node in the middle of an existing connection.
 void NeuralGenome::mutateAddNode()
 {
-	// Get a random connection gene.
-	int connectionCount = connections.size();
-	int connectionToSplit = rand() % connectionCount;
-
-	ConnectionGene& existingConnection = connections[connectionToSplit];
+	ConnectionGene& existingConnection = getRandomConnection();
 	if (!existingConnection.getEnabled()) return;
 
 	// Get its input + output node.
@@ -213,4 +209,47 @@ void NeuralGenome::mutateAddNode()
 	double weight = existingConnection.getWeight();
 	ConnectionGene connection2(newNodeIndex, toNode, true, weight, NeuralGenome::getNewInnovationNumber());
 	connections.insert(std::make_pair(connections.size(), connection2));
+}
+
+// Mutates the genome by randomly shifting a weight up or down.
+void NeuralGenome::mutateShiftWeight()
+{
+	ConnectionGene& existingConnection = getRandomConnection();
+
+	bool shiftUp = rand() % 2 == 0;
+	double weight = existingConnection.getWeight();
+	weight += shiftUp ? 0.1 : -0.1;
+	weight = glm::clamp(weight, -1.0, 1.0);
+
+	existingConnection.setWeight(weight);
+}
+
+// Mutates the genome by creating setting a random connection's weight to a random number.
+void NeuralGenome::mutateRandomWeight()
+{
+	ConnectionGene& existingConnection = getRandomConnection();
+	existingConnection.setWeight(randomWeight());
+}
+
+// Mutates the genome by toggling (enabled/disabled) a connection.
+void NeuralGenome::mutateToggleConnection()
+{
+	ConnectionGene& existingConnection = getRandomConnection();
+	existingConnection.setEnabled(!existingConnection.getEnabled());
+}
+
+// Gets a random connection from the genome.
+ConnectionGene& NeuralGenome::getRandomConnection()
+{
+	// Get a random connection gene.
+	int connectionCount = connections.size();
+	int connectionToSplit = rand() % connectionCount;
+
+	return connections[connectionToSplit];
+}
+
+// Generates a random weight between -1.0 and 1.0
+double NeuralGenome::randomWeight()
+{
+	return (((double)rand() / (RAND_MAX)) * 2.0) - 1.0;
 }

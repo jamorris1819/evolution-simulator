@@ -19,6 +19,9 @@ public:
 	std::map<int, ConnectionGene> getConnections();
 	void mutateAddConnection();
 	void mutateAddNode();
+	void mutateShiftWeight();
+	void mutateRandomWeight();
+	void mutateToggleConnection();
 private:
 	std::map<int, NodeGene> nodes;
 	std::map<int, ConnectionGene> connections;
@@ -26,6 +29,8 @@ private:
 	void setNodeValue(int node, double value);
 	double recurseNetwork(int node, double *inputs);
 	bool tryAddConnection(int& fromNode, int& toNode);
+	ConnectionGene& getRandomConnection();
 	static int innovationNumber;
+	double randomWeight();
 };
 

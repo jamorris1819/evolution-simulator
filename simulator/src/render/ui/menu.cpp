@@ -202,7 +202,7 @@ void Menu::renderNeuralNetDetails()
 	std::vector<ConnectionData> connections = netData->getConnections();
 	std::map<int, NodeGene> n = selectedNeuralGenome->getNodes();
 
-	x = p.x + 16.0f, y = p.y + 16.0f;
+	x = p.x + 16.0f, y = p.y + 128.0f;
 
 	// Render the connections.
 	for (int j = 0; j < connections.size(); j++) {
@@ -235,6 +235,20 @@ void Menu::renderNeuralNetDetails()
 			ImColor(lerpColour(cRed, cGreen, val)),
 			20);
 	}
+	
+	ImGui::BeginGroup();
+	ImGui::BeginChild("item view", ImVec2(0, -400));
+	if (ImGui::Button("Add connection")) { selectedNeuralGenome->mutateAddConnection(); focusNeuralGenome(selectedNeuralGenome); }
+	ImGui::SameLine();
+	if (ImGui::Button("Add node")) { selectedNeuralGenome->mutateAddNode(); focusNeuralGenome(selectedNeuralGenome); }
+	ImGui::SameLine();
+	if (ImGui::Button("Toggle connection")) { selectedNeuralGenome->mutateToggleConnection(); focusNeuralGenome(selectedNeuralGenome); }
+
+	if (ImGui::Button("Shift connection weight")) { selectedNeuralGenome->mutateShiftWeight(); focusNeuralGenome(selectedNeuralGenome); }
+	ImGui::SameLine();
+	if (ImGui::Button("Random connection weight")) { selectedNeuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
+	ImGui::EndChild();
+	ImGui::EndGroup();
 }
 
 void Menu::triggerBodyRegen()
@@ -330,9 +344,6 @@ void Menu::renderCreatureWindow()
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Add neural connection")) { selectedNeuralGenome->mutateAddConnection(); focusNeuralGenome(selectedNeuralGenome); }
-	ImGui::SameLine();
-	if (ImGui::Button("Add neural node")) { selectedNeuralGenome->mutateAddNode(); focusNeuralGenome(selectedNeuralGenome); }
 	ImGui::EndGroup();
 
 	ImGui::End();

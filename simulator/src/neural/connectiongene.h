@@ -4,18 +4,18 @@
 class ConnectionGene {
 public:
 	ConnectionGene();
-	ConnectionGene(int input, int output, bool enabled, float weight, int innovation);
+	ConnectionGene(int input, int output, bool enabled, double weight, int innovation);
 	int getInputNode();
 	int getOutputNode();
-	float getWeight();
+	double getWeight();
 	bool getEnabled();
 	int getInnovation();
-	float evaluate(float input);
+	void setWeight(double weight);
 	void setEnabled(bool enabled);
 private:
 	int inputNode;
 	int outputNode;
 	bool enabled;
-	float weight;
+	double weight;
 	int innovation;
 };
