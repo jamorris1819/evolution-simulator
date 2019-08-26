@@ -7,7 +7,7 @@ class NeuralGenome {
 public:
 	NeuralGenome(int inputs, int outputs);
 	//~NeuralGenome();
-	float* evaluate(float* inputs);
+	double* evaluate(double* inputs);
 	int inputCount;
 	int outputCount;
 	int getNodeCount();
@@ -22,7 +22,9 @@ public:
 private:
 	std::map<int, NodeGene> nodes;
 	std::map<int, ConnectionGene> connections;
-	float recurseNetwork(int node, float *inputs);
+	double activateFunction(int node, double value);
+	void setNodeValue(int node, double value);
+	double recurseNetwork(int node, double *inputs);
 	bool tryAddConnection(int& fromNode, int& toNode);
 	static int innovationNumber;
 };

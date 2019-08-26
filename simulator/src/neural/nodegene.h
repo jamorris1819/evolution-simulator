@@ -7,6 +7,13 @@ enum class NodeType
 	HIDDEN
 };
 
+enum class ActivationFunction
+{
+	SIGMOID,
+	RELU,
+	NONE
+};
+
 class NodeGene {
 public:
 	NodeGene(NodeType type);
@@ -14,8 +21,11 @@ public:
 	NodeType getType();
 	double getValue();
 	void setValue(double val);
+	ActivationFunction getActivationFunction();
+	void setActivationFunction(ActivationFunction activationFunction);
 private:
 	double tempValue;
 	bool useTemp;
 	NodeType nodeType;
+	ActivationFunction activationFunction;
 };

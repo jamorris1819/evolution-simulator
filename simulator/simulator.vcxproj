@@ -1469,6 +1469,7 @@
     <ClInclude Include="src\render\ui\imstb_truetype.h" />
     <ClInclude Include="src\render\ui\menu.h" />
     <ClInclude Include="src\render\ui\netrender.h" />
+    <ClInclude Include="src\util\Function.h" />
     <ClInclude Include="src\util\input.h" />
     <ClInclude Include="src\util\shaderutility.h" />
     <ClInclude Include="src\render\polygondata.h" />

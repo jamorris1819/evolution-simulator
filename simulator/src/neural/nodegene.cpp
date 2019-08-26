@@ -27,3 +27,14 @@ void NodeGene::setValue(double value)
 {
 	tempValue = value;
 }
+
+
+ActivationFunction NodeGene::getActivationFunction()
+{
+	return activationFunction;
+}
+
+void NodeGene::setActivationFunction(ActivationFunction activationFunction)
+{
+	this->activationFunction = activationFunction;
+}
