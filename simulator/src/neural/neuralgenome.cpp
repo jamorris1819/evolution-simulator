@@ -186,15 +186,15 @@ void NeuralGenome::mutateAddConnection()
 // Mutates the genome by creating a new node in the middle of an existing connection.
 void NeuralGenome::mutateAddNode()
 {
-	ConnectionGene& existingConnection = getRandomConnection();
-	if (!existingConnection.getEnabled()) return;
+	ConnectionGene* existingConnection = nullptr;
+	if (!getRandomConnection(&existingConnection) || !existingConnection->getEnabled()) return;
 
 	// Get its input + output node.
-	int fromNode = existingConnection.getInputNode();
-	int toNode = existingConnection.getOutputNode();
+	int fromNode = existingConnection->getInputNode();
+	int toNode = existingConnection->getOutputNode();
 
 	// Disable it as we're replacing it.
-	existingConnection.setEnabled(false);
+	existingConnection->setEnabled(false);
 
 	// Add a new node in between.
 	NodeGene newNode(NodeType::HIDDEN);
@@ -206,7 +206,7 @@ void NeuralGenome::mutateAddNode()
 	ConnectionGene connection1(fromNode, newNodeIndex, true, 1.0, NeuralGenome::getNewInnovationNumber());		// weight of 1 to preserve original
 	connections.insert(std::make_pair(connections.size(), connection1));
 
-	double weight = existingConnection.getWeight();
+	double weight = existingConnection->getWeight();
 	ConnectionGene connection2(newNodeIndex, toNode, true, weight, NeuralGenome::getNewInnovationNumber());
 	connections.insert(std::make_pair(connections.size(), connection2));
 }
@@ -214,38 +214,44 @@ void NeuralGenome::mutateAddNode()
 // Mutates the genome by randomly shifting a weight up or down.
 void NeuralGenome::mutateShiftWeight()
 {
-	ConnectionGene& existingConnection = getRandomConnection();
+	ConnectionGene* existingConnection = nullptr;
+	if (!getRandomConnection(&existingConnection)) return;
 
 	bool shiftUp = rand() % 2 == 0;
-	double weight = existingConnection.getWeight();
+	double weight = existingConnection->getWeight();
 	weight += shiftUp ? 0.1 : -0.1;
 	weight = glm::clamp(weight, -1.0, 1.0);
 
-	existingConnection.setWeight(weight);
+	existingConnection->setWeight(weight);
 }
 
 // Mutates the genome by creating setting a random connection's weight to a random number.
 void NeuralGenome::mutateRandomWeight()
 {
-	ConnectionGene& existingConnection = getRandomConnection();
-	existingConnection.setWeight(randomWeight());
+	ConnectionGene* existingConnection = nullptr;
+	if (!getRandomConnection(&existingConnection)) return;
+	existingConnection->setWeight(randomWeight());
 }
 
 // Mutates the genome by toggling (enabled/disabled) a connection.
 void NeuralGenome::mutateToggleConnection()
 {
-	ConnectionGene& existingConnection = getRandomConnection();
-	existingConnection.setEnabled(!existingConnection.getEnabled());
+	ConnectionGene* existingConnection = nullptr;
+	if (!getRandomConnection(&existingConnection)) return;
+	existingConnection->setEnabled(!existingConnection->getEnabled());
 }
 
 // Gets a random connection from the genome.
-ConnectionGene& NeuralGenome::getRandomConnection()
+bool NeuralGenome::getRandomConnection(ConnectionGene** connectionGene)
 {
 	// Get a random connection gene.
 	int connectionCount = connections.size();
-	int connectionToSplit = rand() % connectionCount;
+	if (connectionCount == 0) return false;
 
-	return connections[connectionToSplit];
+	int connectionToSplit = rand() % connectionCount;
+	*connectionGene = &connections[connectionToSplit];
+
+	return true;
 }
 
 // Generates a random weight between -1.0 and 1.0

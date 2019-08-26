@@ -29,7 +29,7 @@ private:
 	void setNodeValue(int node, double value);
 	double recurseNetwork(int node, double *inputs);
 	bool tryAddConnection(int& fromNode, int& toNode);
-	ConnectionGene& getRandomConnection();
+	bool getRandomConnection(ConnectionGene** connectionGene);
 	static int innovationNumber;
 	double randomWeight();
 };

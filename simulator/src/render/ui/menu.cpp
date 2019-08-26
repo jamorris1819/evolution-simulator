@@ -340,7 +340,7 @@ void Menu::renderCreatureWindow()
 		ImGui::EndTabBar();
 	}
 	ImGui::EndChild();
-	if (ImGui::Button("Mutate")) { selectedGenome->mutate(); triggerBodyRegen(); }
+	if (ImGui::Button("Mutate")) { delete selectedNeuralGenome; focusNeuralGenome(new NeuralGenome(5, 3)); selectedGenome->mutate(); triggerBodyRegen(); }
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();
