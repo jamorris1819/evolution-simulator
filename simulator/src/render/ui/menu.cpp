@@ -12,6 +12,9 @@ bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
 Body* Menu::selectedBody;
 NeuralGenome* Menu::selectedNeuralGenome;
+NeuralGenome* Menu::selectedNeuralGenome1;
+NeuralGenome* Menu::selectedNeuralGenome2;
+NeuralGenome* Menu::selectedNeuralGenome3;
 NetData* Menu::netData;
 
 void Menu::initialise(GLFWwindow* window)
@@ -247,6 +250,26 @@ void Menu::renderNeuralNetDetails()
 	if (ImGui::Button("Shift connection weight")) { selectedNeuralGenome->mutateShiftWeight(); focusNeuralGenome(selectedNeuralGenome); }
 	ImGui::SameLine();
 	if (ImGui::Button("Random connection weight")) { selectedNeuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
+
+
+
+	if (ImGui::Button("c1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
+	ImGui::SameLine();
+	if (ImGui::Button("c2")) { selectedNeuralGenome2 = new NeuralGenome(7, 4); }
+	ImGui::SameLine();
+	if (ImGui::Button("c3")) { selectedNeuralGenome3 = NeuralGenome::cross(selectedNeuralGenome1, selectedNeuralGenome2); }
+
+	if (ImGui::Button("v1")) { focusNeuralGenome(selectedNeuralGenome1); }
+	ImGui::SameLine();
+	if (ImGui::Button("v2")) { focusNeuralGenome(selectedNeuralGenome2); }
+	ImGui::SameLine();
+	if (ImGui::Button("v3")) { focusNeuralGenome(selectedNeuralGenome3); }
+
+
+	if (ImGui::Button("Random connection weight")) { selectedNeuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
+
+
+
 	ImGui::EndChild();
 	ImGui::EndGroup();
 }
@@ -340,7 +363,7 @@ void Menu::renderCreatureWindow()
 		ImGui::EndTabBar();
 	}
 	ImGui::EndChild();
-	if (ImGui::Button("Mutate")) { delete selectedNeuralGenome; focusNeuralGenome(new NeuralGenome(5, 3)); selectedGenome->mutate(); triggerBodyRegen(); }
+	if (ImGui::Button("Mutate")) { delete selectedNeuralGenome; focusNeuralGenome(new NeuralGenome(3, 1)); selectedGenome->mutate(); triggerBodyRegen(); }
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();

@@ -1,4 +1,5 @@
 #include "connectiongene.h"
+#include "innovationmanager.h"
 
 ConnectionGene::ConnectionGene()
 {
@@ -9,13 +10,13 @@ ConnectionGene::ConnectionGene()
 	this->innovation = 0;
 }
 
-ConnectionGene::ConnectionGene(int input, int output, bool enabled, double weight, int innovation)
+ConnectionGene::ConnectionGene(int input, int output, bool enabled, double weight)
 {
 	inputNode = input;
 	outputNode = output;
 	this->enabled = enabled;
 	this->weight = weight;
-	this->innovation = innovation;
+	this->innovation = InnovationManager::getInnovationNumber(inputNode, outputNode);
 }
 
 int ConnectionGene::getInputNode()

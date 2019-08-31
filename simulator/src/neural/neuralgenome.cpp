@@ -25,6 +25,20 @@ NeuralGenome::NeuralGenome(int inputs, int outputs)
 	outputCount = outputs;	
 }
 
+NeuralGenome::NeuralGenome(std::map<int, NodeGene> nodes, std::map<int, ConnectionGene> connections)
+{
+	this->nodes.insert(nodes.begin(), nodes.end());
+	this->connections.insert(connections.begin(), connections.end());
+
+	inputCount = 0;
+	outputCount = 0;
+
+	for (int i = 0; i < nodes.size(); i++) {
+		if (nodes.at(i).getType() == NodeType::INPUT) inputCount++;
+		if (nodes.at(i).getType() == NodeType::OUTPUT) outputCount++;
+	}
+}
+
 double* NeuralGenome::evaluate(double* inputs)
 {
 	double* outputs = new double[outputCount];
@@ -69,7 +83,7 @@ double NeuralGenome::recurseNetwork(int node, double *inputs)
 		
 		// If it's a hidden node then we must recurse further.
 		double recurseValue = recurseNetwork(attachedNode, inputs);
-		double val = activateFunction(node, recurseValue * connGene.getWeight());
+		double val = activateFunction(connGene.getInputNode(), recurseValue * connGene.getWeight());
 
 		toReturn += val;
 	}
@@ -114,6 +128,78 @@ std::map<int, ConnectionGene> NeuralGenome::getConnections()
 std::map<int, NodeGene> NeuralGenome::getNodes()
 {
 	return nodes;
+}
+
+/*
+	C R O S S I N G
+*/
+
+// Find the largest innovation number present in the genome.
+int NeuralGenome::findLargestInnovation()
+{
+	int genomeSize = connections.size();
+	int largestInnovation = -1;
+
+	for (int i = 0; i < genomeSize; i++) {
+		if (connections.at(i).getInnovation() > largestInnovation) largestInnovation = connections.at(i).getInnovation();
+	}
+
+	return largestInnovation;
+}
+
+// Checks to see if the innovation is present in the genome.
+int NeuralGenome::innovationPresent(int innovationNumber)
+{
+	for (int j = 0; j < connections.size(); j++) {
+		if (connections.at(j).getInnovation() == innovationNumber) {
+			return j;
+		}
+	}
+
+	return -1;
+}
+
+// Crosses the 2 genomes to create a child.
+NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
+{
+ 	std::map<int, NodeGene> nodes;
+	std::map<int, ConnectionGene> connections;
+
+	int largestInnovation1 = genome1->findLargestInnovation();
+	int largestInnovation2 = genome2->findLargestInnovation();
+
+	int largestInnovation = glm::max(largestInnovation1, largestInnovation2);
+
+	// Iterate through the connection genes and cross.
+	for (int i = 0; i <= largestInnovation; i++) {
+		// Check if the a gene with this innovation number exists in both genomes.
+		int locationInGenome1 = genome1->innovationPresent(i);
+		int locationInGenome2 = genome2->innovationPresent(i);
+
+		// If this innovation is present in both, choose one at random.
+		if (locationInGenome1 >= 0 && locationInGenome2 >= 0) {
+			connections.insert(std::make_pair(connections.size(),
+				rand() % 2 == 0 ? genome1->connections.at(locationInGenome1) : genome2->connections.at(locationInGenome2)
+			));
+		}
+		// If it isn't in both, take the copy from the genome where it does exist.
+		else if (locationInGenome1 >= 0) {
+			connections.insert(std::make_pair(connections.size(), genome1->connections.at(locationInGenome1)));
+		}
+		else if (locationInGenome2 >= 0) {
+			connections.insert(std::make_pair(connections.size(), genome2->connections.at(locationInGenome2)));
+		}
+	}
+
+	// Create the node genes. // todo check this works
+	bool genome1MoreNodes = genome1->nodes.size() > genome2->nodes.size();
+
+	if (genome1MoreNodes)
+		nodes.insert(genome1->nodes.begin(), genome1->nodes.end());
+	else
+		nodes.insert(genome2->nodes.begin(), genome2->nodes.end());
+
+	return new NeuralGenome(nodes, connections);
 }
 
 /*
@@ -179,7 +265,7 @@ void NeuralGenome::mutateAddConnection()
 	double weight = randomWeight();;
 
 	// Create the connection
-	ConnectionGene gene(fromNode, toNode, true, weight, 0);
+	ConnectionGene gene(fromNode, toNode, true, weight);
 	connections.insert(std::make_pair(connections.size(), gene));
 }
 
@@ -203,11 +289,11 @@ void NeuralGenome::mutateAddNode()
 	int newNodeIndex = getNodeCount() - 1;
 
 	// Now create 2 connections with the new node in the middle.
-	ConnectionGene connection1(fromNode, newNodeIndex, true, 1.0, NeuralGenome::getNewInnovationNumber());		// weight of 1 to preserve original
+	ConnectionGene connection1(fromNode, newNodeIndex, true, 1.0);		// weight of 1 to preserve original
 	connections.insert(std::make_pair(connections.size(), connection1));
 
 	double weight = existingConnection->getWeight();
-	ConnectionGene connection2(newNodeIndex, toNode, true, weight, NeuralGenome::getNewInnovationNumber());
+	ConnectionGene connection2(newNodeIndex, toNode, true, weight);
 	connections.insert(std::make_pair(connections.size(), connection2));
 }
 

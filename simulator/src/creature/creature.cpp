@@ -59,7 +59,6 @@ void Creature::update(double deltaTime)
 	internalClock += deltaTime;
 
 	if (neuralGenome == nullptr) return;
-
 	// Think
 	double* inputs = new double[5]{
 		(sin(internalClock) + 1.0) / 2.0,
@@ -71,6 +70,7 @@ void Creature::update(double deltaTime)
 
 	double* decision = neuralGenome->evaluate(inputs);
 	delete inputs;
+	return;
 
 	// Process decision.
 	cout << decision[0] << endl;

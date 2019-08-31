@@ -2243,5 +2243,8 @@
     <ClInclude Include="src\util\Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\neural\innovationmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

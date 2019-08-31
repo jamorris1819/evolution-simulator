@@ -2,7 +2,7 @@
 #define e 2.71828
 #include "glm\common.hpp"
 
-class Function{
+class Function {
 public:
 	static double sigmoid(double x);
 	static double relu(double x);

@@ -4,7 +4,7 @@
 class ConnectionGene {
 public:
 	ConnectionGene();
-	ConnectionGene(int input, int output, bool enabled, double weight, int innovation);
+	ConnectionGene(int input, int output, bool enabled, double weight);
 	int getInputNode();
 	int getOutputNode();
 	double getWeight();

@@ -31,5 +31,8 @@ private:
 	static Genome* selectedGenome;
 	static Body* selectedBody;
 	static NeuralGenome* selectedNeuralGenome;
+	static NeuralGenome* selectedNeuralGenome1;
+	static NeuralGenome* selectedNeuralGenome2;
+	static NeuralGenome* selectedNeuralGenome3;
 	static NetData* netData;
 };
