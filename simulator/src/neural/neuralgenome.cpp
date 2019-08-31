@@ -27,6 +27,7 @@ NeuralGenome::NeuralGenome(int inputs, int outputs)
 
 NeuralGenome::NeuralGenome(std::map<int, NodeGene> nodes, std::map<int, ConnectionGene> connections)
 {
+	// Copy the genes over.
 	this->nodes.insert(nodes.begin(), nodes.end());
 	this->connections.insert(connections.begin(), connections.end());
 
@@ -39,6 +40,7 @@ NeuralGenome::NeuralGenome(std::map<int, NodeGene> nodes, std::map<int, Connecti
 	}
 }
 
+// Evaluates the network and performs all calculations.
 double* NeuralGenome::evaluate(double* inputs)
 {
 	double* outputs = new double[outputCount];
@@ -131,7 +133,7 @@ std::map<int, NodeGene> NeuralGenome::getNodes()
 }
 
 /*
-	C R O S S I N G
+		C R O S S I N G
 */
 
 // Find the largest innovation number present in the genome.
@@ -206,48 +208,6 @@ NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
 		M U T A T I O N S
 */
 
-// Attempts to find 2 nodes to create a connection between.
-bool NeuralGenome::tryAddConnection(int& fromNode, int& toNode)
-{
-	bool hiddenNodesExist = getNodeCount() > inputCount + outputCount;	// If there are hidden nodes in this neural network.
-	bool useHiddenNode = hiddenNodesExist && rand() % 2 == 0;			// If we want to involve a hidden node in this connection.
-
-	if (useHiddenNode) {
-		bool startOnHidden = rand() % 2 == 0;
-		int hiddenNodeCount = getNodeCount() - inputCount - outputCount;
-		int hiddenNodeToUse = inputCount + outputCount + (rand() % hiddenNodeCount);
-
-		if (startOnHidden) {
-			fromNode = hiddenNodeToUse;						// hidden node
-			toNode = inputCount + (rand() % outputCount);	// an output node
-		}
-		else {
-			toNode = hiddenNodeToUse;
-			fromNode = rand() % 2 == 0										// randomly choose:
-				? rand() % inputCount										// input node
-				: inputCount + outputCount + (rand() % hiddenNodeCount);	// hidden node
-		}
-	}
-	else {
-		fromNode = rand() % inputCount;					// input node
-		toNode = inputCount + (rand() % outputCount);	// output node
-	}
-
-	// A connection can't go from itself to itself.
-	if (fromNode == toNode) return false;
-
-	// Check if these nodes already have a connection.
-	for (int j = 0; j < connections.size(); j++) {
-		ConnectionGene connGene = connections[j];
-		if ((connGene.getInputNode() == fromNode && connGene.getOutputNode() == toNode)
-			|| (connGene.getInputNode() == toNode && connGene.getOutputNode() == fromNode)) {
-			return false;
-		}
-	}
-
-	return true;
-}
-
 // Mutates the genome by creating a new connection between 2 random nodes.
 void NeuralGenome::mutateAddConnection()
 {
@@ -255,7 +215,8 @@ void NeuralGenome::mutateAddConnection()
 	int toNode = 0;
 	bool canMutate = false;
 
-	for (int i = 0; i < 5; i++) {
+	// Try and find a connection which can be used.
+	for (int i = 0; i < inputCount * outputCount; i++) {
 		canMutate = canMutate || tryAddConnection(fromNode, toNode);
 		if (canMutate) break;
 	}
@@ -325,6 +286,66 @@ void NeuralGenome::mutateToggleConnection()
 	ConnectionGene* existingConnection = nullptr;
 	if (!getRandomConnection(&existingConnection)) return;
 	existingConnection->setEnabled(!existingConnection->getEnabled());
+}
+
+/*
+		M U T A T I O N  H E L P E R  M E T H O D S
+*/
+
+// Check if a connection exists between the two nodes.
+bool NeuralGenome::connectionExists(int input, int output)
+{
+	for (int j = 0; j < connections.size(); j++) {
+		ConnectionGene connGene = connections[j];
+		if ((connGene.getInputNode() == input && connGene.getOutputNode() == output)
+			|| (connGene.getInputNode() == output && connGene.getOutputNode() == input)) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+// Chooses 2 nodes to be used for the new connection.
+void NeuralGenome::generateRandomConnection(int& input, int& output)
+{
+	bool hiddenNodesExist = getNodeCount() > inputCount + outputCount;	// If there are hidden nodes in this neural network.
+	bool useHiddenNode = hiddenNodesExist && rand() % 2 == 0;			// If we want to involve a hidden node in this connection.
+
+	// If we're going for an input->output connection.
+	if (!useHiddenNode) {
+		input = rand() % inputCount;					// an input node
+		output = inputCount + (rand() % outputCount);	// an output node
+		return;
+	}
+
+	bool startOnHidden = rand() % 2 == 0;
+	int hiddenNodeCount = getNodeCount() - inputCount - outputCount;
+	int hiddenNodeToUse = inputCount + outputCount + (rand() % hiddenNodeCount);
+
+	if (startOnHidden) {
+		input = hiddenNodeToUse;						// hidden node
+		output = inputCount + (rand() % outputCount);	// an output node
+	}
+	else {
+		output = hiddenNodeToUse;
+		input = rand() % 2 == 0										// randomly choose:
+			? rand() % inputCount										// input node
+			: inputCount + outputCount + (rand() % hiddenNodeCount);	// hidden node
+	}
+}
+
+// Attempts to find 2 nodes to create a connection between.
+bool NeuralGenome::tryAddConnection(int& input, int& output)
+{
+	// Select points for a new connection.
+	generateRandomConnection(input, output);
+
+	// A connection can't go from itself to itself.
+	if (input == output) return false;
+
+	// Check if these nodes already have a connection.
+	return connectionExists(input, output);
 }
 
 // Gets a random connection from the genome.

@@ -252,23 +252,17 @@ void Menu::renderNeuralNetDetails()
 	if (ImGui::Button("Random connection weight")) { selectedNeuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
 
 
-
-	if (ImGui::Button("c1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
+	if (ImGui::Button("Create 1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
 	ImGui::SameLine();
-	if (ImGui::Button("c2")) { selectedNeuralGenome2 = new NeuralGenome(7, 4); }
+	if (ImGui::Button("Create 2")) { selectedNeuralGenome2 = new NeuralGenome(7, 4); }
 	ImGui::SameLine();
-	if (ImGui::Button("c3")) { selectedNeuralGenome3 = NeuralGenome::cross(selectedNeuralGenome1, selectedNeuralGenome2); }
+	if (ImGui::Button("Cross 3")) { selectedNeuralGenome3 = NeuralGenome::cross(selectedNeuralGenome1, selectedNeuralGenome2); }
 
-	if (ImGui::Button("v1")) { focusNeuralGenome(selectedNeuralGenome1); }
+	if (ImGui::Button("View 1")) { focusNeuralGenome(selectedNeuralGenome1); }
 	ImGui::SameLine();
-	if (ImGui::Button("v2")) { focusNeuralGenome(selectedNeuralGenome2); }
+	if (ImGui::Button("View 2")) { focusNeuralGenome(selectedNeuralGenome2); }
 	ImGui::SameLine();
-	if (ImGui::Button("v3")) { focusNeuralGenome(selectedNeuralGenome3); }
-
-
-	if (ImGui::Button("Random connection weight")) { selectedNeuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
-
-
+	if (ImGui::Button("View 3")) { focusNeuralGenome(selectedNeuralGenome3); }
 
 	ImGui::EndChild();
 	ImGui::EndGroup();

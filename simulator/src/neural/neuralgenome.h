@@ -25,11 +25,17 @@ public:
 private:
 	std::map<int, NodeGene> nodes;
 	std::map<int, ConnectionGene> connections;
+
 	double activateFunction(int node, double value);
 	void setNodeValue(int node, double value);
 	double recurseNetwork(int node, double *inputs);
-	bool tryAddConnection(int& fromNode, int& toNode);
+
+	// Helper methods for mutation
+	bool tryAddConnection(int& input, int& output);
+	void generateRandomConnection(int& input, int& output);
+	bool connectionExists(int input, int output);
 	bool getRandomConnection(ConnectionGene** connectionGene);
+
 	static int innovationNumber;
 	double randomWeight();
 };
