@@ -3,6 +3,7 @@
 Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : DrawnEntity(glm::vec3(position, 0.0f))
 {
 	genome = nullptr;
+	neuralGenome = nullptr;
 	body = new Body(shader, world);
 	internalClock = 0;
 }

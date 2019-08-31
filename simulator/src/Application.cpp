@@ -46,8 +46,6 @@ void initialiseEntities() {
 	Menu::focusGenome(gen);
 	Menu::focusNeuralGenome(neuralGenome);
 
-
-
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
 }

@@ -156,7 +156,7 @@ void Menu::renderBodyDetails()
 
 void Menu::renderNeuralNetDescription()
 {
-	ImGui::TextWrapped("some Neural Net description here...");
+	ImGui::TextWrapped("The Neural Network is the brain of the creature. The network contains takes in multiple inputs and performs mathematical functions on the data in order to produce an output, which is used to control what the creature does.");
 }
 
 ImVec4 lerpColour(ImVec4 col1, ImVec4 col2, float x)

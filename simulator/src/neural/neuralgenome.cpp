@@ -164,6 +164,10 @@ int NeuralGenome::innovationPresent(int innovationNumber)
 // Crosses the 2 genomes to create a child.
 NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
 {
+	/*
+		TODO: Ensure disjoint genes are taken from the fitter parent.
+	*/
+
  	std::map<int, NodeGene> nodes;
 	std::map<int, ConnectionGene> connections;
 
