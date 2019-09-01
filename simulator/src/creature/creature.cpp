@@ -86,8 +86,15 @@ void Creature::update(double deltaTime)
 	if (decision[1] > 0.65) body->turnRight();
 	if (decision[2] > 0.5) {
 		double power = (decision[2] - 0.5) / 0.5;
-		body->moveForward(power);
+		moveForward(power);
 	}
 
 	delete decision;
+}
+
+void Creature::moveForward(double power)
+{
+	if (!isAlive()) return;
+	body->moveForward(power);
+	setMovementCost(10.0 * power);
 }

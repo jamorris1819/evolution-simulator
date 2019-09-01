@@ -19,6 +19,7 @@ protected:
 
 	void setLivingCost(double livingCost);
 	double getLivingCost();
+	void setMovementCost(double movementCost);
 
 private:
 	double maxHealth;
@@ -26,5 +27,6 @@ private:
 	double health;
 	double energy;
 	double livingCost; // the amount of energy required per update.
+	double movementCost; // a variable amount depending on what the living entity is doing.
 	bool alive;
 };

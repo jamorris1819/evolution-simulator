@@ -16,6 +16,7 @@ public:
 	NeuralGenome* getNeuralGenome();
 	void generate();
 	void update(double deltaTime);
+	void moveForward(double power);
 
 private:
 	double internalClock;

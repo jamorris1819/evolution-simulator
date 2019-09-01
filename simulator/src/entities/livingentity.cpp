@@ -9,6 +9,7 @@ LivingEntity::LivingEntity(glm::vec3 position) : DrawnEntity(position) {
 	health = maxHealth;
 	energy = maxEnergy;
 	livingCost = 1;
+	movementCost = 0;
 }
 
 LivingEntity::~LivingEntity()
@@ -22,16 +23,20 @@ void LivingEntity::update(double deltaTime)
 
 	if (!alive) return;
 
-	energy -= livingCost * deltaTime;
+	energy -= (livingCost + movementCost) *deltaTime;
 
 	if (health <= 0) { kill(); }
 	if (energy <= 0) { kill(); }
+
+	movementCost = 0; // reset
 }
 
 void LivingEntity::kill()
 {
 	// TODO
 	alive = false;
+	health = 0;
+	energy = 0;
 }
 
 void LivingEntity::setHealth(double health)
@@ -67,6 +72,11 @@ double LivingEntity::getMaxEnergy()
 void LivingEntity::setLivingCost(double livingCost)
 {
 	this->livingCost = livingCost;
+}
+
+void LivingEntity::setMovementCost(double movementCost)
+{
+	this->movementCost = movementCost;
 }
 
 bool LivingEntity::isAlive() {

@@ -149,7 +149,7 @@ void update() {
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
-		creature->body->moveForward(1.0f);
+		creature->moveForward(1.0f);
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
