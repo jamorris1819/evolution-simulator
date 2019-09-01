@@ -153,11 +153,11 @@ void update() {
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
-		creature->body->turnLeft();
+		creature->body->turnLeft(0.4f);
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
-		creature->body->turnRight();
+		creature->body->turnRight(-0.4f);
 	}
 
 	// test evolution

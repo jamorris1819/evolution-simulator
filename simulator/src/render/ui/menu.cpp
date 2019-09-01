@@ -7,6 +7,7 @@
 #include "glm\glm.hpp"
 #include <string>
 #include "../src/neural/nodegene.h"
+#include "../../creature/creaturebody.h"
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
@@ -146,28 +147,28 @@ void Menu::renderBodyDetails()
 	ImGui::Separator();
 
 	// SEED
-	ImGui::DragInt("Seed", &selectedBody->seed);
+	ImGui::DragInt("Seed", &((CreatureBody*)selectedBody)->seed);
 
 	// STEPS
-	ImGui::DragInt("Steps", &selectedBody->steps);
+	ImGui::DragInt("Steps", &((CreatureBody*)selectedBody)->steps);
 
 	// FREQUENCY
-	ImGui::DragFloat("Frequency", &selectedBody->frequency);
+	ImGui::DragFloat("Frequency", &((CreatureBody*)selectedBody)->frequency);
 
 	// STRIDE
-	ImGui::DragInt("Stride X", &selectedBody->strideX);
-	ImGui::DragInt("Stride Y", &selectedBody->strideY);
+	ImGui::DragInt("Stride X", &((CreatureBody*)selectedBody)->strideX);
+	ImGui::DragInt("Stride Y", &((CreatureBody*)selectedBody)->strideY);
 
 	// OFFSET
-	ImGui::DragFloat("Offset X", &selectedBody->offsetX);
-	ImGui::DragFloat("Offset Y", &selectedBody->offsetY);
+	ImGui::DragFloat("Offset X", &((CreatureBody*)selectedBody)->offsetX);
+	ImGui::DragFloat("Offset Y", &((CreatureBody*)selectedBody)->offsetY);
 
 	// OCTAVES
-	ImGui::DragInt("Octaves", &selectedBody->octaves);
+	ImGui::DragInt("Octaves", &((CreatureBody*)selectedBody)->octaves);
 
 	// LENGTH / WIDTH
-	ImGui::DragFloat("Length", &selectedBody->length);
-	ImGui::DragFloat("Width", &selectedBody->width);
+	ImGui::DragFloat("Length", &((CreatureBody*)selectedBody)->length);
+	ImGui::DragFloat("Width", &((CreatureBody*)selectedBody)->width);
 }
 
 void Menu::renderNeuralNetDescription()
@@ -287,16 +288,16 @@ void Menu::renderNeuralNetDetails()
 void Menu::triggerBodyRegen()
 {
 	selectedBody->unload();
-	selectedBody->addParameters(
-		selectedGenome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS),
-		5,
-		5,
-		selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX),
-		selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY),
-		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_R),
+	((CreatureBody*)selectedBody)->setRGB(selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_R),
 		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_G),
-		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_B)
-	);
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_B));
+
+	((CreatureBody*)selectedBody)->setNoiseOffset(selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX),
+		selectedGenome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY));
+
+	((CreatureBody*)selectedBody)->setNoiseParams(selectedGenome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS), 5, 5);
+		
+		
 	selectedBody->generate();
 	selectedBody->load();
 }

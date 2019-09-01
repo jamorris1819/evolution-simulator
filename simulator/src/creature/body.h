@@ -8,7 +8,6 @@ class Body : public PolygonR {
 public:
 	Body(GLuint shader, b2World* world);
 	~Body();
-	void addParameters(int steps, int noiseType, int octaves, float offsetX, float offsetY, int r, int g, int b);
 	void unload();
 	glm::vec2 getPosition();
 	float getRotation();
@@ -17,30 +16,22 @@ public:
 	b2Body* getPhysicsBody();
 
 	void moveForward(float power);
-	void turnLeft();
-	void turnRight();
-	void update();
+	void turnLeft(float power);
+	void turnRight(float power);
+	//virtual void update() = 0;
 
-	void generate();
+	void setRGB(int r, int g, int b);
+
+	virtual void generate();
 	int seed;
-	int steps;
-	int noiseType;
-	int octaves;
-	int strideX;
-	int strideY;
-	float offsetX;
-	float offsetY;
-	float length;
-	float width;
-	float frequency;
+	
 	int r;
 	int g;
 	int b;
 
-private:
-	void generateBodyPoints();
-	void generatePhysicsBody();
-	void generateMouth();
+protected:
+	virtual void generateBodyPoints() = 0;
+	virtual void generatePhysicsBody();
 	b2Body* physicsBody;
 	b2World* world;
 };

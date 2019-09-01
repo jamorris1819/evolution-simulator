@@ -1,11 +1,12 @@
 #include "creature.h"
+#include "creaturebody.h"
 #include "../util/contactlistener.h"
 
 Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEntity(glm::vec3(position, 0.0f))
 {
 	genome = nullptr;
 	neuralGenome = nullptr;
-	body = new Body(shader, world);
+	body = new CreatureBody(shader, world);
 	internalClock = 0;
 }
 
@@ -49,12 +50,15 @@ void Creature::generate()
 	int b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 
 	// Generate the body.
-	body->addParameters(steps, noiseType, octaves, offsetX, offsetY, r, g, b);
-	body->generate();
-	body->load();
+	CreatureBody* castBody = (CreatureBody*)body;
+	castBody->setRGB(r, g, b);
+	castBody->setNoiseOffset(offsetX, offsetY);
+	castBody->setNoiseParams(steps, noiseType, octaves);
+	castBody->generate();
+	castBody->load();
 
 	// Give all fixtures a pointer to the creature.
-	b2Body* rBody = body->getPhysicsBody();
+	b2Body* rBody = castBody->getPhysicsBody();
 	for (b2Fixture* b = rBody->GetFixtureList(); b; b = b->GetNext()) {
 		b->SetUserData(this);
 	}
@@ -82,8 +86,8 @@ void Creature::update(double deltaTime)
 
 	// Process decision.
 	cout << decision[0] << endl;
-	if (decision[0] > 0.65) body->turnLeft();
-	if (decision[1] > 0.65) body->turnRight();
+	if (decision[0] > 0.65) body->turnLeft(0.4f);
+	if (decision[1] > 0.65) body->turnRight(-0.4f);
 	if (decision[2] > 0.5) {
 		double power = (decision[2] - 0.5) / 0.5;
 		moveForward(power);
