@@ -102,6 +102,12 @@
     <ClCompile Include="src\neural\netdata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\contactlistener.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\livingentity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -2244,6 +2250,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\neural\innovationmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\livingentity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

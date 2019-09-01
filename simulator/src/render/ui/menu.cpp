@@ -11,6 +11,7 @@
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
 Body* Menu::selectedBody;
+LivingEntity* Menu::selectedLivingEntity;
 NeuralGenome* Menu::selectedNeuralGenome;
 NeuralGenome* Menu::selectedNeuralGenome1;
 NeuralGenome* Menu::selectedNeuralGenome2;
@@ -100,7 +101,7 @@ void Menu::renderTraitsDetails()
 
 	// SIZE
 	int size = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SIZE);
-	ImGui::DragInt("Size", &size); 
+	ImGui::DragInt("Size", &size);
 
 	// COLOUR
 	float colour[3] = {
@@ -117,6 +118,21 @@ void Menu::renderTraitsDetails()
 	// ROTATION SPEED
 	int rotationSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_ROTATION);
 	ImGui::DragInt("Rotation Speed", &rotationSpeed);
+}
+
+void Menu::renderLivingEntityDetails()
+{
+	ImGui::Text("Health");
+	ImGui::SameLine();
+	ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));
+	ImGui::ProgressBar(selectedLivingEntity->getHealth() / selectedLivingEntity->getMaxHealth(), ImVec2(-1.0f, 0.0f));
+	ImGui::PopStyleColor();
+
+	ImGui::Text("Energy");
+	ImGui::SameLine();
+	ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImVec4(0.0f, 0.5f, 0.0f, 1.0f));
+	ImGui::ProgressBar(selectedLivingEntity->getEnergy() / selectedLivingEntity->getMaxEnergy(), ImVec2(-1.0f, 0.0f));
+	ImGui::PopStyleColor();
 }
 
 void Menu::renderBodyDescription()
@@ -296,6 +312,7 @@ void Menu::renderCreatureWindow()
 	static int selected = 0;
 	ImGui::BeginChild("left pane", ImVec2(150, 0), true);
 	std::vector<const char*> options;
+	options.push_back("Life");
 	options.push_back("Genome");
 	options.push_back("Traits");
 	options.push_back("Body");
@@ -317,15 +334,18 @@ void Menu::renderCreatureWindow()
 	const char* title;
 	switch (selected) {
 	case 0:
-		title = "Viewing Genome";
+		title = "Viewing Life";
 		break;
 	case 1:
-		title = "Viewing Traits";
+		title = "Viewing Genome";
 		break;
 	case 2:
-		title = "Viewing Body";
+		title = "Viewing Traits";
 		break;
 	case 3:
+		title = "Viewing Body";
+		break;
+	case 4:
 		title = "Viewing Neural Network";
 		break;
 	default:
@@ -339,18 +359,20 @@ void Menu::renderCreatureWindow()
 	{
 		if (ImGui::BeginTabItem("Description"))
 		{
-			if (selected == 0 && selectedGenome != nullptr) renderGenomeDescription();
-			if (selected == 1 && selectedGenome != nullptr) renderTraitsDescription();
-			if (selected == 2 && selectedBody != nullptr) renderBodyDescription();
-			if (selected == 3 && selectedBody != nullptr) renderNeuralNetDescription();
+			//if (selected == 0 && selectedLivingEntity != nullptr) renderLivingEntityDetails();
+			if (selected == 1 && selectedGenome != nullptr) renderGenomeDescription();
+			if (selected == 2 && selectedGenome != nullptr) renderTraitsDescription();
+			if (selected == 3 && selectedBody != nullptr) renderBodyDescription();
+			if (selected == 4 && selectedBody != nullptr) renderNeuralNetDescription();
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Details"))
 		{
-			if (selected == 0 && selectedGenome != nullptr) renderGenomeDetails();
-			if (selected == 1 && selectedGenome != nullptr) renderTraitsDetails();
-			if (selected == 2 && selectedBody != nullptr) renderBodyDetails();
-			if (selected == 3 && selectedBody != nullptr) renderNeuralNetDetails();
+			if (selected == 0 && selectedLivingEntity != nullptr) renderLivingEntityDetails();
+			if (selected == 1 && selectedGenome != nullptr) renderGenomeDetails();
+			if (selected == 2 && selectedGenome != nullptr) renderTraitsDetails();
+			if (selected == 3 && selectedBody != nullptr) renderBodyDetails();
+			if (selected == 4 && selectedBody != nullptr) renderNeuralNetDetails();
 
 			ImGui::EndTabItem();
 		}
@@ -513,4 +535,10 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 	}
 
 	int a = 3;
+}
+
+// This brings the living entity into focus.
+void Menu::focusLivingEntity(LivingEntity* livingEntity)
+{
+	selectedLivingEntity = livingEntity;
 }

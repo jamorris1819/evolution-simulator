@@ -4,6 +4,7 @@
 #include "../src/genetics/genome.h"
 #include "../src/neural/neuralgenome.h"
 #include "../src/neural/netdata.h"
+#include "../src/entities/livingentity.h"
 
 class Menu
 {
@@ -14,6 +15,7 @@ public:
 	static void focusGenome(Genome* genome);
 	static void focusBody(Body* body);
 	static void focusNeuralGenome(NeuralGenome* neuralGenome);
+	static void focusLivingEntity(LivingEntity* livingEntity);
 private:
 	Menu();
 	static void renderMenuBar();
@@ -26,10 +28,12 @@ private:
 	static void renderNeuralNetDescription();
 	static void renderNeuralNetDetails();
 	static void renderCreatureWindow();
+	static void renderLivingEntityDetails();
 	static void triggerBodyRegen();
 	static bool* bWindowCreature;
 	static Genome* selectedGenome;
 	static Body* selectedBody;
+	static LivingEntity* selectedLivingEntity;
 	static NeuralGenome* selectedNeuralGenome;
 	static NeuralGenome* selectedNeuralGenome1;
 	static NeuralGenome* selectedNeuralGenome2;

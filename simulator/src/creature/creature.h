@@ -1,11 +1,11 @@
 #pragma once
 #include "body.h"
 #include "../genetics/genome.h"
-#include "../entities/drawnentity.h"
+#include "../entities/livingentity.h"
 #include "glm\vec2.hpp"
 #include "../neural/neuralgenome.h"
 
-class Creature : public DrawnEntity
+class Creature : public LivingEntity
 {
 public:
 	Creature(GLuint shader, b2World* world, glm::vec2 position);

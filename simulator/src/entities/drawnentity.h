@@ -30,7 +30,7 @@ public:
 	void setRotation(float rotation);
 	void setPolygon(PolygonR *polygon);
 	void setBody(Body *body);
-	void update(double deltaTime);
+	virtual void update(double deltaTime);
 	void render();
 	void unload();
 	Body* body;

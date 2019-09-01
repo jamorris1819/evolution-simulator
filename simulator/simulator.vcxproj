@@ -135,6 +135,7 @@
     <ClCompile Include="include\noise\FastNoise.cpp" />
     <ClCompile Include="src\creature\body.cpp" />
     <ClCompile Include="src\creature\creature.cpp" />
+    <ClCompile Include="src\entities\livingentity.cpp" />
     <ClCompile Include="src\genetics\base.cpp" />
     <ClCompile Include="src\genetics\gene.cpp" />
     <ClCompile Include="packages\glm.0.9.9.500\build\native\include\glm\detail\glm.cpp" />
@@ -1199,6 +1200,7 @@
     <ClInclude Include="include\noise\FastNoise.h" />
     <ClInclude Include="src\creature\body.h" />
     <ClInclude Include="src\creature\creature.h" />
+    <ClInclude Include="src\entities\livingentity.h" />
     <ClInclude Include="src\genetics\gene.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut_ext.h" />

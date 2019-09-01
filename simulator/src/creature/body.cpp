@@ -75,19 +75,7 @@ void Body::generate()
 
 void Body::update()
 {
-	/*for (b2ContactEdge* edges = physicsBody->GetContactList(); edges; edges = edges->next) {
-		if (edges->contact->GetFixtureB()->GetFilterData().categoryBits == ObjectType::CREATURE) {
-			std::cout << "collision" << std::endl;
-			Creature* creature = (Creature*)edges->contact->GetFixtureB()->GetUserData();
-			int a = 0;
-		}
-
-		if (edges->contact->GetFixtureA()->GetFilterData().categoryBits == ObjectType::CREATURE) {
-			std::cout << "collision" << std::endl;
-			Creature* creature = (Creature*)edges->contact->GetFixtureB()->GetUserData();
-			int a = 0;
-		}*
-	}*/
+	
 }
 
 void Body::generateBodyPoints()

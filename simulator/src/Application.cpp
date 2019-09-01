@@ -41,6 +41,7 @@ void initialiseEntities() {
 	creature->generate();
 
 	neuralGenome = new NeuralGenome(5, 3);
+	Menu::focusLivingEntity(creature);
 
 	creature->setNeuralGenome(neuralGenome);
 

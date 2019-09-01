@@ -1,7 +1,7 @@
 #include "creature.h"
 #include "../util/contactlistener.h"
 
-Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : DrawnEntity(glm::vec3(position, 0.0f))
+Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEntity(glm::vec3(position, 0.0f))
 {
 	genome = nullptr;
 	neuralGenome = nullptr;
@@ -62,7 +62,7 @@ void Creature::generate()
 
 void Creature::update(double deltaTime)
 {
-	DrawnEntity::update(deltaTime);
+	LivingEntity::update(deltaTime);
 
 	internalClock += deltaTime;
 
