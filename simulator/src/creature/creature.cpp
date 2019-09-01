@@ -1,4 +1,5 @@
 #include "creature.h"
+#include "../util/contactlistener.h"
 
 Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : DrawnEntity(glm::vec3(position, 0.0f))
 {
@@ -51,6 +52,12 @@ void Creature::generate()
 	body->addParameters(steps, noiseType, octaves, offsetX, offsetY, r, g, b);
 	body->generate();
 	body->load();
+
+	// Give all fixtures a pointer to the creature.
+	b2Body* rBody = body->getPhysicsBody();
+	for (b2Fixture* b = rBody->GetFixtureList(); b; b = b->GetNext()) {
+		b->SetUserData(this);
+	}
 }
 
 void Creature::update(double deltaTime)

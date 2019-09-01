@@ -154,6 +154,7 @@
     <ClCompile Include="src\render\ui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\render\ui\imgui_widgets.cpp" />
     <ClCompile Include="src\render\ui\menu.cpp" />
+    <ClCompile Include="src\util\contactlistener.h" />
     <ClCompile Include="src\util\input.cpp" />
     <ClCompile Include="src\util\shaderutility.cpp" />
     <ClCompile Include="src\render\polygondata.cpp" />

@@ -2,6 +2,7 @@
 #include "noise\FastNoise.h"
 #include "GL\glew.h"
 #include "glm\glm.hpp"
+#include "../util/contactlistener.h"
 
 #define PI 3.14159265359
 
@@ -67,6 +68,26 @@ void Body::generate()
 
 	// Generate physics body.
 	generatePhysicsBody();
+
+	// Create mouth 'sensor'.
+	generateMouth();
+}
+
+void Body::update()
+{
+	/*for (b2ContactEdge* edges = physicsBody->GetContactList(); edges; edges = edges->next) {
+		if (edges->contact->GetFixtureB()->GetFilterData().categoryBits == ObjectType::CREATURE) {
+			std::cout << "collision" << std::endl;
+			Creature* creature = (Creature*)edges->contact->GetFixtureB()->GetUserData();
+			int a = 0;
+		}
+
+		if (edges->contact->GetFixtureA()->GetFilterData().categoryBits == ObjectType::CREATURE) {
+			std::cout << "collision" << std::endl;
+			Creature* creature = (Creature*)edges->contact->GetFixtureB()->GetUserData();
+			int a = 0;
+		}*
+	}*/
 }
 
 void Body::generateBodyPoints()
@@ -136,12 +157,39 @@ void Body::generatePhysicsBody()
 		fixtureDef.shape = &shape;
 		fixtureDef.density = 10.0f;
 		fixtureDef.restitution = 0.6f;
+
+		fixtureDef.filter.categoryBits = ContactType::CREATURE;
+
 		physicsBody->CreateFixture(&fixtureDef);
 	}
 
 	// Apply some settings to the new body.
 	physicsBody->SetLinearDamping(2.0f);
 	physicsBody->SetAngularDamping(5.0f);
+}
+
+void Body::generateMouth()
+{
+	b2Vec2 vert[4];
+
+	// Assign shape's vertices.
+	vert[0].Set(-0.2f, 1.2f);
+	vert[1].Set(-0.2f, 0.0f);
+	vert[2].Set(0.2f, 0.0f);
+	vert[3].Set(0.2f, 1.2f);
+
+	b2PolygonShape shape;
+	shape.Set(vert, 4);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 10.0f;
+	fixtureDef.isSensor = true;
+	fixtureDef.restitution = 0.6f;
+
+	fixtureDef.filter.categoryBits = ContactType::MOUTH;
+
+	physicsBody->CreateFixture(&fixtureDef);
 }
 
 void Body::unload()

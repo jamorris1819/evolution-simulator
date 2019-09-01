@@ -16,6 +16,7 @@
 #include "Box2D\Box2D.h"
 #include "creature\creature.h"
 #include "neural\neuralgenome.h"
+#include "util/contactlistener.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ Body* body;
 Camera* cam;
 b2World* world;
 NeuralGenome* neuralGenome;
+ContactListener* contactListener;
 
 void initialiseEntities() {
 	creature = new Creature(program, world, glm::vec2(0, 0));
@@ -41,6 +43,7 @@ void initialiseEntities() {
 	neuralGenome = new NeuralGenome(5, 3);
 
 	creature->setNeuralGenome(neuralGenome);
+
 
 	Menu::focusBody(creature->body);
 	Menu::focusGenome(gen);
@@ -77,7 +80,16 @@ void initialiseBox2D()
 	groundBox.SetAsBox(5.0f, 2.0f);
 
 	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	b2Fixture* groundFixture = groundBody->CreateFixture(&groundBox, 0.0f);
+	b2Filter filterData = groundFixture->GetFilterData();
+	filterData.categoryBits = ContactType::TERRAIN;
+	groundFixture->SetFilterData(filterData);
+
+	contactListener = new ContactListener();
+	world->SetContactListener(contactListener);
+
+
+	cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
 }
 
 void initialise()

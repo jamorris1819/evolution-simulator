@@ -19,6 +19,7 @@ public:
 	void moveForward(float power);
 	void turnLeft();
 	void turnRight();
+	void update();
 
 	void generate();
 	int seed;
@@ -39,6 +40,7 @@ public:
 private:
 	void generateBodyPoints();
 	void generatePhysicsBody();
+	void generateMouth();
 	b2Body* physicsBody;
 	b2World* world;
 };
