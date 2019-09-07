@@ -4,7 +4,7 @@
 #include "../src/genetics/genome.h"
 #include "../src/neural/neuralgenome.h"
 #include "../src/neural/netdata.h"
-#include "../src/entities/livingentity.h"
+#include "../../creature/creature.h"
 
 class Menu
 {

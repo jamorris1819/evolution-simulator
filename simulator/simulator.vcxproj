@@ -136,6 +136,7 @@
     <ClCompile Include="src\creature\body.cpp" />
     <ClCompile Include="src\creature\creature.cpp" />
     <ClCompile Include="src\creature\creaturebody.cpp" />
+    <ClCompile Include="src\entities\entitymanager.cpp" />
     <ClCompile Include="src\entities\livingentity.cpp" />
     <ClCompile Include="src\genetics\base.cpp" />
     <ClCompile Include="src\genetics\gene.cpp" />
@@ -1202,6 +1203,7 @@
     <ClInclude Include="src\creature\body.h" />
     <ClInclude Include="src\creature\creature.h" />
     <ClInclude Include="src\creature\creaturebody.h" />
+    <ClInclude Include="src\entities\entitymanager.h" />
     <ClInclude Include="src\entities\livingentity.h" />
     <ClInclude Include="src\genetics\gene.h" />
     <ClInclude Include="packages\freeglut.2.8.1.15\build\native\include\GL\freeglut.h" />

@@ -106,7 +106,7 @@ void Body::generatePhysicsBody()
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(20.0f, 10.0f);
+	bodyDef.position.Set(0.0f, 0.0f);
 	physicsBody = world->CreateBody(&bodyDef);
 
 	// Create the triangles for this body.

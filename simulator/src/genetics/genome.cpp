@@ -8,7 +8,7 @@ Genome::Genome(bool fill)
 {
 	strandLength = (int)GeneMarker::GENE_COUNT;
 	strandWeights = new double[strandLength];
-	srand(time(NULL));
+	//srand(time(NULL));
 	if (fill) {
 		generate();
 	}
@@ -39,7 +39,7 @@ void Genome::generate()
 		strandWeights[i] = (rand() % 100) / 100.0;
 	}
 
-	srand(time(NULL));
+	//srand(time(NULL));
 	
 	// Create generic genome.
 

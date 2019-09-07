@@ -17,6 +17,7 @@
 #include "creature\creature.h"
 #include "neural\neuralgenome.h"
 #include "util/contactlistener.h"
+#include "entities/entitymanager.h"
 
 using namespace std;
 
@@ -27,29 +28,22 @@ float width = 1920.0f;
 float height = 1080.0f;
 double* frequency;
 
-Creature* creature;
+EntityManager* entityManager;
+
 Body* body;
 Camera* cam;
 b2World* world;
-NeuralGenome* neuralGenome;
 ContactListener* contactListener;
 
 void initialiseEntities() {
-	creature = new Creature(program, world, glm::vec2(0, 0));
-	Genome* gen = new Genome(true);
-	creature->setGenome(gen);
-	creature->generate();
+	// Initialise entity manager and create a test creature.
+	entityManager = new EntityManager(program, world);
+	entityManager->createCreature(glm::vec2(20, 10));
+	
+	// Bring creature into focus in UI.
+	Menu::focusLivingEntity(entityManager->getTestCreature());
 
-	neuralGenome = new NeuralGenome(5, 3);
-	Menu::focusLivingEntity(creature);
-
-	creature->setNeuralGenome(neuralGenome);
-
-
-	Menu::focusBody(creature->body);
-	Menu::focusGenome(gen);
-	Menu::focusNeuralGenome(neuralGenome);
-
+	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
 }
@@ -129,7 +123,7 @@ void initialise()
 }
 
 void render() {
-	creature->render();
+	entityManager->render();
 }
 
 void update() {
@@ -141,31 +135,24 @@ void update() {
 	deltaTime = 0.013;
 
 	cam->update(deltaTime);
-	//de->update(deltaTime);
-	creature->update(deltaTime);
+	entityManager->update(deltaTime);
 
 	// Update the physics simulation.
 	world->Step(1.0f / 60.0f, 6, 2);
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
-		creature->moveForward(1.0f);
+		entityManager->getTestCreature()->moveForward(1.0f);
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
-		creature->body->turnLeft(0.4f);
+		entityManager->getTestCreature()->body->turnLeft(0.4f);
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
-		creature->body->turnRight(-0.4f);
+		entityManager->getTestCreature()->body->turnRight(-0.4f);
 	}
 
-	// test evolution
-
-	/*body->unload();
-	body->offsetX += deltaTime * 0.1f;
-	body->generate();
-	body->load();*/
 }
 
 void error_callback(int error, const char* description)

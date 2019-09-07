@@ -542,4 +542,8 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 void Menu::focusLivingEntity(LivingEntity* livingEntity)
 {
 	selectedLivingEntity = livingEntity;
+	Creature* creature = (Creature*)livingEntity;
+	focusGenome(creature->getGenome());
+	focusNeuralGenome(creature->getNeuralGenome());
+	focusBody(creature->body);
 }

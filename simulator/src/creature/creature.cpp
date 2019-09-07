@@ -55,6 +55,7 @@ void Creature::generate()
 	castBody->setNoiseOffset(offsetX, offsetY);
 	castBody->setNoiseParams(steps, noiseType, octaves);
 	castBody->generate();
+	castBody->setPosition(getPosition());
 	castBody->load();
 
 	// Give all fixtures a pointer to the creature.
