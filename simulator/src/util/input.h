@@ -10,6 +10,7 @@ public:
 	static bool pollChange();
 	static bool isDown(int key);
 	static bool isUp(int key);
+	static bool isPressed(int key);
 	static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 	static bool scrollDown();
 	static bool scrollUp();

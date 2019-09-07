@@ -2,6 +2,8 @@
 
 #include "Box2D/Box2D.h"
 #include "../creature/creature.h"
+#include "../entities/entitymanager.h"
+#include "input.h"
 
 enum ContactType {
 	TERRAIN = 0x0001,
@@ -12,6 +14,14 @@ enum ContactType {
 
 class ContactListener : public b2ContactListener
 {
+	EntityManager* entityManager;
+
+public:
+	ContactListener(EntityManager*& entityManager) : b2ContactListener()
+	{
+		this->entityManager = entityManager;
+	}
+
 	void BeginContact(b2Contact* contact) {
 		Creature* creatureA = nullptr;
 		Creature* creatureB = nullptr;
@@ -26,7 +36,18 @@ class ContactListener : public b2ContactListener
 			case ContactType::CREATURE:
 				creatureB = (Creature*)other->GetUserData();
 				// Handle collision between 2 creatures.
-				std::cout << "creature collision" << std::endl;
+				glm::vec3 pos1 = creatureA->getPosition();
+				glm::vec3 pos2 = creatureB->getPosition();
+				glm::vec3 pos3 = (pos1 + pos2) / 2.0f;
+				if (creatureA->canReproduce && creatureB->canReproduce) {
+					entityManager->createChildCreatureQueue(creatureA, creatureB, pos3);
+					creatureA->canReproduce = false;
+					creatureA->reproduceClock = 0;
+					creatureA->setVelocity((pos3 - pos1) * 10.0f);
+					creatureB->canReproduce = false;
+					creatureB->reproduceClock = 0;
+					creatureB->setVelocity((pos3 - pos2) * 10.0f);
+				}
 				break;
 
 			case ContactType::TERRAIN:

@@ -17,6 +17,8 @@ public:
 	void generate();
 	void update(double deltaTime);
 	void moveForward(double power);
+	bool canReproduce;
+	double reproduceClock;
 
 private:
 	double internalClock;

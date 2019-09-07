@@ -2,7 +2,7 @@
 
 LivingEntity::LivingEntity(glm::vec3 position) : DrawnEntity(position) {
 	maxHealth = 100.0;
-	maxEnergy = 100.0;
+	maxEnergy = 1000.0;
 
 	alive = true;
 

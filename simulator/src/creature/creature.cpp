@@ -9,6 +9,8 @@ Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEn
 	body = new CreatureBody(shader, world);
 	internalClock = 0;
 	thinkClock = 0;
+	canReproduce = false;
+	reproduceClock = 0;
 }
 
 Creature::~Creature()
@@ -72,6 +74,10 @@ void Creature::update(double deltaTime)
 
 	internalClock += deltaTime;
 	thinkClock += deltaTime;
+	reproduceClock += deltaTime;
+
+	canReproduce = reproduceClock > 5;
+
 	if (thinkClock < 0.1) {
 		return;
 	}

@@ -50,6 +50,18 @@ bool Input::isDown(int key)
 	return false;
 }
 
+bool Input::isPressed(int key)
+{
+	// If user is typing into the UI, ignore this.
+	ImGuiIO& io = ImGui::GetIO();
+	if (io.WantCaptureKeyboard) return false;
+
+	std::map<int, int>::iterator it = keyMap.find(key);
+	if (it != keyMap.end())
+		return it->second == GLFW_PRESS;
+	return false;
+}
+
 bool Input::isUp(int key)
 {
 	std::map<int, int>::iterator it = keyMap.find(key);

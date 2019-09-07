@@ -42,17 +42,13 @@ void initialiseEntities() {
 	srand(time(NULL));
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
-	int y = 10;
 
-	Creature* creatureA = entityManager->createRandomCreature(glm::vec2(0, y));
-	Creature* creatureB = entityManager->createRandomCreature(glm::vec2(0, y + 2));
-	for (int x = 0; x < 200; x++) {
-		Creature* creatureC = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(x * 2 + 2, y));
-		Creature* creatureD = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(x * 2 + 2, y + 2));
-
-		creatureA = creatureC;
-		creatureB = creatureD;
+	for (int i = 0; i < 10; i++) {
+		int x = (rand() % 60) - 30;
+		int y = (rand() % 60) - 30;
+		entityManager->createRandomCreature(glm::vec2(x, y));
 	}
+	
 
 	//delete creatureA;
 	//delete creatureB;
@@ -96,10 +92,6 @@ void initialiseBox2D()
 	filterData.categoryBits = ContactType::TERRAIN;
 	groundFixture->SetFilterData(filterData);
 
-	contactListener = new ContactListener();
-	world->SetContactListener(contactListener);
-
-
 	cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
 }
 
@@ -123,8 +115,11 @@ void initialise()
 	// Initialise UI.
 	Menu::initialise(window);
 
+
 	initialiseBox2D();
 	initialiseEntities();
+	contactListener = new ContactListener(entityManager);
+	world->SetContactListener(contactListener);
 
 	// Initialise input handler.
 	Input::initialise();
