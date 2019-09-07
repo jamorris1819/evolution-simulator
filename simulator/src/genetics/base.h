@@ -4,7 +4,7 @@ class Base
 {
 public:
 	Base();
-	Base* clone();
+	virtual Base* clone();
 	bool typeInt;
 	bool typeBool;
 	bool typeFloat;

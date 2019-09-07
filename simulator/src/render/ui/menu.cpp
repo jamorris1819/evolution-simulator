@@ -501,7 +501,6 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 		}
 
 		netData->addNode(nodeData);
-		i++;
 	}
 
 	// Calculate the positions for hidden nodes. 

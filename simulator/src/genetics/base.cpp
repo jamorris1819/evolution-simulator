@@ -4,6 +4,13 @@
 Base::Base() {}
 Base* Base::clone()
 {
-	// todo
-	return this;
+	Base* base = new Base();
+	base->dominant = dominant;
+	base->enabled = enabled;
+	base->order = order;
+	base->typeBool = typeBool;
+	base->typeInt = typeInt;
+	base->typeFloat = typeFloat;
+
+	return base;
 }

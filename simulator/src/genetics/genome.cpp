@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 #include "glm\glm.hpp"
+#include <thread>
 
 Genome::Genome(bool fill)
 {
 	strandLength = (int)GeneMarker::GENE_COUNT;
 	strandWeights = new double[strandLength];
-	//srand(time(NULL));
 	if (fill) {
 		generate();
 	}
@@ -26,6 +26,7 @@ Genome::~Genome()
 
 int Genome::generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread)
 {
+	std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	int chosenPoint = (startingArea - maxSpread) + (rand() % (2 * maxSpread));
 	*spread = minStride + (rand() % (maxStride - minStride));
 
@@ -34,12 +35,11 @@ int Genome::generateInt(int startingArea, int maxSpread, int minStride, int maxS
 
 void Genome::generate()
 {
+
 	// Initialise weights.
 	for (int i = 0; i < strandLength; i++) {
 		strandWeights[i] = (rand() % 100) / 100.0;
 	}
-
-	//srand(time(NULL));
 	
 	// Create generic genome.
 
@@ -180,4 +180,29 @@ void Genome::mutate()
 			}
 		}
 	}
+}
+
+Genome* Genome::cross(Genome* genome1, Genome* genome2)
+{
+	if (genome1->strandLength != genome2->strandLength) return nullptr;
+
+	Genome* childGenome = new Genome(false);
+	bool flipStrands = rand() % 2 == 0;
+	Genome* parentA = flipStrands ? genome1 : genome2;
+	Genome* parentB = !flipStrands ? genome1 : genome2;
+
+	std::vector<Base*> strandA;
+	std::vector<Base*> strandB;
+
+	childGenome->strandWeights = new double[genome1->strandLength];
+	for (int i = 0; i < genome1->strandLength; i++) {
+		strandA.push_back(parentA->strandA[i]->clone());
+		strandB.push_back(parentB->strandB[i]->clone());
+		childGenome->strandWeights[i] = flipStrands ? genome1->strandWeights[i] : genome2->strandWeights[i];
+	}
+
+	childGenome->strandA = strandA;
+	childGenome->strandB = strandB;
+	
+	return childGenome;
 }

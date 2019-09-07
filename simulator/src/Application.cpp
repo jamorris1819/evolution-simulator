@@ -19,6 +19,8 @@
 #include "neural\neuralgenome.h"
 #include "util/contactlistener.h"
 #include "entities/entitymanager.h"
+#include <thread>
+#include <time.h>
 
 using namespace std;
 
@@ -37,16 +39,22 @@ b2World* world;
 ContactListener* contactListener;
 
 void initialiseEntities() {
+	srand(time(NULL));
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
-	for (int x = 0; x < 100; x++) {
+	/*for (int x = 0; x < 100; x++) {
 		for (int y = 0; y < 10; y++) {
-			entityManager->createCreature(glm::vec2(x * 2, y * 2));
+			entityManager->createRandomCreature(glm::vec2(x * 2, y * 2));
 		}
-	}
-	
+	}*/
+
+	Creature* creatureA = entityManager->createRandomCreature(glm::vec2(0, 0));
+	Creature* creatureB = entityManager->createRandomCreature(glm::vec2(2, 0));
+	Creature* creatureC = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(1, 1));
+	//delete creatureA;
+	//delete creatureB;
 	// Bring creature into focus in UI.
-	Menu::focusLivingEntity(entityManager->getTestCreature());
+	Menu::focusLivingEntity(creatureC);
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
@@ -142,7 +150,7 @@ void update() {
 	entityManager->update(deltaTime);
 
 	// Update the physics simulation.
-	//world->Step(1.0f / 60.0f, 6, 2);
+	world->Step(1.0f / 60.0f, 6, 2);
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {

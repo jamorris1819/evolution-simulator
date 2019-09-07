@@ -12,6 +12,7 @@ public:
 	Genome* clone();
 	void generate();
 	void mutate();
+	static Genome* cross(Genome* genome1, Genome* genome2);
 	int generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	template<class T> Gene<T>* getGene(int order, bool mainStrand);
 	template<class T> Gene<T>* getGene(GeneMarker marker, bool mainStrand);
