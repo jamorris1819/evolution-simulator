@@ -8,6 +8,7 @@ Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEn
 	neuralGenome = nullptr;
 	body = new CreatureBody(shader, world);
 	internalClock = 0;
+	thinkClock = 0;
 }
 
 Creature::~Creature()
@@ -70,6 +71,12 @@ void Creature::update(double deltaTime)
 	LivingEntity::update(deltaTime);
 
 	internalClock += deltaTime;
+	thinkClock += deltaTime;
+	if (thinkClock < 0.1) {
+		return;
+	}
+
+	thinkClock = 0;
 
 	if (neuralGenome == nullptr) return;
 	// Think
@@ -83,18 +90,18 @@ void Creature::update(double deltaTime)
 
 	double* decision = neuralGenome->evaluate(inputs);
 	delete inputs;
+	delete decision;
 	return;
 
 	// Process decision.
-	cout << decision[0] << endl;
+	/*cout << decision[0] << endl;
 	if (decision[0] > 0.65) body->turnLeft(0.4f);
 	if (decision[1] > 0.65) body->turnRight(-0.4f);
 	if (decision[2] > 0.5) {
 		double power = (decision[2] - 0.5) / 0.5;
 		moveForward(power);
-	}
+	}*/
 
-	delete decision;
 }
 
 void Creature::moveForward(double power)

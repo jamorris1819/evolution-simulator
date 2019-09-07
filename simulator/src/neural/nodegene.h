@@ -21,6 +21,8 @@ public:
 	NodeType getType();
 	double getValue();
 	void setValue(double val);
+	void flush();
+	bool isSet();
 	ActivationFunction getActivationFunction();
 	void setActivationFunction(ActivationFunction activationFunction);
 private:

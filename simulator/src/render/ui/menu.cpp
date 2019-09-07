@@ -220,7 +220,7 @@ void Menu::renderNeuralNetDetails()
 
 	std::vector<NodeData> nodes = netData->getNodes();
 	std::vector<ConnectionData> connections = netData->getConnections();
-	std::map<int, NodeGene> n = selectedNeuralGenome->getNodes();
+	std::vector<std::pair<int, NodeGene>> n = selectedNeuralGenome->getNodes();
 
 	x = p.x + 16.0f, y = p.y + 128.0f;
 
@@ -246,7 +246,7 @@ void Menu::renderNeuralNetDetails()
 		NodeData node = nodes[i];
 
 		// Calculate colour.
-		double val = n.at(i).getValue();
+		double val = n[i].second.getValue();
 
 		draw_list->AddCircleFilled(ImVec2(
 			x + node.x,	// start x
@@ -448,8 +448,8 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 
 	netData = new NetData();
 	selectedNeuralGenome = neuralGenome;
-	std::map<int, NodeGene> nodeGenes = neuralGenome->getNodes();
-	std::map<int, ConnectionGene> connectionGenes = neuralGenome->getConnections();
+	std::vector<std::pair<int, NodeGene>> nodeGenes = neuralGenome->getNodes();
+	std::vector<std::pair<int, ConnectionGene>> connectionGenes = neuralGenome->getConnections();
 	int inputCount = 0;
 	int outputCount = 0;
 	int hiddenCount = 0;
@@ -461,22 +461,21 @@ void Menu::focusNeuralGenome(NeuralGenome* neuralGenome)
 	
 	
 	// Create connection info.
-	std::map<int, ConnectionGene>::iterator it2;
-	for (it2 = connectionGenes.begin(); it2 != connectionGenes.end(); it2++) {
+	for (int i = 0; i < connectionGenes.size(); i++) {
+		ConnectionGene connectionGene = connectionGenes[i].second;
 		ConnectionData connectionData;
-		connectionData.from = it2->second.getInputNode();
-		connectionData.to = it2->second.getOutputNode();
-		connectionData.enabled = it2->second.getEnabled();
-		connectionData.weight = it2->second.getWeight();
+		connectionData.from = connectionGene.getInputNode();
+		connectionData.to = connectionGene.getOutputNode();
+		connectionData.enabled = connectionGene.getEnabled();
+		connectionData.weight = connectionGene.getWeight();
 
 		netData->addConnection(connectionData);
 	}
 
 	// Create the node info (position + type).
-	std::map<int, NodeGene>::iterator it;
-	int i = 0;
-	for (it = nodeGenes.begin(); it != nodeGenes.end(); it++) {
-		int order = it->first;
+	
+	for (int i = 0; i < nodeGenes.size(); i++) {
+		int order = nodeGenes[i].first;
 		NodeData nodeData;
 
 		// If this is an input node.

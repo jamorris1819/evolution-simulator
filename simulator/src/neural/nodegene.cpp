@@ -6,6 +6,7 @@ NodeGene::NodeGene(NodeType type)
 {
 	nodeType = type;
 	tempValue = 0;
+	useTemp = false;
 }
 
 NodeGene::~NodeGene()
@@ -26,6 +27,18 @@ double NodeGene::getValue()
 void NodeGene::setValue(double value)
 {
 	tempValue = value;
+	useTemp = true;
+}
+
+bool NodeGene::isSet()
+{
+	return useTemp;
+}
+
+void NodeGene::flush()
+{
+	tempValue = 0;
+	useTemp = false;
 }
 
 ActivationFunction NodeGene::getActivationFunction()

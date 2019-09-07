@@ -11,32 +11,32 @@ NeuralGenome::NeuralGenome(int inputs, int outputs)
 	for (int i = 0; i < inputs; i++) {
 		NodeGene nodeGene(NodeType::INPUT);
 		nodeGene.setActivationFunction(ActivationFunction::NONE);
-		nodes.insert(std::make_pair(nodes.size(), nodeGene));
+		nodes.push_back(std::make_pair(nodes.size(), nodeGene));
 	}
 
 	// Create output nodes.
 	for (int i = 0; i < outputs; i++) {
 		NodeGene nodeGene(NodeType::OUTPUT);
 		nodeGene.setActivationFunction(ActivationFunction::SIGMOID);
-		nodes.insert(std::make_pair(nodes.size(), nodeGene));
+		nodes.push_back(std::make_pair(nodes.size(), nodeGene));
 	}
 
 	inputCount = inputs;
 	outputCount = outputs;	
 }
 
-NeuralGenome::NeuralGenome(std::map<int, NodeGene> nodes, std::map<int, ConnectionGene> connections)
+NeuralGenome::NeuralGenome(std::vector<std::pair<int, NodeGene>> nodes, std::vector<std::pair<int, ConnectionGene>> connections)
 {
 	// Copy the genes over.
-	this->nodes.insert(nodes.begin(), nodes.end());
-	this->connections.insert(connections.begin(), connections.end());
+	this->nodes = nodes;
+	this->connections = connections;
 
 	inputCount = 0;
 	outputCount = 0;
 
 	for (int i = 0; i < nodes.size(); i++) {
-		if (nodes.at(i).getType() == NodeType::INPUT) inputCount++;
-		if (nodes.at(i).getType() == NodeType::OUTPUT) outputCount++;
+		if (nodes[i].second.getType() == NodeType::INPUT) inputCount++;
+		if (nodes[i].second.getType() == NodeType::OUTPUT) outputCount++;
 	}
 }
 
@@ -49,28 +49,36 @@ double* NeuralGenome::evaluate(double* inputs)
 		outputs[i] = Function::sigmoid(recurseNetwork(inputCount + i, inputs));
 	}
 
+	// Flush the temporary node values.
+	for (int i = 0; i < nodes.size(); i++) {
+		nodes[i].second.flush();
+	}
+
 	return outputs;
 }
 
 // Find the value of the node by recursing down the network.
 double NeuralGenome::recurseNetwork(int node, double *inputs)
 {
-	double toReturn = 0.0;
+	// Check if this node has already been evaluated.
+	if (getNode(node).isSet()) {
+		return getNode(node).getValue();
+	}
 
-	std::map<int, ConnectionGene>::iterator it;
-	std::vector<ConnectionGene> genes;
+	double toReturn = 0.0;
+	std::vector<std::pair<int, ConnectionGene>> genes(10);
 
 	// Gather a list of connections originating or ending at this node.
-	for (it = connections.begin(); it != connections.end(); it++)
+	for (int i = 0; i < connections.size(); i++)
 	{
-		ConnectionGene connGene = it->second;
+		ConnectionGene connGene = connections[i].second;
 		if (connGene.getOutputNode() == node)
-			genes.push_back(connGene);
+			genes.push_back(connections[i]);
 	}
 
 	// Iterate through all relevant connections to determine value of node.
 	for (int i = 0; i < genes.size(); i++) {
-		ConnectionGene connGene = genes[i];
+		ConnectionGene connGene = genes[i].second;
 		int attachedNode = connGene.getInputNode();
 
 		// If disabled then skip.
@@ -91,14 +99,19 @@ double NeuralGenome::recurseNetwork(int node, double *inputs)
 	}
 
 	float value = toReturn;
-	setNodeValue(node, value);
+	getNode(node).setValue(value);
 	return value;
+}
+
+NodeGene& NeuralGenome::getNode(int index)
+{
+	return nodes[index].second;
 }
 
 // Performs the activation function required by that node.
 double NeuralGenome::activateFunction(int node, double value)
 {
-	ActivationFunction func = nodes.at(node).getActivationFunction();
+	ActivationFunction func = nodes[node].second.getActivationFunction();
 
 	switch (func) {
 	case ActivationFunction::SIGMOID:
@@ -114,7 +127,7 @@ double NeuralGenome::activateFunction(int node, double value)
 // Sets the node's value for use in rendering.
 void NeuralGenome::setNodeValue(int node, double value)
 {
-	nodes.at(node).setValue(value);
+	nodes[node].second.setValue(value);
 }
 
 int NeuralGenome::getNodeCount()
@@ -122,12 +135,12 @@ int NeuralGenome::getNodeCount()
 	return nodes.size();
 }
 
-std::map<int, ConnectionGene> NeuralGenome::getConnections()
+std::vector<std::pair<int, ConnectionGene>> NeuralGenome::getConnections()
 {
 	return connections;
 }
 
-std::map<int, NodeGene> NeuralGenome::getNodes()
+std::vector<std::pair<int, NodeGene>> NeuralGenome::getNodes()
 {
 	return nodes;
 }
@@ -143,7 +156,7 @@ int NeuralGenome::findLargestInnovation()
 	int largestInnovation = -1;
 
 	for (int i = 0; i < genomeSize; i++) {
-		if (connections.at(i).getInnovation() > largestInnovation) largestInnovation = connections.at(i).getInnovation();
+		if (connections[i].second.getInnovation() > largestInnovation) largestInnovation = connections[i].second.getInnovation();
 	}
 
 	return largestInnovation;
@@ -153,7 +166,7 @@ int NeuralGenome::findLargestInnovation()
 int NeuralGenome::innovationPresent(int innovationNumber)
 {
 	for (int j = 0; j < connections.size(); j++) {
-		if (connections.at(j).getInnovation() == innovationNumber) {
+		if (connections[j].second.getInnovation() == innovationNumber) {
 			return j;
 		}
 	}
@@ -168,8 +181,8 @@ NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
 		TODO: Ensure disjoint genes are taken from the fitter parent.
 	*/
 
- 	std::map<int, NodeGene> nodes;
-	std::map<int, ConnectionGene> connections;
+	std::vector<std::pair<int, NodeGene>> nodes;
+	std::vector<std::pair<int, ConnectionGene>> connections;
 
 	int largestInnovation1 = genome1->findLargestInnovation();
 	int largestInnovation2 = genome2->findLargestInnovation();
@@ -184,16 +197,16 @@ NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
 
 		// If this innovation is present in both, choose one at random.
 		if (locationInGenome1 >= 0 && locationInGenome2 >= 0) {
-			connections.insert(std::make_pair(connections.size(),
-				rand() % 2 == 0 ? genome1->connections.at(locationInGenome1) : genome2->connections.at(locationInGenome2)
+			connections.push_back(std::make_pair(connections.size(),
+				rand() % 2 == 0 ? genome1->connections[locationInGenome1].second : genome2->connections[locationInGenome2].second
 			));
 		}
 		// If it isn't in both, take the copy from the genome where it does exist.
 		else if (locationInGenome1 >= 0) {
-			connections.insert(std::make_pair(connections.size(), genome1->connections.at(locationInGenome1)));
+			connections.push_back(std::make_pair(connections.size(), genome1->connections[locationInGenome1].second));
 		}
 		else if (locationInGenome2 >= 0) {
-			connections.insert(std::make_pair(connections.size(), genome2->connections.at(locationInGenome2)));
+			connections.push_back(std::make_pair(connections.size(), genome2->connections[locationInGenome2].second));
 		}
 	}
 
@@ -201,9 +214,9 @@ NeuralGenome* NeuralGenome::cross(NeuralGenome* genome1, NeuralGenome* genome2)
 	bool genome1MoreNodes = genome1->nodes.size() > genome2->nodes.size();
 
 	if (genome1MoreNodes)
-		nodes.insert(genome1->nodes.begin(), genome1->nodes.end());
+		nodes = genome1->nodes;
 	else
-		nodes.insert(genome2->nodes.begin(), genome2->nodes.end());
+		nodes = genome2->nodes;
 
 	return new NeuralGenome(nodes, connections);
 }
@@ -231,7 +244,7 @@ void NeuralGenome::mutateAddConnection()
 
 	// Create the connection
 	ConnectionGene gene(fromNode, toNode, true, weight);
-	connections.insert(std::make_pair(connections.size(), gene));
+	connections.push_back(std::make_pair(connections.size(), gene));
 }
 
 // Mutates the genome by creating a new node in the middle of an existing connection.
@@ -250,16 +263,16 @@ void NeuralGenome::mutateAddNode()
 	// Add a new node in between.
 	NodeGene newNode(NodeType::HIDDEN);
 	newNode.setActivationFunction(ActivationFunction::RELU);
-	nodes.insert(std::make_pair(nodes.size(), newNode));
+	nodes.push_back(std::make_pair(nodes.size(), newNode));
 	int newNodeIndex = getNodeCount() - 1;
 
 	// Now create 2 connections with the new node in the middle.
 	ConnectionGene connection1(fromNode, newNodeIndex, true, 1.0);		// weight of 1 to preserve original
-	connections.insert(std::make_pair(connections.size(), connection1));
+	connections.push_back(std::make_pair(connections.size(), connection1));
 
 	double weight = existingConnection->getWeight();
 	ConnectionGene connection2(newNodeIndex, toNode, true, weight);
-	connections.insert(std::make_pair(connections.size(), connection2));
+	connections.push_back(std::make_pair(connections.size(), connection2));
 }
 
 // Mutates the genome by randomly shifting a weight up or down.
@@ -300,7 +313,7 @@ void NeuralGenome::mutateToggleConnection()
 bool NeuralGenome::connectionExists(int input, int output)
 {
 	for (int j = 0; j < connections.size(); j++) {
-		ConnectionGene connGene = connections[j];
+		ConnectionGene connGene = connections[j].second;
 		if ((connGene.getInputNode() == input && connGene.getOutputNode() == output)
 			|| (connGene.getInputNode() == output && connGene.getOutputNode() == input)) {
 			return false;
@@ -360,7 +373,7 @@ bool NeuralGenome::getRandomConnection(ConnectionGene** connectionGene)
 	if (connectionCount == 0) return false;
 
 	int connectionToSplit = rand() % connectionCount;
-	*connectionGene = &connections[connectionToSplit];
+	*connectionGene = &connections[connectionToSplit].second;
 
 	return true;
 }

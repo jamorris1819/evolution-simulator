@@ -20,6 +20,7 @@ public:
 
 private:
 	double internalClock;
+	double thinkClock;
 	Genome * genome;
 	NeuralGenome* neuralGenome;
 };

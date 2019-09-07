@@ -6,6 +6,7 @@
 #include "entities\drawnentity.h"
 #include "render\camera.h"
 #include "util\input.h"
+#include <Windows.h>
 
 #include "render\ui\menu.h"
 #include "genetics\gene.h"
@@ -38,7 +39,11 @@ ContactListener* contactListener;
 void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
-	entityManager->createCreature(glm::vec2(20, 10));
+	for (int x = 0; x < 100; x++) {
+		for (int y = 0; y < 10; y++) {
+			entityManager->createCreature(glm::vec2(x * 2, y * 2));
+		}
+	}
 	
 	// Bring creature into focus in UI.
 	Menu::focusLivingEntity(entityManager->getTestCreature());
@@ -50,7 +55,7 @@ void initialiseEntities() {
 
 double getTime()
 {
-	return 0;
+	return GetTickCount64();
 }
 
 void initialiseBox2D()
@@ -132,13 +137,12 @@ void update() {
 	double elapsedTime = currentTime - lastTime;
 	double deltaTime = elapsedTime * 0.001;
 	lastTime = currentTime;
-	deltaTime = 0.013;
 
 	cam->update(deltaTime);
 	entityManager->update(deltaTime);
 
 	// Update the physics simulation.
-	world->Step(1.0f / 60.0f, 6, 2);
+	//world->Step(1.0f / 60.0f, 6, 2);
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
