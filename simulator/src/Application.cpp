@@ -42,19 +42,22 @@ void initialiseEntities() {
 	srand(time(NULL));
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
-	/*for (int x = 0; x < 100; x++) {
-		for (int y = 0; y < 10; y++) {
-			entityManager->createRandomCreature(glm::vec2(x * 2, y * 2));
-		}
-	}*/
+	int y = 10;
 
-	Creature* creatureA = entityManager->createRandomCreature(glm::vec2(0, 0));
-	Creature* creatureB = entityManager->createRandomCreature(glm::vec2(2, 0));
-	Creature* creatureC = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(1, 1));
+	Creature* creatureA = entityManager->createRandomCreature(glm::vec2(0, y));
+	Creature* creatureB = entityManager->createRandomCreature(glm::vec2(0, y + 2));
+	for (int x = 0; x < 200; x++) {
+		Creature* creatureC = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(x * 2 + 2, y));
+		Creature* creatureD = entityManager->createChildCreature(creatureA, creatureB, glm::vec2(x * 2 + 2, y + 2));
+
+		creatureA = creatureC;
+		creatureB = creatureD;
+	}
+
 	//delete creatureA;
 	//delete creatureB;
 	// Bring creature into focus in UI.
-	Menu::focusLivingEntity(creatureC);
+	Menu::focusLivingEntity(entityManager->getTestCreature());
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);

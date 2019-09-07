@@ -120,7 +120,7 @@ template<class T> void Gene<T>::mutate()
 			std::tuple<int, int> limits = geneMarkerLimits((GeneMarker)order);
 			if (lowerLimit < upperLimit) {
 				float range = upperLimit - lowerLimit;
-				if (number < 3) {
+				if (number < 1) {
 					// Major change
 					range /= 10.0f;
 				}
@@ -134,7 +134,7 @@ template<class T> void Gene<T>::mutate()
 			else {
 				float fNumber;
 				int changeAmount;
-				if (number < 3) {
+				if (number < 1) {
 					// Major change
 					changeAmount = 100;
 				}

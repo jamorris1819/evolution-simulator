@@ -198,7 +198,7 @@ Genome* Genome::cross(Genome* genome1, Genome* genome2)
 	for (int i = 0; i < genome1->strandLength; i++) {
 		strandA.push_back(parentA->strandA[i]->clone());
 		strandB.push_back(parentB->strandB[i]->clone());
-		childGenome->strandWeights[i] = flipStrands ? genome1->strandWeights[i] : genome2->strandWeights[i];
+		childGenome->strandWeights[i] = rand() % 2 == 0 ? genome1->strandWeights[i] : genome2->strandWeights[i];
 	}
 
 	childGenome->strandA = strandA;
