@@ -21,6 +21,7 @@
 #include "entities/entitymanager.h"
 #include <thread>
 #include <time.h>
+#include "terrain/hex.h"
 
 using namespace std;
 
@@ -37,13 +38,14 @@ Body* body;
 Camera* cam;
 b2World* world;
 ContactListener* contactListener;
+vector<Hex*> terr;
 
 void initialiseEntities() {
 	srand(time(NULL));
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 30; i++) {
 		int x = (rand() % 60) - 30;
 		int y = (rand() % 60) - 30;
 		entityManager->createRandomCreature(glm::vec2(x, y));
@@ -54,6 +56,18 @@ void initialiseEntities() {
 	//delete creatureB;
 	// Bring creature into focus in UI.
 	Menu::focusLivingEntity(entityManager->getTestCreature());
+
+	for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < 10; i++) {
+			glm::vec2 position;
+			position.x = i * sqrt(3);
+			if (j % 2 != 0) position.x += sqrt(3) / 2;
+			position.y = j * 2 * 0.75f;
+			Hex* hex = new Hex(position, program);
+			hex->enableOverrideColour(glm::vec3(i / 10.0f, 1 - (j / 10.0f), 0));
+			terr.push_back(hex);
+		}
+	}
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
@@ -135,6 +149,9 @@ void initialise()
 
 void render() {
 	entityManager->render();
+	for (int i = 0; i < terr.size(); i++) {
+		terr[i]->render();
+	}
 }
 
 void update() {

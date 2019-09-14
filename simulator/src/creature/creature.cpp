@@ -95,19 +95,17 @@ void Creature::update(double deltaTime)
 	};
 
 	double* decision = neuralGenome->evaluate(inputs);
-	delete inputs;
-	delete decision;
-	return;
+	delete[] inputs;
 
 	// Process decision.
-	/*cout << decision[0] << endl;
 	if (decision[0] > 0.65) body->turnLeft(0.4f);
 	if (decision[1] > 0.65) body->turnRight(-0.4f);
 	if (decision[2] > 0.5) {
 		double power = (decision[2] - 0.5) / 0.5;
 		moveForward(power);
-	}*/
+	}
 
+	delete[] decision;
 }
 
 void Creature::moveForward(double power)

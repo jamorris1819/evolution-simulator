@@ -157,6 +157,7 @@
     <ClCompile Include="src\render\ui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\render\ui\imgui_widgets.cpp" />
     <ClCompile Include="src\render\ui\menu.cpp" />
+    <ClCompile Include="src\terrain\hex.cpp" />
     <ClCompile Include="src\util\contactlistener.h" />
     <ClCompile Include="src\util\input.cpp" />
     <ClCompile Include="src\util\shaderutility.cpp" />
@@ -1477,6 +1478,7 @@
     <ClInclude Include="src\render\ui\imstb_truetype.h" />
     <ClInclude Include="src\render\ui\menu.h" />
     <ClInclude Include="src\render\ui\netrender.h" />
+    <ClInclude Include="src\terrain\hex.h" />
     <ClInclude Include="src\util\Function.h" />
     <ClInclude Include="src\util\input.h" />
     <ClInclude Include="src\util\shaderutility.h" />

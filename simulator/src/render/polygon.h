@@ -18,5 +18,9 @@ public:
 	void render(glm::mat4 matrix);
 	GLuint shaderID;
 	VertexArrayObject* vao;
-
+	void enableOverrideColour(glm::vec3 overrideColour);
+private:
+	void setColour();
+	bool useOverrideColour;
+	glm::vec3 overrideColour;
 };

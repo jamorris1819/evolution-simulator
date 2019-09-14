@@ -4,6 +4,8 @@
 
 DrawnEntity::DrawnEntity(glm::vec3 position) : Entity()
 {
+	polygon = nullptr;
+
 	enabled = true;
 	setPosition(position);
 	setVelocity(glm::vec3(0, 0, 0));
@@ -53,7 +55,7 @@ PolygonR* DrawnEntity::getPolygon()
 glm::mat4 DrawnEntity::getMatrix() const
 {
 	// Create translation matrix.
-	glm::mat4 matrix = glm::translate(glm::mat4(1.0f), glm::vec3(body->getPosition(), 0.0f));
+	glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
 	// Apply rotation matrix.
 	matrix = glm::rotate(matrix, body->getRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
 
@@ -98,7 +100,8 @@ void DrawnEntity::render()
 
 void DrawnEntity::update(double deltaTime)
 {
-	setPosition(glm::vec3(body->getPosition(), 0.0f));
+	if(body != nullptr)
+		setPosition(glm::vec3(body->getPosition(), 0.0f));
 }
 
 void DrawnEntity::unload()

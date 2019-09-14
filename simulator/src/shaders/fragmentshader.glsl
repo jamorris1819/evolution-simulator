@@ -3,8 +3,16 @@
 in vec3 oColour;
 
 out vec4 color;
+
+uniform bool uOverrideEnabled;
+uniform vec4 uOverrideColour;
  
 void main(void)
 {
-	color = vec4(oColour, 1);
+	if(!uOverrideEnabled) {
+		color = overrideColour;
+	}
+	else {
+		color = oColour;
+	}
 }

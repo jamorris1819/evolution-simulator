@@ -17,12 +17,14 @@ Body::~Body()
 
 glm::vec2 Body::getPosition()
 {
+	if (physicsBody == nullptr) return glm::vec2(0, 0);
 	b2Vec2 position = physicsBody->GetPosition();
 	return glm::vec2(position.x, position.y);
 }
 
 float Body::getRotation()
 {
+	return 0;
 	return physicsBody->GetAngle();
 }
 
@@ -57,7 +59,7 @@ void Body::unload()
 
 void Body::moveForward(float power)
 {
-	float force = 60.0f * power;
+	float force = 600.0f * power;
 	physicsBody->ApplyForceToCenter(
 		b2Vec2(sin(-getRotation()) * force, cos(getRotation()) * force),
 		true);

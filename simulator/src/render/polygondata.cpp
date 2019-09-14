@@ -60,6 +60,15 @@ std::vector<float>& PolygonData::getIndices()
 	return indices;
 }
 
+void PolygonData::setColour(glm::vec3 colour)
+{
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i].setColour(colour);
+	}
+
+	generateFloatData();
+}
+
 int PolygonData::getVertexCount() {
 	return vertices.size();
 }

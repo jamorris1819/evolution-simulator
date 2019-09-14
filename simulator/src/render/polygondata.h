@@ -11,6 +11,7 @@ public:
 	float* getVertices();
 	void setVertices(std::vector<Vertex> data);
 	std::vector<float> & getIndices();
+	void setColour(glm::vec3 colour);
 	//void load();
 	//void unload();
 	int getVertexCount();
