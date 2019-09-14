@@ -1,6 +1,7 @@
 #pragma once
 #include "GLFW\glfw3.h"
 #include <map>
+#include <glm\ext\vector_float2.hpp>
 
 class Input
 {
@@ -14,6 +15,7 @@ public:
 	static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 	static bool scrollDown();
 	static bool scrollUp();
+	static void mouseMoveCallback(GLFWwindow* window, double x, double y);
 	static GLFWwindow* glfwWindow;
 protected:
 	Input();
@@ -21,4 +23,5 @@ protected:
 	static bool updated;
 	static bool scrolledUp;
 	static bool scrolledDown;
+	static glm::vec2 mouseCoordinates;
 };

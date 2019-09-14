@@ -7,6 +7,7 @@ std::map<int, int> Input::keyMap;
 bool Input::updated;
 bool Input::scrolledUp;
 bool Input::scrolledDown;
+glm::vec2 Input::mouseCoordinates;
 
 Input::Input()
 {
@@ -94,4 +95,9 @@ bool Input::scrollUp()
 	bool temp = scrolledUp;
 	scrolledUp = false;
 	return temp;
+}
+
+void Input::mouseMoveCallback(GLFWwindow* window, double x, double y)
+{
+	mouseCoordinates = glm::vec2(x, y);
 }

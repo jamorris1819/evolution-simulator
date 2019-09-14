@@ -139,6 +139,7 @@ void initialise()
 	Input::initialise();
 	glfwSetKeyCallback(window, Input::keyCallback);
 	glfwSetScrollCallback(window, Input::scrollCallback);
+	glfwSetCursorPosCallback(window, Input::mouseMoveCallback);
 	
 
 	//for (int i = 0; i < 100000; i++) {
