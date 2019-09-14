@@ -9,10 +9,10 @@ uniform vec4 uOverrideColour;
  
 void main(void)
 {
-	if(!uOverrideEnabled) {
-		color = overrideColour;
+	if(uOverrideEnabled) {
+		color = uOverrideColour;
 	}
 	else {
-		color = oColour;
+		color = vec4(oColour, 1);
 	}
 }

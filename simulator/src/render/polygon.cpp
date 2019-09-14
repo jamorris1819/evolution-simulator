@@ -35,7 +35,7 @@ void PolygonR::setColour()
 {
 	glUseProgram(shaderID);
 	int overrideColourLocation = glGetUniformLocation(shaderID, "uOverrideColour");
-	glUniform3f(overrideColourLocation, overrideColour.x, overrideColour.y, overrideColour.z);
+	glUniform4f(overrideColourLocation, overrideColour.x, overrideColour.y, overrideColour.z, 1.0f);
 }
 
 void PolygonR::load()
