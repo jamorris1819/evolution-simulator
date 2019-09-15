@@ -22,6 +22,7 @@
 #include <thread>
 #include <time.h>
 #include "terrain/hex.h"
+#include "terrain/terrainmanager.h"
 
 using namespace std;
 
@@ -39,6 +40,7 @@ Camera* cam;
 b2World* world;
 ContactListener* contactListener;
 vector<Hex*> terr;
+TerrainManager* terrain;
 
 void initialiseEntities() {
 	srand(time(NULL));
@@ -61,31 +63,10 @@ void initialiseEntities() {
 	noise.SetNoiseType(FastNoise::ValueFractal);
 	noise.SetSeed(123456789);
 
-	for (int j = 0; j < 1; j++) {
-		for (int i = 0; i < 1; i++) {
-			glm::vec2 position;
-			position.x = size * i * sqrt(3);
-			if (j % 2 != 0) position.x += size * sqrt(3) / 2;
-			position.y = size * j * 2 * 0.75f;
-			Hex* hex = new Hex(size, position, program);
-			float z = noise.GetNoise(i, j) / 1.0f;
-
-			glm::vec3 colour = glm::vec3(z, z, z) * 255.0f;
-
-			if (z < 0.1f) colour = glm::vec3(87, 156, 198);
-			else if (z < 0.15f) colour = glm::vec3(206, 162, 125);
-			else if (z < 0.2f) colour = glm::vec3(239, 205, 178);
-			else if (z < 0.55f) colour = glm::vec3(137, 162, 61); 
-			else if (z < 0.7f) colour = glm::vec3(23, 97, 38);
-			else if (z < 0.85f) colour = glm::vec3(134, 140, 136);
-			else colour = glm::vec3(81, 88, 81);
-
-			colour /= 255.0f;
-
-			hex->enableOverrideColour(colour);
-			terr.push_back(hex);
-		}
-	}
+	terrain = new TerrainManager(program);
+	terrain->generate(100, 100, 8);
+	terrain->paintTerrain(100);
+	Menu::painter = terrain;
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
@@ -163,15 +144,12 @@ void initialise()
 	
 
 	//for (int i = 0; i < 100000; i++) {
-		//Gene<int>* g = a->getGene<int>(GeneMarker::GM_SIZE, 0);
 		//delete size;
 	//}
 }
 
 void render() {
-	for (int i = 0; i < terr.size(); i++) {
-		terr[i]->render();
-	}
+	terrain->render();
 	entityManager->render();
 }
 

@@ -18,6 +18,7 @@ public:
 	static void focusNeuralGenome(NeuralGenome* neuralGenome);
 	static void focusLivingEntity(LivingEntity* livingEntity);
 	static Camera* camera;
+	static void* painter;
 private:
 	Menu();
 	static void renderOverlay();

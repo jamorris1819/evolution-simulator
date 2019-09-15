@@ -87,8 +87,8 @@ bool Camera::handleMovement(double deltaTime)
 
 bool Camera::handleZoom(double deltaTime)
 {
-	if (Input::scrollUp()) zoom += 0.1f;
-	else if (Input::scrollDown()) zoom -= 0.1f;
+	if (Input::scrollUp()) zoom *= 1.1f;
+	else if (Input::scrollDown()) zoom *= 0.9f;
 	else return false;
 
 	// Lock the zoom to the camera's limits.

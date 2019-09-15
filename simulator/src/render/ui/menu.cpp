@@ -9,6 +9,7 @@
 #include "../src/neural/nodegene.h"
 #include "../../creature/creaturebody.h"
 #include "../../util/input.h"
+#include "../../terrain/terrainmanager.h"
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
@@ -20,6 +21,7 @@ NeuralGenome* Menu::selectedNeuralGenome2;
 NeuralGenome* Menu::selectedNeuralGenome3;
 NetData* Menu::netData;
 Camera* Menu::camera;
+void* Menu::painter;
 
 void Menu::initialise(GLFWwindow* window)
 {
@@ -386,6 +388,8 @@ void Menu::renderCreatureWindow()
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();
+	if (ImGui::Button("Repaint World")) { ((TerrainManager*)painter)->paintTerrain(rand()); }
+	ImGui::SameLine();
 	ImGui::EndGroup();
 
 	ImGui::End();
@@ -441,7 +445,7 @@ void Menu::renderOverlay()
 	ImGui::SetNextWindowBgAlpha(0.35f); // Transparent background
 	if (ImGui::Begin("Example: Simple overlay", &a, (corner != -1 ? ImGuiWindowFlags_NoMove : 0) | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
 	{
-		ImGui::Text("Simple overlay\n" "in the corner of the screen.\n" "(right-click to change position)");
+		ImGui::Text("Description Overlay");
 		ImGui::Separator();
 		if (ImGui::IsMousePosValid())
 			ImGui::Text("Mouse Position: (%.1f,%.1f)", mousePos.x, mousePos.y);
