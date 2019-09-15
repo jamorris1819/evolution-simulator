@@ -31,5 +31,6 @@ private:
 	int vertexDataCount;
 	bool enabled;
 	int dataSize;
+	GLuint model;
 };
 

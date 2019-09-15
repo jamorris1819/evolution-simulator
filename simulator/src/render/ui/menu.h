@@ -5,6 +5,7 @@
 #include "../src/neural/neuralgenome.h"
 #include "../src/neural/netdata.h"
 #include "../../creature/creature.h"
+#include "../camera.h"
 
 class Menu
 {
@@ -16,8 +17,10 @@ public:
 	static void focusBody(Body* body);
 	static void focusNeuralGenome(NeuralGenome* neuralGenome);
 	static void focusLivingEntity(LivingEntity* livingEntity);
+	static Camera* camera;
 private:
 	Menu();
+	static void renderOverlay();
 	static void renderMenuBar();
 	static void renderGenomeDescription();
 	static void renderGenomeDetails();

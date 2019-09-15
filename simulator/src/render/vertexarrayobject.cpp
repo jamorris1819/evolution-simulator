@@ -16,6 +16,7 @@ VertexArrayObject::VertexArrayObject(PolygonData* polygonData)
 	this->polygonData = polygonData;
 	vao[0] = 0;
 	enabled = true;
+	model = -1;
 }
 
 
@@ -46,10 +47,10 @@ void VertexArrayObject::setShader(GLuint shaderId)
 void VertexArrayObject::allocateMemory(int amount)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-	glBufferData(GL_ARRAY_BUFFER, amount * vertexDataCount * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, amount * vertexDataCount * sizeof(float), nullptr, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[1]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(float), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(float), nullptr, GL_STATIC_DRAW);
 }
 
 void VertexArrayObject::load()
@@ -128,8 +129,8 @@ void VertexArrayObject::render(glm::mat4 matrix)
 		return;
 
 	// Attach model matrix to shader.
-	GLuint uModel = glGetUniformLocation(shaderId, "uModel");
-	glUniformMatrix4fv(uModel, 1, GL_TRUE, &matrix[0][0]);
+	if(model == -1) model = glGetUniformLocation(shaderId, "uModel");
+	glUniformMatrix4fv(model, 1, GL_TRUE, &matrix[0][0]);
 
 	// Bind vertex and render polygon.
 	glBindVertexArray(vao[0]);

@@ -64,7 +64,6 @@ void CreatureBody::generateMouth()
 void CreatureBody::generateBodyPoints()
 {
 	FastNoise noise;
-	noise.SetSeed(0);
 	noise.SetNoiseType(FastNoise::SimplexFractal);
 	noise.SetFractalOctaves(octaves);
 	noise.SetFrequency(frequency);

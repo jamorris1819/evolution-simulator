@@ -8,6 +8,8 @@ class Camera : public Entity
 public:
 	Camera(glm::vec2 position, GLuint shaderID);
 	glm::mat4 view;
+	glm::mat4 projection;
+	glm::vec4 viewport;
 	bool enabled;
 	void initialise(float width, float height, float speed);
 	void align();
@@ -23,5 +25,4 @@ protected:
 	float moveSpeed;
 	float zoom;
 	glm::vec2 position;
-	glm::mat4 projection;
 };

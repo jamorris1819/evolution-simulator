@@ -27,8 +27,10 @@ void Camera::initialise(float width, float height, float speed)
 	moveSpeed = speed;
 	zoom = 1.0f;
 
-	minZoom = 0.2f;
+	minZoom = 0.02f;
 	maxZoom = 1.9f;
+
+	viewport = glm::vec4(0, 0, 1920, 1080);
 
 	align();
 }
@@ -99,6 +101,13 @@ bool Camera::handleZoom(double deltaTime)
 		zoomHeight / ppm,				// Top
 		-1.0f,					// Near
 		1.0f					// Far
+	);
+
+	viewport = glm::vec4(
+		(width - zoomWidth),
+		(height - zoomHeight),
+		zoomWidth,
+		zoomHeight
 	);
 
 	return true;
