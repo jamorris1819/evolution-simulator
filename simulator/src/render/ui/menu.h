@@ -33,6 +33,7 @@ private:
 	static void renderNeuralNetDetails();
 	static void renderCreatureWindow();
 	static void renderLivingEntityDetails();
+	static void renderWorldEditor();
 	static void triggerBodyRegen();
 	static bool* bWindowCreature;
 	static Genome* selectedGenome;
@@ -43,4 +44,6 @@ private:
 	static NeuralGenome* selectedNeuralGenome2;
 	static NeuralGenome* selectedNeuralGenome3;
 	static NetData* netData;
+
+	static bool* worldEditorOpen;
 };

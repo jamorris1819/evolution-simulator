@@ -23,6 +23,23 @@ NetData* Menu::netData;
 Camera* Menu::camera;
 void* Menu::painter;
 
+// Helper to display a little (?) mark which shows a tooltip when hovered.
+// In your own code you may want to display an actual icon if you are using a merged icon fonts (see misc/fonts/README.txt)
+static void HelpMarker(const char* desc)
+{
+	ImGui::TextDisabled("(?)");
+	if (ImGui::IsItemHovered())
+	{
+		ImGui::BeginTooltip();
+		ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+		ImGui::TextUnformatted(desc);
+		ImGui::PopTextWrapPos();
+		ImGui::EndTooltip();
+	}
+}
+
+bool* Menu::worldEditorOpen;
+
 void Menu::initialise(GLFWwindow* window)
 {
 	ImGui::CreateContext();
@@ -35,6 +52,9 @@ void Menu::initialise(GLFWwindow* window)
 	*bWindowCreature = true;
 
 	selectedGenome = nullptr;
+
+	worldEditorOpen = new bool;
+	*worldEditorOpen = true;
 
 	std::cout << "ImGui has initialised successfully" << std::endl;
 }
@@ -138,6 +158,120 @@ void Menu::renderLivingEntityDetails()
 	ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImVec4(0.0f, 0.5f, 0.0f, 1.0f));
 	ImGui::ProgressBar(selectedLivingEntity->getEnergy() / selectedLivingEntity->getMaxEnergy(), ImVec2(-1.0f, 0.0f));
 	ImGui::PopStyleColor();
+}
+
+void Menu::renderWorldEditor()
+{
+	if (painter == nullptr) return;
+	/*ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
+	if (!ImGui::Begin("World Editor", worldEditorOpen, 0)) {
+		ImGui::End();
+	}
+
+	ImGui::LabelText("Attribute", "Value");
+	ImGui::Separator();
+
+	static int seed = 0;
+	static int octaves = 3;
+	static float scale = 1.0f;
+
+	ImGui::DragInt("Seed", &seed);
+	ImGui::DragInt("Octaves", &octaves);
+	ImGui::DragFloat("scale", &scale);
+
+	if (ImGui::Button("Repaint World")) { ((TerrainManager*)painter)->paintTerrain(seed++, octaves, scale); }
+	ImGui::End();*/
+
+	bool changeMade = false;
+
+	ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
+	if (!ImGui::Begin("World Editor", worldEditorOpen, 0)) {
+		ImGui::End();
+	}
+
+	if (ImGui::BeginTabBar("##Tabs", ImGuiTabBarFlags_None))
+	{
+		if (ImGui::BeginTabItem("Height map"))
+		{
+
+			// Left pane.
+			static int selected = 0;
+			ImGui::BeginChild("left pane", ImVec2(150, 0), true);
+			std::vector<const char*> options = { "layer one" };
+			for (int i = 0; i < options.size(); i++)
+			{
+				char label[128];
+				sprintf_s(label, (const char*)options[i], i);
+				if (ImGui::Selectable(label, selected == i))
+					selected = i;
+			}
+			ImGui::EndChild();
+			ImGui::SameLine();
+
+			// Right pane.
+			ImGui::BeginGroup();
+			ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing())); // Leave room for 1 line below us
+
+			const char* title;
+			title = "Editing height map layers";
+			ImGui::Text(title);
+
+			ImGui::Separator();
+
+			
+			ImGui::LabelText("Attribute", "Value");
+			ImGui::Separator();
+			
+			// Standard noise settings.
+			static char layerName[128] = "untitled layer";
+			const char* noiseTypes[] = { "Value", "Value Fractal", "Perlin", "Perlin Fractal", "Simplex", "Simplex Fractal", "Cellular", "White Noise", "Cubic", "Cubic Fractal" };
+			static int seed = 0;
+			static float scale = 1.0f;
+			static int noiseSelected = 2;
+			static float frequency = 0.2;
+
+			changeMade |= ImGui::Combo("noise type", &noiseSelected, noiseTypes, IM_ARRAYSIZE(noiseTypes)); ImGui::SameLine(); HelpMarker("The type of noise determines what patterns will be present in the generated height map.");
+			changeMade |= ImGui::InputText("layer name", layerName, IM_ARRAYSIZE(layerName));
+			changeMade |= ImGui::DragInt("seed", &seed); ImGui::SameLine(); HelpMarker("A seed used by the generator to create the map.");
+			changeMade |= ImGui::DragFloat("scale", &scale);
+			changeMade |= ImGui::SliderFloat("frequency", &frequency, 0.0f, 0.5f, "frequency = %.3f"); ImGui::SameLine(); HelpMarker("Frequency is the number of cycles that occur in a wave.");
+
+			ImGui::Separator();
+
+			// Fractal noise settings.
+			const char* fractalTypes[] = { "FBM", "Billow", "Rigid Multi" };
+			static int fractalSelected = 0;
+			static int octaves = 3;
+			static float lacunarity = 0.5f;
+			static float gain = 0.5f;
+
+			if (std::string(noiseTypes[noiseSelected]).find("Fractal") != std::string::npos) {
+				changeMade |= ImGui::Combo("fractal type", &fractalSelected, fractalTypes, IM_ARRAYSIZE(fractalTypes)); ImGui::SameLine(); HelpMarker("The fractal types determine which algortithm they are generated with.");
+				changeMade |= ImGui::SliderInt("octaves", &octaves, 1, 12); ImGui::SameLine(); HelpMarker("Octaves are used to add extra detail to the map.");
+				changeMade |= ImGui::DragFloat("lacunarity", &lacunarity, 0.0f, 2.0f);
+				changeMade |= ImGui::DragFloat("gain", &gain, 0.0f, 2.0f);
+			}
+
+			static int offsetX = 0;
+			static int offsetY = 0;
+
+			changeMade |= ImGui::SliderInt("offset x", &offsetX, -1000, 1000);
+			changeMade |= ImGui::SliderInt("offset y", &offsetY, -1000, 1000);
+
+			if (changeMade) ((TerrainManager*)painter)->paintTerrain(seed, scale, noiseSelected, frequency, fractalSelected, octaves, lacunarity, gain, offsetX, offsetY);
+			ImGui::EndChild();
+			ImGui::EndGroup();
+			ImGui::EndTabItem();
+		}
+		if (ImGui::BeginTabItem("Weather map"))
+		{
+			ImGui::EndTabItem();
+		}
+		
+		ImGui::EndTabBar();
+
+	}
+	ImGui::End();
 }
 
 void Menu::renderBodyDescription()
@@ -388,7 +522,6 @@ void Menu::renderCreatureWindow()
 	ImGui::SameLine();
 	if (ImGui::Button("Regen body")) { triggerBodyRegen(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Repaint World")) { ((TerrainManager*)painter)->paintTerrain(rand()); }
 	ImGui::SameLine();
 	ImGui::EndGroup();
 
@@ -492,6 +625,7 @@ void Menu::renderUI()
 	ImGui::ShowDemoWindow();
 	Menu::renderMenuBar();
 	Menu::renderCreatureWindow();
+	Menu::renderWorldEditor();
 	Menu::renderOverlay();
 
 	// Render frame.

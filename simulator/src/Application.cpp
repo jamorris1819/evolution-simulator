@@ -47,9 +47,9 @@ void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	for (int i = 0; i < 10; i++) {
-		int x = (rand() % 60) - 30;
-		int y = (rand() % 60) - 30;
+	for (int i = 0; i < 20; i++) {
+		int x = (rand() % 100);
+		int y = (rand() % 100);
 		entityManager->createRandomCreature(glm::vec2(x, y));
 	}
 	
@@ -64,8 +64,8 @@ void initialiseEntities() {
 	noise.SetSeed(123456789);
 
 	terrain = new TerrainManager(program);
-	terrain->generate(100, 100, 8);
-	terrain->paintTerrain(100);
+	terrain->generate(100, 100, 2);
+	terrain->paintTerrain(0, 1.0f, 0, 0.5f, 0, 3, 2.0f, 0.5f, 0, 0);
 	Menu::painter = terrain;
 
 	// Initialise camera.

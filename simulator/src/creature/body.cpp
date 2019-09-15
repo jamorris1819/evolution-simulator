@@ -24,7 +24,6 @@ glm::vec2 Body::getPosition()
 
 float Body::getRotation()
 {
-	return 0;
 	return physicsBody->GetAngle();
 }
 
