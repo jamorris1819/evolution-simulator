@@ -16,11 +16,14 @@ void Camera::initialise(float width, float height, float speed)
 
 	ppm = 64; // Pixels per metre.
 
+	float boundaryWidth = width / ppm;
+	float boundaryHeight = height / ppm;
+
 	projection = glm::ortho(
-		0.0f,		// Left
-		width / ppm,		// Right
-		0.0f,		// Bottom
-		height / ppm,		// Top
+		-boundaryWidth,		// Left
+		boundaryWidth,		// Right
+		-boundaryHeight,		// Bottom
+		boundaryHeight,		// Top
 		-1.0f,		// Near
 		1.0f		// Far
 	);
@@ -30,7 +33,7 @@ void Camera::initialise(float width, float height, float speed)
 	minZoom = 0.02f;
 	maxZoom = 1.9f;
 
-	viewport = glm::vec4(0, 0, 1920, 1080);
+	viewport = glm::vec4(0, 0, 1920 / ppm, 1080 / ppm);
 
 	align();
 }
@@ -40,7 +43,9 @@ void Camera::align()
 	glUseProgram(shaderID);
 
 	// Create the view matrix.
-	glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0));
+	glm::mat4 translate = glm::translate(glm::mat4(1.0f),
+		glm::vec3(position, 0)
+	);
 	view = translate;
 
 	// Apply the camera transformation.
@@ -94,20 +99,23 @@ bool Camera::handleZoom(double deltaTime)
 	float zoomHeight = (height / width) * zoomWidth;
 
 	// Create the new projection.
+	float boundaryWidth = zoomWidth / ppm;
+	float boundaryHeight = zoomHeight / ppm;
+
 	projection = glm::ortho(
-		(width - zoomWidth) / ppm,		// Left
-		zoomWidth / ppm,				// Right
-		(height - zoomHeight) / ppm,	// Bottom
-		zoomHeight / ppm,				// Top
-		-1.0f,					// Near
-		1.0f					// Far
+		-boundaryWidth,		// Left
+		boundaryWidth,		// Right
+		-boundaryHeight,		// Bottom
+		boundaryHeight,		// Top
+		-1.0f,		// Near
+		1.0f		// Far
 	);
 
 	viewport = glm::vec4(
-		(width - zoomWidth),
-		(height - zoomHeight),
-		zoomWidth,
-		zoomHeight
+		(width - zoomWidth) / ppm,
+		(height - zoomHeight) / ppm,
+		zoomWidth / ppm,
+		zoomHeight / ppm
 	);
 
 	return true;

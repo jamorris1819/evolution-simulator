@@ -17,11 +17,11 @@ public:
 	static bool scrollUp();
 	static void mouseMoveCallback(GLFWwindow* window, double x, double y);
 	static GLFWwindow* glfwWindow;
+	static glm::vec2 mouseCoordinates;
 protected:
 	Input();
 	static std::map<int, int> keyMap;
 	static bool updated;
 	static bool scrolledUp;
 	static bool scrolledDown;
-	static glm::vec2 mouseCoordinates;
 };

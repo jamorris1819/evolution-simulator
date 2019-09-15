@@ -16,6 +16,8 @@ public:
 	void update(double deltaTime);
 	bool handleMovement(double deltaTime);
 	bool handleZoom(double deltaTime);
+	float zoom;
+	glm::vec2 position;
 protected:
 	int ppm;
 	float minZoom;
@@ -23,6 +25,4 @@ protected:
 	float width;
 	float height;
 	float moveSpeed;
-	float zoom;
-	glm::vec2 position;
 };

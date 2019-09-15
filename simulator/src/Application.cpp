@@ -61,8 +61,8 @@ void initialiseEntities() {
 	noise.SetNoiseType(FastNoise::ValueFractal);
 	noise.SetSeed(123456789);
 
-	for (int j = 0; j < 100; j++) {
-		for (int i = 0; i < 100; i++) {
+	for (int j = 0; j < 1; j++) {
+		for (int i = 0; i < 1; i++) {
 			glm::vec2 position;
 			position.x = size * i * sqrt(3);
 			if (j % 2 != 0) position.x += size * sqrt(3) / 2;

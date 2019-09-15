@@ -8,6 +8,7 @@
 #include <string>
 #include "../src/neural/nodegene.h"
 #include "../../creature/creaturebody.h"
+#include "../../util/input.h"
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
@@ -397,14 +398,39 @@ void Menu::renderOverlay()
 	static bool a = true;
 	ImGuiIO& io = ImGui::GetIO();
 	if (camera == nullptr) return;
-	glm::mat4 te = glm::inverse(camera->view * camera->projection);
+	glm::vec3 originalMouse = glm::vec3(io.MousePos.x / 64, -io.MousePos.y / 64, 0) ;
+	originalMouse.x /= camera->zoom;
+	originalMouse.y /= camera->zoom * (1920 / 1080);
+	glm::mat4 te = camera->projection * camera->view;
 
-	glm::vec3 t = glm::unProject(
-		glm::vec3(io.MousePos.x, -io.MousePos.y, 0),
+	glm::mat4 real = glm::translate(glm::mat4(1), originalMouse) * camera->view * camera->projection;
+
+	originalMouse /= camera->zoom;
+	glm::mat4 aa = glm::translate(glm::mat4(1), originalMouse);
+
+
+	
+
+	glm::vec3 mouseinput = glm::vec3(Input::mouseCoordinates, 1.0f);
+	mouseinput.x = ((mouseinput.x / 1920) * 2) - 1;
+	mouseinput.y = -1 * (((mouseinput.y / 1080) * 2) - 1);
+
+	glm::mat4 pv = camera->projection;
+	glm::mat4 ipv = glm::inverse(pv);
+
+	glm::vec3 ppp = (glm::vec4(mouseinput, 1.0f) * ipv);
+
+	/*glm::vec3 t =  glm::unProject(
+		mouseinput / camera->zoom,
 		camera->view,
 		camera->projection,
 		camera->viewport
-	);
+	);*/
+	glm::vec3 mousePos = glm::vec4(ppp, 0.0f) - glm::vec4(camera->position.x, camera->position.y, 0.0f, 0.0f);/*
+		
+		- glm::vec4(camera->viewport.z / 2.0f, camera->viewport.w / 2.0f, 0.0f, 0.0f)
+		- glm::vec4(ppp, 0.0f); // glm::vec3(te[3]) + glm::vec3();// glm::vec3(io.MousePos.x, -io.MousePos.y, 0);*/
+
 
 	if (corner != -1)
 	{
@@ -418,7 +444,7 @@ void Menu::renderOverlay()
 		ImGui::Text("Simple overlay\n" "in the corner of the screen.\n" "(right-click to change position)");
 		ImGui::Separator();
 		if (ImGui::IsMousePosValid())
-			ImGui::Text("Mouse Position: (%.1f,%.1f)", t.x, t.y);
+			ImGui::Text("Mouse Position: (%.1f,%.1f)", mousePos.x, mousePos.y);
 		else
 			ImGui::Text("Mouse Position: <invalid>");
 		if (ImGui::BeginPopupContextWindow())
