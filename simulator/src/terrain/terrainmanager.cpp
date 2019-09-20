@@ -1,5 +1,4 @@
 #include "terrainmanager.h"
-#include <noise\FastNoise.h>
 
 TerrainManager::TerrainManager(GLuint program)
 {
@@ -40,28 +39,64 @@ void TerrainManager::render()
 	}
 }
 
-void TerrainManager::paintTerrain(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+void TerrainManager::updateNoiseHeightMap(int id, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
 {
-	FastNoise noiseHeight;
-	noiseHeight.SetNoiseType((FastNoise::NoiseType)noiseType); 
-	noiseHeight.SetSeed(seed);
-	noiseHeight.SetFrequency(frequency);
+	updateNoise(noiseHeightMaps[id], seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
+}
 
-	noiseHeight.SetFractalType((FastNoise::FractalType)fractalType);
-	noiseHeight.SetFractalOctaves(octaves);
-	noiseHeight.SetFractalLacunarity(lacunarity);
-	noiseHeight.SetFractalGain(gain);
+void TerrainManager::createNoiseHeightMap(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+{
+	FastNoise* noise = createNoise(seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
+	noiseHeightMaps.push_back(noise);
+}
 
+int TerrainManager::noiseHeightMapCount()
+{
+	return noiseHeightMaps.size();
+}
+
+FastNoise* TerrainManager::createNoise(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+{
+	FastNoise* noise = new FastNoise(seed);
+	updateNoise(noise, seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
+
+	return noise;
+}
+
+void TerrainManager::updateNoise(FastNoise* noise, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+{
+	noise->SetNoiseType((FastNoise::NoiseType)noiseType);
+	noise->SetSeed(seed);
+	noise->SetFrequency(frequency);
+
+	noise->SetFractalType((FastNoise::FractalType)fractalType);
+	noise->SetFractalOctaves(octaves);
+	noise->SetFractalLacunarity(lacunarity);
+	noise->SetFractalGain(gain); this->offsetX = offsetX;
+	this->offsetY = offsetY;
+}
+
+void TerrainManager::paintTerrain()
+{
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
 			Hex* hex = tiles[x][y];
 
-			float z = noiseHeight.GetNoise(x + offsetY, y + offsetX) * scale;
+			float z = 0.0f;
+			for (int i = 0; i < noiseHeightMaps.size(); i++) {
+				z += noiseHeightMaps[i]->GetNoise(x + offsetY, y + offsetX);
+			}
 
 
 			glm::vec3 colour = glm::vec3(z, z, z) * 255.0f;
 
 			// Height colours
+
+			hex->fade = (z < 0.15f);
+
+			if (z < 0.15f && noiseHeightMaps.size() > 0) {
+				hex->fadeOffset = noiseHeightMaps[0]->GetNoise(x, y);
+			}
 
 			if (z < 0.02f) colour = glm::vec3(67, 136, 178); // dark blue
 			else if (z < 0.1f) colour = glm::vec3(87, 156, 198); // light blue
@@ -72,9 +107,21 @@ void TerrainManager::paintTerrain(int seed, float scale, int noiseType, float fr
 			else if (z < 0.85f) colour = glm::vec3(134, 140, 136); // mountain
 			else colour = glm::vec3(81, 88, 81); // high mountain
 
+			int shade = rand() % 10;
+			if (z >= 0.15f) colour += glm::vec3(shade, shade, shade);
+
 			colour /= 255.0f;
 
 			hex->enableOverrideColour(colour);
+		}
+	}
+}
+
+void TerrainManager::update(double deltaTime)
+{
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			tiles[x][y]->update(deltaTime);
 		}
 	}
 }

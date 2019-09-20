@@ -9,6 +9,8 @@ Hex::Hex(int size, glm::vec2 position, GLuint program) : PolygonR(program)
 	generate();
 	load();
 	this->position = glm::vec3(position, 0);
+	fade = false;
+	fadeOffset = rand() % 360;
 }
 
 void Hex::generate()
@@ -28,4 +30,14 @@ void Hex::generate()
 void Hex::render()
 {
 	PolygonR::render(glm::translate(glm::mat4(1.0f), position));
+}
+
+void Hex::update(double deltaTime)
+{
+	if (fade) {
+		if (time == 0) colour = overrideColour;
+		time += deltaTime;
+		float c = (6.0f * sin(time + fadeOffset)) + 3.0f;
+		overrideColour =  colour + (glm::vec3(c, c, c) / 255.0f);
+	}
 }

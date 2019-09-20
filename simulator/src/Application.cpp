@@ -47,9 +47,9 @@ void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	for (int i = 0; i < 20; i++) {
-		int x = (rand() % 100);
-		int y = (rand() % 100);
+	for (int i = 0; i < 50; i++) {
+		int x = (rand() % 1000);
+		int y = (rand() % 1000);
 		entityManager->createRandomCreature(glm::vec2(x, y));
 	}
 	
@@ -59,13 +59,10 @@ void initialiseEntities() {
 	// Bring creature into focus in UI.
 	Menu::focusLivingEntity(entityManager->getTestCreature());
 	int size = 4;
-	FastNoise noise;
-	noise.SetNoiseType(FastNoise::ValueFractal);
-	noise.SetSeed(123456789);
 
 	terrain = new TerrainManager(program);
-	terrain->generate(100, 100, 2);
-	terrain->paintTerrain(0, 1.0f, 0, 0.5f, 0, 3, 2.0f, 0.5f, 0, 0);
+	terrain->generate(50, 50, 8);
+	terrain->paintTerrain();
 	Menu::painter = terrain;
 
 	// Initialise camera.
@@ -162,6 +159,7 @@ void update() {
 
 	cam->update(deltaTime);
 	entityManager->update(deltaTime);
+	terrain->update(deltaTime);
 
 	// Update the physics simulation.
 	world->Step(1.0f / 60.0f, 6, 2);

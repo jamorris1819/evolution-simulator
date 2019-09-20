@@ -6,7 +6,12 @@ public:
 	Hex(int size, glm::vec2 position, GLuint program);
 	void generate();
 	void render();
+	void update(double deltaTime);
+	bool fade;
+	int fadeOffset;
 private:
 	glm::vec3 position;
+	glm::vec3 colour;
 	int size;
+	double time;
 };

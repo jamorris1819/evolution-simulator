@@ -81,7 +81,6 @@ void Creature::update(double deltaTime)
 	if (thinkClock < 0.1) {
 		return;
 	}
-	return;
 
 	thinkClock = 0;
 

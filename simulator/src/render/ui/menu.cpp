@@ -258,7 +258,14 @@ void Menu::renderWorldEditor()
 			changeMade |= ImGui::SliderInt("offset x", &offsetX, -1000, 1000);
 			changeMade |= ImGui::SliderInt("offset y", &offsetY, -1000, 1000);
 
-			if (changeMade) ((TerrainManager*)painter)->paintTerrain(seed, scale, noiseSelected, frequency, fractalSelected, octaves, lacunarity, gain, offsetX, offsetY);
+			if (((TerrainManager*)painter)->noiseHeightMapCount() == 0) {
+				((TerrainManager*)painter)->createNoiseHeightMap(seed, scale, noiseSelected, frequency, fractalSelected, octaves, lacunarity, gain, offsetX, offsetY);
+			}
+
+			if (changeMade) {
+				((TerrainManager*)painter)->updateNoiseHeightMap(selected, seed, scale, noiseSelected, frequency, fractalSelected, octaves, lacunarity, gain, offsetX, offsetY);
+				((TerrainManager*)painter)->paintTerrain();
+			}
 			ImGui::EndChild();
 			ImGui::EndGroup();
 			ImGui::EndTabItem();
