@@ -41,3 +41,23 @@ void Hex::update(double deltaTime)
 		overrideColour =  colour + (glm::vec3(c, c, c) / 255.0f);
 	}
 }
+
+bool Hex::getFade()
+{
+	return fade;
+}
+
+void Hex::setFade(bool fade)
+{
+	this->fade = fade;
+}
+
+int Hex::getFadeOffset()
+{
+	return fadeOffset;
+}
+
+void Hex::setFadeOffset(int fadeOffset)
+{
+	this->fadeOffset = fadeOffset;
+}

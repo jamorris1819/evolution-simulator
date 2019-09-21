@@ -94,9 +94,24 @@ bool Camera::handleZoom(double deltaTime)
 	// Lock the zoom to the camera's limits.
 	zoom = glm::clamp(zoom, minZoom, maxZoom);
 
+	createProjection();
+
+	return true;
+}
+
+void Camera::updateWindowBounds(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+	createProjection();
+	align();
+}
+
+void Camera::createProjection()
+{
 	// Calculate the new viewport size.
-	float zoomWidth = width / zoom;
-	float zoomHeight = (height / width) * zoomWidth;
+	float zoomWidth = (float)width / zoom;
+	float zoomHeight = ((float)height / (float)width) * zoomWidth;
 
 	// Create the new projection.
 	float boundaryWidth = zoomWidth / ppm;
@@ -117,8 +132,6 @@ bool Camera::handleZoom(double deltaTime)
 		zoomWidth / ppm,
 		zoomHeight / ppm
 	);
-
-	return true;
 }
 
 void Camera::update(double deltaTime)

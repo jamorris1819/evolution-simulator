@@ -17,12 +17,15 @@ public:
 	bool handleMovement(double deltaTime);
 	bool handleZoom(double deltaTime);
 	float zoom;
+	void updateWindowBounds(int width, int height);
 	glm::vec2 position;
 protected:
 	int ppm;
 	float minZoom;
 	float maxZoom;
-	float width;
-	float height;
+	int width;
+	int height;
 	float moveSpeed;
+
+	void createProjection();
 };

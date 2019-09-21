@@ -1,5 +1,6 @@
 #pragma once
 #include "hex.h"
+#include "noiselayer.h"
 #include <noise\FastNoise.h>
 
 class TerrainManager {
@@ -9,12 +10,14 @@ public:
 	void render();
 	void paintTerrain();
 	void update(double deltaTime);
-	void updateNoiseHeightMap(int id, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
-	void createNoiseHeightMap(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
+	int createNoiseHeightMap();
 	int noiseHeightMapCount();
+	void updateNoiseLayer(int id, string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
+	NoiseLayer& getNoiseLayer(int id);
 
 private:
-	std::vector<FastNoise*> noiseHeightMaps;
+	std::vector<NoiseLayer> noiseHeightLayers;
+	std::vector<FastNoise*> noiseHeightGenerators;
 	GLuint program;
 	int width;
 	int height;
@@ -22,6 +25,7 @@ private:
 	int offsetX;
 	int offsetY;
 	std::vector<std::vector<Hex*>> tiles;
-	FastNoise* createNoise(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
-	void updateNoise(FastNoise* noise, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
+	void updateNoise(FastNoise* noise, NoiseLayer layer);
+	void updateNoise(FastNoise* noise, string name, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
+	float getHeightNoise(float x, float y);
 };

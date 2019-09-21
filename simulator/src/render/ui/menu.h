@@ -5,6 +5,7 @@
 #include "../src/neural/neuralgenome.h"
 #include "../src/neural/netdata.h"
 #include "../../creature/creature.h"
+#include "../src/terrain/terrainmanager.h"
 #include "../camera.h"
 
 class Menu
@@ -17,8 +18,8 @@ public:
 	static void focusBody(Body* body);
 	static void focusNeuralGenome(NeuralGenome* neuralGenome);
 	static void focusLivingEntity(LivingEntity* livingEntity);
+	static void focusTerrainManager(TerrainManager* terrainManager);
 	static Camera* camera;
-	static void* painter;
 private:
 	Menu();
 	static void renderOverlay();
@@ -44,6 +45,7 @@ private:
 	static NeuralGenome* selectedNeuralGenome2;
 	static NeuralGenome* selectedNeuralGenome3;
 	static NetData* netData;
+	static TerrainManager* terrain;
 
 	static bool* worldEditorOpen;
 };

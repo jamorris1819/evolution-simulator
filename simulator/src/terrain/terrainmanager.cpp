@@ -28,8 +28,6 @@ void TerrainManager::generate(int width, int height, int tileSize)
 	}
 }
 
-
-
 void TerrainManager::render()
 {
 	for (int y = 0; y < height; y++) {
@@ -39,41 +37,73 @@ void TerrainManager::render()
 	}
 }
 
-void TerrainManager::updateNoiseHeightMap(int id, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+int TerrainManager::createNoiseHeightMap()
 {
-	updateNoise(noiseHeightMaps[id], seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
-}
-
-void TerrainManager::createNoiseHeightMap(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
-{
-	FastNoise* noise = createNoise(seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
-	noiseHeightMaps.push_back(noise);
+	noiseHeightLayers.push_back(NoiseLayer());
+	noiseHeightGenerators.push_back(new FastNoise());
+	return noiseHeightLayers.size() - 1;
 }
 
 int TerrainManager::noiseHeightMapCount()
 {
-	return noiseHeightMaps.size();
+	return noiseHeightLayers.size();
 }
 
-FastNoise* TerrainManager::createNoise(int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+
+NoiseLayer& TerrainManager::getNoiseLayer(int id)
 {
-	FastNoise* noise = new FastNoise(seed);
-	updateNoise(noise, seed, scale, noiseType, frequency, fractalType, octaves, lacunarity, gain, offsetX, offsetY);
-
-	return noise;
+	return noiseHeightLayers[id];
 }
 
-void TerrainManager::updateNoise(FastNoise* noise, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+void TerrainManager::updateNoiseLayer(int id, string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
+{
+	if (id > noiseHeightLayers.size() - 1) return;
+
+	noiseHeightLayers[id].name = string(name.c_str());
+	noiseHeightLayers[id].enabled = enabled;
+	noiseHeightLayers[id].inverse = inverse;
+	noiseHeightLayers[id].seed = seed;
+	noiseHeightLayers[id].scale = scale;
+	noiseHeightLayers[id].noiseType = noiseType;
+	noiseHeightLayers[id].frequency = frequency;
+	noiseHeightLayers[id].fractalType = fractalType;
+	noiseHeightLayers[id].octaves = octaves;
+	noiseHeightLayers[id].lacunarity = lacunarity;
+	noiseHeightLayers[id].gain = gain;
+	noiseHeightLayers[id].offsetX = offsetX;
+	noiseHeightLayers[id].offsetY = offsetY;
+
+	updateNoise(noiseHeightGenerators[id], noiseHeightLayers[id]);
+}
+
+void TerrainManager::updateNoise(FastNoise* noise, NoiseLayer layer)
+{
+	updateNoise(noise, layer.name, layer.seed, layer.scale, layer.noiseType, layer.frequency, layer.fractalType, layer.octaves, layer.lacunarity, layer.gain, layer.offsetX, layer.offsetY);
+}
+
+void TerrainManager::updateNoise(FastNoise* noise, string name, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
 {
 	noise->SetNoiseType((FastNoise::NoiseType)noiseType);
-	noise->SetSeed(seed);
 	noise->SetFrequency(frequency);
-
+	noise->SetSeed(seed);
 	noise->SetFractalType((FastNoise::FractalType)fractalType);
 	noise->SetFractalOctaves(octaves);
 	noise->SetFractalLacunarity(lacunarity);
-	noise->SetFractalGain(gain); this->offsetX = offsetX;
-	this->offsetY = offsetY;
+	noise->SetFractalGain(gain);
+}
+
+float TerrainManager::getHeightNoise(float x, float y)
+{
+	float z = 0.0f;
+	for (int i = 0; i < noiseHeightLayers.size(); i++) {
+		if (!noiseHeightLayers[i].enabled) continue;
+
+		float noise = noiseHeightGenerators[i]->GetNoise(x + noiseHeightLayers[i].offsetY, y + noiseHeightLayers[i].offsetX);
+		noise *= noiseHeightLayers[i].inverse ? -1.0f : 1.0f;
+		noise *= noiseHeightLayers[i].scale;
+		z += noise;
+	}
+	return z;
 }
 
 void TerrainManager::paintTerrain()
@@ -82,20 +112,17 @@ void TerrainManager::paintTerrain()
 		for (int x = 0; x < width; x++) {
 			Hex* hex = tiles[x][y];
 
-			float z = 0.0f;
-			for (int i = 0; i < noiseHeightMaps.size(); i++) {
-				z += noiseHeightMaps[i]->GetNoise(x + offsetY, y + offsetX);
-			}
+			float z = getHeightNoise(x, y);
 
 
 			glm::vec3 colour = glm::vec3(z, z, z) * 255.0f;
 
 			// Height colours
 
-			hex->fade = (z < 0.15f);
+			hex->setFade(z < 0.15f); // fade the ocean
 
-			if (z < 0.15f && noiseHeightMaps.size() > 0) {
-				hex->fadeOffset = noiseHeightMaps[0]->GetNoise(x, y);
+			if (z < 0.15f && noiseHeightLayers.size() > 0) {
+				//hex->setFadeOffset(noiseHeightMaps[0]->GetNoise(x, y) * 10);
 			}
 
 			if (z < 0.02f) colour = glm::vec3(67, 136, 178); // dark blue

@@ -2279,5 +2279,8 @@
     <ClInclude Include="src\terrain\terrainmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\terrain\noiselayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

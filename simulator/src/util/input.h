@@ -24,4 +24,5 @@ protected:
 	static bool updated;
 	static bool scrolledUp;
 	static bool scrolledDown;
+	static int getKeyState(int key);
 };

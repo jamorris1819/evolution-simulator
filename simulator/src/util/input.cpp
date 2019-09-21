@@ -39,16 +39,24 @@ void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, i
 	updated = true;
 }
 
+int Input::getKeyState(int key)
+{
+	std::map<int, int>::iterator it = keyMap.find(key);
+	if (it != keyMap.end())
+		return it->second;
+	return -1;
+}
+
 bool Input::isDown(int key)
 {
 	// If user is typing into the UI, ignore this.
 	ImGuiIO& io = ImGui::GetIO();
+	io.KeysDown[io.KeyMap[ImGuiKey_Backspace]] = getKeyState(GLFW_KEY_BACKSPACE);
+
 	if (io.WantCaptureKeyboard) return false;
 
-	std::map<int, int>::iterator it = keyMap.find(key);
-	if (it != keyMap.end())
-		return it->second == GLFW_PRESS || it->second == GLFW_REPEAT;
-	return false;
+	int state = getKeyState(key);
+	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
 bool Input::isPressed(int key)
@@ -57,18 +65,12 @@ bool Input::isPressed(int key)
 	ImGuiIO& io = ImGui::GetIO();
 	if (io.WantCaptureKeyboard) return false;
 
-	std::map<int, int>::iterator it = keyMap.find(key);
-	if (it != keyMap.end())
-		return it->second == GLFW_PRESS;
-	return false;
+	return getKeyState(key) == GLFW_PRESS;
 }
 
 bool Input::isUp(int key)
 {
-	std::map<int, int>::iterator it = keyMap.find(key);
-	if (it != keyMap.end())
-		return it->second == GLFW_RELEASE;
-	return false;
+	return getKeyState(key) == GLFW_RELEASE;
 }
 
 /// Mouse related methods.

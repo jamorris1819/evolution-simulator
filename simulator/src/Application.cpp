@@ -63,7 +63,7 @@ void initialiseEntities() {
 	terrain = new TerrainManager(program);
 	terrain->generate(50, 50, 8);
 	terrain->paintTerrain();
-	Menu::painter = terrain;
+	Menu::focusTerrainManager(terrain);
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
@@ -184,6 +184,14 @@ void error_callback(int error, const char* description)
 	fprintf(stderr, "Error: %s\n", description);
 }
 
+void window_size_callback(GLFWwindow* window, int w, int h)
+{
+	width = w;
+	height = h;
+	glViewport(0, 0, width, height);
+	cam->updateWindowBounds(width, height);
+}
+
 int main(int argc, char **argv)
 {
 	/* Initialize the library */
@@ -197,6 +205,7 @@ int main(int argc, char **argv)
 
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(width, height, "Evolution Simulator", NULL, NULL);
+	glfwSetWindowSizeCallback(window, window_size_callback);
 	glfwSetWindowPos(window, (3440.0f - width) / 2, (1440.0f - height) / 2);
 	if (!window)
 	{
