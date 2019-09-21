@@ -41,7 +41,29 @@ int TerrainManager::createNoiseHeightMap()
 {
 	noiseHeightLayers.push_back(NoiseLayer());
 	noiseHeightGenerators.push_back(new FastNoise());
+
+	if (noiseHeightLayers.size() == 1) {
+		noiseHeightLayers[0].enabled = true;
+		noiseHeightLayers[0].inverse = false;
+		noiseHeightLayers[0].seed = 0;
+		noiseHeightLayers[0].scale = 1.0f;
+		noiseHeightLayers[0].noiseType = 9;
+		noiseHeightLayers[0].frequency = 0.1f;
+		noiseHeightLayers[0].fractalType = 2;
+		noiseHeightLayers[0].octaves = 3;
+		noiseHeightLayers[0].lacunarity = 0.5f;
+		noiseHeightLayers[0].gain = 0.5f;
+		noiseHeightLayers[0].offsetX = 0;
+		noiseHeightLayers[0].offsetY = 0;
+	}
+
 	return noiseHeightLayers.size() - 1;
+}
+
+void TerrainManager::deleteNoiseHeightMap(int id)
+{
+	noiseHeightGenerators.erase(noiseHeightGenerators.begin() + id);
+	noiseHeightLayers.erase(noiseHeightLayers.begin() + id);
 }
 
 int TerrainManager::noiseHeightMapCount()

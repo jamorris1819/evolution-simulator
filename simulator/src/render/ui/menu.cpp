@@ -163,15 +163,14 @@ void Menu::renderLivingEntityDetails()
 void Menu::renderWorldEditor()
 {
 	if (terrain == nullptr) return;
+	bool changeMade = false;
 
 	if (terrain->noiseHeightMapCount() == 0) {
 		terrain->createNoiseHeightMap();
 		char name[128] = "base layer";
-		terrain->updateNoiseLayer(0, name, true, false, 0, 1.0f, 2, 0.2f, 0, 3,
-			0.5f, 0.5f, 0, 0);
+		changeMade = true;
 	}
 
-	bool changeMade = false;
 
 	ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
 	if (!ImGui::Begin("World Editor", worldEditorOpen, 0)) {
@@ -189,12 +188,16 @@ void Menu::renderWorldEditor()
 				selected = terrain->createNoiseHeightMap();
 				string name = "new layer ";
 				name += std::to_string(terrain->noiseHeightMapCount());
-				terrain->updateNoiseLayer(selected, name, true, false, 0, 1.0f, 2, 0.2f, 0, 3,
-					0.5f, 0.5f, 0, 0);
+				
+				changeMade = true;
 			}
 			ImGui::SameLine();
 			NoiseLayer& layer = terrain->getNoiseLayer(selected);
-			ImGui::Button("Delete");
+			if (ImGui::Button("Delete") && terrain->noiseHeightMapCount() > 1) {
+				terrain->deleteNoiseHeightMap(selected);
+				if (selected > terrain->noiseHeightMapCount() - 1) selected--;
+				changeMade = true;
+			}
 
 			// Render panel of layers
 			ImGui::BeginChild("left pane", ImVec2(173, 0), true);

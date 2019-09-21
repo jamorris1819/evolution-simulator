@@ -11,6 +11,7 @@ public:
 	void paintTerrain();
 	void update(double deltaTime);
 	int createNoiseHeightMap();
+	void deleteNoiseHeightMap(int id);
 	int noiseHeightMapCount();
 	void updateNoiseLayer(int id, string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY);
 	NoiseLayer& getNoiseLayer(int id);
