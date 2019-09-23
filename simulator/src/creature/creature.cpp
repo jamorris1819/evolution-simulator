@@ -18,19 +18,9 @@ Creature::~Creature()
 	delete genome;
 }
 
-void Creature::setGenome(Genome* genome)
-{
-	this->genome = genome;
-}
-
 void Creature::setNeuralGenome(NeuralGenome* neuralGenome)
 {
 	this->neuralGenome = neuralGenome;
-}
-
-Genome* Creature::getGenome()
-{
-	return genome;
 }
 
 NeuralGenome* Creature::getNeuralGenome()

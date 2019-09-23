@@ -74,6 +74,15 @@ void Body::turnRight(float power)
 	physicsBody->ApplyAngularImpulse(power, true);
 }
 
+void Body::render(glm::mat4 matrix)
+{
+	PolygonR::render(matrix);
+
+	for (int i = 0; i < polygons.size(); i++) {
+		polygons[i]->render(matrix);
+	}
+}
+
 void Body::setRGB(int r, int g, int b)
 {
 	this->r = r;

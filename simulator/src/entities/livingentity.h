@@ -1,5 +1,6 @@
 #pragma once
 #include "drawnentity.h"
+#include "../genetics/genome.h"
 
 class LivingEntity : public DrawnEntity {
 public:
@@ -12,14 +13,16 @@ public:
 	double getEnergy();
 	double getMaxHealth();
 	double getMaxEnergy();
+	Genome* getGenome();
+	void setGenome(Genome* genome);
 
 protected:
 	void setHealth(double health);
 	void setEnergy(double energy);
-
 	void setLivingCost(double livingCost);
 	double getLivingCost();
 	void setMovementCost(double movementCost);
+	Genome* genome;
 
 private:
 	double maxHealth;

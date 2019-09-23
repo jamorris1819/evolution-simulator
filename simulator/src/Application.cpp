@@ -23,6 +23,7 @@
 #include <time.h>
 #include "terrain/hex.h"
 #include "terrain/terrainmanager.h"
+#include "creature/plant.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ b2World* world;
 ContactListener* contactListener;
 vector<Hex*> terr;
 TerrainManager* terrain;
+
 
 void initialiseEntities() {
 	srand(time(NULL));
@@ -68,6 +70,8 @@ void initialiseEntities() {
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
+
+	Menu::entityManager = entityManager;
 
 	Menu::camera = cam;
 }

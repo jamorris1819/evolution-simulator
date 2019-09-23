@@ -3,6 +3,10 @@
 TerrainManager::TerrainManager(GLuint program)
 {
 	this->program = program;
+	temperature = new FastNoise();
+	temperature->SetNoiseType(FastNoise::NoiseType::Perlin);
+	temperature->SetFrequency(0.1);
+	temperature->SetSeed(rand());
 }
 
 // Generates the hexagon tiles for the terrain.
@@ -77,6 +81,21 @@ NoiseLayer& TerrainManager::getNoiseLayer(int id)
 	return noiseHeightLayers[id];
 }
 
+int TerrainManager::getWidth()
+{
+	return width;
+}
+
+int TerrainManager::getHeight()
+{
+	return height;
+}
+
+int TerrainManager::getTileSize()
+{
+	return tileSize;
+}
+
 void TerrainManager::updateNoiseLayer(int id, string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY)
 {
 	if (id > noiseHeightLayers.size() - 1) return;
@@ -128,6 +147,19 @@ float TerrainManager::getHeightNoise(float x, float y)
 	return z;
 }
 
+float TerrainManager::getTemperature(float x, float y)
+{
+	float out = 0.0f;
+	if (y < height / 2.0f) {
+		out = y / (height * 0.5f);
+	}
+	else {
+		out = 1.0f - ((y - (height * 0.5f)) / (height * 0.5f));
+	}
+
+	return out + temperature->GetNoise(x, y) * 0.25f;
+}
+
 void TerrainManager::paintTerrain()
 {
 	for (int y = 0; y < height; y++) {
@@ -141,20 +173,32 @@ void TerrainManager::paintTerrain()
 
 			// Height colours
 
-			hex->setFade(z < 0.15f); // fade the ocean
+			
+
+			float temp = getTemperature(y, x);
+
+			hex->setFade(z < 0.15f && temp > 0.3f); // fade the ocean
 
 			if (z < 0.15f && noiseHeightLayers.size() > 0) {
 				//hex->setFadeOffset(noiseHeightMaps[0]->GetNoise(x, y) * 10);
 			}
 
-			if (z < 0.02f) colour = glm::vec3(67, 136, 178); // dark blue
-			else if (z < 0.1f) colour = glm::vec3(87, 156, 198); // light blue
-			else if (z < 0.15f) colour = glm::vec3(206, 162, 125); // wet sand
-			else if (z < 0.2f) colour = glm::vec3(239, 205, 178); // dry sand
-			else if (z < 0.55f) colour = glm::vec3(137, 162, 61); // grass
-			else if (z < 0.7f) colour = glm::vec3(23, 97, 38); // forest
-			else if (z < 0.85f) colour = glm::vec3(134, 140, 136); // mountain
-			else colour = glm::vec3(81, 88, 81); // high mountain
+			if (temp > 0.3f) {
+				if (z < 0.02f) colour = glm::vec3(6, 66, 115); // dark blue
+				else if (z < 0.1f) colour = glm::vec3(29, 162, 216); // light blue
+				else if (z < 0.2f) colour = glm::vec3(219, 202, 105); // sand
+				else if (z < 0.55f) {
+
+					if (temp > 0.7f) colour = glm::vec3(219, 202, 105); // desert
+					else if (temp > 0.3f) colour = glm::vec3(102, 141, 60); // grassland
+					else colour = glm::vec3(238, 238, 238); // snow
+				}
+				else colour = glm::vec3(73, 56, 41); 
+			}
+			else {
+				if (z < 0.2f) colour = glm::vec3(71, 123, 195); // ice
+				else  colour = glm::vec3(238, 238, 238); // snow
+			}
 
 			int shade = rand() % 10;
 			if (z >= 0.15f) colour += glm::vec3(shade, shade, shade);
@@ -174,3 +218,12 @@ void TerrainManager::update(double deltaTime)
 		}
 	}
 }
+
+
+/*if (z < 0.02f) colour = glm::vec3(6, 66, 115); // dark blue
+else if (z < 0.1f) colour = glm::vec3(29, 162, 216); // light blue
+else if (z < 0.2f) colour = glm::vec3(219, 202, 105); // sand
+else if (z < 0.55f) colour = glm::vec3(102, 141, 60); // grass
+else if (z < 0.7f) colour = glm::vec3(23, 97, 38); // forest
+else if (z < 0.85f) colour = glm::vec3(134, 140, 136); // mountain
+else colour = glm::vec3(81, 88, 81); // high mountain*/

@@ -18,6 +18,7 @@ public:
 	void moveForward(float power);
 	void turnLeft(float power);
 	void turnRight(float power);
+	void render(glm::mat4 matrix);
 	//virtual void update() = 0;
 
 	void setRGB(int r, int g, int b);
@@ -30,6 +31,7 @@ public:
 	int b;
 
 protected:
+	std::vector<PolygonR*> polygons;
 	virtual void generateBodyPoints() = 0;
 	virtual void generatePhysicsBody();
 	b2Body* physicsBody;

@@ -6,6 +6,17 @@ EntityManager::EntityManager(GLuint shader, b2World* world)
 	this->world = world;
 }
 
+void EntityManager::createPlant(glm::vec2 position)
+{
+	Plant* plant = new Plant(shader, world, glm::vec3(position, 0));
+	Genome* genome = new Genome(false);
+	genome->generatePlant();
+	plant->setGenome(genome);
+	plant->generate();
+
+	plantList.push_back(plant);
+}
+
 Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position)
 {
 	Creature* newCreature = new Creature(this->shader, this->world, position);
@@ -31,6 +42,7 @@ Creature* EntityManager::createCreatureQueue(Genome* genome, NeuralGenome* neura
 Creature* EntityManager::createRandomCreature(glm::vec2 position)
 {
 	Genome* genome = new Genome(true);
+	genome->generateCreature();
 	NeuralGenome* neuralGenome = new NeuralGenome(5, 3);
 
 	for (int i = 0; i < 5; i++) {
@@ -80,11 +92,19 @@ void EntityManager::update(double deltaTime)
 	for (int i = 0; i < creatureList.size(); i++) {
 		creatureList[i]->update(deltaTime);
 	}
+
+	for (int i = 0; i < plantList.size(); i++) {
+		plantList[i]->update(deltaTime);
+	}
 }
 
 void EntityManager::render()
 {
 	for (int i = 0; i < creatureList.size(); i++) {
 		creatureList[i]->render();
+	}
+
+	for (int i = 0; i < plantList.size(); i++) {
+		plantList[i]->render();
 	}
 }

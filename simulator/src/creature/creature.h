@@ -10,9 +10,7 @@ class Creature : public LivingEntity
 public:
 	Creature(GLuint shader, b2World* world, glm::vec2 position);
 	~Creature();
-	void setGenome(Genome* genome);
 	void setNeuralGenome(NeuralGenome* neuralGenome);
-	Genome* getGenome();
 	NeuralGenome* getNeuralGenome();
 	void generate();
 	void update(double deltaTime);
@@ -23,6 +21,5 @@ public:
 private:
 	double internalClock;
 	double thinkClock;
-	Genome * genome;
 	NeuralGenome* neuralGenome;
 };

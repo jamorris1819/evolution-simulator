@@ -74,6 +74,16 @@ void LivingEntity::setLivingCost(double livingCost)
 	this->livingCost = livingCost;
 }
 
+Genome* LivingEntity::getGenome()
+{
+	return genome;
+}
+
+void LivingEntity::setGenome(Genome* genome)
+{
+	this->genome = genome;
+}
+
 void LivingEntity::setMovementCost(double movementCost)
 {
 	this->movementCost = movementCost;

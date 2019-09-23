@@ -10,10 +10,12 @@ public:
 	Genome(bool fill);
 	~Genome();
 	Genome* clone();
-	void generate();
+	void generateCreature();
+	void generatePlant();
 	void mutate();
 	static Genome* cross(Genome* genome1, Genome* genome2);
 	int generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
+	int generateFloat(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	template<class T> Gene<T>* getGene(int order, bool mainStrand);
 	template<class T> Gene<T>* getGene(GeneMarker marker, bool mainStrand);
 	template<class T> T getGeneValue(int order);
@@ -27,7 +29,15 @@ public:
 template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand)
 {
 	std::vector<Base*> strandToUse = mainStrand ? strandA : strandB;
-	Base* gene = strandToUse[order];
+	Base* gene = nullptr;
+	for (int i = 0; i < strandToUse.size(); i++) {
+		if (strandToUse[i]->order == order) {
+			gene = strandToUse[i];
+			break;
+		}
+	}
+	if (gene == nullptr) return nullptr;
+
 	return ((Gene<T>*)gene);
 }
 

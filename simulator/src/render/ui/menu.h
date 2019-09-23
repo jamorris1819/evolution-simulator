@@ -7,6 +7,7 @@
 #include "../../creature/creature.h"
 #include "../src/terrain/terrainmanager.h"
 #include "../camera.h"
+#include "../../entities/entitymanager.h"
 
 class Menu
 {
@@ -20,6 +21,7 @@ public:
 	static void focusLivingEntity(LivingEntity* livingEntity);
 	static void focusTerrainManager(TerrainManager* terrainManager);
 	static Camera* camera;
+	static EntityManager* entityManager;
 private:
 	Menu();
 	static void renderOverlay();

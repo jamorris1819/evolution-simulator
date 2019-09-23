@@ -7,11 +7,7 @@
 
 Genome::Genome(bool fill)
 {
-	strandLength = (int)GeneMarker::GENE_COUNT;
-	strandWeights = new double[strandLength];
-	if (fill) {
-		generate();
-	}
+	
 }
 
 Genome::~Genome()
@@ -26,21 +22,14 @@ Genome::~Genome()
 
 int Genome::generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread)
 {
-	std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	int chosenPoint = (startingArea - maxSpread) + (rand() % (2 * maxSpread));
 	*spread = minStride + (rand() % (maxStride - minStride));
 
 	return chosenPoint;
 }
 
-void Genome::generate()
+void Genome::generateCreature()
 {
-
-	// Initialise weights.
-	for (int i = 0; i < strandLength; i++) {
-		strandWeights[i] = (rand() % 100) / 100.0;
-	}
-	
 	// Create generic genome.
 
 	// SIZE
@@ -49,8 +38,6 @@ void Genome::generate()
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SIZE));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SIZE));
 	delete spread;
-
-	Gene<int>* a = (Gene<int>*)strandA[0];
 
 	// COLOUR R
 	spread = new int;
@@ -114,6 +101,75 @@ void Genome::generate()
 	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	delete spread;
+
+	strandLength = strandA.size();
+	strandWeights = new double[strandLength];
+
+	// Initialise weights.
+	for (int i = 0; i < strandLength; i++) {
+		strandWeights[i] = (rand() % 100) / 100.0;
+	}
+}
+
+void Genome::generatePlant()
+{
+	// Create generic genome.
+	// COLOUR R
+	int* spread = new int;
+	int position = generateInt(4, 4, 2, 4, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_R));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_R));
+	delete spread;
+
+	// COLOUR G
+	spread = new int;
+	position = generateInt(102, 4, 2, 4, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_G));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_G));
+	delete spread;
+
+	// COLOUR B
+	spread = new int;
+	position = generateInt(35, 4, 2, 4, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_B));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_B));
+	delete spread;
+
+	// LEAF LENGTH
+	spread = new int;
+	position = generateInt(500, 500, 20, 50, spread);
+	strandA.push_back(new Gene<float>((position - *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
+	strandB.push_back(new Gene<float>((position + *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
+	delete spread;
+	
+	// BODY SIZE
+	spread = new int;
+	position = generateInt(75, 50, 4, 8, spread);
+	strandA.push_back(new Gene<float>((position - *spread) / 100.0f, (int)GeneMarker::GM_SIZE));
+	strandB.push_back(new Gene<float>((position + *spread) / 100.0f, (int)GeneMarker::GM_SIZE));
+	delete spread;
+
+	// BODY MUTATION RATE
+	spread = new int;
+	position = generateInt(15, 5, 5, 10, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
+	delete spread;
+
+	// BODY MUTATION RATE
+	spread = new int;
+	position = generateInt(12, 4, 2, 4, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));
+	delete spread;
+
+	strandLength = strandA.size();
+	strandWeights = new double[strandLength];
+
+	// Initialise weights.
+	for (int i = 0; i < strandLength; i++) {
+		strandWeights[i] = (rand() % 100) / 100.0;
+	}
 }
 
 Genome* Genome::clone()
@@ -141,6 +197,8 @@ Genome* Genome::clone()
 			std::cerr << "Unknown type - could not be cloned" << std::endl;
 		}
 	}
+
+	clonedGenome->strandLength = clonedGenome->strandA.size();
 
 	return clonedGenome;
 }
@@ -194,6 +252,7 @@ Genome* Genome::cross(Genome* genome1, Genome* genome2)
 	std::vector<Base*> strandA;
 	std::vector<Base*> strandB;
 
+	childGenome->strandLength = genome1->strandLength;
 	childGenome->strandWeights = new double[genome1->strandLength];
 	for (int i = 0; i < genome1->strandLength; i++) {
 		strandA.push_back(parentA->strandA[i]->clone());

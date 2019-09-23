@@ -16,6 +16,9 @@ enum class GeneMarker
 	GM_BODY_OFFSETX,
 	GM_BODY_OFFSETY,
 
+	// Plant genes
+	GM_LEAF_LENGTH,
+
 	// Leave at end for count.
 	GENE_COUNT
 };

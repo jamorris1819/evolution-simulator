@@ -10,6 +10,7 @@
 #include "../../creature/creaturebody.h"
 #include "../../util/input.h"
 #include "../../terrain/terrainmanager.h"
+#include <thread>
 
 bool* Menu::bWindowCreature;
 Genome* Menu::selectedGenome;
@@ -22,6 +23,7 @@ NeuralGenome* Menu::selectedNeuralGenome3;
 NetData* Menu::netData;
 Camera* Menu::camera;
 TerrainManager* Menu::terrain;
+EntityManager* Menu::entityManager;
 
 // Helper to display a little (?) mark which shows a tooltip when hovered.
 // In your own code you may want to display an actual icon if you are using a merged icon fonts (see misc/fonts/README.txt)
@@ -188,7 +190,7 @@ void Menu::renderWorldEditor()
 				selected = terrain->createNoiseHeightMap();
 				string name = "new layer ";
 				name += std::to_string(terrain->noiseHeightMapCount());
-				
+
 				changeMade = true;
 			}
 			ImGui::SameLine();
@@ -224,10 +226,10 @@ void Menu::renderWorldEditor()
 
 			ImGui::Separator();
 
-			
+
 			ImGui::LabelText("Attribute", "Value");
 			ImGui::Separator();
-			
+
 			// Standard noise settings.
 			static char layerName[128];
 			std::copy(layer.name.begin(), layer.name.end(), layerName);
@@ -282,11 +284,44 @@ void Menu::renderWorldEditor()
 		}
 		if (ImGui::BeginTabItem("Weather map"))
 		{
+			if (ImGui::Button("Make plants")) {
+				int tileSize = terrain->getTileSize();
+				for (int y = 0; y < terrain->getHeight(); y++) {
+					for (int x = 0; x < terrain->getWidth(); x++) {
+						float noise = terrain->getHeightNoise(y, x);
+						float temp = terrain->getTemperature(x, y);
+						if (noise < 0.2f || (temp < 0.3f || temp > 0.7f)) {
+							continue;
+						}
+
+						//float chance = rand() % 2 == 0;
+
+						//if (chance) continue;
+
+						//int times = 1 + rand() % 2;
+						glm::vec2 position;
+						position.x = tileSize * x * sqrt(3);
+						if (y % 2 != 0) position.x += tileSize * sqrt(3) / 2; // Offset if an odd row
+						position.y = tileSize * y * 2 * 0.75f;
+
+						//for (int i = 0; i < times; i++) {
+
+						float offsetX = ((rand() % 200) - 100) / 100.0f;
+						float offsetY = ((rand() % 200) - 100) / 100.0f;
+
+							
+
+							position += glm::vec2(offsetX * tileSize / 2.0f, offsetY * tileSize / 2.0f);
+
+							entityManager->createPlant(position);
+						//}
+					}
+				}
+			}
+
 			ImGui::EndTabItem();
 		}
-		
 		ImGui::EndTabBar();
-
 	}
 	ImGui::End();
 }
