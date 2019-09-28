@@ -1,29 +1,31 @@
+#define GLEW_STATIC
+
 #include <iostream>
-#include "util\shaderutility.h"
+#include "shaderutility.h"
 #include <vector>
-#include "render\vertex.h"
-#include "render\vertexarrayobject.h"
-#include "entities\drawnentity.h"
-#include "render\camera.h"
-#include "util\input.h"
+#include "vertex.h"
+#include "vertexarrayobject.h"
+#include "drawnentity.h"
+#include "camera.h"
+#include "input.h"
 #include <Windows.h>
 
-#include "render\ui\menu.h"
-#include "genetics\gene.h"
-#include "genetics\genome.h"
-#include "genetics\genemarker.h"
+#include "menu.h"
+#include "gene.h"
+#include "genome.h"
+#include "genemarker.h"
 #include <ctime>
-#include "noise\FastNoise.h"
-#include "Box2D\Box2D.h"
-#include "creature\creature.h"
-#include "neural\neuralgenome.h"
-#include "util/contactlistener.h"
-#include "entities/entitymanager.h"
+#include "FastNoise.h"
+#include "Box2D.h"
+#include "creature.h"
+#include "neuralgenome.h"
+#include "contactlistener.h"
+#include "entitymanager.h"
 #include <thread>
 #include <time.h>
-#include "terrain/hex.h"
-#include "terrain/terrainmanager.h"
-#include "creature/plant.h"
+#include "hex.h"
+#include "terrainmanager.h"
+#include "plant.h"
 
 using namespace std;
 
@@ -123,7 +125,7 @@ void initialise()
 
 	// Set up shaders.
 	ShaderUtility shaderUtility;
-	program = shaderUtility.createProgram((char*)"src/Shaders/vertexshader.glsl", (char*)"src/Shaders/fragmentshader.glsl");
+	program = shaderUtility.createProgram((char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 	glPolygonMode(GL_FRONT, GL_POLYGON);
 	
 	lastTime = getTime();
