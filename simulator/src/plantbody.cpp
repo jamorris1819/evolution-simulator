@@ -4,16 +4,17 @@
 
 PlantBody::PlantBody(GLuint shader, b2World* world) : Body(shader, world)
 {
-	layers = 3;
+	leafLayers = 3;
 	leafLength = 1;
 	size = 1;
 	steps = 10;
 }
 
-void PlantBody::setAttributes(float size, float leafLength, int steps, int r, int g, int b)
+void PlantBody::setAttributes(float size, float leafLength, int leafLayers, int steps, int r, int g, int b)
 {
 	this->size = size;
 	this->leafLength = leafLength;
+	this->leafLayers = leafLayers;
 	this->steps = steps;
 	this->r = r;
 	this->g = g;
@@ -85,9 +86,9 @@ void PlantBody::generateSpikeyBody()
 	setVertices(vertices);
 
 	// Body has been generated. Now add extra polygon layers.
-	float angleStep = 360.0f / (float)layers;
+	float angleStep = 360.0f / (float)leafLayers;
 
-	for (int i = 1; i < layers; i++) {
+	for (int i = 1; i < leafLayers; i++) {
 		PolygonR* p = new PolygonR(shaderID);
 		for (int j = 0; j < vertices.size(); j++) {
 			Vertex& v = vertices[j];

@@ -24,7 +24,9 @@ Genome::~Genome()
 int Genome::generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread)
 {
 	int chosenPoint = (startingArea - maxSpread) + (rand() % (2 * maxSpread));
-	*spread = minStride + (rand() % (maxStride - minStride));
+
+	int spreadDivisor = glm::max(1, maxStride - minStride);
+	*spread = minStride + (rand() % spreadDivisor);
 
 	return chosenPoint;
 }
@@ -117,6 +119,11 @@ void Genome::generatePlant()
 	position = generateInt(500, 500, 20, 50, spread);
 	strandA.push_back(new Gene<float>((position - *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
 	strandB.push_back(new Gene<float>((position + *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
+
+	// LEAF LAYERS
+	position = generateInt(3, 2, 1, 1, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_LEAF_LAYERS));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_LEAF_LAYERS));
 	
 	// BODY SIZE
 	position = generateInt(75, 50, 4, 8, spread);
@@ -129,9 +136,9 @@ void Genome::generatePlant()
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
 
 	// BODY MUTATION RATE
-	position = generateInt(12, 4, 2, 4, spread);
-	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
-	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));
+	position = generateInt(24, 4, 2, 4, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_LEAF_STEPS));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_LEAF_STEPS));
 	delete spread;
 
 	strandLength = strandA.size();

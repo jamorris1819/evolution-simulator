@@ -17,7 +17,9 @@ enum class GeneMarker
 	GM_BODY_OFFSETY,
 
 	// Plant genes
+	GM_LEAF_STEPS,
 	GM_LEAF_LENGTH,
+	GM_LEAF_LAYERS,
 
 	// Leave at end for count.
 	GENE_COUNT
@@ -52,6 +54,8 @@ inline std::tuple<int, int> geneMarkerLimits(GeneMarker v)
 	case GeneMarker::GM_SPEED_MOVEMENT: return std::tuple<int, int>(5, 50);
 	case GeneMarker::GM_SPEED_ROTATION: return std::tuple<int, int>(5, 50);
 	case GeneMarker::GM_BODY_STEPS: return std::tuple<int, int>(6, 20);
+	case GeneMarker::GM_LEAF_STEPS: return std::tuple<int, int>(8, 40);
+	case GeneMarker::GM_LEAF_LAYERS: return std::tuple<int, int>(1, 8);
 	default:      return std::tuple<int, int>(0, 0); // no limits
 	}
 }
