@@ -35,6 +35,7 @@ void CreatureBody::generate()
 {
 	Body::generate();
 	generateMouth();
+	generateEyes();
 }
 
 void CreatureBody::generateMouth()
@@ -101,7 +102,51 @@ void CreatureBody::generateBodyPoints()
 	setVertices(vertices);
 }
 
-void Body::generatePhysicsBody()
+void CreatureBody::generateEyes()
+{
+	steps = 30;
+	double step = 2.0 * PI / steps;
+
+	// Basic creature generation.
+	vector<Vertex> vertices;
+
+	// Generate the eye.
+	for (int i = 0; i < steps; i++) {
+		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		v.multiply(0.15f);
+		v.setPosition(v.getPosition() + glm::vec2(-0.3f, 0.35f));
+		v.setColour(glm::vec3(1, 1, 1));
+		vertices.push_back(v);
+	}
+
+	// Assign these vertices to the polygon model.
+	
+
+	PolygonR* p = new PolygonR(shaderID);
+	p->setVertices(vertices);
+	p->load();
+	polygons.push_back(p);
+	vertices.clear();
+	// Generate the eye.
+	for (int i = 0; i < steps; i++) {
+		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		v.multiply(0.15f);
+		v.setPosition(v.getPosition() + glm::vec2(0.3f, 0.35f));
+		v.setColour(glm::vec3(1, 1, 1));
+		vertices.push_back(v);
+	}
+
+	// Assign these vertices to the polygon model.
+
+
+	p = new PolygonR(shaderID);
+	p->setVertices(vertices);
+	p->load();
+	polygons.push_back(p);
+
+}
+
+void CreatureBody::generatePhysicsBody()
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;

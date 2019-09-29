@@ -5,6 +5,7 @@
 PolygonData::PolygonData()
 {
 	floatData = nullptr;
+	vertexCount = 0;
 }
 
 

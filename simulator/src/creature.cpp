@@ -42,8 +42,6 @@ void Creature::generate()
 	int g = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_G);
 	int b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 
-	if (steps > 30) steps = 30; // todo: fix release error with steps.
-
 	// Generate the body.
 	CreatureBody* castBody = (CreatureBody*)body;
 	castBody->setRGB(r, g, b);

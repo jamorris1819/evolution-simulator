@@ -12,7 +12,7 @@ public:
 	Gene(T value, int order);
 	Gene(T value, GeneMarker marker);
 	~Gene();
-	void setValue(T value);
+	void setValue(T nvalue);
 	void enable();
 	void disable();
 	void setDominant(bool dominant);
@@ -28,7 +28,6 @@ private:
 
 template<class T> Gene<T>::Gene(T value, int order)
 {
-	setValue(value);
 
 	dominant =  (int)(rand() % 4) != 0;	// 1 in 4 change of being false.
 	enabled = true;
@@ -41,20 +40,20 @@ template<class T> Gene<T>::Gene(T value, int order)
 	std::tuple<int, int> limits = geneMarkerLimits((GeneMarker)order);
 	lowerLimit = std::get<0>(limits);
 	upperLimit = std::get<1>(limits);
+
+	setValue(value);
 }
 
-template<class T> Gene<T>::Gene(T value, GeneMarker marker)
-{
-	Gene(value, (int)marker);
-}
+template<class T> Gene<T>::Gene(T value, GeneMarker marker) : Gene<T>(value, (int)marker) { }
 
 template<class T> Gene<T>::~Gene()
 {
+	std::cout << "gene destroyed" << std::endl;
 }
 
-template<class T> void Gene<T>::setValue(T value)
+template<class T> void Gene<T>::setValue(T nvalue)
 {
-	T newVal = value;
+	T newVal = nvalue;
 	if (upperLimit > lowerLimit) newVal = glm::clamp(newVal, lowerLimit, upperLimit);
 	this->value = newVal;
 }

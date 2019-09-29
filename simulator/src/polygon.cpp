@@ -5,6 +5,7 @@
 	this->shaderID = shaderID;
 	overrideColour = glm::vec3(1, 0, 1);	// magenta so it's obvious this hasn't been set.
 	useOverrideColour = false;
+	vao = nullptr;
 }
 
 PolygonR::~PolygonR()

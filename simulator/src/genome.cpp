@@ -7,7 +7,8 @@
 
 Genome::Genome(bool fill)
 {
-	
+	strandLength = 0;
+	strandWeights = nullptr;
 }
 
 Genome::~Genome()
@@ -37,69 +38,48 @@ void Genome::generateCreature()
 	int position = generateInt(50, 20, 10, 30, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SIZE));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SIZE));
-	delete spread;
 
 	// COLOUR R
-	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_R));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_R));
-	delete spread;
 
 	// COLOUR G
-	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_G));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_G));
-	delete spread;
 
 	// COLOUR B
-	spread = new int;
 	position = generateInt(127, 100, 30, 80, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_B));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_B));
-	delete spread;
 
 	// SPEED MOVEMENT
-	spread = new int;
 	position = generateInt(20, 10, 5, 15, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SPEED_MOVEMENT));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SPEED_MOVEMENT));
-	delete spread;
 
 	// SPEED ROTATION
-	spread = new int;
 	position = generateInt(15, 5, 5, 10, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_SPEED_ROTATION));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_SPEED_ROTATION));
-	delete spread;
 
 	// BODY STEPS
-	spread = new int;
 	position = generateInt(10, 2, 0, 2, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));
-	delete spread;
-
-	std::cout << "steps: ";
-	std::cout << position << std::endl;
 
 	// BODY MUTATION RATE
-	spread = new int;
 	position = generateInt(15, 5, 5, 10, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
-	delete spread;
 
 	// BODY OFFSET X
-	spread = new int;
 	position = generateInt(0, 5000, 0, 1, spread);
 	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETX));
 	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETX));
-	delete spread;
 
 	// BODY OFFSET Y
-	spread = new int;
 	position = generateInt(0, 5000, 0, 1, spread);
 	strandA.push_back(new Gene<float>(position - *spread, (int)GeneMarker::GM_BODY_OFFSETY));
 	strandB.push_back(new Gene<float>(position + *spread, (int)GeneMarker::GM_BODY_OFFSETY));
@@ -122,45 +102,33 @@ void Genome::generatePlant()
 	int position = generateInt(4, 4, 2, 4, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_R));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_R));
-	delete spread;
 
 	// COLOUR G
-	spread = new int;
 	position = generateInt(102, 4, 2, 4, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_G));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_G));
-	delete spread;
 
 	// COLOUR B
-	spread = new int;
 	position = generateInt(35, 4, 2, 4, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_COLOUR_B));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_COLOUR_B));
-	delete spread;
 
 	// LEAF LENGTH
-	spread = new int;
 	position = generateInt(500, 500, 20, 50, spread);
 	strandA.push_back(new Gene<float>((position - *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
 	strandB.push_back(new Gene<float>((position + *spread) / 500.0f, (int)GeneMarker::GM_LEAF_LENGTH));
-	delete spread;
 	
 	// BODY SIZE
-	spread = new int;
 	position = generateInt(75, 50, 4, 8, spread);
 	strandA.push_back(new Gene<float>((position - *spread) / 100.0f, (int)GeneMarker::GM_SIZE));
 	strandB.push_back(new Gene<float>((position + *spread) / 100.0f, (int)GeneMarker::GM_SIZE));
-	delete spread;
 
 	// BODY MUTATION RATE
-	spread = new int;
 	position = generateInt(15, 5, 5, 10, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_MUTATION_RATE));
-	delete spread;
 
 	// BODY MUTATION RATE
-	spread = new int;
 	position = generateInt(12, 4, 2, 4, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BODY_STEPS));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BODY_STEPS));

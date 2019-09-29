@@ -17,8 +17,7 @@ public:
 	int generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	int generateFloat(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	template<class T> Gene<T>* getGene(int order, bool mainStrand);
-	template<class T> Gene<T>* getGene(GeneMarker marker, bool mainStrand);
-	template<class T> T getGeneValue(int order);
+	template<class T> T getGeneValueInt(int order);
 	template<class T> T getGeneValue(GeneMarker marker);
 	std::vector<Base*> strandA;
 	std::vector<Base*> strandB;
@@ -36,25 +35,44 @@ template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand)
 			break;
 		}
 	}
-	if (gene == nullptr) return nullptr;
+
+	if (gene == nullptr) {
+		std::cout << "No gene was found" << std::endl;
+		return nullptr; 
+	}
 
 	return ((Gene<T>*)gene);
 }
 
-template<class T> Gene<T>* Genome::getGene(GeneMarker marker, bool mainStrand)
-{
-	return getGene<T>((int)marker, mainStrand);
-}
-
-template<class T> T Genome::getGeneValue(int order)
+template<class T> T Genome::getGeneValueInt(int order)
 {
 	T value = 0;
 
 	Gene<T>* geneA = getGene<T>(order, true);
 	Gene<T>* geneB = getGene<T>(order, false);
+
+	if (geneA == nullptr || geneB == nullptr) {
+		std::cout << "nullptr on gene" << std::endl;
+	}
+
+
 	bool domA = geneA->getDominant();
 	bool domB = geneB->getDominant();
-	float weight = strandWeights[order];
+
+	int index = -1;
+	for (int i = 0; i < strandA.size(); i++) {
+		if (order == strandA[i]->order) {
+			index = i;
+			break;
+		}
+	}
+
+	if (index == -1) {
+		std::cout << "Gene couldn't be found..." << std::endl;
+		abort();
+	}
+
+	float weight =  strandWeights[index]; // TODO: this may be the problem.
 
 	// If this is an integer, calculate a new int based on the weights.
 	if (std::is_same_v<T, int>) {
@@ -108,6 +126,6 @@ template<class T> T Genome::getGeneValue(int order)
 
 template<class T> T Genome::getGeneValue(GeneMarker marker)
 {
-	return getGeneValue<T>((int)marker);
+	return getGeneValueInt<T>((int)marker);
 }
 

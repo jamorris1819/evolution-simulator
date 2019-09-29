@@ -33,7 +33,7 @@ public:
 protected:
 	std::vector<PolygonR*> polygons;
 	virtual void generateBodyPoints() = 0;
-	virtual void generatePhysicsBody();
+	virtual void generatePhysicsBody() = 0;
 	b2Body* physicsBody;
 	b2World* world;
 };

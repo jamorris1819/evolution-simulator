@@ -127,23 +127,23 @@ void Menu::renderTraitsDetails()
 	ImGui::Separator();
 
 	// SIZE
-	int size = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SIZE);
+	int size = selectedGenome->getGeneValue<int>(GeneMarker::GM_SIZE);
 	ImGui::DragInt("Size", &size);
 
 	// COLOUR
 	float colour[3] = {
-		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_R) / 255.0f,
-		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_G) / 255.0f,
-		selectedGenome->getGeneValue<int>((int)GeneMarker::GM_COLOUR_B) / 255.0f
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_R) / 255.0f,
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_G) / 255.0f,
+		selectedGenome->getGeneValue<int>(GeneMarker::GM_COLOUR_B) / 255.0f
 	};
 	ImGui::ColorEdit3("Colour", colour);
 
 	// MOVEMENT SPEED
-	int movementSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_MOVEMENT);
+	int movementSpeed = selectedGenome->getGeneValue<int>(GeneMarker::GM_SPEED_MOVEMENT);
 	ImGui::DragInt("Movement Speed", &movementSpeed);
 
 	// ROTATION SPEED
-	int rotationSpeed = selectedGenome->getGeneValue<int>((int)GeneMarker::GM_SPEED_ROTATION);
+	int rotationSpeed = selectedGenome->getGeneValue<int>(GeneMarker::GM_SPEED_ROTATION);
 	ImGui::DragInt("Rotation Speed", &rotationSpeed);
 }
 
@@ -294,27 +294,16 @@ void Menu::renderWorldEditor()
 							continue;
 						}
 
-						//float chance = rand() % 2 == 0;
-
-						//if (chance) continue;
-
-						//int times = 1 + rand() % 2;
 						glm::vec2 position;
 						position.x = tileSize * x * sqrt(3);
 						if (y % 2 != 0) position.x += tileSize * sqrt(3) / 2; // Offset if an odd row
 						position.y = tileSize * y * 2 * 0.75f;
 
-						//for (int i = 0; i < times; i++) {
-
 						float offsetX = ((rand() % 200) - 100) / 100.0f;
 						float offsetY = ((rand() % 200) - 100) / 100.0f;
 
-							
-
-							position += glm::vec2(offsetX * tileSize / 2.0f, offsetY * tileSize / 2.0f);
-
-							entityManager->createPlant(position);
-						//}
+						position += glm::vec2(offsetX * tileSize / 2.0f, offsetY * tileSize / 2.0f);
+						entityManager->createPlant(position);
 					}
 				}
 			}

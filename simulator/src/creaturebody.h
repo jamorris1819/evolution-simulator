@@ -18,7 +18,9 @@ public:
 	float width;
 	float frequency;
 
-private:
+protected:
 	virtual void generateBodyPoints();
+	virtual void generatePhysicsBody();
+	void generateEyes();
 	void generateMouth();
 };

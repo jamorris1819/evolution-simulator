@@ -12,5 +12,6 @@ private:
 	void generateSpikeyBody();
 	float size;
 	float leafLength;
+	int layers;
 	int steps;
 };

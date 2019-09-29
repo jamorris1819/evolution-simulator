@@ -1,7 +1,16 @@
 #include "base.h"
 #include <iostream>
 
-Base::Base() {}
+Base::Base()
+{
+	dominant = true;
+	enabled = true;
+	order = 0;
+	typeBool = false;
+	typeFloat = false;
+	typeInt = false;
+}
+
 Base* Base::clone()
 {
 	Base* base = new Base();

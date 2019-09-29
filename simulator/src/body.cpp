@@ -9,6 +9,10 @@ Body::Body(GLuint shader, b2World* world) : PolygonR(shader)
 {
 	seed = 0;
 	this->world = world;
+	r = 1;
+	g = 0;
+	b = 1;
+	physicsBody = nullptr;
 }
 
 Body::~Body()

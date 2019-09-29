@@ -52,8 +52,8 @@ void initialiseEntities() {
 	entityManager = new EntityManager(program, world);
 
 	for (int i = 0; i < 50; i++) {
-		int x = (rand() % 1000);
-		int y = (rand() % 1000);
+		int x = (rand() % 400);
+		int y = (rand() % 400);
 		entityManager->createRandomCreature(glm::vec2(x, y));
 	}
 	
@@ -144,6 +144,8 @@ void initialise()
 	glfwSetKeyCallback(window, Input::keyCallback);
 	glfwSetScrollCallback(window, Input::scrollCallback);
 	glfwSetCursorPosCallback(window, Input::mouseMoveCallback);
+
+	glfwMaximizeWindow(window);
 	
 
 	//for (int i = 0; i < 100000; i++) {
