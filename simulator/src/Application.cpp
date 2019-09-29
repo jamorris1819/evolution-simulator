@@ -80,7 +80,7 @@ void initialiseEntities() {
 
 double getTime()
 {
-	return GetTickCount64();
+	return GetTickCount();
 }
 
 void initialiseBox2D()
