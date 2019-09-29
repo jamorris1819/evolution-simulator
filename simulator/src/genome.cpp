@@ -124,6 +124,11 @@ void Genome::generatePlant()
 	position = generateInt(3, 2, 1, 1, spread);
 	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_LEAF_LAYERS));
 	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_LEAF_LAYERS));
+
+	// BUSH COUNT
+	position = generateInt(5, 2, 1, 1, spread);
+	strandA.push_back(new Gene<int>(position - *spread, (int)GeneMarker::GM_BUSH_COUNT));
+	strandB.push_back(new Gene<int>(position + *spread, (int)GeneMarker::GM_BUSH_COUNT));
 	
 	// BODY SIZE
 	position = generateInt(75, 50, 4, 8, spread);

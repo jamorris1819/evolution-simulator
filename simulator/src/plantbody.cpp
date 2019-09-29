@@ -6,15 +6,17 @@ PlantBody::PlantBody(GLuint shader, b2World* world) : Body(shader, world)
 {
 	leafLayers = 3;
 	leafLength = 1;
+	bushCount = 5;
 	size = 1;
 	steps = 10;
 }
 
-void PlantBody::setAttributes(float size, float leafLength, int leafLayers, int steps, int r, int g, int b)
+void PlantBody::setAttributes(float size, float leafLength, int leafLayers, int steps, int bushCount, int r, int g, int b)
 {
 	this->size = size;
 	this->leafLength = leafLength;
 	this->leafLayers = leafLayers;
+	this->bushCount = bushCount;
 	this->steps = steps;
 	this->r = r;
 	this->g = g;
@@ -64,10 +66,45 @@ void PlantBody::generateRoundBody()
 
 	// Assign these vertices to the polygon model.
 	setVertices(vertices);
+
+	int numberOfCircles = bushCount;
+	float angleStep = PI * 2.0 / (float)numberOfCircles;
+
+	// Shrink the vertices down to be reused for the additional polygons.
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i].setPosition(vertices[i].getPosition() * glm::vec2(0.75, 0.75));
+	}
+
+	// Generate some extra 'bumps' around these to make them look bush-like.
+	// Iterate around in a circular fashion.
+	for (int i = 0; i < numberOfCircles; i++) {
+		PolygonR* p = new PolygonR(shaderID);
+		vector<Vertex> subVertices;
+
+		for (int j = 0; j < vertices.size(); j++) {
+			Vertex& v = vertices[j];
+
+			// Allow the vertices to fluctuate randomly to give it a rougher look.
+			float multiplier = 1.0f - ((rand() % 25) / 100.0f);
+
+			// Get new position.
+			float x = cos(i * angleStep) * size * multiplier;
+			float y = sin(i * angleStep) * size * multiplier;
+
+			// Create new vertex.
+			Vertex nV(x + v.getPosition().x, y + v.getPosition().y);
+			nV.setColour(v.getColour());
+			subVertices.push_back(nV);
+		}
+		p->setVertices(subVertices);
+		p->load();
+		polygons.push_back(p);
+	}
 }
 
 void PlantBody::generateSpikeyBody()
 {
+	size /= 3;
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
