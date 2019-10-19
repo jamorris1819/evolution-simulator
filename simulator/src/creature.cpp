@@ -51,11 +51,7 @@ void Creature::generate()
 	castBody->setPosition(getPosition());
 	castBody->load();
 
-	// Give all fixtures a pointer to the creature.
-	b2Body* rBody = castBody->getPhysicsBody();
-	for (b2Fixture* b = rBody->GetFixtureList(); b; b = b->GetNext()) {
-		b->SetUserData(this);
-	}
+	LivingEntity::generate();
 }
 
 void Creature::update(double deltaTime)
@@ -105,4 +101,21 @@ void Creature::moveForward(double power)
 	if (!isAlive()) return;
 	body->moveForward(power);
 	setMovementCost(10.0 * power);
+}
+
+void Creature::entityEnteredVision(LivingEntity* livingEntity)
+{
+	std::cout << "Something came into vision" << std::endl;
+	entitiesInVision.push_back(livingEntity);
+}
+
+void Creature::entityLeftVision(LivingEntity* livingEntity)
+{
+	for (int i = 0; i < entitiesInVision.size(); i++) {
+		if (entitiesInVision[i] == livingEntity) {
+			entitiesInVision.erase(entitiesInVision.begin() + i);
+			std::cout << "Something left vision" << std::endl;
+			return;
+		}
+	}
 }

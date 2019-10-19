@@ -59,6 +59,7 @@ void initialiseEntities() {
 	
 
 	entityManager->createRandomCreature(glm::vec2(100, 100));
+	entityManager->createRandomCreature(glm::vec2(100, 120));
 
 
 	// Bring creature into focus in UI.

@@ -20,4 +20,6 @@ void Plant::generate()
 	body->generate();
 	body->setPosition(getPosition());
 	body->load();
+
+	LivingEntity::generate();
 }

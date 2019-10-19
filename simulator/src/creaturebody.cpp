@@ -144,6 +144,28 @@ void CreatureBody::generateEyes()
 	p->load();
 	polygons.push_back(p);
 
+
+	// Create the vision sensor.
+
+	b2Vec2 vert[4];
+
+	// Assign shape's vertices.
+	vert[0].Set(0.0f, 0.0f);
+	vert[1].Set(-100.0f, 100.0f);
+	vert[2].Set(100.0f, 100.0f);
+
+	b2PolygonShape shape;
+	shape.Set(vert, 3);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &shape;
+	fixtureDef.density = 0.0f;
+	fixtureDef.isSensor = true;
+	fixtureDef.restitution = 0.6f;
+
+	fixtureDef.filter.categoryBits = ContactType::VISON_CONE;
+
+	physicsBody->CreateFixture(&fixtureDef);
 }
 
 void CreatureBody::generatePhysicsBody()

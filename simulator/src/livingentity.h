@@ -22,6 +22,7 @@ protected:
 	void setLivingCost(double livingCost);
 	double getLivingCost();
 	void setMovementCost(double movementCost);
+	virtual void generate();
 	Genome* genome;
 
 private:
