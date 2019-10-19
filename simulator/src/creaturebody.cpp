@@ -179,6 +179,6 @@ void CreatureBody::generatePhysicsBody()
 	}
 
 	// Apply some settings to the new body.
-	physicsBody->SetLinearDamping(2.0f);
-	physicsBody->SetAngularDamping(5.0f);
+	physicsBody->SetLinearDamping(20.0f);
+	physicsBody->SetAngularDamping(20.0f);
 }

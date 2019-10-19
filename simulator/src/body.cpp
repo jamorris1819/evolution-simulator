@@ -62,7 +62,7 @@ void Body::unload()
 
 void Body::moveForward(float power)
 {
-	float force = 600.0f * power;
+	float force = 3000.0f * power;
 	physicsBody->ApplyForceToCenter(
 		b2Vec2(sin(-getRotation()) * force, cos(getRotation()) * force),
 		true);
@@ -70,12 +70,12 @@ void Body::moveForward(float power)
 
 void Body::turnLeft(float power)
 {
-	physicsBody->ApplyAngularImpulse(power, true);
+	physicsBody->ApplyAngularImpulse(4.0f * power, true);
 }
 
 void Body::turnRight(float power)
 {
-	physicsBody->ApplyAngularImpulse(power, true);
+	physicsBody->ApplyAngularImpulse(4.0f * -power, true);
 }
 
 void Body::render(glm::mat4 matrix)

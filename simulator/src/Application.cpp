@@ -51,15 +51,16 @@ void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	for (int i = 0; i < 50; i++) {
+	/*(for (int i = 0; i < 50; i++) {
 		int x = (rand() % 400);
 		int y = (rand() % 400);
 		entityManager->createRandomCreature(glm::vec2(x, y));
-	}
+	}*/
 	
 
-	//delete creatureA;
-	//delete creatureB;
+	entityManager->createRandomCreature(glm::vec2(100, 100));
+
+
 	// Bring creature into focus in UI.
 	Menu::focusLivingEntity(entityManager->getTestCreature());
 	int size = 4;
@@ -110,17 +111,17 @@ void initialiseBox2D()
 	filterData.categoryBits = ContactType::TERRAIN;
 	groundFixture->SetFilterData(filterData);
 
-	cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
+	std::cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
 }
 
 void initialise()
 {
 	// Output some data to screen.
-	cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
-	cout << "GLFW Version " << glfwGetVersionString() << endl;
-	cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
-	cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
-	cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
+	std::cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
+	std::cout << "GLFW Version " << glfwGetVersionString() << endl;
+	std::cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
+	std::cout << "OpenGL version: " << glGetString(GL_VERSION) << endl;
+	std::cout << "OpenGL renderer: " << glGetString(GL_RENDERER) << endl;
 	glViewport(0, 0, width, height);
 
 	// Set up shaders.
@@ -174,15 +175,15 @@ void update() {
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
-		entityManager->getTestCreature()->moveForward(1.0f);
+		entityManager->getTestCreature()->moveForward(0.6f);
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
-		entityManager->getTestCreature()->body->turnLeft(0.4f);
+		entityManager->getTestCreature()->body->turnLeft(0.75f);
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
-		entityManager->getTestCreature()->body->turnRight(-0.4f);
+		entityManager->getTestCreature()->body->turnRight(0.75f);
 	}
 
 }
