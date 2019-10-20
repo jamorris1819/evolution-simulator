@@ -18,9 +18,6 @@ public:
 	bool canReproduce;
 	double reproduceClock;
 
-	void entityEnteredVision(LivingEntity* livingEntity);
-	void entityLeftVision(LivingEntity* livingEntity);
-
 private:
 	std::vector<LivingEntity*> entitiesInVision;
 	double internalClock;

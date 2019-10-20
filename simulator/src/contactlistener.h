@@ -9,8 +9,7 @@ enum ContactType {
 	TERRAIN = 0x0001,
 	CREATURE = 0x0002,
 	PLANT = 0x0004,
-	MOUTH = 0x0008,
-	VISON_CONE = 0x0016
+	MOUTH = 0x0008
 };
 
 class ContactListener : public b2ContactListener
@@ -73,12 +72,6 @@ public:
 				break;
 			}
 		}
-		else if (VisionPresent(contact, creatureA, livingEntity)) {
-			if (creatureA == nullptr || livingEntity == nullptr) return;
-
-			creatureA->entityEnteredVision(livingEntity);
-		}
-
 	}
 
 	bool CreaturePresent(b2Contact* contact, Creature*& creature, b2Fixture*& other) {
@@ -127,37 +120,7 @@ public:
 		return false;
 	}
 
-	bool VisionPresent(b2Contact* contact, Creature*& self, LivingEntity*& livingEntity) {
-		b2Fixture* fixtureA = contact->GetFixtureA();
-		b2Fixture* fixtureB = contact->GetFixtureB();
-		if (!fixtureA->IsSensor() && !fixtureB->IsSensor()) return false;
-
-		ContactType typeA = (ContactType)fixtureA->GetFilterData().categoryBits;
-		ContactType typeB = (ContactType)fixtureB->GetFilterData().categoryBits;
-
-		if (typeA == ContactType::VISON_CONE) {
-			livingEntity = (LivingEntity*)fixtureB->GetUserData();
-			self = (Creature*)fixtureA->GetUserData();
-			return true;
-		}
-
-		if (typeB == ContactType::VISON_CONE) {
-			livingEntity = (LivingEntity*)fixtureA->GetUserData();
-			self = (Creature*)fixtureB->GetUserData();
-			return true;
-		}
-
-		return false;
-	}
-
 	void EndContact(b2Contact* contact) {
-		Creature* creatureA = nullptr;
-		LivingEntity* livingEntity = nullptr;
 
-		if (VisionPresent(contact, creatureA, livingEntity)) {
-			if (creatureA == nullptr || livingEntity == nullptr) return;
-
-			creatureA->entityLeftVision(livingEntity);
-		}
 	}
 };
