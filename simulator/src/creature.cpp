@@ -54,24 +54,109 @@ void Creature::generate()
 	LivingEntity::generate();
 }
 
-void Creature::update(double deltaTime)
+void Creature::updateInternalClocks(double deltaTime)
 {
-	LivingEntity::update(deltaTime);
-
 	internalClock += deltaTime;
 	thinkClock += deltaTime;
 	reproduceClock += deltaTime;
 
 	canReproduce = reproduceClock > 5;
+}
 
-	if (thinkClock < 0.1) {
-		return;
+bool Creature::canThink()
+{
+	bool canThink = thinkClock < 0.1;
+
+	if (canThink) thinkClock = 0;
+
+	return canThink;
+}
+
+LivingEntity* Creature::processVision(std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
+{
+	LivingEntity* focusedEntity = nullptr;
+	double topScore = 0.0f;
+	double distance = 0.0;
+	double angle = 0.0;
+
+	for (int i = 0; i < creatureList.size(); i++) {
+		LivingEntity* entity = creatureList[i];
+		if (entity == this) continue;
+		if (!isEntityInVision(entity, distance, angle)) continue;
+		
+		double entityImportance = rateEntityImportance(entity, distance, angle);
+
+		if (entityImportance > topScore) {
+			focusedEntity = entity;
+			topScore = entityImportance;
+		}
 	}
 
-	thinkClock = 0;
+	return focusedEntity;
+}
 
+bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance)
+{
+	// We avoid sqrt in order to optimise.
+	double viewDistance = 10; // TODO: replace with gene value.
+	double viewDistanceSqr = pow(viewDistance, 2);
+	double distanceSqr =
+		(double)pow(livingEntity->getPosition().x - getPosition().x, 2)
+		+ (double)pow(livingEntity->getPosition().y - getPosition().y, 2);
+	distance = distanceSqr;
+
+	return distanceSqr <= viewDistanceSqr;
+}
+
+bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
+{
+	// Calculate the direction vectors.
+	double rotation = getRotation();
+	glm::vec2 viewDir = glm::vec2(glm::sin(rotation), glm::cos(rotation));
+	glm::vec2 entityDir = glm::vec2(
+		livingEntity->getPosition().x - getPosition().x,
+		livingEntity->getPosition().y - getPosition().y
+	);
+
+	entityDir = glm::normalize(entityDir);
+
+	// Calculate angle
+	double dot = (double)entityDir.x * viewDir.x + (double)entityDir.y * viewDir.y;
+	double det = (double)entityDir.x * viewDir.y - (double)entityDir.y * viewDir.x;
+	angle = atan2(det, dot);
+	angle *= (180.0 / 3.141582653); // Convert to degrees.
+
+	double fieldOfView = 45.0;
+
+	if (debug) std::cout << angle << std::endl;
+
+	return angle <= fieldOfView;
+}
+
+double Creature::rateEntityImportance(LivingEntity* livingEntity, double distance, double angle)
+{
+	return 1.0;
+}
+
+bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle)
+{
+	if (livingEntity == this) return false;
+
+	return isEntityWithinViewDistance(livingEntity, distance)
+		&& isEntityWithinFOV(livingEntity, angle);
+}
+
+void Creature::update(double deltaTime, std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
+{
+	LivingEntity::update(deltaTime);
+
+	// Check if enough time has passed to think again.
+	if (!canThink()) return;
+
+	// Process the entities and decide which one is most worthy of attention.
+	LivingEntity* focusedEntity = processVision(creatureList, plantList);
+	
 	return;
-
 	if (neuralGenome == nullptr) return;
 	// Think
 	double* inputs = new double[5]{
@@ -101,4 +186,9 @@ void Creature::moveForward(double power)
 	if (!isAlive()) return;
 	body->moveForward(power);
 	setMovementCost(10.0 * power);
+}
+
+void Creature::setDebug(bool debug)
+{
+	this->debug = debug;
 }

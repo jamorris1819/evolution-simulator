@@ -42,9 +42,9 @@ glm::vec3& DrawnEntity::getScale()
 	return scale;
 }
 
-float& DrawnEntity::getRotation()
+float DrawnEntity::getRotation()
 {
-	return rotation;
+	return -body->getRotation();
 }
 
 PolygonR* DrawnEntity::getPolygon()

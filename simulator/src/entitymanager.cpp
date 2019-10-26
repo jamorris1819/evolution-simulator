@@ -90,7 +90,7 @@ void EntityManager::update(double deltaTime)
 	}
 
 	for (int i = 0; i < creatureList.size(); i++) {
-		creatureList[i]->update(deltaTime);
+		creatureList[i]->update(deltaTime, creatureList, plantList);
 	}
 
 	for (int i = 0; i < plantList.size(); i++) {

@@ -64,7 +64,7 @@ void initialiseEntities() {
 
 	entityManager->createRandomCreature(glm::vec2(100, 100));
 	entityManager->createRandomCreature(glm::vec2(100, 120));
-
+	entityManager->getTestCreature()->setDebug(true);
 
 	int size = 4;
 

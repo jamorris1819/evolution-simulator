@@ -21,7 +21,7 @@ public:
 	glm::vec3 & getPosition();
 	glm::vec3 & getVelocity();
 	glm::vec3 & getScale();
-	float & getRotation();
+	float getRotation();
 	PolygonR* getPolygon();
 	glm::mat4 getMatrix() const;
 	void setPosition(glm::vec3 position);
