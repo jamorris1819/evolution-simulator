@@ -26,6 +26,8 @@
 #include "hex.h"
 #include "terrainmanager.h"
 #include "plant.h"
+#include "worldwindow.h"
+#include "creaturewindow.h"
 
 using namespace std;
 
@@ -44,6 +46,7 @@ b2World* world;
 ContactListener* contactListener;
 vector<Hex*> terr;
 TerrainManager* terrain;
+Menu* menu;
 
 
 void initialiseEntities() {
@@ -57,27 +60,21 @@ void initialiseEntities() {
 		entityManager->createRandomCreature(glm::vec2(x, y));
 	}*/
 	
+	
 
 	entityManager->createRandomCreature(glm::vec2(100, 100));
 	entityManager->createRandomCreature(glm::vec2(100, 120));
 
 
-	// Bring creature into focus in UI.
-	Menu::focusLivingEntity(entityManager->getTestCreature());
 	int size = 4;
 
 	terrain = new TerrainManager(program);
 	terrain->generate(50, 50, 8);
 	terrain->paintTerrain();
-	Menu::focusTerrainManager(terrain);
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
-
-	Menu::entityManager = entityManager;
-
-	Menu::camera = cam;
 }
 
 double getTime()
@@ -115,6 +112,22 @@ void initialiseBox2D()
 	std::cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
 }
 
+void initialiseUI()
+{
+	// Initialise UI.
+	menu = new Menu();
+	menu->initialise(window);
+
+	WorldWindow* worldWindow = new WorldWindow();
+	worldWindow->terrain = terrain;
+	worldWindow->entityManager = entityManager;
+	menu->addWindow(worldWindow);
+
+	CreatureWindow* creatureWindow = new CreatureWindow();
+	creatureWindow->creature = entityManager->getTestCreature();
+	menu->addWindow(creatureWindow);
+}
+
 void initialise()
 {
 	// Output some data to screen.
@@ -132,12 +145,10 @@ void initialise()
 	
 	lastTime = getTime();
 
-	// Initialise UI.
-	Menu::initialise(window);
-
-
 	initialiseBox2D();
 	initialiseEntities();
+	initialiseUI();
+
 	contactListener = new ContactListener(entityManager);
 	world->SetContactListener(contactListener);
 
@@ -148,11 +159,6 @@ void initialise()
 	glfwSetCursorPosCallback(window, Input::mouseMoveCallback);
 
 	glfwMaximizeWindow(window);
-	
-
-	//for (int i = 0; i < 100000; i++) {
-		//delete size;
-	//}
 }
 
 void render() {
@@ -240,7 +246,7 @@ int main(int argc, char **argv)
 		update();
 		render();
 
-		Menu::renderUI();
+		menu->render();
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -250,6 +256,6 @@ int main(int argc, char **argv)
 	}
 
 	glfwTerminate();
-	Menu::destroy();
+	menu->unload();
 	return 0;
 }

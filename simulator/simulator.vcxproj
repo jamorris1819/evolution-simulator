@@ -26,6 +26,7 @@
     <ClCompile Include="src\connectiongene.cpp" />
     <ClCompile Include="src\creature.cpp" />
     <ClCompile Include="src\creaturebody.cpp" />
+    <ClCompile Include="src\creaturewindow.cpp" />
     <ClCompile Include="src\drawnentity.cpp" />
     <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\entitymanager.cpp" />
@@ -54,8 +55,11 @@
     <ClCompile Include="src\triangle.cpp" />
     <ClCompile Include="src\vertex.cpp" />
     <ClCompile Include="src\vertexarrayobject.cpp" />
+    <ClCompile Include="src\worldwindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\creaturewindow.h" />
+    <ClInclude Include="src\menuwindow.h" />
     <ClInclude Include="src\base.h" />
     <ClInclude Include="src\body.h" />
     <ClInclude Include="src\camera.h" />
@@ -98,6 +102,7 @@
     <ClInclude Include="src\triangle.h" />
     <ClInclude Include="src\vertex.h" />
     <ClInclude Include="src\vertexarrayobject.h" />
+    <ClInclude Include="src\worldwindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

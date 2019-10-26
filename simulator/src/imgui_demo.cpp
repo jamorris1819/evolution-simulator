@@ -68,6 +68,7 @@ Index of this file:
 #else
 #include <stdint.h>         // intptr_t
 #endif
+#include <iostream>
 
 #ifdef _MSC_VER
 #pragma warning (disable: 4996) // 'This function or variable may be unsafe': strcpy, strdup, sprintf, vsnprintf, sscanf, fopen
@@ -3762,6 +3763,7 @@ struct ExampleAppLog
         if (!ImGui::Begin(title, p_open))
         {
             ImGui::End();
+			std::cout << "test" << std::endl;
             return;
         }
 
