@@ -170,7 +170,7 @@ void update() {
 	// Calculate delta time.
 	double currentTime = getTime();
 	double elapsedTime = currentTime - lastTime;
-	double deltaTime = elapsedTime * 0.001;
+	double deltaTime = abs(elapsedTime * 0.001);
 	lastTime = currentTime;
 
 	cam->update(deltaTime);

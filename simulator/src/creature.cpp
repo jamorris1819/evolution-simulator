@@ -102,20 +102,3 @@ void Creature::moveForward(double power)
 	body->moveForward(power);
 	setMovementCost(10.0 * power);
 }
-
-void Creature::entityEnteredVision(LivingEntity* livingEntity)
-{
-	std::cout << "Something came into vision" << std::endl;
-	entitiesInVision.push_back(livingEntity);
-}
-
-void Creature::entityLeftVision(LivingEntity* livingEntity)
-{
-	for (int i = 0; i < entitiesInVision.size(); i++) {
-		if (entitiesInVision[i] == livingEntity) {
-			entitiesInVision.erase(entitiesInVision.begin() + i);
-			std::cout << "Something left vision" << std::endl;
-			return;
-		}
-	}
-}
