@@ -34,6 +34,8 @@ void Menu::render()
 	ImGui::NewFrame();
 	ImGui::ShowDemoWindow();
 
+	renderMenuBar();
+
 	for (int i = 0; i < windows.size(); i++) {
 		MenuWindow* menuWindow = windows[i];
 		if (menuWindow->isVisible()) menuWindow->render();
@@ -122,18 +124,12 @@ void Menu::renderOverlay()
 void Menu::renderMenuBar()
 {
 	if (ImGui::BeginMainMenuBar()) {
-		if (ImGui::BeginMenu("File")) {
-			ImGui::MenuItem("New");
-			ImGui::EndMenu();
+		for (int i = 0; i < windows.size(); i++) {
+			if (ImGui::MenuItem(windows[i]->windowName)) {
+				windows[i]->setVisible(!windows[i]->isVisible());
+			}
 		}
 
-		if (ImGui::BeginMenu("Windows")) {
-			ImGui::MenuItem("Main window");
-			ImGui::MenuItem("Debug window");
-			ImGui::MenuItem("Creature window");
-			ImGui::MenuItem("Environment window");
-			ImGui::EndMenu();
-		}
 		ImGui::EndMainMenuBar();
 	}
 }
