@@ -28,6 +28,7 @@
 #include "plant.h"
 #include "worldwindow.h"
 #include "creaturewindow.h"
+#include "bushbody.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ float lastTime;
 float width = 1920.0f;
 float height = 1080.0f;
 double* frequency;
+double counter;
 
 EntityManager* entityManager;
 
@@ -54,14 +56,14 @@ void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	for (int i = 0; i < 100; i++) {
+	/*for (int i = 0; i < 100; i++) {
 		int x = (rand() % 400);
 		int y = (rand() % 400);
 		entityManager->createRandomCreature(glm::vec2(x, y));
-	}
+	}*/
 	
 	
-
+	entityManager->createPlant(glm::vec2(160, 100));
 	entityManager->createRandomCreature(glm::vec2(150, 100));
 	entityManager->createRandomCreature(glm::vec2(150, 120));
 	entityManager->getTestCreature()->setDebug(true);
@@ -76,6 +78,7 @@ void initialiseEntities() {
 	cam = new Camera(glm::vec2(0, 0), program);
 	cam->initialise(width, height, 20.0f);
 	cam->position = -entityManager->getTestCreature()->getPosition();
+	counter = 0;
 }
 
 double getTime()
@@ -173,6 +176,7 @@ void update() {
 	double elapsedTime = currentTime - lastTime;
 	double deltaTime = abs(elapsedTime * 0.001);
 	lastTime = currentTime;
+	counter += deltaTime;
 
 	cam->update(deltaTime);
 	entityManager->update(deltaTime);
@@ -193,7 +197,6 @@ void update() {
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
 		entityManager->getTestCreature()->body->turnRight(0.75f);
 	}
-
 }
 
 void error_callback(int error, const char* description)

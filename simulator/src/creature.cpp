@@ -189,3 +189,12 @@ void Creature::setDebug(bool debug)
 {
 	this->debug = debug;
 }
+
+void Creature::canEat(LivingEntity* livingEntity)
+{
+	livingEntity->beConsumed();
+}
+
+void Creature::beConsumed()
+{
+}

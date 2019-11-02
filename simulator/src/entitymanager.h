@@ -18,9 +18,9 @@ public:
 	Creature* createChildCreatureQueue(Creature* creatureA, Creature* creatureB, glm::vec2 position);
 	void update(double deltaTime);
 	void render();
+	std::vector<Plant*> plantList;
 private:
 	std::vector <Creature*> creatureList;
-	std::vector<Plant*> plantList;
 	std::queue<Creature*> generationQueue;
 	GLuint shader;
 	b2World* world;

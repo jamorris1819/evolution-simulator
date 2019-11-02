@@ -15,6 +15,7 @@ public:
 	double getMaxEnergy();
 	Genome* getGenome();
 	void setGenome(Genome* genome);
+	virtual void beConsumed() = 0;
 
 protected:
 	void setHealth(double health);

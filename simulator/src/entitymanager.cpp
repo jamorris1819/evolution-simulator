@@ -1,4 +1,5 @@
 #include "entitymanager.h"
+#include "bush.h"
 
 EntityManager::EntityManager(GLuint shader, b2World* world)
 {
@@ -8,7 +9,7 @@ EntityManager::EntityManager(GLuint shader, b2World* world)
 
 void EntityManager::createPlant(glm::vec2 position)
 {
-	Plant* plant = new Plant(shader, world, glm::vec3(position, 0));
+	Plant* plant = new Bush(shader, world, glm::vec3(position, 0));
 	Genome* genome = new Genome(false);
 	genome->generatePlant();
 	plant->setGenome(genome);

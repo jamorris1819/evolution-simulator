@@ -68,7 +68,8 @@ public:
 				std::cout << "you can't eat terrain" << std::endl;
 				break;
 			case ContactType::PLANT:
-				std::cout << "can eat food" << std::endl;
+				std::cout << "nom nom nom" << std::endl;
+				creatureA->canEat((LivingEntity*)other->GetUserData());
 				break;
 			}
 		}

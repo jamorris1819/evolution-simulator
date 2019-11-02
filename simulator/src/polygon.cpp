@@ -6,6 +6,7 @@
 	overrideColour = glm::vec3(1, 0, 1);	// magenta so it's obvious this hasn't been set.
 	useOverrideColour = false;
 	vao = nullptr;
+	visible = true;
 }
 
 PolygonR::~PolygonR()
@@ -15,6 +16,7 @@ PolygonR::~PolygonR()
 
 void PolygonR::render(glm::mat4 matrix)
 {
+	if (!visible) return;
 	glUseProgram(shaderID);
 
 	// Tell fragment shader if we're overriding the colour.

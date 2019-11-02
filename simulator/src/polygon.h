@@ -19,6 +19,7 @@ public:
 	GLuint shaderID;
 	VertexArrayObject* vao;
 	void enableOverrideColour(glm::vec3 overrideColour);
+	bool visible;
 protected:
 	glm::vec3 overrideColour;
 	void setColour();

@@ -22,6 +22,9 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\base.cpp" />
     <ClCompile Include="src\body.cpp" />
+    <ClCompile Include="src\bush.cpp" />
+    <ClCompile Include="src\bushbody.cpp" />
+    <ClCompile Include="src\bushbody.h" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\connectiongene.cpp" />
     <ClCompile Include="src\creature.cpp" />
@@ -58,6 +61,7 @@
     <ClCompile Include="src\worldwindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\bush.h" />
     <ClInclude Include="src\creaturewindow.h" />
     <ClInclude Include="src\menuwindow.h" />
     <ClInclude Include="src\base.h" />

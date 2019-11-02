@@ -19,23 +19,20 @@
     <Filter Include="Source Files\ui\imgui">
       <UniqueIdentifier>{2a957ea6-9738-4ee0-b711-a21ff0fce2d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\genetics">
+      <UniqueIdentifier>{1d712ea1-8340-40c7-abd7-0f649b4800c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{220a1d27-332e-4a35-9136-5e17e2f1505b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\living">
+      <UniqueIdentifier>{54c96e03-2782-4fa0-b040-c719d443b6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\living\body">
+      <UniqueIdentifier>{149c5160-764c-4d67-8314-4e63013e398e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\netdata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\neuralgenome.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nodegene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plantbody.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\polygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -72,12 +69,6 @@
     <ClCompile Include="src\connectiongene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\creature.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\creaturebody.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\drawnentity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,12 +76,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\entitymanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\genome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hex.cpp">
@@ -132,27 +117,48 @@
     <ClCompile Include="src\creaturewindow.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\gene.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\genome.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\neuralgenome.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\netdata.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nodegene.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\creaturebody.cpp">
+      <Filter>Source Files\living\body</Filter>
+    </ClCompile>
+    <ClCompile Include="src\creature.cpp">
+      <Filter>Source Files\living</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plant.cpp">
+      <Filter>Source Files\living</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plantbody.cpp">
+      <Filter>Source Files\living\body</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bushbody.h">
+      <Filter>Source Files\living\body</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bushbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\netdata.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\netrender.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\neuralgenome.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nodegene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\noiselayer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plant.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plantbody.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\polygon.h">
@@ -191,12 +197,6 @@
     <ClInclude Include="src\contactlistener.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\creature.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\creaturebody.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\drawnentity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -207,15 +207,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Function.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\genemarker.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\genome.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\hex.h">
@@ -268,6 +259,39 @@
     </ClInclude>
     <ClInclude Include="src\creaturewindow.h">
       <Filter>Source Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gene.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\genemarker.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\genome.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\neuralgenome.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\netdata.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nodegene.h">
+      <Filter>Source Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\creaturebody.h">
+      <Filter>Source Files\living\body</Filter>
+    </ClInclude>
+    <ClInclude Include="src\creature.h">
+      <Filter>Source Files\living</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plant.h">
+      <Filter>Source Files\living</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plantbody.h">
+      <Filter>Source Files\living\body</Filter>
+    </ClInclude>
+    <ClInclude Include="src\bush.h">
+      <Filter>Source Files\living</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

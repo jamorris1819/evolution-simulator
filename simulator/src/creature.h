@@ -19,6 +19,8 @@ public:
 	bool canReproduce;
 	double reproduceClock;
 	void setDebug(bool debug);
+	void canEat(LivingEntity* livingEntity);
+	void beConsumed() override;
 
 private:
 	bool debug;

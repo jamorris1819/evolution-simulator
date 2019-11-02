@@ -2,7 +2,6 @@
 
 Plant::Plant(GLuint shader, b2World* world, glm::vec3 position) : LivingEntity(position)
 {
-	body = new PlantBody(shader, world);
 }
 
 void Plant::generate()
