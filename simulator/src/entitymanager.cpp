@@ -24,6 +24,7 @@ Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGeno
 	newCreature->setNeuralGenome(neuralGenome);
 	newCreature->canReproduce = true;
 	newCreature->generate();
+	newCreature->body->setRotation((rand() % 360) * 3.141582653f / 180);
 	creatureList.push_back(newCreature);
 
 	return newCreature;

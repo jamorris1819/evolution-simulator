@@ -128,8 +128,6 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
 
 	double fieldOfView = 45.0;
 
-	if (debug) std::cout << angle << std::endl;
-
 	return angle <= fieldOfView;
 }
 
@@ -152,11 +150,10 @@ void Creature::update(double deltaTime, std::vector<Creature*>& creatureList, st
 
 	// Check if enough time has passed to think again.
 	if (!canThink()) return;
-
+	return;
 	// Process the entities and decide which one is most worthy of attention.
 	LivingEntity* focusedEntity = processVision(creatureList, plantList);
 	
-	return;
 	if (neuralGenome == nullptr) return;
 	// Think
 	double* inputs = new double[5]{

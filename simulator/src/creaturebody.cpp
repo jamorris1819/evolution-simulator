@@ -123,6 +123,18 @@ void CreatureBody::generateEyes()
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
+
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i].setPosition(vertices[i].getPosition() - glm::vec2(-0.3f, 0.35f));
+		vertices[i].setPosition((vertices[i].getPosition() * 0.35f) + glm::vec2(0, 0.05f));
+		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(-0.3f, 0.35f));
+		vertices[i].setColour(glm::vec3(0, 0, 0));
+	}
+	p = new PolygonR(shaderID);
+	p->setVertices(vertices);
+	p->load();
+	polygons.push_back(p);
+
 	vertices.clear();
 
 	// Generate the eye.
@@ -135,6 +147,17 @@ void CreatureBody::generateEyes()
 	}
 
 	// Assign these vertices to the polygon model.
+	p = new PolygonR(shaderID);
+	p->setVertices(vertices);
+	p->load();
+	polygons.push_back(p);
+
+	for (int i = 0; i < vertices.size(); i++) {
+		vertices[i].setPosition(vertices[i].getPosition() - glm::vec2(0.3f, 0.35f));
+		vertices[i].setPosition((vertices[i].getPosition() * 0.35f) + glm::vec2(0, 0.05f));
+		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(0.3f, 0.35f));
+		vertices[i].setColour(glm::vec3(0, 0, 0));
+	}
 	p = new PolygonR(shaderID);
 	p->setVertices(vertices);
 	p->load();

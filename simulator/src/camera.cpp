@@ -30,7 +30,7 @@ void Camera::initialise(float width, float height, float speed)
 	moveSpeed = speed;
 	zoom = 1.0f;
 
-	minZoom = 0.02f;
+	minZoom = 0.002f;
 	maxZoom = 1.9f;
 
 	viewport = glm::vec4(0, 0, 1920 / ppm, 1080 / ppm);

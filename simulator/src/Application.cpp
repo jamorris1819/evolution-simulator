@@ -54,16 +54,16 @@ void initialiseEntities() {
 	// Initialise entity manager and create a test creature.
 	entityManager = new EntityManager(program, world);
 
-	/*(for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < 100; i++) {
 		int x = (rand() % 400);
 		int y = (rand() % 400);
 		entityManager->createRandomCreature(glm::vec2(x, y));
-	}*/
+	}
 	
 	
 
-	entityManager->createRandomCreature(glm::vec2(100, 100));
-	entityManager->createRandomCreature(glm::vec2(100, 120));
+	entityManager->createRandomCreature(glm::vec2(150, 100));
+	entityManager->createRandomCreature(glm::vec2(150, 120));
 	entityManager->getTestCreature()->setDebug(true);
 
 	int size = 4;
