@@ -5,7 +5,7 @@ Bush::Bush(GLuint shader, b2World* world, glm::vec3 position) : Plant(shader, wo
 {
 	body = new BushBody(shader, world);
 	availableFruit = 0;
-	timeToReplenish = 4 + (rand() % 6);
+	timeToReplenish = 4 + (double)(rand() % 6);
 	internalTimer = 0;
 	maxFruit = 0;
 }
@@ -14,14 +14,19 @@ void Bush::generate()
 {
 	Plant::generate();
 	maxFruit = ((BushBody*)(PlantBody*)body)->fruit.size();
+	availableFruit = maxFruit / 2;
+	BushBody* bushBody = (BushBody*)(PlantBody*)body;
+	bushBody->setVisibleFruit(availableFruit);
 }
 
-void Bush::beConsumed()
+double Bush::beConsumed()
 {
 	availableFruit--;
 	if (availableFruit < 0) availableFruit = 0;
 	BushBody* bushBody = (BushBody*)(PlantBody*)body;
 	bushBody->setVisibleFruit(availableFruit);
+
+	return 25;
 }
 
 void Bush::update(double deltaTime)

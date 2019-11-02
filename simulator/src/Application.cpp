@@ -190,12 +190,20 @@ void update() {
 		entityManager->getTestCreature()->moveForward(0.6f);
 	}
 
+	if (Input::isPressed(GLFW_KEY_DOWN)) {
+		entityManager->getTestCreature()->moveForward(-0.6f);
+	}
+
 	if (Input::isDown(GLFW_KEY_LEFT)) {
 		entityManager->getTestCreature()->body->turnLeft(0.75f);
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
 		entityManager->getTestCreature()->body->turnRight(0.75f);
+	}
+
+	if (Input::isPressed(GLFW_KEY_SPACE)) {
+		entityManager->getTestCreature()->consume();
 	}
 }
 

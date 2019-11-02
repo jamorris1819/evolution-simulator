@@ -19,10 +19,15 @@ public:
 	bool canReproduce;
 	double reproduceClock;
 	void setDebug(bool debug);
-	void canEat(LivingEntity* livingEntity);
-	void beConsumed() override;
+	void consume();
+	double beConsumed() override;
+	void setContactEntity(LivingEntity* livingEntity);
+	void clearContactEntity();
 
 private:
+	double eatCooldown;
+	double eatClock;
+	LivingEntity* contactEntity;
 	bool debug;
 	std::vector<LivingEntity*> entitiesInVision;
 	double internalClock;
@@ -31,6 +36,7 @@ private:
 
 	void updateInternalClocks(double deltaTime);
 	bool canThink();
+	bool canEat();
 	LivingEntity* processVision(std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList);
 	bool isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle);
 	bool isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance);

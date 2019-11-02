@@ -68,8 +68,7 @@ public:
 				std::cout << "you can't eat terrain" << std::endl;
 				break;
 			case ContactType::PLANT:
-				std::cout << "nom nom nom" << std::endl;
-				creatureA->canEat((LivingEntity*)other->GetUserData());
+				creatureA->setContactEntity((LivingEntity*)other->GetUserData());
 				break;
 			}
 		}
@@ -122,6 +121,21 @@ public:
 	}
 
 	void EndContact(b2Contact* contact) {
+		Creature* creatureA = nullptr;
+		Creature* creatureB = nullptr;
+		LivingEntity* livingEntity = nullptr;
+		b2Fixture* other = nullptr;
 
+		if (MouthPresent(contact, creatureA, other)) {
+			if (creatureA == nullptr || other == nullptr) return;
+
+			ContactType type = (ContactType)other->GetFilterData().categoryBits;
+
+			switch (type) {
+			case ContactType::PLANT:
+				creatureA->clearContactEntity();
+				break;
+			}
+		}
 	}
 };

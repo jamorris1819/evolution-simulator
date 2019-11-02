@@ -33,7 +33,7 @@ void PlantBody::generatePhysicsBody()
 
 	b2CircleShape circleShape;
 	circleShape.m_p.Set(0, 0); //position, relative to body position
-	circleShape.m_radius = size / 2.0f; //radius
+	circleShape.m_radius = size; //radius
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &circleShape;

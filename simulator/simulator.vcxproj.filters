@@ -148,10 +148,10 @@
       <Filter>Source Files\living\body</Filter>
     </ClCompile>
     <ClCompile Include="src\bushbody.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\living\body</Filter>
     </ClCompile>
     <ClCompile Include="src\bush.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\living</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

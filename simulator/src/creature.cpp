@@ -11,6 +11,9 @@ Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEn
 	thinkClock = 0;
 	canReproduce = false;
 	reproduceClock = 0;
+	eatCooldown = 0.5;
+	eatClock = 0;
+	setLivingCost(10);
 }
 
 Creature::~Creature()
@@ -59,17 +62,27 @@ void Creature::updateInternalClocks(double deltaTime)
 	internalClock += deltaTime;
 	thinkClock += deltaTime;
 	reproduceClock += deltaTime;
+	eatClock += deltaTime;
 
 	canReproduce = reproduceClock > 5;
 }
 
 bool Creature::canThink()
 {
-	bool canThink = thinkClock < 0.1;
+	bool canThink = thinkClock > 0.1;
 
 	if (canThink) thinkClock = 0;
 
 	return canThink;
+}
+
+bool Creature::canEat()
+{
+	bool canEat = eatClock > eatCooldown;
+
+	if (canEat) eatClock = 0;
+
+	return canEat;
 }
 
 LivingEntity* Creature::processVision(std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
@@ -147,12 +160,14 @@ bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, do
 void Creature::update(double deltaTime, std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
 {
 	LivingEntity::update(deltaTime);
+	updateInternalClocks(deltaTime);
 
 	// Check if enough time has passed to think again.
 	if (!canThink()) return;
-	return;
+
 	// Process the entities and decide which one is most worthy of attention.
 	LivingEntity* focusedEntity = processVision(creatureList, plantList);
+
 	
 	if (neuralGenome == nullptr) return;
 	// Think
@@ -168,12 +183,12 @@ void Creature::update(double deltaTime, std::vector<Creature*>& creatureList, st
 	delete[] inputs;
 
 	// Process decision.
-	if (decision[0] > 0.65) body->turnLeft(0.4f);
+	/*if (decision[0] > 0.65) body->turnLeft(0.4f);
 	if (decision[1] > 0.65) body->turnRight(0.4f);
 	if (decision[2] > 0.5) {
 		double power = (decision[2] - 0.5) / 0.5;
 		moveForward(power);
-	}
+	}*/
 
 	delete[] decision;
 }
@@ -190,11 +205,26 @@ void Creature::setDebug(bool debug)
 	this->debug = debug;
 }
 
-void Creature::canEat(LivingEntity* livingEntity)
+void Creature::consume()
 {
-	livingEntity->beConsumed();
+	if (!canEat() || contactEntity == nullptr) return;
+
+	contactEntity->beConsumed();
+	setEnergy(getEnergy() + 10);
+	cout << "eaten" << endl;
 }
 
-void Creature::beConsumed()
+double Creature::beConsumed()
 {
+	return 0;
+}
+
+void Creature::setContactEntity(LivingEntity* livingEntity)
+{
+	this->contactEntity = livingEntity;
+}
+
+void Creature::clearContactEntity()
+{
+	contactEntity = nullptr;
 }

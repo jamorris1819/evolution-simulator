@@ -41,7 +41,7 @@ void LivingEntity::kill()
 
 void LivingEntity::setHealth(double health)
 {
-	this->health = health;
+	this->health = health > maxHealth ? maxHealth : health;
 }
 
 double LivingEntity::getHealth()
@@ -51,7 +51,7 @@ double LivingEntity::getHealth()
 
 void LivingEntity::setEnergy(double energy)
 {
-	this->energy = energy;
+	this->energy = energy > maxEnergy ? maxEnergy : energy;
 }
 
 double LivingEntity::getEnergy()

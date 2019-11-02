@@ -4,7 +4,7 @@
 class Bush : public Plant {
 public:
 	Bush(GLuint shader, b2World* world, glm::vec3 position);
-	void beConsumed() override;
+	double beConsumed() override;
 	void update(double deltaTime) override;
 	void generate() override;
 private:
