@@ -36,7 +36,7 @@ void TerrainManager::render()
 {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			tiles[x][y]->render();
+			tiles[y][x]->render();
 		}
 	}
 }
@@ -164,7 +164,7 @@ void TerrainManager::paintTerrain()
 {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			Hex* hex = tiles[x][y];
+			Hex* hex = tiles[y][x];
 
 			float z = getHeightNoise(x, y);
 
@@ -175,7 +175,7 @@ void TerrainManager::paintTerrain()
 
 			
 
-			float temp = getTemperature(y, x);
+			float temp = getTemperature(x, y);
 
 			hex->setFade(z < 0.15f && temp > 0.3f); // fade the ocean
 
@@ -214,7 +214,7 @@ void TerrainManager::update(double deltaTime)
 {
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
-			tiles[x][y]->update(deltaTime);
+			tiles[y][x]->update(deltaTime);
 		}
 	}
 }

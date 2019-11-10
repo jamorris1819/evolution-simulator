@@ -6,7 +6,7 @@ class LivingEntity : public DrawnEntity {
 public:
 	LivingEntity(glm::vec3 position);
 	~LivingEntity();
-	virtual void update(double deltaTime);
+	virtual void update(double deltaTime, std::vector<LivingEntity*>& entityList);
 	void kill();
 	bool isAlive();
 	double getHealth();

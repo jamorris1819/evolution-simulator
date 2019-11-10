@@ -29,9 +29,9 @@ double Bush::beConsumed()
 	return 25;
 }
 
-void Bush::update(double deltaTime)
+void Bush::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 {
-	Plant::update(deltaTime);
+	Plant::update(deltaTime, entityList);
 
 	// If fruit is missing, replenish it.
 	if(availableFruit < maxFruit) internalTimer += deltaTime;

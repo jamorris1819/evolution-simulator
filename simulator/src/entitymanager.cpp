@@ -15,7 +15,7 @@ void EntityManager::createPlant(glm::vec2 position)
 	plant->setGenome(genome);
 	plant->generate();
 
-	plantList.push_back(plant);
+	entityList.push_back(plant);
 }
 
 Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position)
@@ -26,7 +26,7 @@ Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGeno
 	newCreature->canReproduce = true;
 	newCreature->generate();
 	newCreature->body->setRotation((rand() % 360) * 3.141582653f / 180);
-	creatureList.push_back(newCreature);
+	entityList.push_back(newCreature);
 
 	return newCreature;
 }
@@ -87,26 +87,18 @@ void EntityManager::update(double deltaTime)
 			Creature* creature = generationQueue.front();
 			generationQueue.pop();
 			creature->generate();
-			creatureList.push_back(creature);
+			entityList.push_back(creature);
 		}
 	}
 
-	for (int i = 0; i < creatureList.size(); i++) {
-		creatureList[i]->update(deltaTime, creatureList, plantList);
-	}
-
-	for (int i = 0; i < plantList.size(); i++) {
-		plantList[i]->update(deltaTime);
+	for (int i = 0; i < entityList.size(); i++) {
+		entityList[i]->update(deltaTime, entityList);
 	}
 }
 
 void EntityManager::render()
 {
-	for (int i = 0; i < creatureList.size(); i++) {
-		creatureList[i]->render();
-	}
-
-	for (int i = 0; i < plantList.size(); i++) {
-		plantList[i]->render();
+	for (int i = 0; i < entityList.size(); i++) {
+		entityList[i]->render();
 	}
 }

@@ -63,10 +63,10 @@ void initialiseEntities() {
 	}*/
 	
 	
-	entityManager->createPlant(glm::vec2(160, 100));
 	entityManager->createRandomCreature(glm::vec2(150, 100));
 	entityManager->createRandomCreature(glm::vec2(150, 120));
-	entityManager->getTestCreature()->setDebug(true);
+	entityManager->createPlant(glm::vec2(160, 100));
+	((Creature*)entityManager->getTestCreature())->setDebug(true);
 
 	int size = 4;
 
@@ -128,7 +128,7 @@ void initialiseUI()
 	menu->addWindow(worldWindow);
 
 	CreatureWindow* creatureWindow = new CreatureWindow();
-	creatureWindow->creature = entityManager->getTestCreature();
+	creatureWindow->creature = (Creature*)entityManager->getTestCreature();
 	menu->addWindow(creatureWindow);
 }
 
@@ -187,23 +187,23 @@ void update() {
 
 	// Debug creature controller.
 	if (Input::isDown(GLFW_KEY_UP)) {
-		entityManager->getTestCreature()->moveForward(0.6f);
+		((Creature*)entityManager->getTestCreature())->moveForward(0.6f);
 	}
 
 	if (Input::isPressed(GLFW_KEY_DOWN)) {
-		entityManager->getTestCreature()->moveForward(-0.6f);
+		((Creature*)entityManager->getTestCreature())->moveForward(-0.6f);
 	}
 
 	if (Input::isDown(GLFW_KEY_LEFT)) {
-		entityManager->getTestCreature()->body->turnLeft(0.75f);
+		((Creature*)entityManager->getTestCreature())->body->turnLeft(0.75f);
 	}
 
 	if (Input::isDown(GLFW_KEY_RIGHT)) {
-		entityManager->getTestCreature()->body->turnRight(0.75f);
+		((Creature*)entityManager->getTestCreature())->body->turnRight(0.75f);
 	}
 
 	if (Input::isPressed(GLFW_KEY_SPACE)) {
-		entityManager->getTestCreature()->consume();
+		((Creature*)entityManager->getTestCreature())->consume();
 	}
 }
 

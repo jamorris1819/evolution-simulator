@@ -5,7 +5,7 @@ class Bush : public Plant {
 public:
 	Bush(GLuint shader, b2World* world, glm::vec3 position);
 	double beConsumed() override;
-	void update(double deltaTime) override;
+	void update(double deltaTime, std::vector<LivingEntity*>& entityList) override;
 	void generate() override;
 private:
 	int availableFruit;

@@ -14,7 +14,7 @@ public:
 	void setNeuralGenome(NeuralGenome* neuralGenome);
 	NeuralGenome* getNeuralGenome();
 	virtual void generate();
-	void update(double deltaTime, std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList);
+	void update(double deltaTime, std::vector<LivingEntity*>& entityList);
 	void moveForward(double power);
 	bool canReproduce;
 	double reproduceClock;
@@ -37,7 +37,7 @@ private:
 	void updateInternalClocks(double deltaTime);
 	bool canThink();
 	bool canEat();
-	LivingEntity* processVision(std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList);
+	LivingEntity* processVision(std::vector<LivingEntity*>& entityList);
 	bool isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle);
 	bool isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance);
 	bool isEntityWithinFOV(LivingEntity* livingEntity, double& angle);

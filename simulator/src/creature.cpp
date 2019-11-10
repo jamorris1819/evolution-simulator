@@ -85,19 +85,24 @@ bool Creature::canEat()
 	return canEat;
 }
 
-LivingEntity* Creature::processVision(std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
+LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList)
 {
 	LivingEntity* focusedEntity = nullptr;
 	double topScore = 0.0f;
 	double distance = 0.0;
 	double angle = 0.0;
 
-	for (int i = 0; i < creatureList.size(); i++) {
-		LivingEntity* entity = creatureList[i];
+	entitiesInVision.clear();
+	entitiesInVision.reserve(32);
+
+	for (int i = 0; i < entityList.size(); i++) {
+		LivingEntity* entity = entityList[i];
 		if (entity == this) continue;
 		if (!isEntityInVision(entity, distance, angle)) continue;
-		
+
 		double entityImportance = rateEntityImportance(entity, distance, angle);
+
+		entitiesInVision.push_back(entity);
 
 		if (entityImportance > topScore) {
 			focusedEntity = entity;
@@ -111,7 +116,7 @@ LivingEntity* Creature::processVision(std::vector<Creature*>& creatureList, std:
 bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance)
 {
 	// We avoid sqrt in order to optimise.
-	double viewDistance = 10; // TODO: replace with gene value.
+	double viewDistance = 35; // TODO: replace with gene value.
 	double viewDistanceSqr = pow(viewDistance, 2);
 	double distanceSqr =
 		(double)pow(livingEntity->getPosition().x - getPosition().x, 2)
@@ -157,17 +162,16 @@ bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, do
 		&& isEntityWithinFOV(livingEntity, angle);
 }
 
-void Creature::update(double deltaTime, std::vector<Creature*>& creatureList, std::vector<Plant*>& plantList)
+void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 {
-	LivingEntity::update(deltaTime);
+	LivingEntity::update(deltaTime, entityList);
 	updateInternalClocks(deltaTime);
 
 	// Check if enough time has passed to think again.
 	if (!canThink()) return;
 
 	// Process the entities and decide which one is most worthy of attention.
-	LivingEntity* focusedEntity = processVision(creatureList, plantList);
-
+	LivingEntity* focusedEntity = processVision(entityList);
 	
 	if (neuralGenome == nullptr) return;
 	// Think

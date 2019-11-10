@@ -17,7 +17,7 @@ LivingEntity::~LivingEntity()
 
 }
 
-void LivingEntity::update(double deltaTime)
+void LivingEntity::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 {
 	DrawnEntity::update(deltaTime);
 
