@@ -23,12 +23,12 @@ public:
 	void mutateShiftWeight();
 	void mutateRandomWeight();
 	void mutateToggleConnection();
+	double activateFunction(int node, double value);
 private:
 	std::vector<std::pair<int, NodeGene>> nodes;
 	std::vector<std::pair<int, ConnectionGene>> connections;
 	NodeGene& getNode(int index);
 
-	double activateFunction(int node, double value);
 	void setNodeValue(int node, double value);
 	double recurseNetwork(int node, double *inputs);
 

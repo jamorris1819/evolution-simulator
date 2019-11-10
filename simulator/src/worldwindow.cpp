@@ -133,7 +133,7 @@ void WorldWindow::renderWindow()
 				for (int y = 0; y < terrain->getHeight(); y++) {
 					for (int x = 0; x < terrain->getWidth(); x++) {
 						if (rand() % 3 != 1) continue;
-						float noise = terrain->getHeightNoise(y, x);
+						float noise = terrain->getHeightNoise(x, y);
 						float temp = terrain->getTemperature(x, y);
 						if (noise < 0.2f || (temp < 0.3f || temp > 0.7f)) {
 							continue;

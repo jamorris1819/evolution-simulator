@@ -17,7 +17,7 @@ NeuralGenome::NeuralGenome(int inputs, int outputs)
 	// Create output nodes.
 	for (int i = 0; i < outputs; i++) {
 		NodeGene nodeGene(NodeType::OUTPUT);
-		nodeGene.setActivationFunction(ActivationFunction::SIGMOID);
+		nodeGene.setActivationFunction(ActivationFunction::NONE);
 		nodes.push_back(std::make_pair(nodes.size(), nodeGene));
 	}
 

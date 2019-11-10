@@ -14,6 +14,9 @@ Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEn
 	eatCooldown = 0.5;
 	eatClock = 0;
 	setLivingCost(10);
+
+	viewDistance = 20.0;
+	viewAngle = 45.0;
 }
 
 Creature::~Creature()
@@ -85,12 +88,15 @@ bool Creature::canEat()
 	return canEat;
 }
 
-LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList)
+LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList, double& distance, double &angle)
 {
 	LivingEntity* focusedEntity = nullptr;
 	double topScore = 0.0f;
-	double distance = 0.0;
-	double angle = 0.0;
+	double topDistance = 0.0;
+	double topAngle = 0.0;
+
+	double tempDistance = 0.0;
+	double tempAngle = 0.0;
 
 	entitiesInVision.clear();
 	entitiesInVision.reserve(32);
@@ -98,25 +104,28 @@ LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList)
 	for (int i = 0; i < entityList.size(); i++) {
 		LivingEntity* entity = entityList[i];
 		if (entity == this) continue;
-		if (!isEntityInVision(entity, distance, angle)) continue;
+		if (!isEntityInVision(entity, tempDistance, tempAngle)) continue;
 
-		double entityImportance = rateEntityImportance(entity, distance, angle);
+		double entityImportance = rateEntityImportance(entity, tempDistance, tempAngle);
 
 		entitiesInVision.push_back(entity);
 
 		if (entityImportance > topScore) {
 			focusedEntity = entity;
 			topScore = entityImportance;
+			topDistance = tempDistance;
+			topAngle = tempAngle;
 		}
 	}
 
+	distance = topDistance;
+	angle = topAngle;
 	return focusedEntity;
 }
 
 bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance)
 {
 	// We avoid sqrt in order to optimise.
-	double viewDistance = 35; // TODO: replace with gene value.
 	double viewDistanceSqr = pow(viewDistance, 2);
 	double distanceSqr =
 		(double)pow(livingEntity->getPosition().x - getPosition().x, 2)
@@ -144,14 +153,20 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
 	angle = atan2(det, dot);
 	angle *= (180.0 / 3.141582653); // Convert to degrees.
 
-	double fieldOfView = 45.0;
+	double fieldOfView = viewAngle;
 
-	return angle <= fieldOfView;
+	if (debug) {
+		int a = 0;
+		a++;
+		cout << angle << endl;
+	}
+
+	return glm::abs(angle) <= fieldOfView;
 }
 
 double Creature::rateEntityImportance(LivingEntity* livingEntity, double distance, double angle)
 {
-	return 1.0;
+	return glm::pow(viewDistance, 2) - distance;
 }
 
 bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle)
@@ -171,20 +186,36 @@ void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 	if (!canThink()) return;
 
 	// Process the entities and decide which one is most worthy of attention.
-	LivingEntity* focusedEntity = processVision(entityList);
-	
+	double distance = 0;
+	double angle = 0;
+	LivingEntity* focusedEntity = processVision(entityList, distance, angle);
 	if (neuralGenome == nullptr) return;
 	// Think
+	double redInput = 0;
+	double greenInput = 0;
+	double blueInput = 0;
+
+	if (focusedEntity != nullptr) {
+		redInput = focusedEntity->body->r / 255.0;
+		greenInput = focusedEntity->body->g / 255.0;
+		blueInput = focusedEntity->body->b / 255.0;
+	}
+
+	distance = distance / glm::pow(viewDistance, 2);
+
 	double* inputs = new double[5]{
-		(sin(internalClock) + 1.0) / 2.0,
-		(sin(internalClock + 10) + 1.0) / 2.0,
-		(sin(internalClock * 2) + 1.0) / 2.0,
-		(sin(internalClock * 27) + 1.0) / 2.0,
-		1.0 - ((sin(internalClock) + 1.0) / 2.0)
+		redInput,
+		greenInput,
+		blueInput,
+		distance > 0 ? distance : 1.0,
+		0.5 + (angle / viewAngle) / 2
 	};
 
 	double* decision = neuralGenome->evaluate(inputs);
 	delete[] inputs;
+
+
+	
 
 	// Process decision.
 	/*if (decision[0] > 0.65) body->turnLeft(0.4f);

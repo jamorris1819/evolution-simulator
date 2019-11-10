@@ -37,7 +37,6 @@ bool NodeGene::isSet()
 
 void NodeGene::flush()
 {
-	tempValue = 0;
 	useTemp = false;
 }
 

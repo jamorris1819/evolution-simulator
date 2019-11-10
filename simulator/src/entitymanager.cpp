@@ -45,7 +45,7 @@ Creature* EntityManager::createRandomCreature(glm::vec2 position)
 {
 	Genome* genome = new Genome(true);
 	genome->generateCreature();
-	NeuralGenome* neuralGenome = new NeuralGenome(5, 3);
+	NeuralGenome* neuralGenome = new NeuralGenome(5, 1);
 
 	for (int i = 0; i < 5; i++) {
 		neuralGenome->mutateAddConnection();

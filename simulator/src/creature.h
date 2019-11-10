@@ -33,11 +33,13 @@ private:
 	double internalClock;
 	double thinkClock;
 	NeuralGenome* neuralGenome;
+	double viewDistance;
+	double viewAngle;
 
 	void updateInternalClocks(double deltaTime);
 	bool canThink();
 	bool canEat();
-	LivingEntity* processVision(std::vector<LivingEntity*>& entityList);
+	LivingEntity* processVision(std::vector<LivingEntity*>& entityList, double& distance, double& angle);
 	bool isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle);
 	bool isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance);
 	bool isEntityWithinFOV(LivingEntity* livingEntity, double& angle);

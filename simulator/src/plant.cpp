@@ -19,6 +19,9 @@ void Plant::generate()
 	body->generate();
 	body->setPosition(getPosition());
 	body->load();
+	body->r = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_R);
+	body->g = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_G);
+	body->b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 
 	LivingEntity::generate();
 }

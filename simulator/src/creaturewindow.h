@@ -34,6 +34,7 @@ private:
 
 	ImVec4 lerpColour(ImVec4 col1, ImVec4 col2, float x)
 	{
+		x = glm::clamp(x, 0.0f, 1.0f);
 		ImVec4 delta = ImVec4(
 			(col2.x - col1.x) * x,
 			(col2.y - col1.y) * x,

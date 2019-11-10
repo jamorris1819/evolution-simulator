@@ -136,7 +136,7 @@ void CreatureWindow::renderNeuralNetworkDetails()
 
 	// Define colours.
 	static ImVec4 cRed = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
-	static ImVec4 cGreen = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+	static ImVec4 cGreen = ImVec4(0.0f, 0.65f, 0.0f, 1.0f);
 
 	const ImU32 col = ImColor(colf);
 	const ImVec2 p = ImGui::GetCursorScreenPos();
@@ -178,30 +178,36 @@ void CreatureWindow::renderNeuralNetworkDetails()
 		NodeData node = nodes[i];
 
 		// Calculate colour.
-		double val = n[i].second.getValue();
-
+		double val = neuralGenome->activateFunction(n[i].first, n[i].second.getValue());
 		draw_list->AddCircleFilled(ImVec2(
 			x + node.x,	// start x
 			y + node.y),	// start y
 			size * 0.5f,
 			ImColor(lerpColour(cRed, cGreen, val)),
 			20);
+
+
+		draw_list->AddText(ImVec2(
+			x + node.x,	// start x
+			y + node.y - 8),
+			ImColor(255, 255, 255),
+			to_string(val).c_str());
 	}
 
-	/*ImGui::BeginGroup();
+	ImGui::BeginGroup();
 	ImGui::BeginChild("item view", ImVec2(0, -400));
-	if (ImGui::Button("Add connection")) { neuralGenome->mutateAddConnection(); focusNeuralGenome(selectedNeuralGenome); }
+	if (ImGui::Button("Add connection")) { neuralGenome->mutateAddConnection(); initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Add node")) { neuralGenome->mutateAddNode(); focusNeuralGenome(selectedNeuralGenome); }
+	if (ImGui::Button("Add node")) { neuralGenome->mutateAddNode(); initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Toggle connection")) { neuralGenome->mutateToggleConnection(); focusNeuralGenome(selectedNeuralGenome); }
+	if (ImGui::Button("Toggle connection")) { neuralGenome->mutateToggleConnection(); initialiseNeuralNetwork(); }
 
-	if (ImGui::Button("Shift connection weight")) { neuralGenome->mutateShiftWeight(); focusNeuralGenome(selectedNeuralGenome); }
+	if (ImGui::Button("Shift connection weight")) { neuralGenome->mutateShiftWeight(); initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Random connection weight")) { neuralGenome->mutateRandomWeight(); focusNeuralGenome(selectedNeuralGenome); }
+	if (ImGui::Button("Random connection weight")) { neuralGenome->mutateRandomWeight(); initialiseNeuralNetwork(); }
 
 
-	if (ImGui::Button("Create 1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
+	/*if (ImGui::Button("Create 1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
 	ImGui::SameLine();
 	if (ImGui::Button("Create 2")) { selectedNeuralGenome2 = new NeuralGenome(7, 4); }
 	ImGui::SameLine();
@@ -211,10 +217,10 @@ void CreatureWindow::renderNeuralNetworkDetails()
 	ImGui::SameLine();
 	if (ImGui::Button("View 2")) { focusNeuralGenome(selectedNeuralGenome2); }
 	ImGui::SameLine();
-	if (ImGui::Button("View 3")) { focusNeuralGenome(selectedNeuralGenome3); }
+	if (ImGui::Button("View 3")) { focusNeuralGenome(selectedNeuralGenome3); }*/
 
 	ImGui::EndChild();
-	ImGui::EndGroup();*/
+	ImGui::EndGroup();
 }
 
 void CreatureWindow::initialiseNeuralNetwork()
