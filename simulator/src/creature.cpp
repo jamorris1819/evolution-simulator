@@ -158,7 +158,7 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
 	if (debug) {
 		int a = 0;
 		a++;
-		cout << angle << endl;
+		//cout << angle << endl;
 	}
 
 	return glm::abs(angle) <= fieldOfView;
@@ -176,12 +176,11 @@ double Creature::rateEntityImportance(LivingEntity* livingEntity, double distanc
 		blueInput = livingEntity->body->b / 255.0;
 	}
 
-	double* inputs = new double[5]{
+	double* inputs = new double[4]{
 		redInput,
 		greenInput,
 		blueInput,
-		1.0 - (distance / glm::pow(viewDistance, 2) > 0 ? distance / glm::pow(viewDistance, 2) : 1.0),
-		0.5 + (angle / viewAngle) / 2
+		1.0 - (distance / glm::pow(viewDistance, 2) > 0 ? distance / glm::pow(viewDistance, 2) : 1.0)
 	};
 
 	double* decision = neuralGenome->evaluate(inputs);

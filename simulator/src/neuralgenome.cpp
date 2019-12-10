@@ -261,15 +261,10 @@ void NeuralGenome::mutateAddNode()
 	ConnectionGene* existingConnection = nullptr;
 	if (!getRandomConnection(&existingConnection) || !existingConnection->getEnabled()) return;
 	
-	if (existingConnection->getInputNode() < 0 || existingConnection->getOutputNode() < 0 || existingConnection->getWeight() > 130)
-	{
-		int a = 0;
-		a++;
-	}
-	
-	// Get its input + output node.
+	// Get node data.
 	int fromNode = existingConnection->getInputNode();
 	int toNode = existingConnection->getOutputNode();
+	double weight = existingConnection->getWeight();
 
 	// Disable it as we're replacing it.
 	existingConnection->setEnabled(false);
@@ -284,7 +279,6 @@ void NeuralGenome::mutateAddNode()
 	ConnectionGene connection1(fromNode, newNodeIndex, true, 1.0);		// weight of 1 to preserve original
 	connections.push_back(std::make_pair(connections.size(), connection1));
 
-	double weight = existingConnection->getWeight();
 	ConnectionGene connection2(newNodeIndex, toNode, true, weight);
 	connections.push_back(std::make_pair(connections.size(), connection2));
 }
@@ -317,6 +311,120 @@ void NeuralGenome::mutateToggleConnection()
 	ConnectionGene* existingConnection = nullptr;
 	if (!getRandomConnection(&existingConnection)) return;
 	existingConnection->setEnabled(!existingConnection->getEnabled());
+}
+
+// Finds the average number of nodes between the given node and the input node.
+double NeuralGenome::nodeDistanceFromInput(int node)
+{
+	double toReturn = 0.0;
+	std::vector<std::pair<int, ConnectionGene>> genes;
+
+	if (node < inputCount) return 0.0;
+
+	// Gather a list of connections ending at this node.
+	for (int i = 0; i < connections.size(); i++)
+	{
+		ConnectionGene connGene = connections[i].second;
+		if (connGene.getEnabled() && connGene.getOutputNode() == node) {
+			bool containedGene = false;
+			for (int j = 0; j < genes.size(); j++) {
+				if (genes[j].first == node) {
+					containedGene = true;
+					break;
+				}
+			}
+			if (!containedGene) genes.push_back(connections[i]);
+		}
+	}
+	if (genes.size() == 0) return 0.0;
+
+	//return 1.0 + nodeDistanceFromInput(genes[0].second.getInputNode());
+
+	
+	int connectionCount = genes.size();
+	double sumCount = 0;
+	for (int i = 0; i < connectionCount; i++) {
+		sumCount += nodeDistanceFromInput(genes[i].second.getInputNode());
+	}
+	sumCount /= (double)connectionCount;
+
+	return 1 + sumCount;
+}
+
+// Finds the average number of nodes between the given node and an output node.
+double NeuralGenome::nodeDistanceFromOutput(int node)
+{
+	double toReturn = 0.0;
+	std::vector<std::pair<int, ConnectionGene>> genes;
+
+	if (node > inputCount && node < inputCount + outputCount) return 0.0;
+
+	// Gather a list of connections starting at this node.
+	for (int i = 0; i < connections.size(); i++)
+	{
+		ConnectionGene connGene = connections[i].second;
+		if (connGene.getEnabled() && connGene.getInputNode() == node) {
+			bool containedGene = false;
+			for (int j = 0; j < genes.size(); j++) {
+				if (genes[j].first == node) {
+					containedGene = true;
+					break;
+				}
+			}
+			if (!containedGene) genes.push_back(connections[i]);
+		}
+	}
+	if (genes.size() == 0) return 0.0;
+
+	//return 1.0 + nodeDistanceFromOutput(genes[0].second.getOutputNode());
+
+	
+	int connectionCount = genes.size();
+	double sumCount = 0;
+	for (int i = 0; i < connectionCount; i++) {
+		sumCount += nodeDistanceFromInput(genes[i].second.getInputNode());
+	}
+	sumCount /= (double)connectionCount;
+
+	return 1 + sumCount;
+}
+
+int NeuralGenome::nodeMaxDistanceFromInput(int node)
+{
+	std::vector<std::pair<int, ConnectionGene>> genes;
+
+	if (node < inputCount) return 0.0;
+
+	// Gather a list of connections ending at this node.
+	for (int i = 0; i < connections.size(); i++)
+	{
+		ConnectionGene connGene = connections[i].second;
+		if (connGene.getEnabled() && connGene.getOutputNode() == node) {
+			bool containedGene = false;
+			for (int j = 0; j < genes.size(); j++) {
+				if (genes[j].first == node) {
+					containedGene = true;
+					break;
+				}
+			}
+			if (!containedGene) genes.push_back(connections[i]);
+		}
+	}
+	if (genes.size() == 0) return 0.0;
+
+	int connectionCount = genes.size();
+	int largestDistance = 0;
+	for (int i = 0; i < connectionCount; i++) {
+		int dist = nodeMaxDistanceFromInput(genes[i].second.getInputNode());
+		if (dist > largestDistance) largestDistance = dist;
+	}
+
+	return 1 + largestDistance;
+
+
+
+
+	return 0;
 }
 
 /*

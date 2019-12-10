@@ -19,7 +19,7 @@ void CreatureWindow::initialise()
 		abort();
 	}
 
-	initialiseNeuralNetwork();
+	creatureViewNet = initialiseNeuralNetwork();
 }
 
 void CreatureWindow::renderWindow()
@@ -150,8 +150,8 @@ void CreatureWindow::renderNeuralNetworkDetails()
 	int outputNodeCount = neuralGenome->outputCount;
 	int totalNodeCount = neuralGenome->getNodeCount() - inputNodeCount - outputNodeCount;
 
-	std::vector<NodeData> nodes = netData->getNodes();
-	std::vector<ConnectionData> connections = netData->getConnections();
+	std::vector<NodeData> nodes = creatureViewNet->getNodes();
+	std::vector<ConnectionData> connections = creatureViewNet->getConnections();
 	std::vector<std::pair<int, NodeGene>> n = neuralGenome->getNodes();
 
 	x = p.x + 16.0f, y = p.y + 128.0f;
@@ -196,39 +196,29 @@ void CreatureWindow::renderNeuralNetworkDetails()
 
 	ImGui::BeginGroup();
 	ImGui::BeginChild("item view", ImVec2(0, -400));
-	if (ImGui::Button("Add connection")) { neuralGenome->mutateAddConnection(); initialiseNeuralNetwork(); }
+	if (ImGui::Button("Add connection")) { neuralGenome->mutateAddConnection(); delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Add node")) { neuralGenome->mutateAddNode(); initialiseNeuralNetwork(); }
+	if (ImGui::Button("Add node")) { neuralGenome->mutateAddNode(); delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Toggle connection")) { neuralGenome->mutateToggleConnection(); initialiseNeuralNetwork(); }
+	if (ImGui::Button("do it again")) { delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
+	ImGui::SameLine();
+	if (ImGui::Button("Toggle connection")) { neuralGenome->mutateToggleConnection(); delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
 
-	if (ImGui::Button("Shift connection weight")) { neuralGenome->mutateShiftWeight(); initialiseNeuralNetwork(); }
+	if (ImGui::Button("Shift connection weight")) { neuralGenome->mutateShiftWeight(); delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
 	ImGui::SameLine();
-	if (ImGui::Button("Random connection weight")) { neuralGenome->mutateRandomWeight(); initialiseNeuralNetwork(); }
-
-
-	/*if (ImGui::Button("Create 1")) { selectedNeuralGenome1 = new NeuralGenome(7, 4); }
-	ImGui::SameLine();
-	if (ImGui::Button("Create 2")) { selectedNeuralGenome2 = new NeuralGenome(7, 4); }
-	ImGui::SameLine();
-	if (ImGui::Button("Cross 3")) { selectedNeuralGenome3 = NeuralGenome::cross(selectedNeuralGenome1, selectedNeuralGenome2); }
-
-	if (ImGui::Button("View 1")) { focusNeuralGenome(selectedNeuralGenome1); }
-	ImGui::SameLine();
-	if (ImGui::Button("View 2")) { focusNeuralGenome(selectedNeuralGenome2); }
-	ImGui::SameLine();
-	if (ImGui::Button("View 3")) { focusNeuralGenome(selectedNeuralGenome3); }*/
+	if (ImGui::Button("Random connection weight")) { neuralGenome->mutateRandomWeight(); delete creatureViewNet; creatureViewNet = initialiseNeuralNetwork(); }
 
 	ImGui::EndChild();
 	ImGui::EndGroup();
 }
 
-void CreatureWindow::initialiseNeuralNetwork()
+NetData* CreatureWindow::initialiseNeuralNetwork()
 {
-	if (netData != nullptr) delete netData;
-
-	netData = new NetData();
 	NeuralGenome* neuralGenome = creature->getNeuralGenome();
+	NetData* netData;
+	int width = 400;
+	int nodeSpacing = 72;
+	netData = new NetData();
 	std::vector<std::pair<int, NodeGene>> nodeGenes = neuralGenome->getNodes();
 	std::vector<std::pair<int, ConnectionGene>> connectionGenes = neuralGenome->getConnections();
 	int inputCount = 0;
@@ -253,8 +243,16 @@ void CreatureWindow::initialiseNeuralNetwork()
 		netData->addConnection(connectionData);
 	}
 
-	// Create the node info (position + type).
+	// We want to put hidden nodes into layers.
+	std::vector <std::vector<NodeData*>> nodeDataLists;
+	int neuralNetDepth = neuralGenome->nodeMaxDistanceFromInput(inputNodeCount);
+	double spacing = (double)width / neuralNetDepth;
+	for (int i = 0; i < neuralNetDepth; i++) {
+		std::vector<NodeData*> data;
+		nodeDataLists.push_back(data);
+	}
 
+	// Create the node info (position + type).
 	for (int i = 0; i < nodeGenes.size(); i++) {
 		int order = nodeGenes[i].first;
 		NodeData nodeData;
@@ -262,22 +260,22 @@ void CreatureWindow::initialiseNeuralNetwork()
 		// If this is an input node.
 		if (order < inputNodeCount) {
 			nodeData.x = 0;
-			nodeData.y = (inputCount++) * 36;
+			nodeData.y = (inputCount++) * nodeSpacing;
 			nodeData.type = NodeType::INPUT;
 		}
 		else if (order >= inputNodeCount + outputNodeCount) {
 			// This is a hidden node.
-			nodeData.x = 1;
-			nodeData.y = hiddenCount++;
+			double indist = neuralGenome->nodeDistanceFromInput(order);
+			nodeData.x = indist * spacing;
+			nodeData.y = nodeDataLists[indist].size() * nodeSpacing;
 			nodeData.type = NodeType::HIDDEN;
 
-			// As this is a hidden node, we need to calculate where it should be.
-			// However we must do it after all nodes have been created.
+			nodeDataLists[indist].push_back(&nodeData);
 		}
 		else {
 			// This is an output node.
-			nodeData.x = 400;
-			nodeData.y = (outputCount++) * 36;
+			nodeData.x = width;
+			nodeData.y = (outputCount++) * nodeSpacing;
 			nodeData.type = NodeType::OUTPUT;
 		}
 
@@ -285,34 +283,13 @@ void CreatureWindow::initialiseNeuralNetwork()
 	}
 
 	// Calculate the positions for hidden nodes. 
-	for (int i = inputCount + outputCount; i < netData->getNodes().size(); i++) {
-
-		vector<int> hiddenNodeConnections;
-
-		// Iterate through all connections and find which nodes this node connects to.
-		for (int j = 0; j < netData->getConnections().size(); j++) {
-			ConnectionData connection = netData->getConnections()[j];
-			if (connection.to == i) hiddenNodeConnections.push_back(connection.from);
-			if (connection.from == i) hiddenNodeConnections.push_back(connection.to);
+	for (int i = 0; i < nodeDataLists.size(); i++) {
+		for (int j = 0; j < nodeDataLists[i].size(); j++) {
+			NodeData* nodeData = nodeDataLists[i][j];
 		}
-
-		// TODO: make this less error prone.
-		if (hiddenNodeConnections.size() == 0) continue;
-
-		// Calculate the average position of connected nodes.
-		int toDrawX = 0;
-		int toDrawY = 0;
-
-		for (int x = 0; x < hiddenNodeConnections.size(); x++) {
-			NodeData toNode = netData->getNodes()[hiddenNodeConnections[x]];
-			toDrawX += (toNode.x) / hiddenNodeConnections.size();
-			toDrawY += (toNode.y) / hiddenNodeConnections.size();
-		}
-
-		// This average becomes our hidden node's position.
-		netData->getNodes()[i].x = toDrawX;
-		netData->getNodes()[i].y = toDrawY;
 	}
+
+	return netData;
 }
 
 void CreatureWindow::renderNeuralNetworkDescription()

@@ -23,6 +23,9 @@ public:
 	void mutateShiftWeight();
 	void mutateRandomWeight();
 	void mutateToggleConnection();
+	double nodeDistanceFromInput(int node);
+	double nodeDistanceFromOutput(int node);
+	int nodeMaxDistanceFromInput(int node);
 	double activateFunction(int node, double value);
 private:
 	std::vector<std::pair<int, NodeGene>> nodes;

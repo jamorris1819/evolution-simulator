@@ -6,7 +6,7 @@
 class CreatureWindow : public MenuWindow {
 public:
 	Creature* creature;
-	NetData* netData;
+	NetData* creatureViewNet;
 	void initialise() override;
 	void renderWindow() override;
 private:
@@ -29,8 +29,7 @@ private:
 	void renderLivingEntityDetails();
 	void renderNeuralNetworkDetails();
 
-	void initialiseNeuralNetwork();
-
+	NetData* initialiseNeuralNetwork();
 
 	ImVec4 lerpColour(ImVec4 col1, ImVec4 col2, float x)
 	{
