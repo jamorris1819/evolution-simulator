@@ -66,14 +66,22 @@ double NeuralGenome::recurseNetwork(int node, double *inputs)
 	}
 
 	double toReturn = 0.0;
-	std::vector<std::pair<int, ConnectionGene>> genes(10);
+	std::vector<std::pair<int, ConnectionGene>> genes;
 
 	// Gather a list of connections originating or ending at this node.
 	for (int i = 0; i < connections.size(); i++)
 	{
 		ConnectionGene connGene = connections[i].second;
-		if (connGene.getOutputNode() == node)
-			genes.push_back(connections[i]);
+		if (connGene.getOutputNode() == node) {
+			bool containedGene = false;
+			for (int j = 0; j < genes.size(); j++) {
+				if (genes[j].first == node) {
+					containedGene = true;
+					break;
+				}
+			}
+			if(!containedGene) genes.push_back(connections[i]);
+		}
 	}
 
 	// Iterate through all relevant connections to determine value of node.
@@ -252,7 +260,13 @@ void NeuralGenome::mutateAddNode()
 {
 	ConnectionGene* existingConnection = nullptr;
 	if (!getRandomConnection(&existingConnection) || !existingConnection->getEnabled()) return;
-
+	
+	if (existingConnection->getInputNode() < 0 || existingConnection->getOutputNode() < 0 || existingConnection->getWeight() > 130)
+	{
+		int a = 0;
+		a++;
+	}
+	
 	// Get its input + output node.
 	int fromNode = existingConnection->getInputNode();
 	int toNode = existingConnection->getOutputNode();

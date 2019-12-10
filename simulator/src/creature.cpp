@@ -166,7 +166,28 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
 
 double Creature::rateEntityImportance(LivingEntity* livingEntity, double distance, double angle)
 {
-	return glm::pow(viewDistance, 2) - distance;
+	double redInput = 0;
+	double greenInput = 0;
+	double blueInput = 0;
+
+	if (livingEntity != nullptr) {
+		redInput = livingEntity->body->r / 255.0;
+		greenInput = livingEntity->body->g / 255.0;
+		blueInput = livingEntity->body->b / 255.0;
+	}
+
+	double* inputs = new double[5]{
+		redInput,
+		greenInput,
+		blueInput,
+		1.0 - (distance / glm::pow(viewDistance, 2) > 0 ? distance / glm::pow(viewDistance, 2) : 1.0),
+		0.5 + (angle / viewAngle) / 2
+	};
+
+	double* decision = neuralGenome->evaluate(inputs);
+	delete[] inputs;
+
+	return decision[0];
 }
 
 bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle)
@@ -191,31 +212,6 @@ void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 	LivingEntity* focusedEntity = processVision(entityList, distance, angle);
 	if (neuralGenome == nullptr) return;
 	// Think
-	double redInput = 0;
-	double greenInput = 0;
-	double blueInput = 0;
-
-	if (focusedEntity != nullptr) {
-		redInput = focusedEntity->body->r / 255.0;
-		greenInput = focusedEntity->body->g / 255.0;
-		blueInput = focusedEntity->body->b / 255.0;
-	}
-
-	distance = distance / glm::pow(viewDistance, 2);
-
-	double* inputs = new double[5]{
-		redInput,
-		greenInput,
-		blueInput,
-		distance > 0 ? distance : 1.0,
-		0.5 + (angle / viewAngle) / 2
-	};
-
-	double* decision = neuralGenome->evaluate(inputs);
-	delete[] inputs;
-
-
-	
 
 	// Process decision.
 	/*if (decision[0] > 0.65) body->turnLeft(0.4f);
@@ -224,8 +220,6 @@ void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 		double power = (decision[2] - 0.5) / 0.5;
 		moveForward(power);
 	}*/
-
-	delete[] decision;
 }
 
 void Creature::moveForward(double power)
