@@ -84,6 +84,16 @@ void LivingEntity::setGenome(Genome* genome)
 	this->genome = genome;
 }
 
+bool LivingEntity::isInWater()
+{
+	return inWater;
+}
+
+void LivingEntity::setInWater(bool inWater)
+{
+	this->inWater = inWater;
+}
+
 void LivingEntity::setMovementCost(double movementCost)
 {
 	this->movementCost = movementCost;

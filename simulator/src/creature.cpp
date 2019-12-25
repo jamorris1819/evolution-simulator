@@ -202,6 +202,8 @@ void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 	LivingEntity::update(deltaTime, entityList);
 	updateInternalClocks(deltaTime);
 
+	if (debug) cout << (isInWater() ? "in water" : "on land") << endl;
+
 	// Check if enough time has passed to think again.
 	if (!canThink()) return;
 

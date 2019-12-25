@@ -420,11 +420,6 @@ int NeuralGenome::nodeMaxDistanceFromInput(int node)
 	}
 
 	return 1 + largestDistance;
-
-
-
-
-	return 0;
 }
 
 /*

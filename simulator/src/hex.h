@@ -11,6 +11,8 @@ public:
 	void setFade(bool fade);
 	int getFadeOffset();
 	void setFadeOffset(int fadeOffset);
+	int originalX;
+	int originalY;
 private:
 	glm::vec3 position;
 	glm::vec3 colour;

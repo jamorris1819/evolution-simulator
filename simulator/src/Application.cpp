@@ -53,8 +53,13 @@ Menu* menu;
 
 void initialiseEntities() {
 	srand(time(NULL));
+
+	terrain = new TerrainManager(program);
+	terrain->generate(50, 50, 8);
+	terrain->paintTerrain();
+
 	// Initialise entity manager and create a test creature.
-	entityManager = new EntityManager(program, world);
+	entityManager = new EntityManager(program, world, terrain);
 
 	entityManager->createRandomCreature(glm::vec2(150, 100));
 	for (int i = 0; i < 100; i++) {
@@ -67,12 +72,6 @@ void initialiseEntities() {
 	entityManager->createRandomCreature(glm::vec2(150, 120));
 	entityManager->createPlant(glm::vec2(160, 100));
 	((Creature*)entityManager->getTestCreature())->setDebug(true);
-
-	int size = 4;
-
-	terrain = new TerrainManager(program);
-	terrain->generate(50, 50, 8);
-	terrain->paintTerrain();
 
 	// Initialise camera.
 	cam = new Camera(glm::vec2(0, 0), program);

@@ -16,6 +16,8 @@ public:
 	Genome* getGenome();
 	void setGenome(Genome* genome);
 	virtual double beConsumed() = 0;
+	bool isInWater();
+	void setInWater(bool inWater);
 
 protected:
 	void setHealth(double health);
@@ -34,4 +36,5 @@ private:
 	double livingCost; // the amount of energy required per update.
 	double movementCost; // a variable amount depending on what the living entity is doing.
 	bool alive;
+	bool inWater;
 };

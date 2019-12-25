@@ -1,10 +1,11 @@
 #include "entitymanager.h"
 #include "bush.h"
 
-EntityManager::EntityManager(GLuint shader, b2World* world)
+EntityManager::EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager)
 {
 	this->shader = shader;
 	this->world = world;
+	this->terrainManager = terrainManager;
 }
 
 void EntityManager::createPlant(glm::vec2 position)
@@ -93,6 +94,11 @@ void EntityManager::update(double deltaTime)
 
 	for (int i = 0; i < entityList.size(); i++) {
 		entityList[i]->update(deltaTime, entityList);
+		int tileSize = terrainManager->getTileSize();
+		int x = entityList[i]->getPosition().x;
+		int y = entityList[i]->getPosition().y;
+
+		entityList[i]->setInWater(terrainManager->getHeightNoise(x / tileSize, y / tileSize) < 0.15f);
 	}
 }
 

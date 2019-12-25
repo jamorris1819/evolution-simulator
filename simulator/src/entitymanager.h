@@ -5,10 +5,11 @@
 #include <glm/vec3.hpp>
 #include "creature.h"
 #include "plant.h"
+#include "terrainmanager.h"
 
 class EntityManager {
 public:
-	EntityManager(GLuint shader, b2World* world);
+	EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager);
 	void createPlant(glm::vec2 position);
 	Creature* createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position);
 	Creature* createCreatureQueue(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position);
@@ -23,4 +24,5 @@ private:
 	std::queue<Creature*> generationQueue;
 	GLuint shader;
 	b2World* world;
+	TerrainManager* terrainManager;
 };
