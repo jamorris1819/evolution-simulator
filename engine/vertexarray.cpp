@@ -1,13 +1,13 @@
 #include "pch.h"
-#include "polygonData.h"
+#include "vertexarray.h"
 
-PolygonData::PolygonData()
+VertexArray::VertexArray()
 {
 	floatData = nullptr;
 	vertexCount = 0;
 }
 
-PolygonData::~PolygonData()
+VertexArray::~VertexArray()
 {
 	if (floatData != nullptr) {
 		delete floatData;
@@ -15,7 +15,7 @@ PolygonData::~PolygonData()
 	}
 }
 
-void PolygonData::generateFloatData() {
+void VertexArray::generateFloatData() {
 	if (floatData != nullptr) {
 		delete floatData;
 		floatData = nullptr;
@@ -41,24 +41,32 @@ void PolygonData::generateFloatData() {
 	}
 }
 
-void PolygonData::setVertices(std::vector<Vertex> data)
+void VertexArray::setVertices(std::vector<Vertex> data)
 {
 	vertices = data;
-	for (int i = 0; i < vertices.size(); i++) indices.push_back(indices.size());
+	for (short i = 0; i < vertices.size(); i++) indices.push_back(indices.size());
 	generateFloatData();
 }
 
-float* PolygonData::getVertices()
+void VertexArray::setData(std::vector<Vertex> vertices, std::vector<short> indices)
+{
+	this->vertices = vertices;
+	this->indices = indices;
+
+	generateFloatData();
+}
+
+float* VertexArray::getVertices()
 {
 	return floatData;
 }
 
-std::vector<float>& PolygonData::getIndices()
+std::vector<short>& VertexArray::getIndices()
 {
 	return indices;
 }
 
-void PolygonData::setColour(glm::vec3 colour)
+void VertexArray::setColour(glm::vec3 colour)
 {
 	for (int i = 0; i < vertices.size(); i++) {
 		vertices[i].setColour(colour);
@@ -67,6 +75,6 @@ void PolygonData::setColour(glm::vec3 colour)
 	generateFloatData();
 }
 
-int PolygonData::getVertexCount() {
+int VertexArray::getVertexCount() {
 	return vertices.size();
 }

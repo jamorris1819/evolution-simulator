@@ -3,26 +3,26 @@
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 
-class PolygonData;
+class VertexArray;
 
 class VertexArrayObject
 {
 public:
-	VertexArrayObject(PolygonData* polygonData);
+	VertexArrayObject(VertexArray* polygonData);
 	~VertexArrayObject();
 	void initialise();
 	void load();
-	void load(float* vertices, float* indices, int count);
+	void load(float* vertices, short* indices, int count);
 	void render(glm::mat4 matrix);
 	void unload();
 	void setShader(GLuint shaderId);
-	PolygonData* polygonData;
+	VertexArray* polygonData;
 private:
 	void generateArrays();
 	void allocateMemory(int amount);
-	void process(float* vertices, float* indices, int count);
+	void process(float* vertices, short* indices, int count);
 	void setVertexData(float* vertices, int count);
-	void setIndexData(float* indices, int count);
+	void setIndexData(short* indices, int count);
 	GLuint shaderId;
 	GLuint vao[1];
 	GLuint vbo[2];

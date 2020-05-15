@@ -45,9 +45,6 @@
     <ClInclude Include="vertexarrayobject.h">
       <Filter>Header Files\structures</Filter>
     </ClInclude>
-    <ClInclude Include="polygondata.h">
-      <Filter>Header Files\structures\data</Filter>
-    </ClInclude>
     <ClInclude Include="vertex.h">
       <Filter>Header Files\structures\data</Filter>
     </ClInclude>
@@ -69,6 +66,9 @@
     <ClInclude Include="FastNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vertexarray.h">
+      <Filter>Header Files\structures\data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -82,9 +82,6 @@
     </ClCompile>
     <ClCompile Include="vertexarrayobject.cpp">
       <Filter>Source Files\structures</Filter>
-    </ClCompile>
-    <ClCompile Include="polygondata.cpp">
-      <Filter>Source Files\structures\data</Filter>
     </ClCompile>
     <ClCompile Include="triangle.cpp">
       <Filter>Source Files\structures\data</Filter>
@@ -103,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexarray.cpp">
+      <Filter>Source Files\structures\data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

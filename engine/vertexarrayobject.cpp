@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "vertexarrayobject.h"
-#include "polygonData.h"
+#include "vertexarray.h"
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
 #include "glm\gtc\matrix_transform.hpp"
 
-VertexArrayObject::VertexArrayObject(PolygonData* polygonData)
+VertexArrayObject::VertexArrayObject(VertexArray* polygonData)
 {
 	enabled = false;
 
@@ -48,7 +48,7 @@ void VertexArrayObject::allocateMemory(int amount)
 	glBufferData(GL_ARRAY_BUFFER, amount * vertexDataCount * sizeof(float), nullptr, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[1]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(float), nullptr, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, amount * sizeof(short), nullptr, GL_STATIC_DRAW);
 }
 
 void VertexArrayObject::load()
@@ -56,12 +56,12 @@ void VertexArrayObject::load()
 	process(polygonData->getVertices(), polygonData->getIndices().data(), polygonData->getVertexCount());
 }
 
-void VertexArrayObject::load(float* vertices, float* indices, int count)
+void VertexArrayObject::load(float* vertices, short* indices, int count)
 {
 	process(vertices, indices, count);
 }
 
-void VertexArrayObject::process(float* vertices, float* indices, int count)
+void VertexArrayObject::process(float* vertices, short* indices, int count)
 {
 	glBindVertexArray(vao[0]);
 
@@ -104,15 +104,15 @@ void VertexArrayObject::setVertexData(float* vertices, int count)
 	delete size;
 }
 
-void VertexArrayObject::setIndexData(float* indices, int count)
+void VertexArrayObject::setIndexData(short* indices, int count)
 {
 	GLint* size = new GLint;
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[1]);
-	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, NULL, count * sizeof(float), (const GLvoid*)indices);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, NULL, count * sizeof(short), (const GLvoid*)indices);
 
 	glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, size);
 
-	if (count * sizeof(float) != *size)
+	if (count * sizeof(short) != *size)
 	{
 		std::cout << "Index data not loaded onto graphics card correctly" << std::endl;
 		terminate();
@@ -132,7 +132,7 @@ void VertexArrayObject::render(glm::mat4 matrix)
 
 	// Bind vertex and render polygon.
 	glBindVertexArray(vao[0]);
-	glDrawArrays(GL_POLYGON, 0, dataSize);
+	glDrawArrays(GL_TRIANGLES, 0, dataSize);
 	glBindVertexArray(0);
 }
 

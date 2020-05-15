@@ -15,6 +15,8 @@ Hex::Hex(int size, glm::vec2 position, GLuint program) : PolygonR(program)
 
 void Hex::generate()
 {
+	Vertex origin(0, 0);
+	origin.setColour(glm::vec3(1, 0, 0));
 	vector<Vertex> vertices;
 	for (int i = 0; i < 6; i++) {
 		float angle_deg = 60 * i - 30;
@@ -38,7 +40,7 @@ void Hex::update(double deltaTime)
 		if (time == 0) colour = overrideColour;
 		time += deltaTime;
 		float c = (6.0f * sin(time + fadeOffset)) + 3.0f;
-		overrideColour =  colour + (glm::vec3(c, c, c) / 255.0f);
+		overrideColour = colour + (glm::vec3(c, c, c) / 255.0f);
 	}
 }
 

@@ -4,11 +4,11 @@
 #include "vertex.h"
 #include "triangle.h"
 #include "vertexarrayobject.h"
-#include "polygondata.h"
+#include "vertexarray.h"
 
 using namespace std;
 
-class PolygonR : public PolygonData
+class PolygonR : public VertexArray
 {
 public:
 	PolygonR(GLuint shaderID);

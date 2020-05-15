@@ -159,7 +159,7 @@
     <ClInclude Include="idrawable.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="polygon.h" />
-    <ClInclude Include="polygondata.h" />
+    <ClInclude Include="vertexarray.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="vertexarrayobject.h" />
@@ -177,7 +177,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="polygon.cpp" />
-    <ClCompile Include="polygondata.cpp" />
+    <ClCompile Include="vertexarray.cpp" />
     <ClCompile Include="triangle.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarrayobject.cpp" />
