@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include "genemarker.h"
 #include "base.h"
 #include <ctime>
@@ -28,8 +29,7 @@ private:
 
 template<class T> Gene<T>::Gene(T value, int order)
 {
-
-	dominant =  (int)(rand() % 4) != 0;	// 1 in 4 change of being false.
+	dominant = (int)(rand() % 4) != 0;	// 1 in 4 change of being false.
 	enabled = true;
 	this->order = order;
 
@@ -123,7 +123,7 @@ template<class T> void Gene<T>::mutate()
 					// Major change
 					range /= 10.0f;
 				}
-				else {	
+				else {
 					// Minor change
 					range /= 40.0f;
 				}

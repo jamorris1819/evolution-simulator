@@ -33,25 +33,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\polygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\polygondata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\shaderutility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\terrainmanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vertexarrayobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Application.cpp">
@@ -60,19 +45,10 @@
     <ClCompile Include="src\base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\body.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\connectiongene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\drawnentity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\entitymanager.cpp">
@@ -161,31 +137,13 @@
     <ClInclude Include="src\noiselayer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\polygon.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\polygondata.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\shaderutility.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\terrainmanager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\triangle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vertex.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\vertexarrayobject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\base.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\body.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\camera.h">
@@ -195,12 +153,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\contactlistener.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\drawnentity.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\entitymanager.h">

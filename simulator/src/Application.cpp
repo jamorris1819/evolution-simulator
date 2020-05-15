@@ -3,7 +3,6 @@
 #include <iostream>
 #include "shaderutility.h"
 #include <vector>
-#include "vertex.h"
 #include "vertexarrayobject.h"
 #include "drawnentity.h"
 #include "camera.h"
@@ -50,7 +49,6 @@ vector<Hex*> terr;
 TerrainManager* terrain;
 Menu* menu;
 
-
 void initialiseEntities() {
 	srand(time(NULL));
 
@@ -67,8 +65,7 @@ void initialiseEntities() {
 		int y = (rand() % 400);
 		entityManager->createRandomCreature(glm::vec2(x, y));
 	}
-	
-	
+
 	entityManager->createRandomCreature(glm::vec2(150, 120));
 	entityManager->createPlant(glm::vec2(160, 100));
 	((Creature*)entityManager->getTestCreature())->setDebug(true);
@@ -89,7 +86,6 @@ void initialiseBox2D()
 {
 	b2Vec2 gravity(0.0f, 0.0f);
 	world = new b2World(gravity);
-
 
 	// DEBUG BELOW.
 	b2BodyDef groundBodyDef;
@@ -145,7 +141,7 @@ void initialise()
 	ShaderUtility shaderUtility;
 	program = shaderUtility.createProgram((char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 	glPolygonMode(GL_FRONT, GL_POLYGON);
-	
+
 	lastTime = getTime();
 
 	initialiseBox2D();
@@ -219,7 +215,7 @@ void window_size_callback(GLFWwindow* window, int w, int h)
 	cam->updateWindowBounds(width, height);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	/* Initialize the library */
 	if (!glfwInit())
@@ -239,7 +235,7 @@ int main(int argc, char **argv)
 		glfwTerminate();
 		return -1;
 	}
-	
+
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 
