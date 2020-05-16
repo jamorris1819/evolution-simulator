@@ -8,21 +8,22 @@
 
 using namespace std;
 
-class PolygonR : public VertexArray
-{
+class PolygonData : public VertexArray {
 public:
-	PolygonR(GLuint shaderID);
-	~PolygonR();
+	PolygonData(GLuint shaderID);
+	~PolygonData();
 	void load();
 	void unload();
 	void render(glm::mat4 matrix);
 	GLuint shaderID;
 	VertexArrayObject* vao;
 	void enableOverrideColour(glm::vec3 overrideColour);
-	bool visible;
+	void setVisible(bool visible) { this->visible = visible; }
+	bool isVisible() const { return visible; }
 protected:
 	glm::vec3 overrideColour;
 	void setColour();
+	bool visible;
 private:
 	bool useOverrideColour;
 };

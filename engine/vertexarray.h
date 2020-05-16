@@ -8,15 +8,16 @@ class VertexArray
 public:
 	VertexArray();
 	~VertexArray();
-	float* getVertices();
-	void setVertices(std::vector<Vertex> data);
-	void setData(std::vector<Vertex> vertices, std::vector<short> indices);
-	std::vector<short>& getIndices();
-	void setColour(glm::vec3 colour);
-	int getVertexCount();
+	void setVertices(std::vector<Vertex> const& data);
+	void setData(std::vector<Vertex> const& vertices, std::vector<unsigned short> const& indices);
+	float const* getVertices() const;
+	std::vector<unsigned short> const& getIndices() const;
+	void setColour(glm::vec3 const& colour);
+	int getVertexCount() const;
+	int getIndexCount() const;
 protected:
 	std::vector<Vertex> vertices;
-	std::vector<short> indices;
+	std::vector<unsigned short> indices;
 	void generateFloatData();
 	int vertexCount;
 	float* floatData;

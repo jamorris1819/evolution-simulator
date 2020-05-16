@@ -41,14 +41,14 @@ void VertexArray::generateFloatData() {
 	}
 }
 
-void VertexArray::setVertices(std::vector<Vertex> data)
+void VertexArray::setVertices(std::vector<Vertex> const& data)
 {
 	vertices = data;
-	for (short i = 0; i < vertices.size(); i++) indices.push_back(indices.size());
+	for (unsigned short i = 0; i < vertices.size(); i++) indices.push_back(indices.size());
 	generateFloatData();
 }
 
-void VertexArray::setData(std::vector<Vertex> vertices, std::vector<short> indices)
+void VertexArray::setData(std::vector<Vertex> const& vertices, std::vector<unsigned short> const& indices)
 {
 	this->vertices = vertices;
 	this->indices = indices;
@@ -56,17 +56,17 @@ void VertexArray::setData(std::vector<Vertex> vertices, std::vector<short> indic
 	generateFloatData();
 }
 
-float* VertexArray::getVertices()
+float const* VertexArray::getVertices() const
 {
 	return floatData;
 }
 
-std::vector<short>& VertexArray::getIndices()
+std::vector<unsigned short> const& VertexArray::getIndices() const
 {
 	return indices;
 }
 
-void VertexArray::setColour(glm::vec3 colour)
+void VertexArray::setColour(glm::vec3 const& colour)
 {
 	for (int i = 0; i < vertices.size(); i++) {
 		vertices[i].setColour(colour);
@@ -75,6 +75,10 @@ void VertexArray::setColour(glm::vec3 colour)
 	generateFloatData();
 }
 
-int VertexArray::getVertexCount() {
+int VertexArray::getVertexCount() const {
 	return vertices.size();
+}
+
+int VertexArray::getIndexCount() const {
+	return indices.size();
 }

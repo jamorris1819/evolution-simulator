@@ -4,7 +4,7 @@
 #include "glm\vec2.hpp"
 #include <vector>
 
-class Body : public PolygonR {
+class Body : public PolygonData {
 public:
 	Body(GLuint shader, b2World* world);
 	~Body();
@@ -25,13 +25,13 @@ public:
 
 	virtual void generate();
 	int seed;
-	
+
 	int r;
 	int g;
 	int b;
 
 protected:
-	std::vector<PolygonR*> polygons;
+	std::vector<PolygonData*> polygons;
 	virtual void generateBodyPoints() = 0;
 	virtual void generatePhysicsBody() = 0;
 	b2Body* physicsBody;

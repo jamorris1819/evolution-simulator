@@ -4,8 +4,7 @@
 
 #define PI 3.14159265359
 
-CreatureBody::CreatureBody(GLuint shader, b2World* world) : Body(shader, world)
-{
+CreatureBody::CreatureBody(GLuint shader, b2World* world) : Body(shader, world) {
 	strideX = 1;
 	strideY = 1;
 	offsetX = 0;
@@ -18,28 +17,24 @@ CreatureBody::CreatureBody(GLuint shader, b2World* world) : Body(shader, world)
 	frequency = 0.25f;
 }
 
-void CreatureBody::setNoiseOffset(float x, float y)
-{
+void CreatureBody::setNoiseOffset(float x, float y) {
 	this->offsetX = x;
 	this->offsetY = y;
 }
 
-void CreatureBody::setNoiseParams(int steps, int noiseType, int octaves)
-{
+void CreatureBody::setNoiseParams(int steps, int noiseType, int octaves) {
 	this->steps = steps;
 	this->noiseType = noiseType;
 	this->octaves = octaves;
 }
 
-void CreatureBody::generate()
-{
+void CreatureBody::generate() {
 	Body::generate();
 	generateMouth();
 	generateEyes();
 }
 
-void CreatureBody::generateMouth()
-{
+void CreatureBody::generateMouth() {
 	b2Vec2 vert[4];
 
 	// Assign shape's vertices.
@@ -62,8 +57,7 @@ void CreatureBody::generateMouth()
 	physicsBody->CreateFixture(&fixtureDef);
 }
 
-void CreatureBody::generateBodyPoints()
-{
+void CreatureBody::generateBodyPoints() {
 	FastNoise noise;
 	noise.SetNoiseType(FastNoise::SimplexFractal);
 	noise.SetFractalOctaves(octaves);
@@ -102,8 +96,7 @@ void CreatureBody::generateBodyPoints()
 	setVertices(vertices);
 }
 
-void CreatureBody::generateEyes()
-{
+void CreatureBody::generateEyes() {
 	steps = 30;
 	double step = 2.0 * PI / steps;
 
@@ -119,7 +112,7 @@ void CreatureBody::generateEyes()
 		vertices.push_back(v);
 	}
 
-	PolygonR* p = new PolygonR(shaderID);
+	PolygonData* p = new PolygonData(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -130,7 +123,7 @@ void CreatureBody::generateEyes()
 		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(-0.3f, 0.35f));
 		vertices[i].setColour(glm::vec3(0, 0, 0));
 	}
-	p = new PolygonR(shaderID);
+	p = new PolygonData(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -147,7 +140,7 @@ void CreatureBody::generateEyes()
 	}
 
 	// Assign these vertices to the polygon model.
-	p = new PolygonR(shaderID);
+	p = new PolygonData(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -158,14 +151,13 @@ void CreatureBody::generateEyes()
 		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(0.3f, 0.35f));
 		vertices[i].setColour(glm::vec3(0, 0, 0));
 	}
-	p = new PolygonR(shaderID);
+	p = new PolygonData(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
 }
 
-void CreatureBody::generatePhysicsBody()
-{
+void CreatureBody::generatePhysicsBody() {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(0.0f, 0.0f);

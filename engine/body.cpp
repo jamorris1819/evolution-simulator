@@ -6,8 +6,7 @@
 
 #define PI 3.14159265359
 
-Body::Body(GLuint shader, b2World* world) : PolygonR(shader)
-{
+Body::Body(GLuint shader, b2World* world) : PolygonData(shader) {
 	seed = 0;
 	this->world = world;
 	r = 1;
@@ -16,39 +15,32 @@ Body::Body(GLuint shader, b2World* world) : PolygonR(shader)
 	physicsBody = nullptr;
 }
 
-Body::~Body()
-{
+Body::~Body() {
 }
 
-glm::vec2 Body::getPosition()
-{
+glm::vec2 Body::getPosition() {
 	if (physicsBody == nullptr) return glm::vec2(0, 0);
 	b2Vec2 position = physicsBody->GetPosition();
 	return glm::vec2(position.x, position.y);
 }
 
-float Body::getRotation()
-{
+float Body::getRotation() {
 	return physicsBody->GetAngle();
 }
 
-void Body::setPosition(glm::vec2 position)
-{
+void Body::setPosition(glm::vec2 position) {
 	physicsBody->SetTransform(b2Vec2(position.x, position.y), physicsBody->GetAngle());
 }
 
-void Body::setRotation(float rotation)
-{
+void Body::setRotation(float rotation) {
 	physicsBody->SetTransform(physicsBody->GetPosition(), rotation);
 }
 
-b2Body* Body::getPhysicsBody()
-{
+b2Body* Body::getPhysicsBody() {
 	return physicsBody;
 }
 
-void Body::generate()
-{
+void Body::generate() {
 	// Generate the shape of the body.
 	generateBodyPoints();
 
@@ -56,40 +48,34 @@ void Body::generate()
 	generatePhysicsBody();
 }
 
-void Body::unload()
-{
+void Body::unload() {
 	physicsBody->GetWorld()->DestroyBody(physicsBody);
 }
 
-void Body::moveForward(float power)
-{
+void Body::moveForward(float power) {
 	float force = 3000.0f * power;
 	physicsBody->ApplyForceToCenter(
 		b2Vec2(sin(-getRotation()) * force, cos(getRotation()) * force),
 		true);
 }
 
-void Body::turnLeft(float power)
-{
+void Body::turnLeft(float power) {
 	physicsBody->ApplyAngularImpulse(4.0f * power, true);
 }
 
-void Body::turnRight(float power)
-{
+void Body::turnRight(float power) {
 	physicsBody->ApplyAngularImpulse(4.0f * -power, true);
 }
 
-void Body::render(glm::mat4 matrix)
-{
-	PolygonR::render(matrix);
+void Body::render(glm::mat4 matrix) {
+	PolygonData::render(matrix);
 
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons[i]->render(matrix);
 	}
 }
 
-void Body::setRGB(int r, int g, int b)
-{
+void Body::setRGB(int r, int g, int b) {
 	this->r = r;
 	this->g = g;
 	this->b = b;

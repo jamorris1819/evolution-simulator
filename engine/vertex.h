@@ -4,17 +4,16 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
-class Vertex
-{
+class Vertex {
 public:
 	Vertex();
 	Vertex(float x, float y);
 	Vertex(glm::vec2 position);
 	~Vertex();
-	const glm::vec2& getPosition() const;
+	glm::vec2 const& getPosition() const;
+	glm::vec3 const& getColour() const;
 	void setPosition(glm::vec2 data);
-	const glm::vec3& getColour() const;
-	void setColour(glm::vec3 data);
+	void setColour(glm::vec3 const& data);
 	void multiply(float scalar);
 	void setDefault();
 

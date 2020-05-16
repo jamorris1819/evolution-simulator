@@ -5,24 +5,24 @@
 
 class VertexArray;
 
-class VertexArrayObject
-{
+class VertexArrayObject {
 public:
 	VertexArrayObject(VertexArray* polygonData);
 	~VertexArrayObject();
 	void initialise();
 	void load();
-	void load(float* vertices, short* indices, int count);
+	void load(float* vertices, unsigned short* indices, int count);
 	void render(glm::mat4 matrix);
 	void unload();
 	void setShader(GLuint shaderId);
-	VertexArray* polygonData;
+	VertexArray const* getVertexArray() const { return polygonData; }
 private:
 	void generateArrays();
 	void allocateMemory(int amount);
-	void process(float* vertices, short* indices, int count);
-	void setVertexData(float* vertices, int count);
-	void setIndexData(short* indices, int count);
+	void process(const float* vertices, const unsigned short* indices, int count);
+	void setVertexData(float const* vertices, int count);
+	void setIndexData(unsigned short const* indices, int count);
+	VertexArray* polygonData;
 	GLuint shaderId;
 	GLuint vao[1];
 	GLuint vbo[2];
@@ -33,4 +33,3 @@ private:
 	int dataSize;
 	GLuint model;
 };
-

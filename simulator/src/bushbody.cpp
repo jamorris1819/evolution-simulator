@@ -3,12 +3,10 @@
 #include <poisson_disk_sampling.h>
 #define PI 3.14159265359
 
-BushBody::BushBody(GLuint shader, b2World* world) : PlantBody(shader, world)
-{
+BushBody::BushBody(GLuint shader, b2World* world) : PlantBody(shader, world) {
 }
 
-void BushBody::generateBodyPoints()
-{
+void BushBody::generateBodyPoints() {
 	steps = 30;
 	double step = 2.0 * PI / steps;
 
@@ -38,7 +36,7 @@ void BushBody::generateBodyPoints()
 	// Generate some extra 'bumps' around these to make them look bush-like.
 	// Iterate around in a circular fashion.
 	for (int i = 0; i < numberOfCircles; i++) {
-		PolygonR* p = new PolygonR(shaderID);
+		PolygonData* p = new PolygonData(shaderID);
 		vector<Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {
@@ -79,12 +77,11 @@ void BushBody::generateBodyPoints()
 	for (int i = 0; i < samples.size(); i++) {
 		std::array<float, 2> sample = samples[i];
 
-		PolygonR* p = new PolygonR(shaderID);
+		PolygonData* p = new PolygonData(shaderID);
 		vector<Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {
 			Vertex& v = vertices[j];
-
 
 			// Create new vertex.
 			Vertex nV(0, 0);
@@ -94,15 +91,14 @@ void BushBody::generateBodyPoints()
 		}
 		p->setVertices(subVertices);
 		p->load();
-		p->visible = false;
+		p->setVisible(false);
 		fruit.push_back(p);
 		polygons.push_back(p);
 	}
 }
 
-void BushBody::setVisibleFruit(int i)
-{
+void BushBody::setVisibleFruit(int i) {
 	for (int j = 0; j < fruit.size(); j++) {
-		fruit[j]->visible = j < i;
+		fruit[j]->setVisible(j < i);
 	}
 }

@@ -3,8 +3,7 @@
 #include "polygon.h"
 #include <thread>
 
-DrawnEntity::DrawnEntity(glm::vec3 position) : Entity()
-{
+DrawnEntity::DrawnEntity(glm::vec3 position) : Entity() {
 	polygon = nullptr;
 
 	enabled = true;
@@ -14,8 +13,7 @@ DrawnEntity::DrawnEntity(glm::vec3 position) : Entity()
 	setRotation(0);
 }
 
-DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity()
-{
+DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
 	enabled = true;
 	setPosition(position);
 	setVelocity(glm::vec3(0, 0, 0));
@@ -23,38 +21,31 @@ DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity()
 	setRotation(0);
 }
 
-DrawnEntity::~DrawnEntity()
-{
+DrawnEntity::~DrawnEntity() {
 	delete polygon;
 }
 
-glm::vec3& DrawnEntity::getPosition()
-{
+glm::vec3 const& DrawnEntity::getPosition() const {
 	return position;
 }
 
-glm::vec3& DrawnEntity::getVelocity()
-{
+glm::vec3 const& DrawnEntity::getVelocity() const {
 	return velocity;
 }
 
-glm::vec3& DrawnEntity::getScale()
-{
+glm::vec3 const& DrawnEntity::getScale() const {
 	return scale;
 }
 
-float DrawnEntity::getRotation()
-{
+float DrawnEntity::getRotation() const {
 	return -body->getRotation();
 }
 
-PolygonR* DrawnEntity::getPolygon()
-{
+PolygonData const* DrawnEntity::getPolygon() const {
 	return polygon;
 }
 
-glm::mat4 DrawnEntity::getMatrix() const
-{
+glm::mat4 DrawnEntity::getMatrix() const {
 	// Create translation matrix.
 	glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
 	// Apply rotation matrix.
@@ -63,49 +54,40 @@ glm::mat4 DrawnEntity::getMatrix() const
 	return matrix;
 }
 
-void DrawnEntity::setPosition(glm::vec3 position)
-{
+void DrawnEntity::setPosition(glm::vec3 position) {
 	this->position = position;
 }
 
-void DrawnEntity::setVelocity(glm::vec3 velocity)
-{
+void DrawnEntity::setVelocity(glm::vec3 velocity) {
 	this->velocity = velocity;
 }
 
-void DrawnEntity::setScale(glm::vec3 scale)
-{
+void DrawnEntity::setScale(glm::vec3 scale) {
 	this->scale = scale;
 }
 
-void DrawnEntity::setRotation(float rotation)
-{
+void DrawnEntity::setRotation(float rotation) {
 	this->rotation = rotation;
 }
 
-void DrawnEntity::setPolygon(PolygonR* polygon)
-{
+void DrawnEntity::setPolygon(PolygonData* polygon) {
 	this->polygon = polygon;
 }
 
-void DrawnEntity::setBody(Body* body)
-{
+void DrawnEntity::setBody(Body* body) {
 	this->body = body;
 }
 
-void DrawnEntity::render()
-{
+void DrawnEntity::render() {
 	if (enabled)
 		body->render(getMatrix());
 }
 
-void DrawnEntity::update(double deltaTime)
-{
-	if(body != nullptr)
+void DrawnEntity::update(double deltaTime) {
+	if (body != nullptr)
 		setPosition(glm::vec3(body->getPosition(), 0.0f));
 }
 
-void DrawnEntity::unload()
-{
+void DrawnEntity::unload() {
 	polygon->unload();
 }

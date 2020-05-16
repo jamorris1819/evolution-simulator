@@ -1,7 +1,7 @@
 #pragma once
 #include "polygon.h"
 
-class Hex : public PolygonR {
+class Hex : public PolygonData {
 public:
 	Hex(int size, glm::vec2 position, GLuint program);
 	void generate();

@@ -4,9 +4,10 @@
 
 class IDrawable {
 public:
-	IDrawable(GLuint shaderId);
-	~IDrawable();
+	virtual ~IDrawable() {}
 	virtual void load() = 0;
 	virtual void unload() = 0;
-	virtual void render(glm::mat4 matrix);
+	virtual void render(glm::mat4 matrix) = 0;
+private:
+	GLuint shaderId;
 };
