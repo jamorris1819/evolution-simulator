@@ -11,11 +11,11 @@ void BushBody::generateBodyPoints() {
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
-	vector<Vertex> vertices;
+	vector<eng::Vertex> vertices;
 
 	// Generate the body.
 	for (int i = 0; i < steps; i++) {
-		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		eng::Vertex v(glm::sin(i * step), glm::cos(i * step));
 		float length = size;
 		v.multiply(length);
 		v.setColour(glm::vec3(r, g, b) / 255.0f);
@@ -37,10 +37,10 @@ void BushBody::generateBodyPoints() {
 	// Iterate around in a circular fashion.
 	for (int i = 0; i < numberOfCircles; i++) {
 		eng::VertexRenderer* p = new eng::VertexRenderer(shaderID);
-		vector<Vertex> subVertices;
+		vector<eng::Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {
-			Vertex& v = vertices[j];
+			eng::Vertex& v = vertices[j];
 
 			// Allow the vertices to fluctuate randomly to give it a rougher look.
 			float multiplier = 1.0f - ((rand() % 25) / 100.0f);
@@ -50,7 +50,7 @@ void BushBody::generateBodyPoints() {
 			float y = sin(i * angleStep) * size * multiplier;
 
 			// Create new vertex.
-			Vertex nV(x + v.getPosition().x, y + v.getPosition().y);
+			eng::Vertex nV(x + v.getPosition().x, y + v.getPosition().y);
 			nV.setColour(v.getColour());
 			subVertices.push_back(nV);
 		}
@@ -78,13 +78,13 @@ void BushBody::generateBodyPoints() {
 		std::array<float, 2> sample = samples[i];
 
 		VertexRenderer* p = new VertexRenderer(shaderID);
-		vector<Vertex> subVertices;
+		vector<eng::Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {
-			Vertex& v = vertices[j];
+			eng::Vertex& v = vertices[j];
 
 			// Create new vertex.
-			Vertex nV(0, 0);
+			eng::Vertex nV(0, 0);
 			nV.setPosition(v.getPosition() + glm::vec2(sample[0], sample[1]));
 			nV.setColour(glm::vec3(1, 0, 0));
 			subVertices.push_back(nV);

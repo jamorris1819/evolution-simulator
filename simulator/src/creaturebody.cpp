@@ -66,11 +66,11 @@ void CreatureBody::generateBodyPoints() {
 	double step = PI / sides;
 
 	// Basic creature generation.
-	vector<Vertex> vertices;
+	vector<eng::Vertex> vertices;
 
 	// Generate half of the creature.
 	for (int i = 0; i <= sides; i++) {
-		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		eng::Vertex v(glm::sin(i * step), glm::cos(i * step));
 		float size = (noise.GetNoise((i * strideX) + offsetX, (i * strideY) + offsetY) + 1) / 2.0f;
 		v.multiply(size);
 		vertices.push_back(v);
@@ -79,14 +79,14 @@ void CreatureBody::generateBodyPoints() {
 	// Copy and flip the vertices so they're mirrored.
 	int size = vertices.size();
 	for (int i = 1; i < size; i++) {
-		Vertex v = vertices[size - i - 1];
+		eng::Vertex v = vertices[size - i - 1];
 		v.setPosition(glm::vec2(-1.0f, 1.0f) * v.getPosition());
 		vertices.push_back(v);
 	}
 
 	// Scale body width length/width.
 	for (int i = 0; i < vertices.size(); i++) {
-		Vertex v = vertices[i];
+		eng::Vertex v = vertices[i];
 		v.setPosition(glm::vec2(-width, length) * v.getPosition());
 		v.setColour(glm::vec3(r / 255.0f, g / 255.0f, b / 255.0f));
 		vertices[i] = v;
@@ -101,11 +101,11 @@ void CreatureBody::generateEyes() {
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
-	vector<Vertex> vertices;
+	vector<eng::Vertex> vertices;
 
 	// Generate the eye.
 	for (int i = 0; i < steps; i++) {
-		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		eng::Vertex v(glm::sin(i * step), glm::cos(i * step));
 		v.multiply(0.15f);
 		v.setPosition(v.getPosition() + glm::vec2(-0.3f, 0.35f));
 		v.setColour(glm::vec3(1, 1, 1));
@@ -132,7 +132,7 @@ void CreatureBody::generateEyes() {
 
 	// Generate the eye.
 	for (int i = 0; i < steps; i++) {
-		Vertex v(glm::sin(i * step), glm::cos(i * step));
+		eng::Vertex v(glm::sin(i * step), glm::cos(i * step));
 		v.multiply(0.15f);
 		v.setPosition(v.getPosition() + glm::vec2(0.3f, 0.35f));
 		v.setColour(glm::vec3(1, 1, 1));
@@ -166,8 +166,8 @@ void CreatureBody::generatePhysicsBody() {
 	// Create the triangles for this body.
 	for (int i = 0; i < vertices.size() - 1; i++) {
 		// Get vertices.
-		Vertex v1 = vertices[i];
-		Vertex v2 = vertices[i + 1];
+		eng::Vertex v1 = vertices[i];
+		eng::Vertex v2 = vertices[i + 1];
 		b2Vec2 vert[3];
 
 		// Assign shape's vertices.

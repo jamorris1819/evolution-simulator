@@ -3,8 +3,7 @@
 #include "GL/glew.h"
 #include "entity.h"
 
-class Camera : public Entity
-{
+class Camera : public eng::Entity {
 public:
 	Camera(glm::vec2 position, GLuint shaderID);
 	glm::mat4 view;

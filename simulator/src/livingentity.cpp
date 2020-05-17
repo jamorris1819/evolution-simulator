@@ -12,18 +12,15 @@ LivingEntity::LivingEntity(glm::vec3 position) : DrawnEntity(position) {
 	movementCost = 0;
 }
 
-LivingEntity::~LivingEntity()
-{
-
+LivingEntity::~LivingEntity() {
 }
 
-void LivingEntity::update(double deltaTime, std::vector<LivingEntity*>& entityList)
-{
+void LivingEntity::update(double deltaTime, std::vector<LivingEntity*>& entityList) {
 	DrawnEntity::update(deltaTime);
 
 	if (!alive) return;
 
-	energy -= (livingCost + movementCost) *deltaTime;
+	energy -= (livingCost + movementCost) * deltaTime;
 
 	if (health <= 0) { kill(); }
 	if (energy <= 0) { kill(); }
@@ -31,76 +28,62 @@ void LivingEntity::update(double deltaTime, std::vector<LivingEntity*>& entityLi
 	movementCost = 0; // reset
 }
 
-void LivingEntity::kill()
-{
+void LivingEntity::kill() {
 	// TODO
 	alive = false;
 	health = 0;
 	energy = 0;
 }
 
-void LivingEntity::setHealth(double health)
-{
+void LivingEntity::setHealth(double health) {
 	this->health = health > maxHealth ? maxHealth : health;
 }
 
-double LivingEntity::getHealth()
-{
+double LivingEntity::getHealth() {
 	return health;
 }
 
-void LivingEntity::setEnergy(double energy)
-{
+void LivingEntity::setEnergy(double energy) {
 	this->energy = energy > maxEnergy ? maxEnergy : energy;
 }
 
-double LivingEntity::getEnergy()
-{
+double LivingEntity::getEnergy() {
 	return energy;
 }
 
-double LivingEntity::getMaxHealth()
-{
+double LivingEntity::getMaxHealth() {
 	return maxHealth;
 }
 
-double LivingEntity::getMaxEnergy()
-{
+double LivingEntity::getMaxEnergy() {
 	return maxEnergy;
 }
 
-void LivingEntity::setLivingCost(double livingCost)
-{
+void LivingEntity::setLivingCost(double livingCost) {
 	this->livingCost = livingCost;
 }
 
-Genome* LivingEntity::getGenome()
-{
+Genome* LivingEntity::getGenome() {
 	return genome;
 }
 
-void LivingEntity::setGenome(Genome* genome)
-{
+void LivingEntity::setGenome(Genome* genome) {
 	this->genome = genome;
 }
 
-bool LivingEntity::isInWater()
-{
+bool LivingEntity::isInWater() {
 	return inWater;
 }
 
-void LivingEntity::setInWater(bool inWater)
-{
+void LivingEntity::setInWater(bool inWater) {
 	this->inWater = inWater;
 }
 
-void LivingEntity::setMovementCost(double movementCost)
-{
+void LivingEntity::setMovementCost(double movementCost) {
 	this->movementCost = movementCost;
 }
 
-void LivingEntity::generate()
-{
+void LivingEntity::generate() {
 	b2Body* rBody = body->getPhysicsBody();
 	for (b2Fixture* b = rBody->GetFixtureList(); b; b = b->GetNext()) {
 		b->SetUserData(this);

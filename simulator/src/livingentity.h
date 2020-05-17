@@ -2,7 +2,7 @@
 #include "drawnentity.h"
 #include "genome.h"
 
-class LivingEntity : public DrawnEntity {
+class LivingEntity : public eng::DrawnEntity {
 public:
 	LivingEntity(glm::vec3 position);
 	~LivingEntity();

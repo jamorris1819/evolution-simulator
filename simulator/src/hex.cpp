@@ -13,16 +13,16 @@ Hex::Hex(int size, glm::vec2 position, GLuint program) : VertexRenderer(program)
 }
 
 void Hex::generate() {
-	Vertex origin(0, 0);
+	eng::Vertex origin(0, 0);
 	origin.setColour(glm::vec3(1, 0, 0));
-	vector<Vertex> vertices;
+	vector<eng::Vertex> vertices;
 
 	vertices.push_back(origin);
 
 	for (int i = 0; i < 6; i++) {
 		float angle_deg = 60 * i - 30;
 		float angle_rad = PI / 180 * angle_deg;
-		Vertex v(cos(angle_rad) * size, sin(angle_rad) * size);
+		eng::Vertex v(cos(angle_rad) * size, sin(angle_rad) * size);
 		v.setColour(glm::vec3(1, 0, 0));
 		vertices.push_back(v);
 	}

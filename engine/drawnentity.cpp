@@ -3,91 +3,93 @@
 #include "polygon.h"
 #include <thread>
 
-DrawnEntity::DrawnEntity(glm::vec3 position) : Entity() {
-	polygon = nullptr;
+namespace eng {
+	DrawnEntity::DrawnEntity(glm::vec3 position) : Entity() {
+		polygon = nullptr;
 
-	enabled = true;
-	setPosition(position);
-	setVelocity(glm::vec3(0, 0, 0));
-	setScale(glm::vec3(1, 1, 1));
-	setRotation(0);
-}
+		enabled = true;
+		setPosition(position);
+		setVelocity(glm::vec3(0, 0, 0));
+		setScale(glm::vec3(1, 1, 1));
+		setRotation(0);
+	}
 
-DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
-	enabled = true;
-	setPosition(position);
-	setVelocity(glm::vec3(0, 0, 0));
-	setScale(scale);
-	setRotation(0);
-}
+	DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
+		enabled = true;
+		setPosition(position);
+		setVelocity(glm::vec3(0, 0, 0));
+		setScale(scale);
+		setRotation(0);
+	}
 
-DrawnEntity::~DrawnEntity() {
-	delete polygon;
-}
+	DrawnEntity::~DrawnEntity() {
+		delete polygon;
+	}
 
-glm::vec3 const& DrawnEntity::getPosition() const {
-	return position;
-}
+	glm::vec3 const& DrawnEntity::getPosition() const {
+		return position;
+	}
 
-glm::vec3 const& DrawnEntity::getVelocity() const {
-	return velocity;
-}
+	glm::vec3 const& DrawnEntity::getVelocity() const {
+		return velocity;
+	}
 
-glm::vec3 const& DrawnEntity::getScale() const {
-	return scale;
-}
+	glm::vec3 const& DrawnEntity::getScale() const {
+		return scale;
+	}
 
-float DrawnEntity::getRotation() const {
-	return -body->getRotation();
-}
+	float DrawnEntity::getRotation() const {
+		return -body->getRotation();
+	}
 
-eng::VertexRenderer const* DrawnEntity::getPolygon() const {
-	return polygon;
-}
+	eng::VertexRenderer const* DrawnEntity::getPolygon() const {
+		return polygon;
+	}
 
-glm::mat4 DrawnEntity::getMatrix() const {
-	// Create translation matrix.
-	glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
-	// Apply rotation matrix.
-	matrix = glm::rotate(matrix, body->getRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 DrawnEntity::getMatrix() const {
+		// Create translation matrix.
+		glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
+		// Apply rotation matrix.
+		matrix = glm::rotate(matrix, body->getRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
 
-	return matrix;
-}
+		return matrix;
+	}
 
-void DrawnEntity::setPosition(glm::vec3 position) {
-	this->position = position;
-}
+	void DrawnEntity::setPosition(glm::vec3 position) {
+		this->position = position;
+	}
 
-void DrawnEntity::setVelocity(glm::vec3 velocity) {
-	this->velocity = velocity;
-}
+	void DrawnEntity::setVelocity(glm::vec3 velocity) {
+		this->velocity = velocity;
+	}
 
-void DrawnEntity::setScale(glm::vec3 scale) {
-	this->scale = scale;
-}
+	void DrawnEntity::setScale(glm::vec3 scale) {
+		this->scale = scale;
+	}
 
-void DrawnEntity::setRotation(float rotation) {
-	this->rotation = rotation;
-}
+	void DrawnEntity::setRotation(float rotation) {
+		this->rotation = rotation;
+	}
 
-void DrawnEntity::setPolygon(eng::VertexRenderer* polygon) {
-	this->polygon = polygon;
-}
+	void DrawnEntity::setPolygon(eng::VertexRenderer* polygon) {
+		this->polygon = polygon;
+	}
 
-void DrawnEntity::setBody(Body* body) {
-	this->body = body;
-}
+	void DrawnEntity::setBody(Body* body) {
+		this->body = body;
+	}
 
-void DrawnEntity::render() {
-	if (enabled)
-		body->render(getMatrix());
-}
+	void DrawnEntity::render() {
+		if (enabled)
+			body->render(getMatrix());
+	}
 
-void DrawnEntity::update(double deltaTime) {
-	if (body != nullptr)
-		setPosition(glm::vec3(body->getPosition(), 0.0f));
-}
+	void DrawnEntity::update(double deltaTime) {
+		if (body != nullptr)
+			setPosition(glm::vec3(body->getPosition(), 0.0f));
+	}
 
-void DrawnEntity::unload() {
-	polygon->unload();
+	void DrawnEntity::unload() {
+		polygon->unload();
+	}
 }
