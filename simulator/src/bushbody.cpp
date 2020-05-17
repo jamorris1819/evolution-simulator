@@ -36,7 +36,7 @@ void BushBody::generateBodyPoints() {
 	// Generate some extra 'bumps' around these to make them look bush-like.
 	// Iterate around in a circular fashion.
 	for (int i = 0; i < numberOfCircles; i++) {
-		PolygonData* p = new PolygonData(shaderID);
+		eng::VertexRenderer* p = new eng::VertexRenderer(shaderID);
 		vector<Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {
@@ -77,7 +77,7 @@ void BushBody::generateBodyPoints() {
 	for (int i = 0; i < samples.size(); i++) {
 		std::array<float, 2> sample = samples[i];
 
-		PolygonData* p = new PolygonData(shaderID);
+		VertexRenderer* p = new VertexRenderer(shaderID);
 		vector<Vertex> subVertices;
 
 		for (int j = 0; j < vertices.size(); j++) {

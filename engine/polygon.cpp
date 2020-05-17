@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "polygon.h"
 
-PolygonData::PolygonData(GLuint shaderID) {
+eng::VertexRenderer::VertexRenderer(GLuint shaderID) {
 	this->shaderID = shaderID;
 	overrideColour = glm::vec3(1, 0, 1);	// magenta so it's obvious this hasn't been set.
 	useOverrideColour = false;
@@ -9,11 +9,11 @@
 	visible = true;
 }
 
-PolygonData::~PolygonData() {
+eng::VertexRenderer::~VertexRenderer() {
 	delete vao;
 }
 
-void PolygonData::render(glm::mat4 matrix) {
+void eng::VertexRenderer::render(glm::mat4 matrix) {
 	if (!visible) return;
 	glUseProgram(shaderID);
 
@@ -25,25 +25,25 @@ void PolygonData::render(glm::mat4 matrix) {
 	vao->render(matrix);
 }
 
-void PolygonData::enableOverrideColour(glm::vec3 overrideColour) {
+void eng::VertexRenderer::enableOverrideColour(glm::vec3 overrideColour) {
 	useOverrideColour = true;
 	this->overrideColour = overrideColour;
 }
 
 // Tell the shader what colour to use for the override.
-void PolygonData::setColour() {
+void eng::VertexRenderer::setColour() {
 	glUseProgram(shaderID);
 	int overrideColourLocation = glGetUniformLocation(shaderID, "uOverrideColour");
 	glUniform4f(overrideColourLocation, overrideColour.x, overrideColour.y, overrideColour.z, 1.0f);
 }
 
-void PolygonData::load() {
+void eng::VertexRenderer::load() {
 	vao = new VertexArrayObject(this);
 	vao->initialise();
 	vao->setShader(shaderID);
 	vao->load();
 }
 
-void PolygonData::unload() {
+void eng::VertexRenderer::unload() {
 	vao->unload();
 }

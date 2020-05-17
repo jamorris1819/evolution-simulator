@@ -5,7 +5,7 @@
 class Entity {
 public:
 	Entity();
-	virtual void load() = 0;
+	//virtual void load() = 0;
 	void unload();
 protected:
 	GLuint shaderID;

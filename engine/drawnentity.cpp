@@ -41,7 +41,7 @@ float DrawnEntity::getRotation() const {
 	return -body->getRotation();
 }
 
-PolygonData const* DrawnEntity::getPolygon() const {
+eng::VertexRenderer const* DrawnEntity::getPolygon() const {
 	return polygon;
 }
 
@@ -70,7 +70,7 @@ void DrawnEntity::setRotation(float rotation) {
 	this->rotation = rotation;
 }
 
-void DrawnEntity::setPolygon(PolygonData* polygon) {
+void DrawnEntity::setPolygon(eng::VertexRenderer* polygon) {
 	this->polygon = polygon;
 }
 

@@ -6,7 +6,7 @@
 
 #define PI 3.14159265359
 
-Body::Body(GLuint shader, b2World* world) : PolygonData(shader) {
+Body::Body(GLuint shader, b2World* world) : eng::VertexRenderer(shader) {
 	seed = 0;
 	this->world = world;
 	r = 1;
@@ -68,7 +68,7 @@ void Body::turnRight(float power) {
 }
 
 void Body::render(glm::mat4 matrix) {
-	PolygonData::render(matrix);
+	eng::VertexRenderer::render(matrix);
 
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons[i]->render(matrix);

@@ -112,7 +112,7 @@ void CreatureBody::generateEyes() {
 		vertices.push_back(v);
 	}
 
-	PolygonData* p = new PolygonData(shaderID);
+	VertexRenderer* p = new VertexRenderer(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -123,7 +123,7 @@ void CreatureBody::generateEyes() {
 		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(-0.3f, 0.35f));
 		vertices[i].setColour(glm::vec3(0, 0, 0));
 	}
-	p = new PolygonData(shaderID);
+	p = new VertexRenderer(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -140,7 +140,7 @@ void CreatureBody::generateEyes() {
 	}
 
 	// Assign these vertices to the polygon model.
-	p = new PolygonData(shaderID);
+	p = new VertexRenderer(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);
@@ -151,7 +151,7 @@ void CreatureBody::generateEyes() {
 		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(0.3f, 0.35f));
 		vertices[i].setColour(glm::vec3(0, 0, 0));
 	}
-	p = new PolygonData(shaderID);
+	p = new VertexRenderer(shaderID);
 	p->setVertices(vertices);
 	p->load();
 	polygons.push_back(p);

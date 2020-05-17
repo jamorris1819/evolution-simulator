@@ -6,5 +6,5 @@ public:
 	BushBody(GLuint shader, b2World* world);
 	void generateBodyPoints();
 	void setVisibleFruit(int i);
-	vector<PolygonData*> fruit;
+	vector<eng::VertexRenderer*> fruit;
 };

@@ -3,7 +3,7 @@
 
 #define PI 3.14159265359
 
-Hex::Hex(int size, glm::vec2 position, GLuint program) : PolygonData(program) {
+Hex::Hex(int size, glm::vec2 position, GLuint program) : VertexRenderer(program) {
 	this->size = size;
 	generate();
 	load();
@@ -35,7 +35,7 @@ void Hex::generate() {
 }
 
 void Hex::render() {
-	PolygonData::render(glm::translate(glm::mat4(1.0f), position));
+	VertexRenderer::render(glm::translate(glm::mat4(1.0f), position));
 }
 
 void Hex::update(double deltaTime) {

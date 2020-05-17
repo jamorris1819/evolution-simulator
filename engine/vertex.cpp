@@ -1,22 +1,11 @@
 #include "pch.h"
 #include "vertex.h"
 
-Vertex::Vertex() {
-	setDefault();
-}
+Vertex::Vertex() : position(glm::vec2(0, 0)), colour(glm::vec3(1, 1, 1)) {}
 
-Vertex::~Vertex() {
-	setDefault();
-}
+Vertex::Vertex(glm::vec2 pos) : position(pos), colour(glm::vec3(1, 1, 1)) {}
 
-Vertex::Vertex(float x, float y) {
-	setPosition(glm::vec2(x, y));
-	setColour(glm::vec3(1, 0, 0));
-}
-
-Vertex::Vertex(glm::vec2 position) {
-	setPosition(position);
-}
+Vertex::Vertex(float x, float y) : position(glm::vec2(x, y)), colour(glm::vec3(1, 1, 1)) {}
 
 glm::vec2 const& Vertex::getPosition() const {
 	return position;
@@ -32,13 +21,6 @@ void Vertex::setPosition(glm::vec2 data) {
 
 void Vertex::setColour(glm::vec3 const& data) {
 	colour = data;
-}
-
-void Vertex::setDefault() {
-	glm::vec3 zero(0, 0, 0);
-	glm::vec3 one(1, 1, 1);
-	setPosition(zero);
-	setColour(one);
 }
 
 void Vertex::multiply(float scalar) {

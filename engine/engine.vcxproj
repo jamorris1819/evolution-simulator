@@ -158,6 +158,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="idrawable.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="physicsentity.h" />
     <ClInclude Include="polygon.h" />
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="triangle.h" />
