@@ -47,7 +47,7 @@ namespace eng {
 	}
 
 	void VertexArrayObject::load() {
-		process(polygonData->getVertices(), polygonData->getIndices().data(), polygonData->getIndexCount());
+		//process(polygonData->getVertices(), polygonData->getIndices().data(), polygonData->getIndexCount());
 	}
 
 	void VertexArrayObject::load(float* vertices, unsigned short* indices, int count) {

@@ -11,8 +11,8 @@
 namespace eng {
 	class DrawnEntity : public Entity {
 	public:
-		DrawnEntity(glm::vec3 position);
 		DrawnEntity(glm::vec3 position, glm::vec3 scale);
+		DrawnEntity(glm::vec3 position) : DrawnEntity(position, glm::vec3(1, 1, 1)) {}
 		virtual ~DrawnEntity();
 
 		virtual glm::vec3 const& getPosition() const;
@@ -25,8 +25,8 @@ namespace eng {
 		virtual void setScale(glm::vec3 scale);
 		virtual void setRotation(float rotation);
 
-		eng::VertexRenderer const* getPolygon() const;
-		void setPolygon(eng::VertexRenderer* polygon);
+		eng::VertexArray const& getVertexArray() const { return vertexArray; }
+		void setVertexArray(eng::VertexArray const& va) { vertexArray = va; }
 		glm::mat4 getMatrix() const;
 
 		void setBody(Body* body);
@@ -43,6 +43,7 @@ namespace eng {
 		glm::vec3 scale;
 		bool enabled;
 		float rotation;
-		eng::VertexRenderer* polygon;
+		eng::VertexArray vertexArray;
+		eng::VertexArrayObject* vao;
 	};
 }

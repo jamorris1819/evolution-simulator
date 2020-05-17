@@ -4,16 +4,6 @@
 #include <thread>
 
 namespace eng {
-	DrawnEntity::DrawnEntity(glm::vec3 position) : Entity() {
-		polygon = nullptr;
-
-		enabled = true;
-		setPosition(position);
-		setVelocity(glm::vec3(0, 0, 0));
-		setScale(glm::vec3(1, 1, 1));
-		setRotation(0);
-	}
-
 	DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
 		enabled = true;
 		setPosition(position);
@@ -23,7 +13,7 @@ namespace eng {
 	}
 
 	DrawnEntity::~DrawnEntity() {
-		delete polygon;
+		delete vao;
 	}
 
 	glm::vec3 const& DrawnEntity::getPosition() const {
@@ -40,10 +30,6 @@ namespace eng {
 
 	float DrawnEntity::getRotation() const {
 		return -body->getRotation();
-	}
-
-	eng::VertexRenderer const* DrawnEntity::getPolygon() const {
-		return polygon;
 	}
 
 	glm::mat4 DrawnEntity::getMatrix() const {
@@ -71,10 +57,6 @@ namespace eng {
 		this->rotation = rotation;
 	}
 
-	void DrawnEntity::setPolygon(eng::VertexRenderer* polygon) {
-		this->polygon = polygon;
-	}
-
 	void DrawnEntity::setBody(Body* body) {
 		this->body = body;
 	}
@@ -90,6 +72,6 @@ namespace eng {
 	}
 
 	void DrawnEntity::unload() {
-		polygon->unload();
+		//polygon->unload();
 	}
 }

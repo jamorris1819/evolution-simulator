@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simulator", "simulator\simu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "engine", "engine\engine.vcxproj", "{CFC1F60D-D0B4-4154-8EEE-91DDE0ADB8B2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testground", "testground\testground.vcxproj", "{FC93219B-7247-47AB-AF33-14D30F88158D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{CFC1F60D-D0B4-4154-8EEE-91DDE0ADB8B2}.Release|x64.Build.0 = Release|x64
 		{CFC1F60D-D0B4-4154-8EEE-91DDE0ADB8B2}.Release|x86.ActiveCfg = Release|Win32
 		{CFC1F60D-D0B4-4154-8EEE-91DDE0ADB8B2}.Release|x86.Build.0 = Release|Win32
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Debug|x64.ActiveCfg = Debug|x64
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Debug|x64.Build.0 = Debug|x64
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Debug|x86.ActiveCfg = Debug|Win32
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Debug|x86.Build.0 = Debug|Win32
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Release|x64.ActiveCfg = Release|x64
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Release|x64.Build.0 = Release|x64
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Release|x86.ActiveCfg = Release|Win32
+		{FC93219B-7247-47AB-AF33-14D30F88158D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

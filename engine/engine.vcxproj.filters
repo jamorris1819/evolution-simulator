@@ -104,9 +104,6 @@
     <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vertexarray.cpp">
-      <Filter>Source Files\structures\data</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

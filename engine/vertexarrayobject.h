@@ -9,6 +9,7 @@ namespace eng {
 	class VertexArrayObject {
 	public:
 		VertexArrayObject(VertexArray* polygonData);
+		// todo: copy constructor
 		~VertexArrayObject();
 		void initialise();
 		void load();
@@ -27,8 +28,6 @@ namespace eng {
 		GLuint shaderId;
 		GLuint vao[1];
 		GLuint vbo[2];
-		float* currentAccessV;
-		float* currentAccessI;
 		int vertexDataCount;
 		bool enabled;
 		int dataSize;
