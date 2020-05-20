@@ -6,7 +6,7 @@
 
 #define PI 3.14159265359
 
-Body::Body(GLuint shader, b2World* world) : eng::VertexRenderer(shader) {
+/*Body::Body(GLuint shader, b2World* world) : eng::VertexRenderer(shader) {
 	seed = 0;
 	this->world = world;
 	r = 1;
@@ -79,4 +79,4 @@ void Body::setRGB(int r, int g, int b) {
 	this->r = r;
 	this->g = g;
 	this->b = b;
-}
+}*/

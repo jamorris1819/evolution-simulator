@@ -2,15 +2,14 @@
 #include <string>
 #include "creaturebody.h"
 
-void CreatureWindow::initialise()
-{
+void CreatureWindow::initialise() {
 	setName("Creature Window");
 	options.push_back("Life");
 	options.push_back("Genome");
 	options.push_back("Traits");
 	options.push_back("Body");
 	options.push_back("Neural Network");
-	
+
 	selected = 0;
 	windowVisible = true;
 
@@ -22,12 +21,10 @@ void CreatureWindow::initialise()
 	creatureViewNet = initialiseNeuralNetwork();
 }
 
-void CreatureWindow::renderWindow()
-{
+void CreatureWindow::renderWindow() {
 	// Render the different categories.
 	ImGui::BeginChild("Categories", ImVec2(150, 0), true);
-	for (int i = 0; i < options.size(); i++)
-	{
+	for (int i = 0; i < options.size(); i++) {
 		char label[128];
 		sprintf_s(label, options[i].c_str(), i);
 		if (ImGui::Selectable(label, selected == i))
@@ -46,10 +43,8 @@ void CreatureWindow::renderWindow()
 	ImGui::Text(title);
 
 	ImGui::Separator();
-	if (ImGui::BeginTabBar("##Tabs", ImGuiTabBarFlags_None))
-	{
-		if (ImGui::BeginTabItem("Description"))
-		{
+	if (ImGui::BeginTabBar("##Tabs", ImGuiTabBarFlags_None)) {
+		if (ImGui::BeginTabItem("Description")) {
 			if (selected == 0) renderLivingEntityDetails();
 			if (selected == 1) renderGenomeDescription();
 			if (selected == 2) renderTraitsDescription();
@@ -57,8 +52,7 @@ void CreatureWindow::renderWindow()
 			if (selected == 4) renderNeuralNetworkDescription();
 			ImGui::EndTabItem();
 		}
-		if (ImGui::BeginTabItem("Details"))
-		{
+		if (ImGui::BeginTabItem("Details")) {
 			if (selected == 0) renderLivingEntityDetails();
 			if (selected == 1) renderGenomeDetails();
 			if (selected == 2) renderTraitsDetails();
@@ -78,16 +72,13 @@ void CreatureWindow::renderWindow()
 	ImGui::EndGroup();
 }
 
-void CreatureWindow::renderDetails()
-{
+void CreatureWindow::renderDetails() {
 }
 
-void CreatureWindow::renderDescription()
-{
+void CreatureWindow::renderDescription() {
 }
 
-void CreatureWindow::renderGenomeDescription()
-{
+void CreatureWindow::renderGenomeDescription() {
 	ImGui::TextWrapped("The genome is a structure that contains genetic information about the creature. The genome is comprised of 2 strands of DNA which feature a sequence of genes. A gene may be responsible for the creature's speed or colour, for example. View the 'traits' section to see how these genes determine the creature's characteristics.");
 	ImGui::Text("The genes represented are:");
 	ImGui::Spacing();
@@ -96,23 +87,18 @@ void CreatureWindow::renderGenomeDescription()
 	}
 }
 
-void CreatureWindow::renderTraitsDescription()
-{
+void CreatureWindow::renderTraitsDescription() {
 	ImGui::TextWrapped("The traits of a creature are determined from the genome. A creature will have 2 genes relating to size, for example. A weighted average is taken of the 2 values to determine the traits of the creature.");
 }
 
-void CreatureWindow::renderBodyDescription()
-{
+void CreatureWindow::renderBodyDescription() {
 	ImGui::TextWrapped("The variables that affect the body shape & size are determined through the genome. Here you can view the body traits derived from the genome.");
 }
 
-void CreatureWindow::renderLivingEntityDescription()
-{
-	
+void CreatureWindow::renderLivingEntityDescription() {
 }
 
-void CreatureWindow::renderLivingEntityDetails()
-{
+void CreatureWindow::renderLivingEntityDetails() {
 	LivingEntity* selectedLivingEntity = creature;
 
 	ImGui::Text("Health");
@@ -128,8 +114,7 @@ void CreatureWindow::renderLivingEntityDetails()
 	ImGui::PopStyleColor();
 }
 
-void CreatureWindow::renderNeuralNetworkDetails()
-{
+void CreatureWindow::renderNeuralNetworkDetails() {
 	NeuralGenome* neuralGenome = creature->getNeuralGenome();
 	ImDrawList* draw_list = ImGui::GetWindowDrawList();
 	static ImVec4 colf = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -186,7 +171,6 @@ void CreatureWindow::renderNeuralNetworkDetails()
 			ImColor(lerpColour(cRed, cGreen, val)),
 			20);
 
-
 		draw_list->AddText(ImVec2(
 			x + node.x,	// start x
 			y + node.y - 8),
@@ -212,8 +196,7 @@ void CreatureWindow::renderNeuralNetworkDetails()
 	ImGui::EndGroup();
 }
 
-NetData* CreatureWindow::initialiseNeuralNetwork()
-{
+NetData* CreatureWindow::initialiseNeuralNetwork() {
 	NeuralGenome* neuralGenome = creature->getNeuralGenome();
 	NetData* netData;
 	int width = 400;
@@ -229,7 +212,6 @@ NetData* CreatureWindow::initialiseNeuralNetwork()
 	int inputNodeCount = neuralGenome->inputCount;
 	int outputNodeCount = neuralGenome->outputCount;
 	int totalNodeCount = neuralGenome->getNodeCount() - inputNodeCount - outputNodeCount;
-
 
 	// Create connection info.
 	for (int i = 0; i < connectionGenes.size(); i++) {
@@ -282,7 +264,7 @@ NetData* CreatureWindow::initialiseNeuralNetwork()
 		netData->addNode(nodeData);
 	}
 
-	// Calculate the positions for hidden nodes. 
+	// Calculate the positions for hidden nodes.
 	for (int i = 0; i < nodeDataLists.size(); i++) {
 		for (int j = 0; j < nodeDataLists[i].size(); j++) {
 			NodeData* nodeData = nodeDataLists[i][j];
@@ -292,21 +274,18 @@ NetData* CreatureWindow::initialiseNeuralNetwork()
 	return netData;
 }
 
-void CreatureWindow::renderNeuralNetworkDescription()
-{
+void CreatureWindow::renderNeuralNetworkDescription() {
 	ImGui::TextWrapped("The Neural Network is the brain of the creature. The network contains takes in multiple inputs and performs mathematical functions on the data in order to produce an output, which is used to control what the creature does.");
 }
 
-void CreatureWindow::renderGenomeDetails()
-{
+void CreatureWindow::renderGenomeDetails() {
 	Genome* selectedGenome = creature->getGenome();
 	ImGui::LabelText("Strand B", "Strand A");
 	int strandLength = selectedGenome->strandLength;
 
 	// Render columns representing genome.
 	ImGui::Columns(2);
-	for (int i = 0; i < 2 * strandLength; i++)
-	{
+	for (int i = 0; i < 2 * strandLength; i++) {
 		int index = (int)(glm::floor(i / 2));
 		const char* geneName = geneMarkerToString((GeneMarker)index);
 		std::vector<Base*> strand = i % 2 == 0 ? selectedGenome->strandA : selectedGenome->strandB;
@@ -316,7 +295,6 @@ void CreatureWindow::renderGenomeDetails()
 
 		if (ImGui::GetColumnIndex() == 0)
 			ImGui::Separator();
-
 
 		// Title
 		ImGui::Text(geneName);
@@ -343,8 +321,7 @@ void CreatureWindow::renderGenomeDetails()
 	ImGui::Columns(1);
 }
 
-void CreatureWindow::renderTraitsDetails()
-{
+void CreatureWindow::renderTraitsDetails() {
 	Genome* selectedGenome = creature->getGenome();
 	ImGui::LabelText("Trait", "Value");
 	ImGui::Separator();
@@ -370,9 +347,8 @@ void CreatureWindow::renderTraitsDetails()
 	ImGui::DragInt("Rotation Speed", &rotationSpeed);
 }
 
-void CreatureWindow::renderBodyDetails()
-{
-	CreatureBody* selectedBody = (CreatureBody*)creature->body;
+void CreatureWindow::renderBodyDetails() {
+	/*CreatureBody* selectedBody = (CreatureBody*)creature->body;
 	ImGui::LabelText("Attribute", "Value");
 	ImGui::Separator();
 
@@ -398,5 +374,5 @@ void CreatureWindow::renderBodyDetails()
 
 	// LENGTH / WIDTH
 	ImGui::DragFloat("Length", &selectedBody->length);
-	ImGui::DragFloat("Width", &selectedBody->width);
+	ImGui::DragFloat("Width", &selectedBody->width);*/
 }

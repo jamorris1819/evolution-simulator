@@ -39,12 +39,6 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="polygon.h">
-      <Filter>Header Files\structures</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexarrayobject.h">
-      <Filter>Header Files\structures</Filter>
-    </ClInclude>
     <ClInclude Include="vertex.h">
       <Filter>Header Files\structures\data</Filter>
     </ClInclude>
@@ -72,6 +66,15 @@
     <ClInclude Include="physicsentity.h">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
+    <ClInclude Include="vertexarrayobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instancedvertexarrayobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instance.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -79,12 +82,6 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon.cpp">
-      <Filter>Source Files\structures</Filter>
-    </ClCompile>
-    <ClCompile Include="vertexarrayobject.cpp">
-      <Filter>Source Files\structures</Filter>
     </ClCompile>
     <ClCompile Include="triangle.cpp">
       <Filter>Source Files\structures\data</Filter>
@@ -102,6 +99,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexarrayobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="instancedvertexarrayobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -157,9 +157,10 @@
     <ClInclude Include="FastNoise.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="idrawable.h" />
+    <ClInclude Include="instance.h" />
+    <ClInclude Include="instancedvertexarrayobject.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="physicsentity.h" />
-    <ClInclude Include="polygon.h" />
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="vertex.h" />
@@ -171,13 +172,13 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="FastNoise.cpp" />
+    <ClCompile Include="instancedvertexarrayobject.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="polygon.cpp" />
     <ClCompile Include="triangle.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarrayobject.cpp" />

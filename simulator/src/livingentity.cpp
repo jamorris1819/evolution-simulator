@@ -84,10 +84,11 @@ void LivingEntity::setMovementCost(double movementCost) {
 }
 
 void LivingEntity::generate() {
-	b2Body* rBody = body->getPhysicsBody();
+	// IMPORTANT
+	/*b2Body* rBody = body->getPhysicsBody();
 	for (b2Fixture* b = rBody->GetFixtureList(); b; b = b->GetNext()) {
 		b->SetUserData(this);
-	}
+	}*/
 }
 
 bool LivingEntity::isAlive() {

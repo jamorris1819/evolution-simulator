@@ -38,8 +38,7 @@ void eng::VertexRenderer::setColour() {
 }
 
 void eng::VertexRenderer::load() {
-	vao = new VertexArrayObject(this);
-	vao->initialise();
+	vao = new VertexArrayObject(*this);
 	vao->setShader(shaderID);
 	vao->load();
 }

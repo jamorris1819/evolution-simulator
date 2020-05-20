@@ -1,15 +1,13 @@
 #include "entitymanager.h"
 #include "bush.h"
 
-EntityManager::EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager)
-{
+EntityManager::EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager) {
 	this->shader = shader;
 	this->world = world;
 	this->terrainManager = terrainManager;
 }
 
-void EntityManager::createPlant(glm::vec2 position)
-{
+void EntityManager::createPlant(glm::vec2 position) {
 	Plant* plant = new Bush(shader, world, glm::vec3(position, 0));
 	Genome* genome = new Genome(false);
 	genome->generatePlant();
@@ -19,21 +17,19 @@ void EntityManager::createPlant(glm::vec2 position)
 	entityList.push_back(plant);
 }
 
-Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position)
-{
+Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position) {
 	Creature* newCreature = new Creature(this->shader, this->world, position);
 	newCreature->setGenome(genome);
 	newCreature->setNeuralGenome(neuralGenome);
 	newCreature->canReproduce = true;
 	newCreature->generate();
-	newCreature->body->setRotation((rand() % 360) * 3.141582653f / 180);
+	//newCreature->body->setRotation((rand() % 360) * 3.141582653f / 180);
 	entityList.push_back(newCreature);
 
 	return newCreature;
 }
 
-Creature* EntityManager::createCreatureQueue(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position)
-{
+Creature* EntityManager::createCreatureQueue(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position) {
 	Creature* newCreature = new Creature(this->shader, this->world, position);
 	newCreature->setGenome(genome);
 	newCreature->setNeuralGenome(neuralGenome);
@@ -42,8 +38,7 @@ Creature* EntityManager::createCreatureQueue(Genome* genome, NeuralGenome* neura
 	return newCreature;
 }
 
-Creature* EntityManager::createRandomCreature(glm::vec2 position)
-{
+Creature* EntityManager::createRandomCreature(glm::vec2 position) {
 	Genome* genome = new Genome(true);
 	genome->generateCreature();
 	NeuralGenome* neuralGenome = new NeuralGenome(4, 1);
@@ -55,8 +50,7 @@ Creature* EntityManager::createRandomCreature(glm::vec2 position)
 	return createCreature(genome, neuralGenome, position);
 }
 
-Creature* EntityManager::createChildCreature(Creature* creatureA, Creature* creatureB, glm::vec2 position)
-{
+Creature* EntityManager::createChildCreature(Creature* creatureA, Creature* creatureB, glm::vec2 position) {
 	Genome* childGenome = Genome::cross(creatureA->getGenome(), creatureB->getGenome());
 	NeuralGenome* childNeuralGenome = NeuralGenome::cross(creatureA->getNeuralGenome(), creatureB->getNeuralGenome());
 
@@ -68,8 +62,7 @@ Creature* EntityManager::createChildCreature(Creature* creatureA, Creature* crea
 	return createCreature(childGenome, childNeuralGenome, position);
 }
 
-Creature* EntityManager::createChildCreatureQueue(Creature* creatureA, Creature* creatureB, glm::vec2 position)
-{
+Creature* EntityManager::createChildCreatureQueue(Creature* creatureA, Creature* creatureB, glm::vec2 position) {
 	Genome* childGenome = Genome::cross(creatureA->getGenome(), creatureB->getGenome());
 	NeuralGenome* childNeuralGenome = NeuralGenome::cross(creatureA->getNeuralGenome(), creatureB->getNeuralGenome());
 
@@ -81,8 +74,7 @@ Creature* EntityManager::createChildCreatureQueue(Creature* creatureA, Creature*
 	return createCreatureQueue(childGenome, childNeuralGenome, position);
 }
 
-void EntityManager::update(double deltaTime)
-{
+void EntityManager::update(double deltaTime) {
 	if (!world->IsLocked()) {
 		while (!generationQueue.empty()) {
 			Creature* creature = generationQueue.front();
@@ -102,8 +94,7 @@ void EntityManager::update(double deltaTime)
 	}
 }
 
-void EntityManager::render()
-{
+void EntityManager::render() {
 	for (int i = 0; i < entityList.size(); i++) {
 		entityList[i]->render();
 	}

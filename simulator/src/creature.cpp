@@ -2,11 +2,10 @@
 #include "creaturebody.h"
 #include "contactlistener.h"
 
-Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEntity(glm::vec3(position, 0.0f))
-{
+Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEntity(glm::vec3(position, 0.0f)) {
 	genome = nullptr;
 	neuralGenome = nullptr;
-	body = new CreatureBody(shader, world);
+	//body = new CreatureBody(shader, world);
 	internalClock = 0;
 	thinkClock = 0;
 	canReproduce = false;
@@ -19,23 +18,19 @@ Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEn
 	viewAngle = 45.0;
 }
 
-Creature::~Creature()
-{
+Creature::~Creature() {
 	delete genome;
 }
 
-void Creature::setNeuralGenome(NeuralGenome* neuralGenome)
-{
+void Creature::setNeuralGenome(NeuralGenome* neuralGenome) {
 	this->neuralGenome = neuralGenome;
 }
 
-NeuralGenome* Creature::getNeuralGenome()
-{
+NeuralGenome* Creature::getNeuralGenome() {
 	return neuralGenome;
 }
 
-void Creature::generate()
-{
+void Creature::generate() {
 	if (genome == nullptr) throw exception("no genome specified");
 
 	// Pull data from the genome.
@@ -49,19 +44,18 @@ void Creature::generate()
 	int b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 
 	// Generate the body.
-	CreatureBody* castBody = (CreatureBody*)body;
+	/*CreatureBody* castBody = (CreatureBody*)body;
 	castBody->setRGB(r, g, b);
 	castBody->setNoiseOffset(offsetX, offsetY);
 	castBody->setNoiseParams(steps, noiseType, octaves);
 	castBody->generate();
 	castBody->setPosition(getPosition());
-	castBody->load();
+	castBody->load();*/
 
 	LivingEntity::generate();
 }
 
-void Creature::updateInternalClocks(double deltaTime)
-{
+void Creature::updateInternalClocks(double deltaTime) {
 	internalClock += deltaTime;
 	thinkClock += deltaTime;
 	reproduceClock += deltaTime;
@@ -70,8 +64,7 @@ void Creature::updateInternalClocks(double deltaTime)
 	canReproduce = reproduceClock > 5;
 }
 
-bool Creature::canThink()
-{
+bool Creature::canThink() {
 	bool canThink = thinkClock > 0.1;
 
 	if (canThink) thinkClock = 0;
@@ -79,8 +72,7 @@ bool Creature::canThink()
 	return canThink;
 }
 
-bool Creature::canEat()
-{
+bool Creature::canEat() {
 	bool canEat = eatClock > eatCooldown;
 
 	if (canEat) eatClock = 0;
@@ -88,8 +80,7 @@ bool Creature::canEat()
 	return canEat;
 }
 
-LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList, double& distance, double &angle)
-{
+LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList, double& distance, double& angle) {
 	LivingEntity* focusedEntity = nullptr;
 	double topScore = 0.0f;
 	double topDistance = 0.0;
@@ -123,8 +114,7 @@ LivingEntity* Creature::processVision(std::vector<LivingEntity*>& entityList, do
 	return focusedEntity;
 }
 
-bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance)
-{
+bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& distance) {
 	// We avoid sqrt in order to optimise.
 	double viewDistanceSqr = pow(viewDistance, 2);
 	double distanceSqr =
@@ -135,8 +125,7 @@ bool Creature::isEntityWithinViewDistance(LivingEntity* livingEntity, double& di
 	return distanceSqr <= viewDistanceSqr;
 }
 
-bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
-{
+bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle) {
 	// Calculate the direction vectors.
 	double rotation = getRotation();
 	glm::vec2 viewDir = glm::vec2(glm::sin(rotation), glm::cos(rotation));
@@ -164,17 +153,16 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle)
 	return glm::abs(angle) <= fieldOfView;
 }
 
-double Creature::rateEntityImportance(LivingEntity* livingEntity, double distance, double angle)
-{
+double Creature::rateEntityImportance(LivingEntity* livingEntity, double distance, double angle) {
 	double redInput = 0;
 	double greenInput = 0;
 	double blueInput = 0;
 
-	if (livingEntity != nullptr) {
+	/*if (livingEntity != nullptr) {
 		redInput = livingEntity->body->r / 255.0;
 		greenInput = livingEntity->body->g / 255.0;
 		blueInput = livingEntity->body->b / 255.0;
-	}
+	}*/
 
 	double* inputs = new double[4]{
 		redInput,
@@ -189,20 +177,18 @@ double Creature::rateEntityImportance(LivingEntity* livingEntity, double distanc
 	return decision[0];
 }
 
-bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle)
-{
+bool Creature::isEntityInVision(LivingEntity* livingEntity, double& distance, double& angle) {
 	if (livingEntity == this) return false;
 
 	return isEntityWithinViewDistance(livingEntity, distance)
 		&& isEntityWithinFOV(livingEntity, angle);
 }
 
-void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
-{
+void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList) {
 	LivingEntity::update(deltaTime, entityList);
 	updateInternalClocks(deltaTime);
 
-	if (debug) cout << (isInWater() ? "in water" : "on land") << endl;
+	//if (debug) cout << (isInWater() ? "in water" : "on land") << endl;
 
 	// Check if enough time has passed to think again.
 	if (!canThink()) return;
@@ -223,20 +209,17 @@ void Creature::update(double deltaTime, std::vector<LivingEntity*>& entityList)
 	}*/
 }
 
-void Creature::moveForward(double power)
-{
+void Creature::moveForward(double power) {
 	if (!isAlive()) return;
-	body->moveForward(power);
+	//body->moveForward(power);
 	setMovementCost(10.0 * power);
 }
 
-void Creature::setDebug(bool debug)
-{
+void Creature::setDebug(bool debug) {
 	this->debug = debug;
 }
 
-void Creature::consume()
-{
+void Creature::consume() {
 	if (!canEat() || contactEntity == nullptr) return;
 
 	contactEntity->beConsumed();
@@ -244,17 +227,14 @@ void Creature::consume()
 	cout << "eaten" << endl;
 }
 
-double Creature::beConsumed()
-{
+double Creature::beConsumed() {
 	return 0;
 }
 
-void Creature::setContactEntity(LivingEntity* livingEntity)
-{
+void Creature::setContactEntity(LivingEntity* livingEntity) {
 	this->contactEntity = livingEntity;
 }
 
-void Creature::clearContactEntity()
-{
+void Creature::clearContactEntity() {
 	contactEntity = nullptr;
 }

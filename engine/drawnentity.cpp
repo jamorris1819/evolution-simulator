@@ -10,10 +10,12 @@ namespace eng {
 		setVelocity(glm::vec3(0, 0, 0));
 		setScale(scale);
 		setRotation(0);
+
+		vao.setShader(shaderID);
+		vao.initialise();
 	}
 
 	DrawnEntity::~DrawnEntity() {
-		delete vao;
 	}
 
 	glm::vec3 const& DrawnEntity::getPosition() const {
@@ -29,14 +31,14 @@ namespace eng {
 	}
 
 	float DrawnEntity::getRotation() const {
-		return -body->getRotation();
+		return rotation; // -body->getRotation();
 	}
 
 	glm::mat4 DrawnEntity::getMatrix() const {
 		// Create translation matrix.
 		glm::mat4 matrix = glm::translate(glm::mat4(1.0f), position);
 		// Apply rotation matrix.
-		matrix = glm::rotate(matrix, body->getRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
+		matrix = glm::rotate(matrix, -rotation, glm::vec3(0.0f, 0.0f, 1.0f));
 
 		return matrix;
 	}
@@ -57,21 +59,19 @@ namespace eng {
 		this->rotation = rotation;
 	}
 
-	void DrawnEntity::setBody(Body* body) {
-		this->body = body;
-	}
-
 	void DrawnEntity::render() {
-		if (enabled)
-			body->render(getMatrix());
+		if (enabled && visible)
+			vao.render(getMatrix());
 	}
 
-	void DrawnEntity::update(double deltaTime) {
-		if (body != nullptr)
-			setPosition(glm::vec3(body->getPosition(), 0.0f));
+	void DrawnEntity::load() {
+		if (vertexArray.getVertexCount() == 0) return;
+
+		vao.setVertexArray(vertexArray);
+		vao.load();
 	}
 
 	void DrawnEntity::unload() {
-		//polygon->unload();
+		vao.unload();
 	}
 }

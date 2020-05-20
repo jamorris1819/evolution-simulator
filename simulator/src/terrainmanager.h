@@ -2,6 +2,7 @@
 #include "hex.h"
 #include "noiselayer.h"
 #include "FastNoise.h"
+#include "instancedvertexarrayobject.h"
 
 class TerrainManager {
 public:
@@ -22,6 +23,8 @@ public:
 	int getTileSize();
 
 private:
+	glm::vec3 getColourFromPosition(int x, int y);
+	eng::InstancedVertexArrayObject vao;
 	std::vector<NoiseLayer> noiseHeightLayers;
 	std::vector<FastNoise*> noiseHeightGenerators;
 	FastNoise* temperature;

@@ -1,12 +1,21 @@
 #pragma once
-#include "body.h"
+#include "vertexarray.h"
+#include "genome.h"
 
-class CreatureBody : public Body {
+class CreatureBody : public eng::VertexArray {
 public:
-	CreatureBody(GLuint shader, b2World* world);
+	CreatureBody(Genome const& genome);
 	void setNoiseOffset(float x, float y);
 	void setNoiseParams(int steps, int noiseType, int octaves);
 	virtual void generate();
+
+protected:
+	virtual void generateBodyPoints();
+	void generateEyes();
+	void generateMouth();
+
+private:
+	void extractGenomeData(Genome const& genome);
 	int steps;
 	int noiseType;
 	int octaves;
@@ -17,10 +26,7 @@ public:
 	float length;
 	float width;
 	float frequency;
-
-protected:
-	virtual void generateBodyPoints();
-	virtual void generatePhysicsBody();
-	void generateEyes();
-	void generateMouth();
+	int r;
+	int g;
+	int b;
 };

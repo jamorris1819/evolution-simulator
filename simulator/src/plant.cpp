@@ -1,12 +1,10 @@
 #include "plant.h"
 
-Plant::Plant(GLuint shader, b2World* world, glm::vec3 position) : LivingEntity(position)
-{
+Plant::Plant(GLuint shader, b2World* world, glm::vec3 position) : LivingEntity(position) {
 }
 
-void Plant::generate()
-{
-	((PlantBody*)body)->setAttributes(
+void Plant::generate() {
+	/*((PlantBody*)body)->setAttributes(
 		genome->getGeneValue<float>(GeneMarker::GM_SIZE),
 		genome->getGeneValue<float>(GeneMarker::GM_LEAF_LENGTH),
 		genome->getGeneValue<int>(GeneMarker::GM_LEAF_LAYERS),
@@ -21,7 +19,7 @@ void Plant::generate()
 	body->load();
 	body->r = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_R);
 	body->g = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_G);
-	body->b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
+	body->b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);*/
 
 	LivingEntity::generate();
 }

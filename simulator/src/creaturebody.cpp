@@ -4,17 +4,30 @@
 
 #define PI 3.14159265359
 
-CreatureBody::CreatureBody(GLuint shader, b2World* world) : Body(shader, world) {
+CreatureBody::CreatureBody(Genome const& genome) : eng::VertexArray() {
 	strideX = 1;
 	strideY = 1;
-	offsetX = 0;
-	offsetY = 0;
-	noiseType = 0;
+	noiseType = 4;
 	octaves = 1;
-	steps = 4;
 	length = 1.0f;
 	width = 1.0f;
 	frequency = 0.25f;
+
+	steps = 30;
+	offsetX = 0;
+	offsetY = 0;
+	r = 1;
+	g = 0;
+	b = 1;
+}
+
+void CreatureBody::extractGenomeData(Genome const& genome) {
+	steps = genome.getGeneValue<int>(GeneMarker::GM_BODY_STEPS);
+	offsetX = genome.getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX);
+	offsetY = genome.getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY);
+	r = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_R);
+	g = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_G);
+	b = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 }
 
 void CreatureBody::setNoiseOffset(float x, float y) {
@@ -29,13 +42,12 @@ void CreatureBody::setNoiseParams(int steps, int noiseType, int octaves) {
 }
 
 void CreatureBody::generate() {
-	Body::generate();
 	generateMouth();
 	generateEyes();
 }
 
 void CreatureBody::generateMouth() {
-	b2Vec2 vert[4];
+	/*b2Vec2 vert[4];
 
 	// Assign shape's vertices.
 	vert[0].Set(-0.2f, 1.2f);
@@ -54,7 +66,7 @@ void CreatureBody::generateMouth() {
 
 	fixtureDef.filter.categoryBits = ContactType::MOUTH;
 
-	physicsBody->CreateFixture(&fixtureDef);
+	physicsBody->CreateFixture(&fixtureDef);*/
 }
 
 void CreatureBody::generateBodyPoints() {
@@ -94,10 +106,12 @@ void CreatureBody::generateBodyPoints() {
 
 	// Assign these vertices to the polygon model.
 	setVertices(vertices);
+
+	vector<unsigned short> indices;
 }
 
 void CreatureBody::generateEyes() {
-	steps = 30;
+	/*steps = 30;
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
@@ -154,10 +168,10 @@ void CreatureBody::generateEyes() {
 	p = new VertexRenderer(shaderID);
 	p->setVertices(vertices);
 	p->load();
-	polygons.push_back(p);
+	polygons.push_back(p);*/
 }
 
-void CreatureBody::generatePhysicsBody() {
+/*void CreatureBody::generatePhysicsBody() {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(0.0f, 0.0f);
@@ -191,4 +205,4 @@ void CreatureBody::generatePhysicsBody() {
 	// Apply some settings to the new body.
 	physicsBody->SetLinearDamping(20.0f);
 	physicsBody->SetAngularDamping(20.0f);
-}
+}*/

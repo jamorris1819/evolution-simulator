@@ -41,7 +41,6 @@ double counter;
 
 EntityManager* entityManager;
 
-Body* body;
 Camera* cam;
 b2World* world;
 ContactListener* contactListener;
@@ -53,7 +52,7 @@ void initialiseEntities() {
 	srand(time(NULL));
 
 	terrain = new TerrainManager(program);
-	terrain->generate(50, 50, 8);
+	terrain->generate(1000, 1000, 8);
 	terrain->paintTerrain();
 
 	// Initialise entity manager and create a test creature.
@@ -77,13 +76,11 @@ void initialiseEntities() {
 	counter = 0;
 }
 
-double getTime()
-{
+double getTime() {
 	return GetTickCount();
 }
 
-void initialiseBox2D()
-{
+void initialiseBox2D() {
 	b2Vec2 gravity(0.0f, 0.0f);
 	world = new b2World(gravity);
 
@@ -111,8 +108,7 @@ void initialiseBox2D()
 	std::cout << (ContactType::PLANT | ContactType::CREATURE) << endl;
 }
 
-void initialiseUI()
-{
+void initialiseUI() {
 	// Initialise UI.
 	menu = new Menu();
 	menu->initialise(window);
@@ -127,8 +123,7 @@ void initialiseUI()
 	menu->addWindow(creatureWindow);
 }
 
-void initialise()
-{
+void initialise() {
 	// Output some data to screen.
 	std::cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
 	std::cout << "GLFW Version " << glfwGetVersionString() << endl;
@@ -181,7 +176,7 @@ void update() {
 	world->Step(1.0f / 60.0f, 6, 2);
 
 	// Debug creature controller.
-	if (Input::isDown(GLFW_KEY_UP)) {
+	/*if (Input::isDown(GLFW_KEY_UP)) {
 		((Creature*)entityManager->getTestCreature())->moveForward(0.6f);
 	}
 
@@ -199,24 +194,21 @@ void update() {
 
 	if (Input::isPressed(GLFW_KEY_SPACE)) {
 		((Creature*)entityManager->getTestCreature())->consume();
-	}
+	}*/
 }
 
-void error_callback(int error, const char* description)
-{
+void error_callback(int error, const char* description) {
 	fprintf(stderr, "Error: %s\n", description);
 }
 
-void window_size_callback(GLFWwindow* window, int w, int h)
-{
+void window_size_callback(GLFWwindow* window, int w, int h) {
 	width = w;
 	height = h;
 	glViewport(0, 0, width, height);
 	cam->updateWindowBounds(width, height);
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
@@ -230,8 +222,7 @@ int main(int argc, char** argv)
 	window = glfwCreateWindow(width, height, "Evolution Simulator", NULL, NULL);
 	glfwSetWindowSizeCallback(window, window_size_callback);
 	glfwSetWindowPos(window, (3440.0f - width) / 2, (1440.0f - height) / 2);
-	if (!window)
-	{
+	if (!window) {
 		glfwTerminate();
 		return -1;
 	}
@@ -245,8 +236,7 @@ int main(int argc, char** argv)
 	glfwSwapInterval(1);
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window))
-	{
+	while (!glfwWindowShouldClose(window)) {
 		/* Render here */
 		glClear(GL_COLOR_BUFFER_BIT);
 

@@ -1,23 +1,12 @@
 #pragma once
 #include "polygon.h"
 
-class Hex : public eng::VertexRenderer {
+#include "vertexarray.h"
+
+class Hex : public eng::VertexArray {
 public:
-	Hex(int size, glm::vec2 position, GLuint program);
-	void generate();
-	void render();
-	void update(double deltaTime);
-	bool getFade();
-	void setFade(bool fade);
-	int getFadeOffset();
-	void setFadeOffset(int fadeOffset);
-	int originalX;
-	int originalY;
+	Hex(int size);
+	void virtual generate() override;
 private:
-	glm::vec3 position;
-	glm::vec3 colour;
 	int size;
-	double time;
-	bool fade;
-	int fadeOffset;
 };

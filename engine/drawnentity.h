@@ -29,21 +29,26 @@ namespace eng {
 		void setVertexArray(eng::VertexArray const& va) { vertexArray = va; }
 		glm::mat4 getMatrix() const;
 
-		void setBody(Body* body);
-		virtual void update(double deltaTime);
+		virtual void update(double deltaTime) {};
 		void render();
+		void load();
 		void unload();
-		Body* body;
+
 		bool isEnabled() { return enabled; }
 		void setEnabled(bool enabled) { this->enabled = enabled; }
+
+		bool isVisible() const { return visible; }
+		void setVisible(bool v) { visible = v; }
 
 	protected:
 		glm::vec3 position;
 		glm::vec3 velocity;
 		glm::vec3 scale;
 		bool enabled;
+		bool visible;
 		float rotation;
+		bool loaded = false;
 		eng::VertexArray vertexArray;
-		eng::VertexArrayObject* vao;
+		eng::VertexArrayObject vao;
 	};
 }

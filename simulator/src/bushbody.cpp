@@ -7,7 +7,7 @@ BushBody::BushBody(GLuint shader, b2World* world) : PlantBody(shader, world) {
 }
 
 void BushBody::generateBodyPoints() {
-	steps = 30;
+	/*steps = 30;
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
@@ -94,7 +94,7 @@ void BushBody::generateBodyPoints() {
 		p->setVisible(false);
 		fruit.push_back(p);
 		polygons.push_back(p);
-	}
+	}*/
 }
 
 void BushBody::setVisibleFruit(int i) {

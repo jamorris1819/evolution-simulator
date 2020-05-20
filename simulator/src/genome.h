@@ -4,8 +4,7 @@
 #include "genemarker.h"
 #include <vector>
 
-class Genome
-{
+class Genome {
 public:
 	Genome(bool fill);
 	~Genome();
@@ -16,17 +15,16 @@ public:
 	static Genome* cross(Genome* genome1, Genome* genome2);
 	int generateInt(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
 	int generateFloat(int startingArea, int maxSpread, int minStride, int maxStride, int* spread);
-	template<class T> Gene<T>* getGene(int order, bool mainStrand);
-	template<class T> T getGeneValueInt(int order);
-	template<class T> T getGeneValue(GeneMarker marker);
+	template<class T> Gene<T>* getGene(int order, bool mainStrand) const;
+	template<class T> T getGeneValueInt(int order) const;
+	template<class T> T getGeneValue(GeneMarker marker) const;
 	std::vector<Base*> strandA;
 	std::vector<Base*> strandB;
 	double* strandWeights;
 	int strandLength;
 };
 
-template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand)
-{
+template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand) const {
 	std::vector<Base*> strandToUse = mainStrand ? strandA : strandB;
 	Base* gene = nullptr;
 	for (int i = 0; i < strandToUse.size(); i++) {
@@ -38,14 +36,13 @@ template<class T> Gene<T>* Genome::getGene(int order, bool mainStrand)
 
 	if (gene == nullptr) {
 		std::cout << "No gene was found" << std::endl;
-		return nullptr; 
+		return nullptr;
 	}
 
 	return ((Gene<T>*)gene);
 }
 
-template<class T> T Genome::getGeneValueInt(int order)
-{
+template<class T> T Genome::getGeneValueInt(int order) const {
 	T value = 0;
 
 	Gene<T>* geneA = getGene<T>(order, true);
@@ -54,7 +51,6 @@ template<class T> T Genome::getGeneValueInt(int order)
 	if (geneA == nullptr || geneB == nullptr) {
 		std::cout << "nullptr on gene" << std::endl;
 	}
-
 
 	bool domA = geneA->getDominant();
 	bool domB = geneB->getDominant();
@@ -72,7 +68,7 @@ template<class T> T Genome::getGeneValueInt(int order)
 		abort();
 	}
 
-	float weight =  strandWeights[index]; // TODO: this may be the problem.
+	float weight = strandWeights[index]; // TODO: this may be the problem.
 
 	// If this is an integer, calculate a new int based on the weights.
 	if (std::is_same_v<T, int>) {
@@ -124,8 +120,6 @@ template<class T> T Genome::getGeneValueInt(int order)
 	return value;
 }
 
-template<class T> T Genome::getGeneValue(GeneMarker marker)
-{
+template<class T> T Genome::getGeneValue(GeneMarker marker) const {
 	return getGeneValueInt<T>((int)marker);
 }
-

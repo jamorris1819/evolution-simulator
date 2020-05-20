@@ -4,7 +4,7 @@
 #include "glm\vec2.hpp"
 #include <vector>
 
-class Body : public eng::VertexRenderer {
+/*class Body : public eng::VertexRenderer {
 public:
 	Body(GLuint shader, b2World* world);
 	~Body();
@@ -37,3 +37,4 @@ protected:
 	b2Body* physicsBody;
 	b2World* world;
 };
+*/

@@ -3,8 +3,7 @@
 #include <poisson_disk_sampling.h>
 #define PI 3.14159265359
 
-PlantBody::PlantBody(GLuint shader, b2World* world) : Body(shader, world)
-{
+PlantBody::PlantBody(GLuint shader, b2World* world) {
 	leafLayers = 3;
 	leafLength = 1;
 	bushCount = 5;
@@ -12,21 +11,19 @@ PlantBody::PlantBody(GLuint shader, b2World* world) : Body(shader, world)
 	steps = 10;
 }
 
-void PlantBody::setAttributes(float size, float leafLength, int leafLayers, int steps, int bushCount, int r, int g, int b)
-{
+void PlantBody::setAttributes(float size, float leafLength, int leafLayers, int steps, int bushCount, int r, int g, int b) {
 	this->size = size;
 	this->leafLength = leafLength;
 	this->leafLayers = leafLayers;
 	this->bushCount = bushCount;
 	this->steps = steps;
-	this->r = r;
-	this->g = g;
-	this->b = b;
+	//this->r = r;
+	///this->g = g;
+	//this->b = b;
 }
 
-void PlantBody::generatePhysicsBody()
-{
-	b2BodyDef bodyDef;
+void PlantBody::generatePhysicsBody() {
+	/*b2BodyDef bodyDef;
 	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(0.0f, 0.0f);
 	physicsBody = world->CreateBody(&bodyDef);
@@ -39,7 +36,7 @@ void PlantBody::generatePhysicsBody()
 	fixtureDef.shape = &circleShape;
 
 	fixtureDef.filter.categoryBits = ContactType::PLANT;
-	physicsBody->CreateFixture(&fixtureDef);
+	physicsBody->CreateFixture(&fixtureDef);*/
 }
 
 /*void PlantBody::generateSpikeyBody()
