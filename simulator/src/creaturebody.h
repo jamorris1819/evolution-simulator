@@ -4,7 +4,7 @@
 
 class CreatureBody : public eng::VertexArray {
 public:
-	CreatureBody(Genome const& genome);
+	CreatureBody(Genome* genome);
 	void setNoiseOffset(float x, float y);
 	void setNoiseParams(int steps, int noiseType, int octaves);
 	virtual void generate();
@@ -15,7 +15,7 @@ protected:
 	void generateMouth();
 
 private:
-	void extractGenomeData(Genome const& genome);
+	void extractGenomeData(Genome* genome);
 	int steps;
 	int noiseType;
 	int octaves;

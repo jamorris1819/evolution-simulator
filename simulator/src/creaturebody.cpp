@@ -4,7 +4,7 @@
 
 #define PI 3.14159265359
 
-CreatureBody::CreatureBody(Genome const& genome) : eng::VertexArray() {
+CreatureBody::CreatureBody(Genome* genome) : eng::VertexArray() {
 	strideX = 1;
 	strideY = 1;
 	noiseType = 4;
@@ -19,15 +19,18 @@ CreatureBody::CreatureBody(Genome const& genome) : eng::VertexArray() {
 	r = 1;
 	g = 0;
 	b = 1;
+
+	extractGenomeData(genome);
+	generate();
 }
 
-void CreatureBody::extractGenomeData(Genome const& genome) {
-	steps = genome.getGeneValue<int>(GeneMarker::GM_BODY_STEPS);
-	offsetX = genome.getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX);
-	offsetY = genome.getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY);
-	r = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_R);
-	g = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_G);
-	b = genome.getGeneValue<int>(GeneMarker::GM_COLOUR_B);
+void CreatureBody::extractGenomeData(Genome* genome) {
+	steps = genome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS);
+	offsetX = genome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETX);
+	offsetY = genome->getGeneValue<float>(GeneMarker::GM_BODY_OFFSETY);
+	r = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_R);
+	g = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_G);
+	b = genome->getGeneValue<int>(GeneMarker::GM_COLOUR_B);
 }
 
 void CreatureBody::setNoiseOffset(float x, float y) {
@@ -44,6 +47,7 @@ void CreatureBody::setNoiseParams(int steps, int noiseType, int octaves) {
 void CreatureBody::generate() {
 	generateMouth();
 	generateEyes();
+	generateBodyPoints();
 }
 
 void CreatureBody::generateMouth() {

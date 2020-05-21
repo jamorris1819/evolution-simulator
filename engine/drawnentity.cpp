@@ -6,6 +6,7 @@
 namespace eng {
 	DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
 		enabled = true;
+		visible = true;
 		setPosition(position);
 		setVelocity(glm::vec3(0, 0, 0));
 		setScale(scale);
@@ -32,6 +33,12 @@ namespace eng {
 
 	float DrawnEntity::getRotation() const {
 		return rotation; // -body->getRotation();
+	}
+
+	void DrawnEntity::setVertexArray(eng::VertexArray const& va) {
+		vertexArray = va;
+		vao.setVertexArray(vertexArray);
+		vao.load();
 	}
 
 	glm::mat4 DrawnEntity::getMatrix() const {

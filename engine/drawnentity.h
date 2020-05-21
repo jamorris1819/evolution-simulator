@@ -26,7 +26,7 @@ namespace eng {
 		virtual void setRotation(float rotation);
 
 		eng::VertexArray const& getVertexArray() const { return vertexArray; }
-		void setVertexArray(eng::VertexArray const& va) { vertexArray = va; }
+		void setVertexArray(eng::VertexArray const& va);
 		glm::mat4 getMatrix() const;
 
 		virtual void update(double deltaTime) {};

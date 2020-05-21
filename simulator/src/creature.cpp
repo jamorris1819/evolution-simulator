@@ -33,6 +33,9 @@ NeuralGenome* Creature::getNeuralGenome() {
 void Creature::generate() {
 	if (genome == nullptr) throw exception("no genome specified");
 
+	CreatureBody body(genome);
+	setVertexArray(body);
+
 	// Pull data from the genome.
 	int steps = genome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS);
 	int noiseType = 4;

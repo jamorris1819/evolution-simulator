@@ -52,7 +52,7 @@ void initialiseEntities() {
 	srand(time(NULL));
 
 	terrain = new TerrainManager(program);
-	terrain->generate(1000, 1000, 8);
+	terrain->generate(256, 256, 8);
 	terrain->paintTerrain();
 
 	// Initialise entity manager and create a test creature.
