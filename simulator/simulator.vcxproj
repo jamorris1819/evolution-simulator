@@ -18,91 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\base.cpp" />
-    <ClCompile Include="src\bush.cpp" />
-    <ClCompile Include="src\bushbody.cpp" />
-    <ClCompile Include="src\bushbody.h" />
-    <ClCompile Include="src\camera.cpp" />
-    <ClCompile Include="src\connectiongene.cpp" />
-    <ClCompile Include="src\creature.cpp" />
-    <ClCompile Include="src\creaturebody.cpp" />
-    <ClCompile Include="src\creaturewindow.cpp" />
-    <ClCompile Include="src\entitymanager.cpp" />
-    <ClCompile Include="src\FastNoise.cpp" />
-    <ClCompile Include="src\gene.cpp" />
-    <ClCompile Include="src\genome.cpp" />
-    <ClCompile Include="src\hex.cpp" />
-    <ClCompile Include="src\imgui.cpp" />
-    <ClCompile Include="src\imgui_demo.cpp" />
-    <ClCompile Include="src\imgui_draw.cpp" />
-    <ClCompile Include="src\imgui_impl_glfw.cpp" />
-    <ClCompile Include="src\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="src\imgui_widgets.cpp" />
-    <ClCompile Include="src\input.cpp" />
-    <ClCompile Include="src\livingentity.cpp" />
-    <ClCompile Include="src\menu.cpp" />
-    <ClCompile Include="src\netdata.cpp" />
-    <ClCompile Include="src\neuralgenome.cpp" />
-    <ClCompile Include="src\nodegene.cpp" />
-    <ClCompile Include="src\plant.cpp" />
-    <ClCompile Include="src\plantbody.cpp" />
-    <ClCompile Include="src\shaderutility.cpp" />
-    <ClCompile Include="src\terrainmanager.cpp" />
-    <ClCompile Include="src\worldwindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\bush.h" />
-    <ClInclude Include="src\creaturewindow.h" />
-    <ClInclude Include="src\menuwindow.h" />
-    <ClInclude Include="src\base.h" />
-    <ClInclude Include="src\camera.h" />
-    <ClInclude Include="src\connectiongene.h" />
-    <ClInclude Include="src\contactlistener.h" />
-    <ClInclude Include="src\creature.h" />
-    <ClInclude Include="src\creaturebody.h" />
-    <ClInclude Include="src\entitymanager.h" />
-    <ClInclude Include="src\FastNoise.h" />
-    <ClInclude Include="src\Function.h" />
-    <ClInclude Include="src\gene.h" />
-    <ClInclude Include="src\genemarker.h" />
-    <ClInclude Include="src\genome.h" />
-    <ClInclude Include="src\hex.h" />
-    <ClInclude Include="src\imconfig.h" />
-    <ClInclude Include="src\imgui.h" />
-    <ClInclude Include="src\imgui_impl_glfw.h" />
-    <ClInclude Include="src\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\imgui_internal.h" />
-    <ClInclude Include="src\imstb_rectpack.h" />
-    <ClInclude Include="src\imstb_textedit.h" />
-    <ClInclude Include="src\imstb_truetype.h" />
-    <ClInclude Include="src\innovationmanager.h" />
-    <ClInclude Include="src\input.h" />
-    <ClInclude Include="src\livingentity.h" />
-    <ClInclude Include="src\menu.h" />
-    <ClInclude Include="src\netdata.h" />
-    <ClInclude Include="src\netrender.h" />
-    <ClInclude Include="src\neuralgenome.h" />
-    <ClInclude Include="src\nodegene.h" />
-    <ClInclude Include="src\noiselayer.h" />
-    <ClInclude Include="src\plant.h" />
-    <ClInclude Include="src\plantbody.h" />
-    <ClInclude Include="src\shaderutility.h" />
-    <ClInclude Include="src\terrainmanager.h" />
-    <ClInclude Include="src\worldwindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\engine\engine.vcxproj">
-      <Project>{cfc1f60d-d0b4-4154-8eee-91dde0adb8b2}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{804E8A71-2978-4234-8BC4-2271C8FA20E8}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8645f3a7-60a6-453f-b2f9-69aa7c32d2c8}</ProjectGuid>
     <RootNamespace>simulator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -111,27 +30,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -151,7 +70,13 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,93 +85,163 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\poisson\include;$(SolutionDir)Dependencies\poisson\include</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\poisson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\GLFW\lib-vc2019;$(ProjectDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\poisson\include;</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\GLFW\lib-vc2019;$(ProjectDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\poisson\include;$(SolutionDir)Dependencies\poisson\include</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\poisson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\GLFW\lib-vc2019;$(ProjectDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\poisson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(ProjectDir)Dependencies\GLFW\include;$(ProjectDir)Dependencies\GLEW\include;$(ProjectDir)Dependencies\poisson\include;</AdditionalIncludeDirectories>
-      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(SolutionDir)engine;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\poisson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\GLFW\lib-vc2019;$(ProjectDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib;</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="base.h" />
+    <ClInclude Include="bush.h" />
+    <ClInclude Include="bushbody.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="connectiongene.h" />
+    <ClInclude Include="contactlistener.h" />
+    <ClInclude Include="creature.h" />
+    <ClInclude Include="creaturebody.h" />
+    <ClInclude Include="creaturewindow.h" />
+    <ClInclude Include="entitymanager.h" />
+    <ClInclude Include="FastNoise.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="gene.h" />
+    <ClInclude Include="genemarker.h" />
+    <ClInclude Include="genome.h" />
+    <ClInclude Include="hex.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="innovationmanager.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="livingentity.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="menuwindow.h" />
+    <ClInclude Include="netdata.h" />
+    <ClInclude Include="netrender.h" />
+    <ClInclude Include="neuralgenome.h" />
+    <ClInclude Include="nodegene.h" />
+    <ClInclude Include="noiselayer.h" />
+    <ClInclude Include="plant.h" />
+    <ClInclude Include="plantbody.h" />
+    <ClInclude Include="shaderutility.h" />
+    <ClInclude Include="terrainmanager.h" />
+    <ClInclude Include="worldwindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="base.cpp" />
+    <ClCompile Include="bush.cpp" />
+    <ClCompile Include="bushbody.cpp" />
+    <ClCompile Include="camera.cpp" />
+    <ClCompile Include="connectiongene.cpp" />
+    <ClCompile Include="creature.cpp" />
+    <ClCompile Include="creaturebody.cpp" />
+    <ClCompile Include="creaturewindow.cpp" />
+    <ClCompile Include="entitymanager.cpp" />
+    <ClCompile Include="FastNoise.cpp" />
+    <ClCompile Include="gene.cpp" />
+    <ClCompile Include="genome.cpp" />
+    <ClCompile Include="hex.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="input.cpp" />
+    <ClCompile Include="livingentity.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="netdata.cpp" />
+    <ClCompile Include="neuralgenome.cpp" />
+    <ClCompile Include="nodegene.cpp" />
+    <ClCompile Include="plant.cpp" />
+    <ClCompile Include="plantbody.cpp" />
+    <ClCompile Include="shaderutility.cpp" />
+    <ClCompile Include="terrainmanager.cpp" />
+    <ClCompile Include="worldwindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\engine\engine.vcxproj">
+      <Project>{d91893eb-5ca3-4cce-8dfe-0d7508a19db8}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\glm.0.9.9.600\build\native\glm.targets" Condition="Exists('packages\glm.0.9.9.600\build\native\glm.targets')" />
-    <Import Project="packages\Box2D.2.3.0\build\native\Box2D.targets" Condition="Exists('packages\Box2D.2.3.0\build\native\Box2D.targets')" />
-    <Import Project="packages\glew.redist.1.9.0.1\build\native\glew.redist.targets" Condition="Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" />
-    <Import Project="..\packages\glm.0.9.9.600\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.9.600\build\native\glm.targets')" />
+    <Import Project="..\packages\glm.0.9.9.800\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" />
+    <Import Project="..\packages\Box2D.2.3.0\build\native\Box2D.targets" Condition="Exists('..\packages\Box2D.2.3.0\build\native\Box2D.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\glm.0.9.9.600\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glm.0.9.9.600\build\native\glm.targets'))" />
-    <Error Condition="!Exists('packages\Box2D.2.3.0\build\native\Box2D.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Box2D.2.3.0\build\native\Box2D.targets'))" />
-    <Error Condition="!Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.redist.1.9.0.1\build\native\glew.redist.targets'))" />
-    <Error Condition="!Exists('..\packages\glm.0.9.9.600\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.9.600\build\native\glm.targets'))" />
+    <Error Condition="!Exists('..\packages\glm.0.9.9.800\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.9.800\build\native\glm.targets'))" />
+    <Error Condition="!Exists('..\packages\Box2D.2.3.0\build\native\Box2D.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Box2D.2.3.0\build\native\Box2D.targets'))" />
   </Target>
 </Project>

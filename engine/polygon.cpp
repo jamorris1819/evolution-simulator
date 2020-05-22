@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "polygon.h"
 
-eng::VertexRenderer::VertexRenderer(GLuint shaderID) {
+
+eng::VertexRenderer::VertexRenderer(GLuint shaderID) {
 	this->shaderID = shaderID;
 	overrideColour = glm::vec3(1, 0, 1);	// magenta so it's obvious this hasn't been set.
 	useOverrideColour = false;

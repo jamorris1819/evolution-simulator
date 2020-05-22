@@ -162,12 +162,12 @@
     <ClCompile Include="testground.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\engine\engine.vcxproj">
-      <Project>{cfc1f60d-d0b4-4154-8eee-91dde0adb8b2}</Project>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\engine\engine.vcxproj">
+      <Project>{d91893eb-5ca3-4cce-8dfe-0d7508a19db8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

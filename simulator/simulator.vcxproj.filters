@@ -3,248 +3,230 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\ui">
-      <UniqueIdentifier>{dc0adf29-5cb9-49a7-b573-9b9659324d97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ui\imgui">
-      <UniqueIdentifier>{2a957ea6-9738-4ee0-b711-a21ff0fce2d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\genetics">
-      <UniqueIdentifier>{1d712ea1-8340-40c7-abd7-0f649b4800c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\entities">
-      <UniqueIdentifier>{220a1d27-332e-4a35-9136-5e17e2f1505b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\living">
-      <UniqueIdentifier>{54c96e03-2782-4fa0-b040-c719d443b6d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\living\body">
-      <UniqueIdentifier>{149c5160-764c-4d67-8314-4e63013e398e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\shaderutility.cpp">
+    <ClInclude Include="neuralgenome.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\terrainmanager.cpp">
+    </ClInclude>
+    <ClInclude Include="nodegene.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Application.cpp">
+    </ClInclude>
+    <ClInclude Include="noiselayer.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\base.cpp">
+    </ClInclude>
+    <ClInclude Include="plant.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\camera.cpp">
+    </ClInclude>
+    <ClInclude Include="plantbody.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\connectiongene.cpp">
+    </ClInclude>
+    <ClInclude Include="shaderutility.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entitymanager.cpp">
+    </ClInclude>
+    <ClInclude Include="terrainmanager.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hex.cpp">
+    </ClInclude>
+    <ClInclude Include="worldwindow.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\input.cpp">
+    </ClInclude>
+    <ClInclude Include="base.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\livingentity.cpp">
+    </ClInclude>
+    <ClInclude Include="bush.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\FastNoise.cpp">
+    </ClInclude>
+    <ClInclude Include="bushbody.h">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_demo.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_draw.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_impl_glfw.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_impl_opengl3.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_widgets.cpp">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\menu.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\worldwindow.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\creaturewindow.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gene.cpp">
-      <Filter>Source Files\genetics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\genome.cpp">
-      <Filter>Source Files\genetics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\neuralgenome.cpp">
-      <Filter>Source Files\genetics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\netdata.cpp">
-      <Filter>Source Files\genetics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\nodegene.cpp">
-      <Filter>Source Files\genetics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\creaturebody.cpp">
-      <Filter>Source Files\living\body</Filter>
-    </ClCompile>
-    <ClCompile Include="src\creature.cpp">
-      <Filter>Source Files\living</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plant.cpp">
-      <Filter>Source Files\living</Filter>
-    </ClCompile>
-    <ClCompile Include="src\plantbody.cpp">
-      <Filter>Source Files\living\body</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bushbody.h">
-      <Filter>Source Files\living\body</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bushbody.cpp">
-      <Filter>Source Files\living\body</Filter>
-    </ClCompile>
-    <ClCompile Include="src\bush.cpp">
-      <Filter>Source Files\living</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connectiongene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="contactlistener.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creature.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creaturebody.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creaturewindow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entitymanager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gene.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="genemarker.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="genome.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hex.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glfw.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="innovationmanager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="livingentity.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menuwindow.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="netdata.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="netrender.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\netrender.h">
+    <ClCompile Include="nodegene.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\noiselayer.h">
+    </ClCompile>
+    <ClCompile Include="plant.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shaderutility.h">
+    </ClCompile>
+    <ClCompile Include="plantbody.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\terrainmanager.h">
+    </ClCompile>
+    <ClCompile Include="shaderutility.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\base.h">
+    </ClCompile>
+    <ClCompile Include="terrainmanager.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\camera.h">
+    </ClCompile>
+    <ClCompile Include="worldwindow.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\connectiongene.h">
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\contactlistener.h">
+    </ClCompile>
+    <ClCompile Include="base.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entitymanager.h">
+    </ClCompile>
+    <ClCompile Include="bush.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Function.h">
+    </ClCompile>
+    <ClCompile Include="bushbody.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hex.h">
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\innovationmanager.h">
+    </ClCompile>
+    <ClCompile Include="connectiongene.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\input.h">
+    </ClCompile>
+    <ClCompile Include="creature.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\livingentity.h">
+    </ClCompile>
+    <ClCompile Include="creaturebody.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FastNoise.h">
+    </ClCompile>
+    <ClCompile Include="creaturewindow.cpp">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imconfig.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui_impl_glfw.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui_impl_opengl3.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui_internal.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imstb_rectpack.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imstb_textedit.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imstb_truetype.h">
-      <Filter>Source Files\ui\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menu.h">
-      <Filter>Source Files\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menuwindow.h">
-      <Filter>Source Files\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\worldwindow.h">
-      <Filter>Source Files\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\creaturewindow.h">
-      <Filter>Source Files\ui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gene.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\genemarker.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\genome.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\neuralgenome.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\netdata.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nodegene.h">
-      <Filter>Source Files\genetics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\creaturebody.h">
-      <Filter>Source Files\living\body</Filter>
-    </ClInclude>
-    <ClInclude Include="src\creature.h">
-      <Filter>Source Files\living</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plant.h">
-      <Filter>Source Files\living</Filter>
-    </ClInclude>
-    <ClInclude Include="src\plantbody.h">
-      <Filter>Source Files\living\body</Filter>
-    </ClInclude>
-    <ClInclude Include="src\bush.h">
-      <Filter>Source Files\living</Filter>
-    </ClInclude>
+    </ClCompile>
+    <ClCompile Include="entitymanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="livingentity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="neuralgenome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

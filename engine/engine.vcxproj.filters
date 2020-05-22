@@ -3,33 +3,15 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\structures">
-      <UniqueIdentifier>{2a3ff27f-377a-428c-b3c0-3caf453cd363}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\structures">
-      <UniqueIdentifier>{f3d3bf23-0638-4064-a433-d12bbac34962}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\structures\data">
-      <UniqueIdentifier>{be2f07da-51d1-4da4-8469-5f15e110c765}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\structures\data">
-      <UniqueIdentifier>{befd8660-0710-40df-adee-31ec502e9d6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\entities">
-      <UniqueIdentifier>{352da506-9b30-4d3d-882b-25455309d8e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\entities">
-      <UniqueIdentifier>{c7379c62-9918-46c9-a785-68601eecb739}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,41 +21,41 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vertex.h">
-      <Filter>Header Files\structures\data</Filter>
-    </ClInclude>
-    <ClInclude Include="triangle.h">
-      <Filter>Header Files\structures\data</Filter>
-    </ClInclude>
-    <ClInclude Include="drawnentity.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Header Files\entities</Filter>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="idrawable.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="body.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FastNoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexarray.h">
-      <Filter>Header Files\structures\data</Filter>
-    </ClInclude>
-    <ClInclude Include="physicsentity.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexarrayobject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instancedvertexarrayobject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="instance.h">
-      <Filter>Header Files\structures</Filter>
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instancedvertexarrayobject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsentity.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexarray.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexarrayobject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="body.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drawnentity.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,28 +65,28 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="triangle.cpp">
-      <Filter>Source Files\structures\data</Filter>
-    </ClCompile>
-    <ClCompile Include="vertex.cpp">
-      <Filter>Source Files\structures\data</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="drawnentity.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="body.cpp">
+    <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FastNoise.cpp">
+    <ClCompile Include="instancedvertexarrayobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vertexarrayobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="instancedvertexarrayobject.cpp">
+    <ClCompile Include="body.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="drawnentity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
