@@ -124,7 +124,9 @@ void initialiseUI() {
 }
 
 void initialise() {
+	glewExperimental = GL_TRUE;
 	// Output some data to screen.
+	std::cout << "Glew version " << glewGetString(GLEW_VERSION) << std::endl;
 	std::cout << "Glew initialisation " << (glewInit() == 0 ? "successful" : "failed") << endl;
 	std::cout << "GLFW Version " << glfwGetVersionString() << endl;
 	std::cout << "OpenGL vendor: " << glGetString(GL_VENDOR) << endl;
@@ -138,6 +140,12 @@ void initialise() {
 	glPolygonMode(GL_FRONT, GL_POLYGON);
 
 	lastTime = getTime();
+
+	GLenum err = glewInit();
+	if (GLEW_OK != err) {
+		/* Problem: glewInit failed, something is seriously wrong. */
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+	}
 
 	initialiseBox2D();
 	initialiseEntities();
