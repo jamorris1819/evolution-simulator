@@ -1,6 +1,5 @@
 #pragma once
 #include "body.h"
-#include "GLFW\glfw3.h"
 #include "genome.h"
 #include "neuralgenome.h"
 #include "netdata.h"
@@ -9,6 +8,7 @@
 #include "camera.h"
 #include "entitymanager.h"
 #include "menuwindow.h"
+#include "GLFW\glfw3.h"
 
 class Menu
 {

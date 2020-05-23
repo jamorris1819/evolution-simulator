@@ -1,24 +1,23 @@
 #include "entitymanager.h"
 #include "bush.h"
 
-EntityManager::EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager) {
+EntityManager::EntityManager(GLuint shader, TerrainManager* terrainManager) {
 	this->shader = shader;
-	this->world = world;
 	this->terrainManager = terrainManager;
 }
 
-void EntityManager::createPlant(glm::vec2 position) {
-	Plant* plant = new Bush(shader, world, glm::vec3(position, 0));
+/*void EntityManager::createPlant(glm::vec2 position) {
+	Plant* plant = new Bush(shader, glm::vec3(position, 0));
 	Genome* genome = new Genome(false);
 	genome->generatePlant();
 	plant->setGenome(genome);
 	plant->generate();
 
 	entityList.push_back(plant);
-}
+}*/
 
 Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position) {
-	Creature* newCreature = new Creature(this->shader, this->world, position);
+	Creature* newCreature = new Creature(this->shader, position);
 	newCreature->setGenome(genome);
 	newCreature->setNeuralGenome(neuralGenome);
 	newCreature->canReproduce = true;
@@ -30,7 +29,7 @@ Creature* EntityManager::createCreature(Genome* genome, NeuralGenome* neuralGeno
 }
 
 Creature* EntityManager::createCreatureQueue(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position) {
-	Creature* newCreature = new Creature(this->shader, this->world, position);
+	Creature* newCreature = new Creature(this->shader, position);
 	newCreature->setGenome(genome);
 	newCreature->setNeuralGenome(neuralGenome);
 	generationQueue.push(newCreature);
@@ -75,14 +74,14 @@ Creature* EntityManager::createChildCreatureQueue(Creature* creatureA, Creature*
 }
 
 void EntityManager::update(double deltaTime) {
-	if (!world->IsLocked()) {
+	//if (!world->IsLocked()) {
 		while (!generationQueue.empty()) {
 			Creature* creature = generationQueue.front();
 			generationQueue.pop();
 			creature->generate();
 			entityList.push_back(creature);
 		}
-	}
+	//}
 
 	for (int i = 0; i < entityList.size(); i++) {
 		entityList[i]->update(deltaTime, entityList);

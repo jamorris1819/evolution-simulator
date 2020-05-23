@@ -179,23 +179,21 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="body.h" />
     <ClInclude Include="drawnentity.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="FastNoise.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="idrawable.h" />
     <ClInclude Include="instance.h" />
     <ClInclude Include="instancedvertexarrayobject.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="physicsentity.h" />
+    <ClInclude Include="polygon.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="vertexarrayobject.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="body.cpp" />
     <ClCompile Include="drawnentity.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="entity.cpp" />

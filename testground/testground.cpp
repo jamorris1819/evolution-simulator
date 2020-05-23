@@ -13,52 +13,19 @@ void printva(eng::VertexArray& v) {
 	printv(v.getVertices()[0]);
 }
 
+class A {
+public:
+	void trigger() { test(); }
+	virtual void test() { std::cout << "a"; }
+};
+
+class B : public A {
+	virtual void test() { std::cout << "b"; }
+};
+
 int main() {
-	eng::VertexArray v1;
-
-	{
-		std::vector<eng::Vertex> tmp;
-		eng::Vertex v;
-		v.setPosition(glm::vec2(1, 2));
-		tmp.push_back(v);
-
-		v1.setVertices(tmp);
-	}
-
-	eng::VertexArray v2;
-
-	{
-		std::vector<eng::Vertex> tmp;
-		eng::Vertex v;
-		v.setPosition(glm::vec2(3, 4));
-		tmp.push_back(v);
-
-		v2.setVertices(tmp);
-	}
-
-	printva(v1);
-	printva(v2);
-
-	v2 = v1;
-
-	printva(v1);
-	printva(v2);
-
-	{
-		std::vector<eng::Vertex> tmp;
-		eng::Vertex v;
-		v.setPosition(glm::vec2(3, 4));
-		tmp.push_back(v);
-
-		v2.setVertices(tmp);
-	}
-
-	printva(v1);
-	printva(v2);
-
-	while (true) {
-		eng::Vertex va;
-	}
+	B b;
+	b.trigger();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

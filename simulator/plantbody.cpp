@@ -2,7 +2,7 @@
 #include "contactlistener.h"
 #include <poisson_disk_sampling.h>
 #define PI 3.14159265359
-
+/*
 PlantBody::PlantBody(GLuint shader, b2World* world) {
 	leafLayers = 3;
 	leafLength = 1;
@@ -36,10 +36,10 @@ void PlantBody::generatePhysicsBody() {
 	fixtureDef.shape = &circleShape;
 
 	fixtureDef.filter.categoryBits = ContactType::PLANT;
-	physicsBody->CreateFixture(&fixtureDef);*/
+	physicsBody->CreateFixture(&fixtureDef);
 }
 
-/*void PlantBody::generateSpikeyBody()
+void PlantBody::generateSpikeyBody()
 {
 	size /= 3;
 	double step = 2.0 * PI / steps;

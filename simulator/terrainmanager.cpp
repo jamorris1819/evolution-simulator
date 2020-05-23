@@ -44,7 +44,7 @@ void TerrainManager::generate(int width, int height, int tileSize) {
 
 void TerrainManager::render() {
 	glm::mat4 p(1.0f);
-	vao.render(glm::translate(p, glm::vec3(0, 0, 0)));
+	//vao.render(glm::translate(p, glm::vec3(0, 0, 0)));
 }
 
 int TerrainManager::createNoiseHeightMap() {
@@ -94,10 +94,10 @@ int TerrainManager::getTileSize() {
 	return tileSize;
 }
 
-void TerrainManager::updateNoiseLayer(int id, string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY) {
+void TerrainManager::updateNoiseLayer(int id, std::string name, bool enabled, bool inverse, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY) {
 	if (id > noiseHeightLayers.size() - 1) return;
 
-	noiseHeightLayers[id].name = string(name.c_str());
+	noiseHeightLayers[id].name = std::string(name.c_str());
 	noiseHeightLayers[id].enabled = enabled;
 	noiseHeightLayers[id].inverse = inverse;
 	noiseHeightLayers[id].seed = seed;
@@ -118,7 +118,7 @@ void TerrainManager::updateNoise(FastNoise* noise, NoiseLayer layer) {
 	updateNoise(noise, layer.name, layer.seed, layer.scale, layer.noiseType, layer.frequency, layer.fractalType, layer.octaves, layer.lacunarity, layer.gain, layer.offsetX, layer.offsetY);
 }
 
-void TerrainManager::updateNoise(FastNoise* noise, string name, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY) {
+void TerrainManager::updateNoise(FastNoise* noise, std::string name, int seed, float scale, int noiseType, float frequency, int fractalType, int octaves, float lacunarity, float gain, int offsetX, int offsetY) {
 	noise->SetNoiseType((FastNoise::NoiseType)noiseType);
 	noise->SetFrequency(frequency);
 	noise->SetSeed(seed);

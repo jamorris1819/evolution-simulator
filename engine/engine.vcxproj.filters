@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\structures">
+      <UniqueIdentifier>{849ef0c5-f20c-4b5b-ba4a-30f0b134bfad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\structures">
+      <UniqueIdentifier>{c088ee93-1b0e-46f5-8878-911496a31d45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -24,9 +30,6 @@
     <ClInclude Include="FastNoise.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="idrawable.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="instance.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -36,19 +39,7 @@
     <ClInclude Include="physicsentity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="triangle.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexarray.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="vertexarrayobject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="body.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="drawnentity.h">
@@ -56,6 +47,18 @@
     </ClInclude>
     <ClInclude Include="entity.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexarray.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon.h">
+      <Filter>Header Files\structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,16 +74,7 @@
     <ClCompile Include="instancedvertexarrayobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vertexarrayobject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="drawnentity.cpp">
@@ -88,6 +82,12 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vertex.cpp">
+      <Filter>Source Files\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle.cpp">
+      <Filter>Source Files\structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

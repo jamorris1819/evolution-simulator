@@ -9,7 +9,7 @@
 class Creature : public LivingEntity
 {
 public:
-	Creature(GLuint shader, b2World* world, glm::vec2 position);
+	Creature(GLuint shader, glm::vec2 position);
 	~Creature();
 	void setNeuralGenome(NeuralGenome* neuralGenome);
 	NeuralGenome* getNeuralGenome();

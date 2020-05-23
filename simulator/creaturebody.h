@@ -1,13 +1,14 @@
 #pragma once
-#include "vertexarray.h"
+#include "polygon.h"
+#include "body.h"
 #include "genome.h"
 
-class CreatureBody : public eng::VertexArray {
+class CreatureBody: public Body {
 public:
 	CreatureBody(Genome* genome);
 	void setNoiseOffset(float x, float y);
 	void setNoiseParams(int steps, int noiseType, int octaves);
-	virtual void generate();
+	virtual void generate() override;
 
 protected:
 	virtual void generateBodyPoints();

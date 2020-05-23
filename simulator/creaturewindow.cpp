@@ -37,7 +37,7 @@ void CreatureWindow::renderWindow() {
 	ImGui::BeginGroup();
 	ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetFrameHeightWithSpacing())); // Leave room for 1 line below us
 
-	string titleString = "Viewing " + options.at(selected);
+	std::string titleString = "Viewing " + options.at(selected);
 	const char* title = titleString.c_str();
 
 	ImGui::Text(title);
@@ -175,7 +175,7 @@ void CreatureWindow::renderNeuralNetworkDetails() {
 			x + node.x,	// start x
 			y + node.y - 8),
 			ImColor(255, 255, 255),
-			to_string(val).c_str());
+			std::to_string(val).c_str());
 	}
 
 	ImGui::BeginGroup();

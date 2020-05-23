@@ -1,34 +1,34 @@
 #pragma once
-#include "GL\glew.h"
-#include <vector>
-#include "vertex.h"
-#include "triangle.h"
-#include "vertexarrayobject.h"
 #include "vertexarray.h"
 
-using namespace std;
-
 namespace eng {
-	class VertexRenderer : public VertexArray {
+	class Polygon : public VertexArray {
 	public:
-		VertexRenderer(GLuint shaderID);
-		~VertexRenderer();
-		void load();
-		void unload();
-		void render(glm::mat4 matrix);
-		GLuint shaderID;
-		VertexArrayObject* vao;
-		void enableOverrideColour(glm::vec3 overrideColour);
-		void setVisible(bool visible) { this->visible = visible; }
-		bool isVisible() const { return visible; }
-		VertexArray const& getRenderData() const { return renderData; }
-		void setRenderData(VertexArray const& data) { renderData = data; }
+		Polygon() : VertexArray() {}
 	protected:
-		glm::vec3 overrideColour;
-		void setColour();
-		bool visible;
+		/// <summary>
+		/// Generate indices which turn the polygon data into triangles.
+		/// </summary>
+		virtual void generateIndices() override {
+			if (getVertexCount() == 0) return;
+			//if (!hasOriginVertex()) insertOriginVertex();
+
+			indices.clear();
+
+			for (int i = 1; i < getVertexCount(); ++i) {
+				indices.push_back(i);
+				indices.push_back(0);
+				indices.push_back(i + 1 < getVertexCount() ? i + 1 : 1); // loop back to start
+			}
+		}
+
 	private:
-		bool useOverrideColour;
-		VertexArray renderData;
+		bool hasOriginVertex() { return vertices[0].getPosition() == glm::vec2(0, 0); }
+		void insertOriginVertex() {
+			Vertex origin;
+			origin.setPosition(glm::vec2(0, 0));
+			origin.setColour(vertices[0].getColour());
+			vertices.insert(vertices.begin(), origin);
+		}
 	};
 }

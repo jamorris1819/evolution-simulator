@@ -4,7 +4,7 @@
 
 class LivingEntity : public eng::DrawnEntity {
 public:
-	LivingEntity(glm::vec3 position);
+	LivingEntity(GLuint shaderId, glm::vec3 position);
 	~LivingEntity();
 	virtual void update(double deltaTime, std::vector<LivingEntity*>& entityList);
 	void kill();

@@ -1,6 +1,6 @@
 #include "bush.h"
 #include "bushbody.h"
-
+/*
 Bush::Bush(GLuint shader, b2World* world, glm::vec3 position) : Plant(shader, world, position) {
 	//body = new BushBody(shader, world);
 	availableFruit = 0;
@@ -14,14 +14,14 @@ void Bush::generate() {
 	maxFruit = ((BushBody*)(PlantBody*)body)->fruit.size();
 	availableFruit = maxFruit / 2;
 	BushBody* bushBody = (BushBody*)(PlantBody*)body;
-	bushBody->setVisibleFruit(availableFruit);*/
+	bushBody->setVisibleFruit(availableFruit);
 }
 
 double Bush::beConsumed() {
 	/*availableFruit--;
 	if (availableFruit < 0) availableFruit = 0;
 	BushBody* bushBody = (BushBody*)(PlantBody*)body;
-	bushBody->setVisibleFruit(availableFruit);*/
+	bushBody->setVisibleFruit(availableFruit);
 
 	return 25;
 }
@@ -41,4 +41,4 @@ void Bush::update(double deltaTime, std::vector<LivingEntity*>& entityList) {
 			//bushBody->setVisibleFruit(availableFruit);
 		}
 	}
-}
+}*/

@@ -10,7 +10,7 @@ public:
 	void initialise() override;
 	void renderWindow() override;
 private:
-	std::vector<string> options;
+	std::vector<std::string> options;
 	int selected;
 	void renderDetails();
 	void renderDescription();

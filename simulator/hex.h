@@ -1,5 +1,4 @@
 #pragma once
-#include "polygon.h"
 
 #include "vertexarray.h"
 

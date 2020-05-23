@@ -1,7 +1,7 @@
 #pragma once
 
 struct NoiseLayer {
-	string name;
+	std::string name;
 	bool enabled;
 	bool inverse;
 	int seed;

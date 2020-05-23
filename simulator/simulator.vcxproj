@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="base.h" />
+    <ClInclude Include="body.h" />
     <ClInclude Include="bush.h" />
     <ClInclude Include="bushbody.h" />
     <ClInclude Include="camera.h" />
@@ -194,6 +195,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="base.cpp" />
+    <ClCompile Include="body.cpp" />
     <ClCompile Include="bush.cpp" />
     <ClCompile Include="bushbody.cpp" />
     <ClCompile Include="camera.cpp" />

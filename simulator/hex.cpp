@@ -11,7 +11,7 @@ Hex::Hex(int size) : VertexArray() {
 void Hex::generate() {
 	eng::Vertex origin(0, 0);
 	origin.setColour(glm::vec3(1, 0, 0));
-	vector<eng::Vertex> vertices;
+	std::vector<eng::Vertex> vertices;
 
 	vertices.push_back(origin);
 
@@ -23,7 +23,7 @@ void Hex::generate() {
 		vertices.push_back(v);
 	}
 
-	vector<unsigned short> indices{
+	std::vector<unsigned short> indices{
 		1, 0, 2, 2, 0, 3, 3, 0, 4, 4, 0, 5, 5, 0, 6, 6, 0, 1
 	};
 

@@ -1,6 +1,6 @@
 #include "livingentity.h"
 
-LivingEntity::LivingEntity(glm::vec3 position) : DrawnEntity(position) {
+LivingEntity::LivingEntity(GLuint shaderId, glm::vec3 position) : DrawnEntity(shaderId, position) {
 	maxHealth = 100.0;
 	maxEnergy = 5000.0;
 

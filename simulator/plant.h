@@ -4,6 +4,6 @@
 
 class Plant : public LivingEntity {
 public:
-	Plant(GLuint shader, b2World* world, glm::vec3 position);
+	Plant(GLuint shader, glm::vec3 position);
 	virtual void generate();
 };

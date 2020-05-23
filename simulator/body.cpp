@@ -6,6 +6,8 @@
 
 #define PI 3.14159265359
 
+
+
 /*Body::Body(GLuint shader, b2World* world) : eng::VertexRenderer(shader) {
 	seed = 0;
 	this->world = world;

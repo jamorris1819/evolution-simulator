@@ -31,7 +31,7 @@ void WorldWindow::renderWindow()
 			// Buttons for managing layers.
 			if (ImGui::Button("Create")) {
 				selected = terrain->createNoiseHeightMap();
-				string name = "new layer ";
+				std::string name = "new layer ";
 				name += std::to_string(terrain->noiseHeightMapCount());
 
 				changeMade = true;
@@ -148,7 +148,7 @@ void WorldWindow::renderWindow()
 						float offsetY = ((rand() % 200) - 100) / 100.0f;
 
 						position += glm::vec2(offsetX * tileSize / 2.0f, offsetY * tileSize / 2.0f);
-						entityManager->createPlant(position);
+						//entityManager->createPlant(position);
 					}
 				}
 			}

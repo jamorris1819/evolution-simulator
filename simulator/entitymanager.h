@@ -9,8 +9,8 @@
 
 class EntityManager {
 public:
-	EntityManager(GLuint shader, b2World* world, TerrainManager* terrainManager);
-	void createPlant(glm::vec2 position);
+	EntityManager(GLuint shader, TerrainManager* terrainManager);
+	//void createPlant(glm::vec2 position);
 	Creature* createCreature(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position);
 	Creature* createCreatureQueue(Genome* genome, NeuralGenome* neuralGenome, glm::vec2 position);
 	Creature* createRandomCreature(glm::vec2 position);
@@ -23,6 +23,5 @@ private:
 	std::vector <LivingEntity*> entityList;
 	std::queue<Creature*> generationQueue;
 	GLuint shader;
-	b2World* world;
 	TerrainManager* terrainManager;
 };

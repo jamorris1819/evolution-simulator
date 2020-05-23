@@ -2,7 +2,7 @@
 #include "creaturebody.h"
 #include "contactlistener.h"
 
-Creature::Creature(GLuint shader, b2World* world, glm::vec2 position) : LivingEntity(glm::vec3(position, 0.0f)) {
+Creature::Creature(GLuint shader, glm::vec2 position) : LivingEntity(shader, glm::vec3(position, 0.0f)) {
 	genome = nullptr;
 	neuralGenome = nullptr;
 	//body = new CreatureBody(shader, world);
@@ -31,10 +31,11 @@ NeuralGenome* Creature::getNeuralGenome() {
 }
 
 void Creature::generate() {
-	if (genome == nullptr) throw exception("no genome specified");
+	if (genome == nullptr) throw std::exception("no genome specified");
 
 	CreatureBody body(genome);
-	setVertexArray(body);
+	body.generate();
+	setVertexArray(body.getVertexArray());
 
 	// Pull data from the genome.
 	int steps = genome->getGeneValue<int>(GeneMarker::GM_BODY_STEPS);
@@ -227,7 +228,6 @@ void Creature::consume() {
 
 	contactEntity->beConsumed();
 	setEnergy(getEnergy() + 10);
-	cout << "eaten" << endl;
 }
 
 double Creature::beConsumed() {

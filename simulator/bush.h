@@ -1,6 +1,6 @@
 #pragma once
 #include "plant.h"
-
+/*
 class Bush : public Plant {
 public:
 	Bush(GLuint shader, b2World* world, glm::vec3 position);
@@ -12,4 +12,4 @@ private:
 	int maxFruit;
 	double internalTimer;
 	double timeToReplenish;
-};
+};*/

@@ -1,6 +1,6 @@
 #include "plant.h"
 
-Plant::Plant(GLuint shader, b2World* world, glm::vec3 position) : LivingEntity(position) {
+Plant::Plant(GLuint shader, glm::vec3 position) : LivingEntity(shader, position) {
 }
 
 void Plant::generate() {

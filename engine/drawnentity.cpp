@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "DrawnEntity.h"
-#include "polygon.h"
 #include <thread>
 
 namespace eng {
-	DrawnEntity::DrawnEntity(glm::vec3 position, glm::vec3 scale) : Entity() {
+	DrawnEntity::DrawnEntity(GLuint shaderId, glm::vec3 position, glm::vec3 scale) : Entity() {
 		enabled = true;
 		visible = true;
 		setPosition(position);
@@ -12,7 +11,7 @@ namespace eng {
 		setScale(scale);
 		setRotation(0);
 
-		vao.setShader(shaderID);
+		vao.setShader(shaderId);
 		vao.initialise();
 	}
 

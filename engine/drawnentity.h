@@ -3,16 +3,16 @@
 #include "glm/gtx/quaternion.hpp"
 #include "glm/gtx/transform.hpp"
 #include "GL/glew.h"
-#include "polygon.h"
-#include "body.h"
 #include "entity.h"
+#include "vertexarray.h"
+#include "vertexarrayobject.h"
 
 /// The DrawnEntity allows us to render Entities with their meshes into our scene.
 namespace eng {
 	class DrawnEntity : public Entity {
 	public:
-		DrawnEntity(glm::vec3 position, glm::vec3 scale);
-		DrawnEntity(glm::vec3 position) : DrawnEntity(position, glm::vec3(1, 1, 1)) {}
+		DrawnEntity(GLuint shaderId, glm::vec3 position, glm::vec3 scale);
+		DrawnEntity(GLuint shaderId, glm::vec3 position) : DrawnEntity(shaderId, position, glm::vec3(1, 1, 1)) {}
 		virtual ~DrawnEntity();
 
 		virtual glm::vec3 const& getPosition() const;

@@ -2,7 +2,7 @@
 #include <glm\trigonometric.hpp>
 #include <poisson_disk_sampling.h>
 #define PI 3.14159265359
-
+/*
 BushBody::BushBody(GLuint shader, b2World* world) : PlantBody(shader, world) {
 }
 
@@ -94,11 +94,11 @@ void BushBody::generateBodyPoints() {
 		p->setVisible(false);
 		fruit.push_back(p);
 		polygons.push_back(p);
-	}*/
+	}
 }
 
 void BushBody::setVisibleFruit(int i) {
 	for (int j = 0; j < fruit.size(); j++) {
 		fruit[j]->setVisible(j < i);
 	}
-}
+}*/

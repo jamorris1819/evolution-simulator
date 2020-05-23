@@ -1,6 +1,6 @@
 #pragma once
 #include "body.h"
-
+/*
 class PlantBody {
 public:
 	PlantBody(GLuint shader, b2World* world);
@@ -13,4 +13,4 @@ protected:
 	int bushCount;
 	int leafLayers;
 	int steps;
-};
+};*/

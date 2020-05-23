@@ -15,7 +15,7 @@ void main(void)
 {	
 	gl_Position = vec4(vPosition + vOffset, 0, 1) * uModel * uView * uProjection;
 
-	bool override = vOverrideColour != vec3(0, 0, 0);
+	bool override = vOverrideColour != vec3(1, 1, 1);
 	
 	oColour = override ? vOverrideColour : vColour;
 }

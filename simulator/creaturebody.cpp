@@ -4,7 +4,7 @@
 
 #define PI 3.14159265359
 
-CreatureBody::CreatureBody(Genome* genome) : eng::VertexArray() {
+CreatureBody::CreatureBody(Genome* genome) : Body() {
 	strideX = 1;
 	strideY = 1;
 	noiseType = 4;
@@ -21,7 +21,6 @@ CreatureBody::CreatureBody(Genome* genome) : eng::VertexArray() {
 	b = 1;
 
 	extractGenomeData(genome);
-	generate();
 }
 
 void CreatureBody::extractGenomeData(Genome* genome) {
@@ -45,9 +44,9 @@ void CreatureBody::setNoiseParams(int steps, int noiseType, int octaves) {
 }
 
 void CreatureBody::generate() {
+	generateBodyPoints();
 	generateMouth();
 	generateEyes();
-	generateBodyPoints();
 }
 
 void CreatureBody::generateMouth() {
@@ -81,8 +80,10 @@ void CreatureBody::generateBodyPoints() {
 	int sides = steps;
 	double step = PI / sides;
 
+
 	// Basic creature generation.
-	vector<eng::Vertex> vertices;
+	std::vector<eng::Vertex> vertices;
+	eng::Vertex origin(glm::vec2(0, 0));
 
 	// Generate half of the creature.
 	for (int i = 0; i <= sides; i++) {
@@ -108,18 +109,21 @@ void CreatureBody::generateBodyPoints() {
 		vertices[i] = v;
 	}
 
-	// Assign these vertices to the polygon model.
-	setVertices(vertices);
+	// Add origin to start so can be rendered as polygon
+	vertices.insert(vertices.begin(), origin);
 
-	vector<unsigned short> indices;
+	// Assign these vertices to the polygon model.
+	eng::Polygon mainBody;
+	mainBody.setVertices(vertices);
+	primaryBody = mainBody;
 }
 
 void CreatureBody::generateEyes() {
-	/*steps = 30;
+	steps = 30;
 	double step = 2.0 * PI / steps;
 
 	// Basic creature generation.
-	vector<eng::Vertex> vertices;
+	std::vector<eng::Vertex> vertices;
 
 	// Generate the eye.
 	for (int i = 0; i < steps; i++) {
@@ -130,10 +134,9 @@ void CreatureBody::generateEyes() {
 		vertices.push_back(v);
 	}
 
-	VertexRenderer* p = new VertexRenderer(shaderID);
-	p->setVertices(vertices);
-	p->load();
-	polygons.push_back(p);
+	eng::Polygon eye;
+	eye.setVertices(vertices);
+	secondaryBodies.push_back(eye);
 
 	for (int i = 0; i < vertices.size(); i++) {
 		vertices[i].setPosition(vertices[i].getPosition() - glm::vec2(-0.3f, 0.35f));
@@ -141,12 +144,11 @@ void CreatureBody::generateEyes() {
 		vertices[i].setPosition(vertices[i].getPosition() + glm::vec2(-0.3f, 0.35f));
 		vertices[i].setColour(glm::vec3(0, 0, 0));
 	}
-	p = new VertexRenderer(shaderID);
-	p->setVertices(vertices);
-	p->load();
-	polygons.push_back(p);
 
-	vertices.clear();
+	eye.setVertices(vertices);
+	secondaryBodies.push_back(eye);
+
+	/*vertices.clear();
 
 	// Generate the eye.
 	for (int i = 0; i < steps; i++) {
