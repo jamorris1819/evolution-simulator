@@ -144,7 +144,7 @@ bool Creature::isEntityWithinFOV(LivingEntity* livingEntity, double& angle) {
 	double dot = (double)entityDir.x * viewDir.x + (double)entityDir.y * viewDir.y;
 	double det = (double)entityDir.x * viewDir.y - (double)entityDir.y * viewDir.x;
 	angle = atan2(det, dot);
-	angle *= (180.0 / 3.141582653); // Convert to degrees.
+	angle *= 57.295961901; // Convert to degrees. (180 / PI)
 
 	double fieldOfView = viewAngle;
 

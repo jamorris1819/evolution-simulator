@@ -19,6 +19,18 @@
     <Filter Include="Source Files\structures">
       <UniqueIdentifier>{c088ee93-1b0e-46f5-8878-911496a31d45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\entities">
+      <UniqueIdentifier>{540a5312-f6d4-4000-9858-6d7f7711e2df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{f581386e-2d66-4c5e-a7d0-1cc3b18cab35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\render">
+      <UniqueIdentifier>{dbab6c8b-b0f6-43bc-9ed6-27722b861758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render">
+      <UniqueIdentifier>{4e7e5165-90a2-40e7-ad30-5171f5baa924}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -28,24 +40,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FastNoise.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instance.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instancedvertexarrayobject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="physicsentity.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vertexarrayobject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="drawnentity.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="vertex.h">
@@ -60,6 +54,24 @@
     <ClInclude Include="polygon.h">
       <Filter>Header Files\structures</Filter>
     </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="drawnentity.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="instance.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="instancedvertexarrayobject.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="vertexarrayobject.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsentity.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp">
@@ -71,23 +83,23 @@
     <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="instancedvertexarrayobject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vertexarrayobject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="drawnentity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vertex.cpp">
       <Filter>Source Files\structures</Filter>
     </ClCompile>
     <ClCompile Include="triangle.cpp">
       <Filter>Source Files\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="drawnentity.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexarrayobject.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="instancedvertexarrayobject.cpp">
+      <Filter>Source Files\render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

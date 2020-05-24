@@ -13,14 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{a471d13b-2d2e-4bf6-b3f7-12aa83e847ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\entities">
+      <UniqueIdentifier>{6d462400-f7f3-48d3-84f1-f55fbd0da1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bodies">
+      <UniqueIdentifier>{8a62ecf3-d183-41b4-93b3-789bb2d578c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bodies">
+      <UniqueIdentifier>{71de9970-737a-4003-91ed-66896eb0d516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\genetics">
+      <UniqueIdentifier>{8f21341e-3475-4608-b64e-d3ed9e385bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\genetics">
+      <UniqueIdentifier>{79eb2aa6-e15c-4028-adfa-27c4554e0873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\neural">
+      <UniqueIdentifier>{d5e6707e-92f9-4586-b7dc-645b01b5a08b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\neural">
+      <UniqueIdentifier>{70b1ff85-a113-4af0-a763-2aebc6dec6a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="neuralgenome.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="nodegene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="noiselayer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -37,9 +55,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="worldwindow.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="base.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="bush.h">
@@ -60,9 +75,6 @@
     <ClInclude Include="creature.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="creaturebody.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="creaturewindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -73,15 +85,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gene.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="genemarker.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="genome.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="hex.h">
@@ -111,13 +114,7 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="innovationmanager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="input.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="livingentity.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
@@ -126,20 +123,44 @@
     <ClInclude Include="menuwindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="netdata.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="netrender.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="livingentity.h">
+      <Filter>Header Files\entities</Filter>
     </ClInclude>
     <ClInclude Include="body.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="creaturebody.h">
+      <Filter>Header Files\bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="genome.h">
+      <Filter>Header Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="genemarker.h">
+      <Filter>Header Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="gene.h">
+      <Filter>Header Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="base.h">
+      <Filter>Header Files\genetics</Filter>
+    </ClInclude>
+    <ClInclude Include="netdata.h">
+      <Filter>Header Files\neural</Filter>
+    </ClInclude>
+    <ClInclude Include="netrender.h">
+      <Filter>Header Files\neural</Filter>
+    </ClInclude>
+    <ClInclude Include="neuralgenome.h">
+      <Filter>Header Files\neural</Filter>
+    </ClInclude>
+    <ClInclude Include="nodegene.h">
+      <Filter>Header Files\neural</Filter>
+    </ClInclude>
+    <ClInclude Include="innovationmanager.h">
+      <Filter>Header Files\neural</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="nodegene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="plant.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -158,9 +179,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="base.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bush.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -176,9 +194,6 @@
     <ClCompile Include="creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="creaturebody.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="creaturewindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -186,12 +201,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FastNoise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="genome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hex.cpp">
@@ -218,20 +227,35 @@
     <ClCompile Include="input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="livingentity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="netdata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="neuralgenome.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="livingentity.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
     <ClCompile Include="body.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="creaturebody.cpp">
+      <Filter>Source Files\bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="gene.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="genome.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="base.cpp">
+      <Filter>Source Files\genetics</Filter>
+    </ClCompile>
+    <ClCompile Include="nodegene.cpp">
+      <Filter>Source Files\neural</Filter>
+    </ClCompile>
+    <ClCompile Include="neuralgenome.cpp">
+      <Filter>Source Files\neural</Filter>
+    </ClCompile>
+    <ClCompile Include="netdata.cpp">
+      <Filter>Source Files\neural</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

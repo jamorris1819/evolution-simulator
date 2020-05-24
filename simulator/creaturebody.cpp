@@ -110,6 +110,7 @@ void CreatureBody::generateBodyPoints() {
 	}
 
 	// Add origin to start so can be rendered as polygon
+	origin.setColour(glm::vec3(r / 255.0f, g / 255.0f, b / 255.0f));
 	vertices.insert(vertices.begin(), origin);
 
 	// Assign these vertices to the polygon model.
