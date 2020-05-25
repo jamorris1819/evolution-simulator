@@ -9,6 +9,7 @@
 #include "systemmanager.h"
 #include "entitymanager.h"
 #include "shadermanager.h"
+#include "vertexarray.h"
 
 void initialise()
 {
@@ -21,9 +22,19 @@ void initialise()
 
 	engine::ShaderManager sm;
 	const engine::Shader& myShader = sm.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
-	const engine::Shader& myShader2 = sm.addShader("basic2", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
-	const engine::Shader& myShader3 = sm.addShader("basic3", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
-	const engine::Shader& myShader4 = sm.addShader("basic4", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+
+	engine::VertexArray va1;
+	engine::Vertex v1(0, 0);
+	va1.setVertices(std::vector<engine::Vertex>{v1});
+
+	engine::VertexArray va2;
+	engine::Vertex v2(1, 1);
+	va2.setVertices(std::vector<engine::Vertex>{v2});
+
+	engine::VertexArray va3 = va1 + va2;
+	va3 += va1;
+
+	int a = 3;
 }
 
 void error_callback(int error, const char* description) {

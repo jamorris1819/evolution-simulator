@@ -197,6 +197,8 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="systemmanager.h" />
     <ClInclude Include="velocitycomponent.h" />
+    <ClInclude Include="vertex.h" />
+    <ClInclude Include="vertexarray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entity.cpp" />
@@ -210,6 +212,8 @@
     </ClCompile>
     <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemmanager.cpp" />
+    <ClCompile Include="vertex.cpp" />
+    <ClCompile Include="vertexarray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
