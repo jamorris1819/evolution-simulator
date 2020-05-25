@@ -4,16 +4,17 @@
 #include <iostream>
 #include "../gameengine/entity.h"
 #include "../gameengine/positioncomponent.h"
+#include "../gameengine/systemmanager.h"
+#include "../gameengine/entitymanager.h"
 
 int main()
 {
-	auto pc = new engine::PositionComponent();
-	{
-		engine::Entity entity("test");
-		entity.addComponent(pc);
-		auto p = entity.getComponent<engine::PositionComponent>();
-		p->position.x++;
-	}
+	engine::EntityManager entityManager;
+	auto entity = new engine::Entity("test");
+	entity->addComponent(new engine::PositionComponent(glm::vec2(100, 20)));
+	entityManager.addEntity(entity);
+	engine::SystemManager manager;
+	manager.update(entityManager.getEntities());
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

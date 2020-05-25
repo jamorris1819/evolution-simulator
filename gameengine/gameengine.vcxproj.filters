@@ -28,6 +28,9 @@
     <Filter Include="Header Files\systems">
       <UniqueIdentifier>{26c545f4-4dc7-4315-a778-17568020a35d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{9ac0d602-3582-4d38-9400-bd57637cc15a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -60,6 +63,12 @@
     <ClInclude Include="rotationcomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="systemmanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="entitymanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -70,6 +79,12 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entitymanager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="systemmanager.cpp">
+      <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
