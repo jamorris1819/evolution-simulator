@@ -2,12 +2,15 @@
 //
 
 #include <iostream>
-#include "../gameengine/entity.h"
-#include "../gameengine/positioncomponent.h"
-#include "../gameengine/systemmanager.h"
-#include "../gameengine/entitymanager.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include "entity.h"
+#include "positioncomponent.h"
+#include "systemmanager.h"
+#include "entitymanager.h"
+#include "shadermanager.h"
 
-int main()
+void initialise()
 {
 	engine::EntityManager entityManager;
 	auto entity = new engine::Entity("test");
@@ -15,15 +18,66 @@ int main()
 	entityManager.addEntity(entity);
 	engine::SystemManager manager;
 	manager.update(entityManager.getEntities());
+
+	engine::ShaderManager sm;
+	const engine::Shader& myShader = sm.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+	const engine::Shader& myShader2 = sm.addShader("basic2", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+	const engine::Shader& myShader3 = sm.addShader("basic3", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+	const engine::Shader& myShader4 = sm.addShader("basic4", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void error_callback(int error, const char* description) {
+	fprintf(stderr, "Error: %s\n", description);
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
+GLFWwindow* window;
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+int main() {
+	/* Initialize the library */
+	if (!glfwInit())
+		return -1;
+
+	glfwSetErrorCallback(error_callback);
+
+	/* Create a windowed mode window and its OpenGL context */
+	window = glfwCreateWindow(1920, 1080, "Evolution Simulator", NULL, NULL);
+	//glfwSetWindowSizeCallback(window, window_size_callback);
+	glfwSetWindowPos(window, (3440.0f - 1920) / 2, (1440.0f - 1080) / 2);
+	if (!window) {
+		glfwTerminate();
+		return -1;
+	}
+
+	/* Make the window's context current */
+	glfwMakeContextCurrent(window);
+
+	glewInit();
+
+	initialise();
+
+	bool showDemo = true;
+	glfwSwapInterval(1);
+
+	/* Loop until the user closes the window */
+	while (!glfwWindowShouldClose(window)) {
+		/* Render here */
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		//update();
+		//render();
+
+		//menu->render();
+
+		/* Swap front and back buffers */
+		glfwSwapBuffers(window);
+
+		/* Poll for and process events */
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
+	//menu->unload();
+	return 0;
+}

@@ -90,13 +90,20 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -108,7 +115,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -117,6 +125,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,13 +140,20 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,7 +165,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -153,6 +175,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="component.h" />
@@ -164,6 +192,8 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
     <ClInclude Include="rotationcomponent.h" />
+    <ClInclude Include="shader.h" />
+    <ClInclude Include="shadermanager.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="systemmanager.h" />
     <ClInclude Include="velocitycomponent.h" />
@@ -178,6 +208,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemmanager.cpp" />
   </ItemGroup>
   <ItemGroup>

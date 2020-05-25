@@ -31,6 +31,9 @@
     <Filter Include="Source Files\managers">
       <UniqueIdentifier>{9ac0d602-3582-4d38-9400-bd57637cc15a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\objects">
+      <UniqueIdentifier>{78f6a916-764d-4ef2-9af5-b8063b8afa5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -69,6 +72,12 @@
     <ClInclude Include="entitymanager.h">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Header Files\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="shadermanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -84,6 +93,9 @@
       <Filter>Source Files\managers</Filter>
     </ClCompile>
     <ClCompile Include="systemmanager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="shadermanager.cpp">
       <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
