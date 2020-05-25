@@ -162,7 +162,9 @@
     <ClInclude Include="idmanager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
+    <ClInclude Include="rotationcomponent.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="velocitycomponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entity.cpp" />

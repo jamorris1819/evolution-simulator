@@ -54,6 +54,12 @@
     <ClInclude Include="positioncomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="velocitycomponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="rotationcomponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
