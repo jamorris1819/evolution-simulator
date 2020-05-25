@@ -2,36 +2,24 @@
 //
 
 #include <iostream>
-#include "vertexarray.h"
-#include <vector>
+#include "../gameengine/entity.h"
+#include "../gameengine/positioncomponent.h"
 
-void printv(eng::Vertex const& v) {
-	std::cout << v.getPosition().x << ", " << v.getPosition().y << std::endl;
-}
-
-void printva(eng::VertexArray& v) {
-	printv(v.getVertices()[0]);
-}
-
-class A {
-public:
-	void trigger() { test(); }
-	virtual void test() { std::cout << "a"; }
-};
-
-class B : public A {
-	virtual void test() { std::cout << "b"; }
-};
-
-int main() {
-	B b;
-	b.trigger();
+int main()
+{
+	auto pc = new engine::PositionComponent();
+	{
+		engine::Entity entity("test");
+		entity.addComponent(pc);
+		auto p = entity.getComponent<engine::PositionComponent>();
+		p->position.x++;
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
-// Tips for Getting Started:
+// Tips for Getting Started: 
 //   1. Use the Solution Explorer window to add/manage files
 //   2. Use the Team Explorer window to connect to source control
 //   3. Use the Output window to see build output and other messages
