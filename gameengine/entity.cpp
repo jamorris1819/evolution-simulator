@@ -9,7 +9,19 @@ namespace engine {
 	Entity::Entity(std::string name) {
 		id = IdManager::getNewId();
 		this->name = name;
+		mask = ComponentType::NONE;
 	}
+
+	Entity::Entity(const Entity& entity) {
+		id = entity.id;
+		name = entity.name;
+		mask = entity.mask;
+
+		for (int i = 0; i < entity.components.size(); i++) {
+			
+		}
+	}
+
 	/// <summary>
 	/// Attaches a component to the entity.
 	/// </summary>

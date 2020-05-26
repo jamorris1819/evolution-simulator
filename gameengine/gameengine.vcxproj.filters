@@ -49,6 +49,9 @@
     <Filter Include="Source Files\components">
       <UniqueIdentifier>{f322ff51-2ed3-4eb0-8176-1a2d51c06c14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\systems">
+      <UniqueIdentifier>{1d52da4b-d123-4194-83a0-254d34926500}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -105,6 +108,9 @@
     <ClInclude Include="rendercomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="rendersystem.h">
+      <Filter>Header Files\systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -136,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="rendercomponent.cpp">
       <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="rendersystem.cpp">
+      <Filter>Source Files\systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

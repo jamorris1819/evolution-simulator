@@ -3,7 +3,7 @@
 
 namespace engine {
 	enum class SystemType {
-
+		RENDER = 0x1
 	};
 
 	enum class SystemAction {
@@ -16,5 +16,6 @@ namespace engine {
 		virtual SystemType getType() const = 0;
 		virtual SystemAction getAction() const = 0;
 		virtual void action(Entity* entity) = 0;
+		ComponentType mask;
 	};
 }

@@ -2,7 +2,7 @@
 
 namespace engine {
 	enum class ComponentType : unsigned {
-		NONE = 0x1,
+		NONE = 0x0,
 		POSITION = 0x2,
 		VELOCITY = 0x3,
 		ROTATION = 0x4,

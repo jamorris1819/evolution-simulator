@@ -8,6 +8,6 @@ namespace engine {
 		PositionComponent() : PositionComponent(glm::vec2(0, 0)) {}
 		PositionComponent(glm::vec2 pos) : position(pos) {}
 		virtual ComponentType getType() const override { return ComponentType::POSITION; }
-		glm::vec2& position;
+		glm::vec2 position;
 	};
 }

@@ -8,6 +8,7 @@ namespace engine {
 	class Entity {
 	public:
 		Entity(std::string name);
+		Entity(const Entity& entity);
 		unsigned int getId() const { return id; }
 		const std::vector<std::unique_ptr<Component>>& getComponents() const;
 		void addComponent(Component*);

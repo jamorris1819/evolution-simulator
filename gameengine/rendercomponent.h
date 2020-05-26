@@ -16,7 +16,6 @@ namespace engine {
 		const VertexArray& getData() const;
 		void setData(const VertexArray& data);
 
-	private:
 		VertexArrayObject vao;
 	};
 }

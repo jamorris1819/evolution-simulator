@@ -11,12 +11,17 @@
 #include "shadermanager.h"
 #include "vertexarray.h"
 #include "rendercomponent.h"
+#include "rendersystem.h"
+
+engine::SystemManager* manager;
+engine::EntityManager* entityManager;
 
 void initialise()
 {
 
 	engine::ShaderManager sm;
 	const engine::Shader& myShader = sm.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+	const engine::Shader& myShader2 = sm.addShader("basic2", (char*)"shaders/vertexshader2.glsl", (char*)"shaders/fragmentshader.glsl");
 
 	engine::VertexArray va1;
 	engine::Vertex v1(0, 0);
@@ -26,16 +31,19 @@ void initialise()
 
 	auto rc = new engine::RenderComponent(va1);
 	rc->shaders.push_back(myShader);
+	rc->shaders.push_back(myShader2	);
 
 
-	engine::EntityManager entityManager;
+	entityManager = new engine::EntityManager();
 	auto entity = new engine::Entity("test");
-	entity->addComponent(new engine::PositionComponent(glm::vec2(100, 20)));
+	entity->addComponent(new engine::PositionComponent());
 	entity->addComponent(rc);
 
-	entityManager.addEntity(entity);
-	engine::SystemManager manager;
-	manager.update(entityManager.getEntities());
+	entityManager->addEntity(entity);
+	manager = new engine::SystemManager();
+
+	engine::RenderSystem* rs = new engine::RenderSystem();
+	manager->addSystem(rs);
 }
 
 void error_callback(int error, const char* description) {
@@ -81,6 +89,7 @@ int main() {
 		//render();
 
 		//menu->render();
+		manager->render(entityManager->getEntities());
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
