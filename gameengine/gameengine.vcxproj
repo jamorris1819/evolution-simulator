@@ -191,6 +191,7 @@
     <ClInclude Include="idmanager.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
+    <ClInclude Include="rendercomponent.h" />
     <ClInclude Include="rotationcomponent.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="shadermanager.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="velocitycomponent.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="vertexarray.h" />
+    <ClInclude Include="vertexarrayobject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entity.cpp" />
@@ -210,10 +212,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="rendercomponent.cpp" />
     <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemmanager.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarray.cpp" />
+    <ClCompile Include="vertexarrayobject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

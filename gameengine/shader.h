@@ -6,6 +6,7 @@ namespace engine {
 	public:
 		Shader(GLuint programId) : id(programId) {}
 		GLuint getId() const { return id; }
+		void bind() const { glUseProgram(id); }
 	private:
 		GLuint id;
 	};

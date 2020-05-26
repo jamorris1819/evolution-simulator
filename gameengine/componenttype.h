@@ -5,7 +5,8 @@ namespace engine {
 		NONE = 0x1,
 		POSITION = 0x2,
 		VELOCITY = 0x3,
-		ROTATION = 0x4
+		ROTATION = 0x4,
+		RENDER = 0x8
 	};
 
 	template<class T> inline T operator~ (T a) { return (T)~(int)a; }

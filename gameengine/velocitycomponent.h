@@ -6,8 +6,8 @@ namespace engine {
 	class VelocityComponent : public Component {
 	public:
 		VelocityComponent() : VelocityComponent(glm::vec2(0, 0)) {}
-		VelocityComponent(glm::vec2 vel) { velocity = vel; }
+		VelocityComponent(glm::vec2 vel) : velocity(vel) {}
 		virtual ComponentType getType() const override { return ComponentType::VELOCITY; }
-		glm::vec2 velocity;
+		glm::vec2& velocity;
 	};
 }

@@ -40,6 +40,15 @@
     <Filter Include="Source Files\structures">
       <UniqueIdentifier>{c1a616a6-26f1-4741-a337-2ffa1bbbbdf7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\render">
+      <UniqueIdentifier>{63d1f29e-2870-454c-828f-ee1501e8a701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\render">
+      <UniqueIdentifier>{f47b44d6-3ca1-4fa6-b9e5-279a7cc468e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{f322ff51-2ed3-4eb0-8176-1a2d51c06c14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -90,6 +99,12 @@
     <ClInclude Include="vertexarray.h">
       <Filter>Header Files\structures</Filter>
     </ClInclude>
+    <ClInclude Include="vertexarrayobject.h">
+      <Filter>Header Files\render</Filter>
+    </ClInclude>
+    <ClInclude Include="rendercomponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -115,6 +130,12 @@
     </ClCompile>
     <ClCompile Include="vertexarray.cpp">
       <Filter>Source Files\structures</Filter>
+    </ClCompile>
+    <ClCompile Include="vertexarrayobject.cpp">
+      <Filter>Source Files\render</Filter>
+    </ClCompile>
+    <ClCompile Include="rendercomponent.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
