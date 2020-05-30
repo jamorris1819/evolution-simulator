@@ -187,8 +187,13 @@
     <ClInclude Include="componenttype.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entitymanager.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="eventbus.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="handlerfunctionbase.h" />
     <ClInclude Include="idmanager.h" />
+    <ClInclude Include="memberfunctionhandler.h" />
+    <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
     <ClInclude Include="rendercomponent.h" />

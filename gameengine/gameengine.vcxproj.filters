@@ -52,6 +52,12 @@
     <Filter Include="Source Files\systems">
       <UniqueIdentifier>{1d52da4b-d123-4194-83a0-254d34926500}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{d213976e-7cbf-4c58-902f-7b567ac7e46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events\types">
+      <UniqueIdentifier>{db8c220d-3db4-426e-9add-f9e61770de17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -110,6 +116,21 @@
     </ClInclude>
     <ClInclude Include="rendersystem.h">
       <Filter>Header Files\systems</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="handlerfunctionbase.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="memberfunctionhandler.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="eventbus.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="moveevent.h">
+      <Filter>Header Files\events\types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

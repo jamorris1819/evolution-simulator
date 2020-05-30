@@ -11,8 +11,10 @@ namespace engine {
 		SysType getSystem();
 		void update(std::vector<std::unique_ptr<Entity>>&);
 		void render(std::vector<std::unique_ptr<Entity>>&);
+		EventBus& getEventBus() { return eventBus; }
 	private:
 		std::vector<std::unique_ptr<System>> systems;
+		EventBus eventBus;
 	};
 
 	template<typename SysType>

@@ -15,6 +15,8 @@
 
 engine::SystemManager* manager;
 engine::EntityManager* entityManager;
+engine::Entity* entity;
+engine::EventBus* eventBus;
 
 void initialise()
 {
@@ -35,14 +37,15 @@ void initialise()
 
 
 	entityManager = new engine::EntityManager();
-	auto entity = new engine::Entity("test");
+	entity = new engine::Entity("test");
 	entity->addComponent(new engine::PositionComponent());
 	entity->addComponent(rc);
 
 	entityManager->addEntity(entity);
 	manager = new engine::SystemManager();
+	eventBus = &manager->getEventBus();
 
-	engine::RenderSystem* rs = new engine::RenderSystem();
+	engine::RenderSystem* rs = new engine::RenderSystem(*eventBus);
 	manager->addSystem(rs);
 }
 
@@ -87,6 +90,7 @@ int main() {
 
 		//update();
 		//render();
+		entity->getComponent<engine::PositionComponent>()->position += glm::vec2(0.01, 0);
 
 		//menu->render();
 		manager->render(entityManager->getEntities());
