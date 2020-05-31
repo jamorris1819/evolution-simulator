@@ -1,0 +1,26 @@
+#pragma once
+#include <GL/glew.h>
+#include "GLFW/glfw3.h"
+#include <string>
+#include <functional>
+
+namespace engine {
+	class Window {
+	public:
+		Window(std::string t, int w, int h)
+			: title(t), width(w), height(h), window(nullptr){}
+		~Window();
+		void initialise();
+		int getWidth() const { return width; }
+		int getHeight() const { return height; }
+		bool isOpen();
+		void beginRender();
+		void endRender();
+		std::string getTitle() const { return title; }
+	private:
+		GLFWwindow* window;
+		std::string title;
+		int width;
+		int height;
+	};
+}
