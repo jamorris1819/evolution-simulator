@@ -2,6 +2,7 @@
 #include "eventbus.h"
 #include "window.h"
 #include <string>
+#include "gamestatemanager.h"
 
 namespace engine {
 	class Game {
@@ -14,13 +15,14 @@ namespace engine {
 	protected:
 		Window* window;
 		EventBus eventBus;
+		GameStateManager stateManager;
 
 		virtual void initialise() = 0;
 		virtual void load() = 0;
 		virtual void unload() = 0;
 
-		virtual void render() = 0;
-		virtual void update() = 0;
+		void render() { stateManager.getState()->render(); }
+		void update() { stateManager.getState()->update(); }
 
 	private:
 		void gameLoop() {

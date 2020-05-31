@@ -26,5 +26,8 @@
     <ClInclude Include="mygame.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="mylevel.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

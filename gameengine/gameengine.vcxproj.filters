@@ -58,6 +58,12 @@
     <Filter Include="Header Files\events\types">
       <UniqueIdentifier>{db8c220d-3db4-426e-9add-f9e61770de17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\states">
+      <UniqueIdentifier>{bb138832-c327-47b6-a16e-6783e9b2c80d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\states">
+      <UniqueIdentifier>{048d9ae3-0117-4e08-bc28-9afc8946a3f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -138,6 +144,12 @@
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gamestate.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="gamestatemanager.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -178,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gamestatemanager.cpp">
+      <Filter>Source Files\states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

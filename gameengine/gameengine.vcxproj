@@ -191,6 +191,8 @@
     <ClInclude Include="eventbus.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gamestate.h" />
+    <ClInclude Include="gamestatemanager.h" />
     <ClInclude Include="handlerfunctionbase.h" />
     <ClInclude Include="idmanager.h" />
     <ClInclude Include="memberfunctionhandler.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="entitymanager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
+    <ClCompile Include="gamestatemanager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
