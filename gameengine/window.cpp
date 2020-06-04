@@ -30,4 +30,8 @@ namespace engine {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
+	void Window::registerInputHandler(InputManager& manager) {
+		manager.setWindow(window);
+	}
 }

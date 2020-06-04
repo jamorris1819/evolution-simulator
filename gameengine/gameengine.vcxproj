@@ -193,6 +193,11 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="handlerfunctionbase.h" />
     <ClInclude Include="idmanager.h" />
+    <ClInclude Include="inputmanager.h" />
+    <ClInclude Include="keyboardevent.h" />
+    <ClInclude Include="keydownevent.h" />
+    <ClInclude Include="keyholdevent.h" />
+    <ClInclude Include="keyupevent.h" />
     <ClInclude Include="memberfunctionhandler.h" />
     <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
@@ -215,6 +220,7 @@
     <ClCompile Include="entitymanager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
+    <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

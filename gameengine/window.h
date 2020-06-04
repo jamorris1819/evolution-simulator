@@ -3,6 +3,7 @@
 #include "GLFW/glfw3.h"
 #include <string>
 #include <functional>
+#include "inputmanager.h"
 
 namespace engine {
 	class Window {
@@ -16,6 +17,7 @@ namespace engine {
 		bool isOpen();
 		void beginRender();
 		void endRender();
+		void registerInputHandler(InputManager& manager);
 		std::string getTitle() const { return title; }
 	private:
 		GLFWwindow* window;

@@ -1,5 +1,6 @@
 #pragma once
 #include "eventbus.h"
+#include "inputmanager.h"
 #include "window.h"
 #include <string>
 
@@ -14,6 +15,7 @@ namespace engine {
 	protected:
 		Window* window;
 		EventBus eventBus;
+		InputManager inputManager;
 
 		virtual void initialise() = 0;
 		virtual void load() = 0;

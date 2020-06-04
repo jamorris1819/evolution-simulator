@@ -58,6 +58,9 @@
     <Filter Include="Header Files\events\types">
       <UniqueIdentifier>{db8c220d-3db4-426e-9add-f9e61770de17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\events\types\input">
+      <UniqueIdentifier>{882d6b65-6e83-4f24-a7fd-53fef4dbd7e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -138,6 +141,21 @@
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inputmanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboardevent.h">
+      <Filter>Header Files\events\types\input</Filter>
+    </ClInclude>
+    <ClInclude Include="keydownevent.h">
+      <Filter>Header Files\events\types\input</Filter>
+    </ClInclude>
+    <ClInclude Include="keyupevent.h">
+      <Filter>Header Files\events\types\input</Filter>
+    </ClInclude>
+    <ClInclude Include="keyholdevent.h">
+      <Filter>Header Files\events\types\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -178,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inputmanager.cpp">
+      <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
