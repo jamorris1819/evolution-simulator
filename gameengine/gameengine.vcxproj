@@ -206,6 +206,7 @@
     <ClInclude Include="mousedragevent.h" />
     <ClInclude Include="mouseevent.h" />
     <ClInclude Include="mouseeventdata.h" />
+    <ClInclude Include="mousescrollevent.h" />
     <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />

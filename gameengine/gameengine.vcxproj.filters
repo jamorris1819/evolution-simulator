@@ -186,6 +186,9 @@
     <ClInclude Include="mousedragevent.h">
       <Filter>Header Files\events\types\input\mouse</Filter>
     </ClInclude>
+    <ClInclude Include="mousescrollevent.h">
+      <Filter>Header Files\events\types\input\mouse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">

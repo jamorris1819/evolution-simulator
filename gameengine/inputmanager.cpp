@@ -47,4 +47,8 @@ namespace engine {
 				eventBus->publish(new MouseDragEvent(dx, dy, button, mouseData));
 		}
 	}
+
+	void InputManager::scrollCallback(GLFWwindow* window, double xpos, double ypos) {
+		eventBus->publish(new MouseScrollEvent(xpos, ypos, mouseData));
+	}
 }

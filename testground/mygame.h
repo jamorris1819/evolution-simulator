@@ -14,6 +14,7 @@ public:
 		eventBus.subscribe(this, &MyGame::handleMouseDown);
 		eventBus.subscribe(this, &MyGame::handleMouseUp);
 		eventBus.subscribe(this, &MyGame::handleMouseDrag);
+		eventBus.subscribe(this, &MyGame::handleMouseScroll);
 	}
 	virtual void initialise() override { cout << "init" << endl; };
 	virtual void load() override { cout << "load" << endl; };
@@ -44,5 +45,9 @@ public:
 
 	void handleMouseDrag(engine::MouseDragEvent* k) {
 		std::cout << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]" << std::endl;
+	}
+
+	void handleMouseScroll(engine::MouseScrollEvent* k) {
+		std::cout << "Mouse scroll [" << k->dx << ", " << k->dy << "]" << std::endl;
 	}
 };

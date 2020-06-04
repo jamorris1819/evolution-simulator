@@ -6,3 +6,4 @@
 #include "mousebuttondownevent.h"
 #include "mousebuttonupevent.h"
 #include "mousedragevent.h"
+#include "mousescrollevent.h"
