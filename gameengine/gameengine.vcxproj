@@ -189,6 +189,7 @@
     <ClInclude Include="entitymanager.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="eventbus.h" />
+    <ClInclude Include="events.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="handlerfunctionbase.h" />
@@ -199,6 +200,10 @@
     <ClInclude Include="keyholdevent.h" />
     <ClInclude Include="keyupevent.h" />
     <ClInclude Include="memberfunctionhandler.h" />
+    <ClInclude Include="mousebuttondownevent.h" />
+    <ClInclude Include="mousebuttonevent.h" />
+    <ClInclude Include="mousebuttonupevent.h" />
+    <ClInclude Include="mouseevent.h" />
     <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />

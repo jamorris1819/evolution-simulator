@@ -1,9 +1,7 @@
 #pragma once
 #include "game.h"
 #include <iostream>
-#include "keydownevent.h"
-#include "keyupevent.h"
-#include "keyholdevent.h"
+#include "events.h"
 
 using namespace std;
 
@@ -13,6 +11,8 @@ public:
 		eventBus.subscribe(this, &MyGame::handleInputDown);
 		eventBus.subscribe(this, &MyGame::handleInputUp);
 		eventBus.subscribe(this, &MyGame::handleInputHold);
+		eventBus.subscribe(this, &MyGame::handleMouseDown);
+		eventBus.subscribe(this, &MyGame::handleMouseUp);
 	}
 	virtual void initialise() override { cout << "init" << endl; };
 	virtual void load() override { cout << "load" << endl; };
@@ -31,5 +31,13 @@ public:
 
 	void handleInputHold(engine::KeyHoldEvent* k) {
 		std::cout << "Key held: " << k->key << std::endl;
+	}
+
+	void handleMouseDown(engine::MouseButtonDownEvent* k) {
+		std::cout << "Mouse button down: " << k->button << std::endl;
+	}
+
+	void handleMouseUp(engine::MouseButtonUpEvent* k) {
+		std::cout << "Mouse button up: " << k->button << std::endl;
 	}
 };
