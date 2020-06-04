@@ -64,6 +64,18 @@
     <Filter Include="Source Files\states">
       <UniqueIdentifier>{048d9ae3-0117-4e08-bc28-9afc8946a3f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\events\types\input">
+      <UniqueIdentifier>{882d6b65-6e83-4f24-a7fd-53fef4dbd7e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events\types\input\keyboard">
+      <UniqueIdentifier>{15233b2c-5305-41ed-b060-be5ca3cd2f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events\types\input\mouse">
+      <UniqueIdentifier>{a24f221a-0b37-45e3-804f-80a8e7a9ac31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\events\types\input\mouse\button">
+      <UniqueIdentifier>{b7ceafbe-e45a-42ab-859c-3087832f92f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -144,6 +156,45 @@
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inputmanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboardevent.h">
+      <Filter>Header Files\events\types\input\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="keydownevent.h">
+      <Filter>Header Files\events\types\input\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="keyholdevent.h">
+      <Filter>Header Files\events\types\input\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="keyupevent.h">
+      <Filter>Header Files\events\types\input\keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="mouseevent.h">
+      <Filter>Header Files\events\types\input\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="mousebuttonevent.h">
+      <Filter>Header Files\events\types\input\mouse\button</Filter>
+    </ClInclude>
+    <ClInclude Include="mousebuttondownevent.h">
+      <Filter>Header Files\events\types\input\mouse\button</Filter>
+    </ClInclude>
+    <ClInclude Include="mousebuttonupevent.h">
+      <Filter>Header Files\events\types\input\mouse\button</Filter>
+    </ClInclude>
+    <ClInclude Include="events.h">
+      <Filter>Header Files\events\types</Filter>
+    </ClInclude>
+    <ClInclude Include="mouseeventdata.h">
+      <Filter>Header Files\events\types\input\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="mousedragevent.h">
+      <Filter>Header Files\events\types\input\mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="mousescrollevent.h">
+      <Filter>Header Files\events\types\input\mouse</Filter>
+    </ClInclude>
     <ClInclude Include="gamestate.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
@@ -199,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="systemgamestate.cpp">
       <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="inputmanager.cpp">
+      <Filter>Source Files\managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -189,13 +189,26 @@
     <ClInclude Include="entitymanager.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="eventbus.h" />
+    <ClInclude Include="events.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="gamestatemanager.h" />
     <ClInclude Include="handlerfunctionbase.h" />
     <ClInclude Include="idmanager.h" />
+    <ClInclude Include="inputmanager.h" />
+    <ClInclude Include="keyboardevent.h" />
+    <ClInclude Include="keydownevent.h" />
+    <ClInclude Include="keyholdevent.h" />
+    <ClInclude Include="keyupevent.h" />
     <ClInclude Include="memberfunctionhandler.h" />
+    <ClInclude Include="mousebuttondownevent.h" />
+    <ClInclude Include="mousebuttonevent.h" />
+    <ClInclude Include="mousebuttonupevent.h" />
+    <ClInclude Include="mousedragevent.h" />
+    <ClInclude Include="mouseevent.h" />
+    <ClInclude Include="mouseeventdata.h" />
+    <ClInclude Include="mousescrollevent.h" />
     <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
@@ -218,6 +231,7 @@
     <ClCompile Include="entitymanager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
+    <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="gamestatemanager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
