@@ -5,6 +5,7 @@
 
 namespace engine {
 	EventBus* InputManager::eventBus;
+	MouseEventData InputManager::mouseData;
 
 	void InputManager::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 		if (action == GLFW_PRESS)
@@ -18,8 +19,13 @@ namespace engine {
 
 	void InputManager::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 		if (action == GLFW_PRESS)
-			eventBus->publish(new MouseButtonDownEvent(button));
+			eventBus->publish(new MouseButtonDownEvent(button, mouseData));
 		else if (action == GLFW_RELEASE)
-			eventBus->publish(new MouseButtonUpEvent(button));
+			eventBus->publish(new MouseButtonUpEvent(button, mouseData));
+	}
+
+	void InputManager::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
+		mouseData.x = xpos;
+		mouseData.y = ypos;
 	}
 }

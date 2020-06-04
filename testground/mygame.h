@@ -34,10 +34,10 @@ public:
 	}
 
 	void handleMouseDown(engine::MouseButtonDownEvent* k) {
-		std::cout << "Mouse button down: " << k->button << std::endl;
+		std::cout << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
 	}
 
 	void handleMouseUp(engine::MouseButtonUpEvent* k) {
-		std::cout << "Mouse button up: " << k->button << std::endl;
+		std::cout << "Mouse button up: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
 	}
 };

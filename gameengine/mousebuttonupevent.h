@@ -4,6 +4,6 @@
 namespace engine {
 	class MouseButtonUpEvent : public MouseButtonEvent {
 	public:
-		MouseButtonUpEvent(int b) : MouseButtonEvent(b) {}
+		MouseButtonUpEvent(int b, MouseEventData d) : MouseButtonEvent(b, d) {}
 	};
 }
