@@ -25,7 +25,26 @@ namespace engine {
 	}
 
 	void InputManager::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
+		// Check if any buttons are being used to drag. Send events if so.
+		dragCallback(window, xpos, ypos);
+
 		mouseData.x = xpos;
 		mouseData.y = ypos;
+	}
+
+	void InputManager::dragCallback(GLFWwindow* window, double xpos, double ypos) {
+		int buttons[3] = {
+			GLFW_MOUSE_BUTTON_LEFT,
+			GLFW_MOUSE_BUTTON_RIGHT,
+			GLFW_MOUSE_BUTTON_MIDDLE
+		};
+
+		int dx = xpos - mouseData.x;
+		int dy = ypos - mouseData.y;
+
+		for (int button : buttons) {
+			if (glfwGetMouseButton(window, button) == GLFW_PRESS)
+				eventBus->publish(new MouseDragEvent(dx, dy, button, mouseData));
+		}
 	}
 }

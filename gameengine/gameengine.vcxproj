@@ -203,6 +203,7 @@
     <ClInclude Include="mousebuttondownevent.h" />
     <ClInclude Include="mousebuttonevent.h" />
     <ClInclude Include="mousebuttonupevent.h" />
+    <ClInclude Include="mousedragevent.h" />
     <ClInclude Include="mouseevent.h" />
     <ClInclude Include="mouseeventdata.h" />
     <ClInclude Include="moveevent.h" />

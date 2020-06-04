@@ -5,3 +5,4 @@
 #include "keyholdevent.h"
 #include "mousebuttondownevent.h"
 #include "mousebuttonupevent.h"
+#include "mousedragevent.h"

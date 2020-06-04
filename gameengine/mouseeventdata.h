@@ -3,7 +3,7 @@
 namespace engine {
 	class MouseEventData {
 	public:
-		int x;
-		int y;
+		double x;
+		double y;
 	};
 }
