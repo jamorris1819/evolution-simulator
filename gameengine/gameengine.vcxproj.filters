@@ -150,6 +150,9 @@
     <ClInclude Include="gamestatemanager.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
+    <ClInclude Include="systemgamestate.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -192,6 +195,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gamestatemanager.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="systemgamestate.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
   </ItemGroup>

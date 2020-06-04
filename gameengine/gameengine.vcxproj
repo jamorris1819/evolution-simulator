@@ -205,6 +205,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="shadermanager.h" />
     <ClInclude Include="system.h" />
+    <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />
     <ClInclude Include="velocitycomponent.h" />
     <ClInclude Include="vertex.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="rendercomponent.cpp" />
     <ClCompile Include="rendersystem.cpp" />
     <ClCompile Include="shadermanager.cpp" />
+    <ClCompile Include="systemgamestate.cpp" />
     <ClCompile Include="systemmanager.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarray.cpp" />

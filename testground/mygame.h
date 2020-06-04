@@ -6,7 +6,7 @@
 class MyGame : public engine::Game {
 public:
 	MyGame() : Game("My Game") {
-		level = new MyLevel();
+		level = new MyLevel(eventBus);
 		stateManager.addState(level);
 	}
 	virtual void initialise() override { level->initialise(); };
