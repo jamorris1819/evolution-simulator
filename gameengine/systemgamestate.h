@@ -5,11 +5,12 @@
 #include "systemmanager.h"
 #include "entitymanager.h"
 #include "shadermanager.h"
+#include "camera.h"
 
 namespace engine {
 	class SystemGameState : public GameState {
 	public:
-		SystemGameState(EventBus& eb) : GameState(eb) {}
+		SystemGameState(Window* w, EventBus& eb) : GameState(w, eb), camera(eb) {}
 		virtual void initialise() override;
 		virtual void update() override;
 		virtual void render() override;
@@ -17,5 +18,6 @@ namespace engine {
 		SystemManager systemManager;
 		EntityManager entityManager;
 		ShaderManager shaderManager;
+		Camera camera;
 	};
 }

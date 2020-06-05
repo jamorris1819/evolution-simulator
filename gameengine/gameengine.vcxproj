@@ -183,6 +183,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="componenttype.h" />
     <ClInclude Include="entity.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entitymanager.cpp" />
     <ClCompile Include="game.cpp" />

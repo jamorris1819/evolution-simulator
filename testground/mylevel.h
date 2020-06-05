@@ -9,7 +9,7 @@
 
 class MyLevel : public engine::SystemGameState {
 public:
-	MyLevel(engine::EventBus& eb) : SystemGameState(eb) {
+	MyLevel(engine::Window* w, engine::EventBus& eb) : SystemGameState(w, eb) {
 		std::cout << "level constructed" << std::endl;
 		eventBus.subscribe(this, &MyLevel::handleInputDown);
 		eventBus.subscribe(this, &MyLevel::handleInputUp);
@@ -22,7 +22,7 @@ public:
 		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 
 		engine::Entity* e = new engine::Entity("test");
-		auto rc = new engine::RenderComponent(engine::Rectangle(1, 1));
+		auto rc = new engine::RenderComponent(engine::Rectangle(500, 500));
 		rc->shaders.push_back(shader);
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));

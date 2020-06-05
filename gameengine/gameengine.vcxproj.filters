@@ -79,6 +79,9 @@
     <Filter Include="Header Files\structures\primitives">
       <UniqueIdentifier>{a1c423b6-d4dd-4761-ada9-896e5668fd11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\objects">
+      <UniqueIdentifier>{fe1a1189-aee1-41c9-a327-8f2d0e8688a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -210,6 +213,9 @@
     <ClInclude Include="rectangle.h">
       <Filter>Header Files\structures\primitives</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="inputmanager.cpp">
       <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

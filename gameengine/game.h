@@ -12,9 +12,9 @@ namespace engine {
 		Game(const Game&) = delete;
 		Game(const Game&&) = delete;
 		void run();
+		Window* window;
 
 	protected:
-		Window* window;
 		EventBus eventBus;
 		InputManager inputManager;
 		GameStateManager stateManager;

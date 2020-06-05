@@ -1,10 +1,11 @@
 #pragma once
 #include "eventbus.h"
+#include "window.h"
 
 namespace engine {
 	class GameState {
 	public:
-		GameState(EventBus& eb) : eventBus(eb) {}
+		GameState(Window* w, EventBus& eb) : eventBus(eb), window(w) {}
 		virtual void initialise() = 0;
 		virtual void load() = 0;
 		virtual void update() = 0;
@@ -12,5 +13,6 @@ namespace engine {
 		virtual void unload() = 0;
 	protected:
 		EventBus& eventBus;
+		Window* window;
 	};
 }

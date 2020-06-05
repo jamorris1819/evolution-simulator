@@ -10,6 +10,9 @@ namespace engine {
 	public:
 		const Shader& getShader(std::string);
 		const Shader& addShader(std::string, char*, char*);
+		const std::unordered_map<std::string, Shader>& getShaders() const {
+			return shaders;
+		}
 	private:
 		std::unordered_map<std::string, Shader> shaders;
 		std::string readShader(char*);
