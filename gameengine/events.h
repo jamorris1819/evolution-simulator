@@ -7,3 +7,5 @@
 #include "mousebuttonupevent.h"
 #include "mousedragevent.h"
 #include "mousescrollevent.h"
+#include "cameraevent.h"
+#include "cameramoveevent.h"

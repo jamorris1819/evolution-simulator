@@ -184,6 +184,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="cameraevent.h" />
+    <ClInclude Include="cameramoveevent.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="componenttype.h" />
     <ClInclude Include="entity.h" />

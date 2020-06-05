@@ -12,6 +12,13 @@ namespace engine {
 		createProjection();
 	}
 
+	void Camera::update() {
+		if (targetPosition == position) return;
+
+		position = position + (targetPosition - position) * glm::vec2(0.25, 0.25);
+		eventBus.publish(new CameraEvent());
+	}
+
 	void Camera::updateShader(const Shader& shad) {
 		glUseProgram(shad.getId());
 
@@ -55,5 +62,12 @@ namespace engine {
 			zoomWidth / ppm,
 			zoomHeight / ppm
 		);
+	}
+
+	void Camera::handleMouseDrag(MouseDragEvent* e) {
+		if (e->button != 1) return; // Check if this is right button
+
+		targetPosition.x += e->dx;
+		targetPosition.y -= e->dy;
 	}
 }

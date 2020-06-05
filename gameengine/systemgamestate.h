@@ -6,6 +6,7 @@
 #include "entitymanager.h"
 #include "shadermanager.h"
 #include "camera.h"
+#include "events.h"
 
 namespace engine {
 	class SystemGameState : public GameState {
@@ -19,5 +20,7 @@ namespace engine {
 		EntityManager entityManager;
 		ShaderManager shaderManager;
 		Camera camera;
+		void alignCamera();
+		void handleMouseDrag(CameraEvent* e) { alignCamera(); }
 	};
 }

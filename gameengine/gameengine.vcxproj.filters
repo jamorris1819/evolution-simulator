@@ -82,6 +82,9 @@
     <Filter Include="Source Files\objects">
       <UniqueIdentifier>{fe1a1189-aee1-41c9-a327-8f2d0e8688a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\events\types\camera">
+      <UniqueIdentifier>{504c793b-de8d-48cb-a55c-8d267823f8be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -215,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Header Files\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraevent.h">
+      <Filter>Header Files\events\types\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="cameramoveevent.h">
+      <Filter>Header Files\events\types\camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

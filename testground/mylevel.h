@@ -35,7 +35,9 @@ public:
 	virtual void render() override {
 		SystemGameState::render();
 	}
-	virtual void update() override { }
+	virtual void update() override {
+		SystemGameState::update();
+	}
 	virtual void unload() override { std::cout << "unload" << std::endl; }
 
 	void handleInputDown(engine::KeyDownEvent* k) {
