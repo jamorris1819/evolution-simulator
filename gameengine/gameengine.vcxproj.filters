@@ -76,6 +76,9 @@
     <Filter Include="Header Files\events\types\input\mouse\button">
       <UniqueIdentifier>{b7ceafbe-e45a-42ab-859c-3087832f92f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\structures\primitives">
+      <UniqueIdentifier>{a1c423b6-d4dd-4761-ada9-896e5668fd11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -203,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="systemgamestate.h">
       <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
+      <Filter>Header Files\structures\primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

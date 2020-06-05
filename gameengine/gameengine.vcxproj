@@ -212,6 +212,7 @@
     <ClInclude Include="moveevent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
+    <ClInclude Include="rectangle.h" />
     <ClInclude Include="rendercomponent.h" />
     <ClInclude Include="rendersystem.h" />
     <ClInclude Include="rotationcomponent.h" />

@@ -1,12 +1,15 @@
 #pragma once
-#include "gamestate.h"
+#include "systemgamestate.h"
 #include <iostream>
 #include "eventbus.h"
 #include "events.h"
+#include "rendercomponent.h"
+#include "positioncomponent.h"
+#include "rectangle.h"
 
-class MyLevel : public engine::GameState {
+class MyLevel : public engine::SystemGameState {
 public:
-	MyLevel(engine::EventBus& eb) : GameState(eb) {
+	MyLevel(engine::EventBus& eb) : SystemGameState(eb) {
 		std::cout << "level constructed" << std::endl;
 		eventBus.subscribe(this, &MyLevel::handleInputDown);
 		eventBus.subscribe(this, &MyLevel::handleInputUp);
@@ -15,12 +18,25 @@ public:
 		eventBus.subscribe(this, &MyLevel::handleMouseUp);
 		eventBus.subscribe(this, &MyLevel::handleMouseDrag);
 		eventBus.subscribe(this, &MyLevel::handleMouseScroll);
+
+		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
+
+		engine::Entity* e = new engine::Entity("test");
+		auto rc = new engine::RenderComponent(engine::Rectangle(1, 1));
+		rc->shaders.push_back(shader);
+		e->addComponent(rc);
+		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));
+		entityManager.addEntity(e);
 	}
-	virtual void initialise() override { std::cout << "initialise" << std::endl; }
+	virtual void initialise() override {
+		SystemGameState::initialise();
+	}
 	virtual void load() override { std::cout << "load" << std::endl; }
-	virtual void render() override { std::cout << "render" << std::endl; }
+	virtual void render() override {
+		SystemGameState::render();
+	}
 	virtual void update() override { }
-	virtual void unload() override { }
+	virtual void unload() override { std::cout << "unload" << std::endl; }
 
 	void handleInputDown(engine::KeyDownEvent* k) {
 		std::cout << "Key pressed: " << k->key << std::endl;
