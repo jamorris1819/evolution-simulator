@@ -186,6 +186,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraevent.h" />
     <ClInclude Include="cameramoveevent.h" />
+    <ClInclude Include="camerazoomevent.h" />
     <ClInclude Include="component.h" />
     <ClInclude Include="componenttype.h" />
     <ClInclude Include="entity.h" />
@@ -221,6 +222,7 @@
     <ClInclude Include="rotationcomponent.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="shadermanager.h" />
+    <ClInclude Include="square.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />

@@ -225,6 +225,12 @@
     <ClInclude Include="cameramoveevent.h">
       <Filter>Header Files\events\types\camera</Filter>
     </ClInclude>
+    <ClInclude Include="square.h">
+      <Filter>Header Files\structures\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="camerazoomevent.h">
+      <Filter>Header Files\events\types\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">

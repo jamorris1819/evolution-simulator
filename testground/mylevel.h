@@ -22,7 +22,7 @@ public:
 		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 
 		engine::Entity* e = new engine::Entity("test");
-		auto rc = new engine::RenderComponent(engine::Rectangle(500, 500));
+		auto rc = new engine::RenderComponent(engine::Rectangle(1, 2));
 		rc->shaders.push_back(shader);
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));
@@ -53,7 +53,7 @@ public:
 	}
 
 	void handleMouseDown(engine::MouseButtonDownEvent* k) {
-		std::cout << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
+		//std::cout << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
 	}
 
 	void handleMouseUp(engine::MouseButtonUpEvent* k) {
@@ -61,7 +61,7 @@ public:
 	}
 
 	void handleMouseDrag(engine::MouseDragEvent* k) {
-		std::cout << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]" << std::endl;
+		//std::cout << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]" << std::endl;
 	}
 
 	void handleMouseScroll(engine::MouseScrollEvent* k) {
