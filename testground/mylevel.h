@@ -57,24 +57,24 @@ public:
 	void handleMouseDown(engine::MouseButtonDownEvent* k) {
 		std::stringstream ss;
 		ss << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")";
-		engine::Logger::debug(ss.str().c_str());
+		engine::Logger::debug(ss);
 	}
 
 	void handleMouseUp(engine::MouseButtonUpEvent* k) {
 		std::stringstream ss;
 		ss << "Mouse button up: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")";
-		engine::Logger::debug(ss.str().c_str());
+		engine::Logger::debug(ss);
 	}
 
 	void handleMouseDrag(engine::MouseDragEvent* k) {
 		std::stringstream ss; 
 		ss << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]";
-		engine::Logger::debug(ss.str().c_str());
+		engine::Logger::debug(ss);
 	}
 
 	void handleMouseScroll(engine::MouseScrollEvent* k) {
 		std::stringstream ss;
 		ss << "Mouse scroll [" << k->dx << ", " << k->dy << "]";
-		engine::Logger::debug(ss.str().c_str());
+		engine::Logger::debug(ss);
 	}
 };
