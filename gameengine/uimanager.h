@@ -13,5 +13,6 @@ namespace engine {
 		void unload();
 	private:
 		std::vector<std::unique_ptr<UIWindow>> windows;
+		void createStyle();
 	};
 }

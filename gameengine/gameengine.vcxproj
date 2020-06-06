@@ -213,6 +213,7 @@
     <ClInclude Include="keydownevent.h" />
     <ClInclude Include="keyholdevent.h" />
     <ClInclude Include="keyupevent.h" />
+    <ClInclude Include="loggingwindow.h" />
     <ClInclude Include="memberfunctionhandler.h" />
     <ClInclude Include="mousebuttondownevent.h" />
     <ClInclude Include="mousebuttonevent.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
     <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_glfw.cpp" />
     <ClCompile Include="imgui_impl_opengl3.cpp" />

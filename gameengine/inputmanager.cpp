@@ -2,6 +2,7 @@
 #include "inputmanager.h"
 #include <iostream>
 #include "events.h"
+#include "uimanager.h"
 
 namespace engine {
 	EventBus* InputManager::eventBus;
@@ -18,10 +19,14 @@ namespace engine {
 	}
 
 	void InputManager::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+		if (action == GLFW_RELEASE)
+			eventBus->publish(new MouseButtonUpEvent(button, mouseData));
+
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.WantCaptureMouse) return;
+
 		if (action == GLFW_PRESS)
 			eventBus->publish(new MouseButtonDownEvent(button, mouseData));
-		else if (action == GLFW_RELEASE)
-			eventBus->publish(new MouseButtonUpEvent(button, mouseData));
 	}
 
 	void InputManager::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
@@ -49,6 +54,9 @@ namespace engine {
 	}
 
 	void InputManager::scrollCallback(GLFWwindow* window, double xpos, double ypos) {
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.WantCaptureMouse) return;
+
 		eventBus->publish(new MouseScrollEvent(xpos, ypos, mouseData));
 	}
 }

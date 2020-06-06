@@ -5,12 +5,12 @@
 namespace engine {
 	class UIWindow {
 	public:
-		UIWindow(std::string t, ImVec2 s) : title(t), size(s) {}
+		UIWindow(std::string t, ImVec2 s) : title(t), size(s), visible(true) {}
 		virtual void initialise() = 0;
 		void render() {
 			ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 
-			if (!ImGui::Begin(title.c_str(), &visible, 0)) {
+			if (!ImGui::Begin(title.c_str(), &visible, ImGuiWindowFlags_NoResize)) {
 				ImGui::End();
 				return;
 			}

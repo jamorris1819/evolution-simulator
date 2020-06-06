@@ -267,6 +267,9 @@
     <ClInclude Include="gamestatemanager.h">
       <Filter>Header Files\managers</Filter>
     </ClInclude>
+    <ClInclude Include="loggingwindow.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -336,6 +339,9 @@
       <Filter>Header Files\ui\lib</Filter>
     </ClCompile>
     <ClCompile Include="imgui_draw.cpp">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
       <Filter>Header Files\ui\lib</Filter>
     </ClCompile>
   </ItemGroup>
