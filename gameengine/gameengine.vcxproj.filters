@@ -85,6 +85,12 @@
     <Filter Include="Header Files\events\types\camera">
       <UniqueIdentifier>{504c793b-de8d-48cb-a55c-8d267823f8be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{5484245c-d21c-4850-bd35-c20aa350e176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui\lib">
+      <UniqueIdentifier>{80eaaabb-39ba-44c2-9bdd-376d9ce84c73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -207,9 +213,6 @@
     <ClInclude Include="gamestate.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
-    <ClInclude Include="gamestatemanager.h">
-      <Filter>Header Files\states</Filter>
-    </ClInclude>
     <ClInclude Include="systemgamestate.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
@@ -230,6 +233,39 @@
     </ClInclude>
     <ClInclude Include="camerazoomevent.h">
       <Filter>Header Files\events\types\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glfw.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="uimanager.h">
+      <Filter>Header Files\managers</Filter>
+    </ClInclude>
+    <ClInclude Include="uiwindow.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="gamestatemanager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,9 +308,6 @@
     <ClCompile Include="window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gamestatemanager.cpp">
-      <Filter>Source Files\states</Filter>
-    </ClCompile>
     <ClCompile Include="systemgamestate.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
@@ -283,6 +316,27 @@
     </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="uimanager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="gamestatemanager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Header Files\ui\lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

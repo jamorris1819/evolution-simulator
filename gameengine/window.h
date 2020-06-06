@@ -19,6 +19,7 @@ namespace engine {
 		void endRender();
 		void registerInputHandler(InputManager& manager);
 		std::string getTitle() const { return title; }
+		GLFWwindow* getWindow() const { return window; }
 	private:
 		GLFWwindow* window;
 		std::string title;

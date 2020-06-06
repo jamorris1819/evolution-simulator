@@ -200,6 +200,14 @@
     <ClInclude Include="gamestatemanager.h" />
     <ClInclude Include="handlerfunctionbase.h" />
     <ClInclude Include="idmanager.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="inputmanager.h" />
     <ClInclude Include="keyboardevent.h" />
     <ClInclude Include="keydownevent.h" />
@@ -226,6 +234,8 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />
+    <ClInclude Include="uimanager.h" />
+    <ClInclude Include="uiwindow.h" />
     <ClInclude Include="velocitycomponent.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="vertexarray.h" />
@@ -238,6 +248,11 @@
     <ClCompile Include="entitymanager.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="gamestatemanager.cpp" />
     <ClCompile Include="pch.cpp">
@@ -251,6 +266,7 @@
     <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemgamestate.cpp" />
     <ClCompile Include="systemmanager.cpp" />
+    <ClCompile Include="uimanager.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarray.cpp" />
     <ClCompile Include="vertexarrayobject.cpp" />

@@ -5,6 +5,7 @@
 #include "systemmanager.h"
 #include "entitymanager.h"
 #include "shadermanager.h"
+#include "uimanager.h"
 #include "camera.h"
 #include "events.h"
 
@@ -19,6 +20,7 @@ namespace engine {
 		SystemManager systemManager;
 		EntityManager entityManager;
 		ShaderManager shaderManager;
+		UIManager uiManager;
 		Camera camera;
 		void alignCamera();
 		void handleMouseDrag(CameraEvent* e) { alignCamera(); }

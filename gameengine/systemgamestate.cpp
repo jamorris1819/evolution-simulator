@@ -8,6 +8,8 @@ namespace engine {
 		camera.initialise(window->getWidth(), window->getHeight());
 		eventBus.subscribe(this, &SystemGameState::handleMouseDrag);
 		alignCamera();
+
+		uiManager.initialise(window);
 	}
 
 	void SystemGameState::update(double dt) {
@@ -17,6 +19,8 @@ namespace engine {
 
 	void SystemGameState::render() {
 		systemManager.render(entityManager.getEntities());
+
+		uiManager.render();
 	}
 
 	void SystemGameState::alignCamera() {
