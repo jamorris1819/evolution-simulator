@@ -41,6 +41,7 @@ namespace engine {
 			}
 			clipper.End();
 		}
+		if(scrollToBottom) ImGui::SetScrollHereY(1.0f);
 		ImGui::PopStyleVar();
 
 		ImGui::EndChild();
@@ -61,17 +62,18 @@ namespace engine {
 		ImGui::SameLine();
 
 		if (ImGui::Button("Copy")) {
-			addLog("hello\n");
+			// todo: copy
 		}
 
 		ImGui::SameLine();
 
 		if (ImGui::BeginPopup("View options")) {
 			static bool t = true;
-			ImGui::Checkbox("debug", &t);
-			ImGui::Checkbox("info", &t);
-			ImGui::Checkbox("warning", &t);
-			ImGui::Checkbox("error", &t);
+			ImGui::Checkbox("debug", &levelTypes[0]);
+			ImGui::Checkbox("info", &levelTypes[1]);
+			ImGui::Checkbox("warning", &levelTypes[2]);
+			ImGui::Checkbox("error", &levelTypes[3]);
+			ImGui::Checkbox("auto-scroll", &autoScroll);
 			ImGui::EndPopup();
 		}
 
