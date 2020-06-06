@@ -12,7 +12,7 @@
 namespace engine {
 	class SystemGameState : public GameState {
 	public:
-		SystemGameState(Window* w, EventBus& eb) : GameState(w, eb), camera(eb) {}
+		SystemGameState(Window* w, EventBus& eb) : GameState(w, eb), camera(eb), uiManager(eb) {}
 		virtual void initialise() override;
 		virtual void update(double dt) override;
 		virtual void render() override;

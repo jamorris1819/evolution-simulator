@@ -213,7 +213,10 @@
     <ClInclude Include="keydownevent.h" />
     <ClInclude Include="keyholdevent.h" />
     <ClInclude Include="keyupevent.h" />
+    <ClInclude Include="logevent.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="loggingwindow.h" />
+    <ClInclude Include="loglevel.h" />
     <ClInclude Include="memberfunctionhandler.h" />
     <ClInclude Include="mousebuttondownevent.h" />
     <ClInclude Include="mousebuttonevent.h" />
@@ -257,6 +260,7 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="gamestatemanager.cpp" />
+    <ClCompile Include="loggingwindow.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -2,6 +2,8 @@
 #include "systemgamestate.h"
 
 namespace engine {
+	EventBus* Logger::eventBus;
+
 	void SystemGameState::initialise() {
 		systemManager.addSystem(new RenderSystem(eventBus));
 
@@ -10,6 +12,8 @@ namespace engine {
 		alignCamera();
 
 		uiManager.initialise(window);
+
+		Logger::eventBus = &eventBus;
 	}
 
 	void SystemGameState::update(double dt) {

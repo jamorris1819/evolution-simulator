@@ -6,6 +6,8 @@
 #include "rendercomponent.h"
 #include "positioncomponent.h"
 #include "rectangle.h"
+#include "logger.h"
+#include <sstream>
 
 class MyLevel : public engine::SystemGameState {
 public:
@@ -53,18 +55,26 @@ public:
 	}
 
 	void handleMouseDown(engine::MouseButtonDownEvent* k) {
-		//std::cout << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
+		std::stringstream ss;
+		ss << "Mouse button down: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")";
+		engine::Logger::debug(ss.str().c_str());
 	}
 
 	void handleMouseUp(engine::MouseButtonUpEvent* k) {
-		std::cout << "Mouse button up: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")" << std::endl;
+		std::stringstream ss;
+		ss << "Mouse button up: " << k->button << " at (" << k->data.x << ", " << k->data.y << ")";
+		engine::Logger::debug(ss.str().c_str());
 	}
 
 	void handleMouseDrag(engine::MouseDragEvent* k) {
-		//std::cout << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]" << std::endl;
+		std::stringstream ss; 
+		ss << "Mouse drag (" << k->button << ") [" << k->dx << ", " << k->dy << "]";
+		engine::Logger::debug(ss.str().c_str());
 	}
 
 	void handleMouseScroll(engine::MouseScrollEvent* k) {
-		std::cout << "Mouse scroll [" << k->dx << ", " << k->dy << "]" << std::endl;
+		std::stringstream ss;
+		ss << "Mouse scroll [" << k->dx << ", " << k->dy << "]";
+		engine::Logger::debug(ss.str().c_str());
 	}
 };

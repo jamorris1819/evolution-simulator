@@ -1,6 +1,7 @@
 #pragma once
 #include "eventbus.h"
 #include "window.h"
+#include "logger.h"
 
 namespace engine {
 	class GameState {

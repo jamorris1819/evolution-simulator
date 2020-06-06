@@ -14,7 +14,7 @@ namespace engine {
 		ImGui_ImplGlfw_InitForOpenGL(window->getWindow(), true);
 		ImGui_ImplOpenGL3_Init();
 
-		addWindow(new LoggingWindow());
+		addWindow(new LoggingWindow(eventBus));
 	}
 
 	void UIManager::render() {

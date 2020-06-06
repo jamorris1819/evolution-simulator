@@ -91,6 +91,12 @@
     <Filter Include="Header Files\ui\lib">
       <UniqueIdentifier>{80eaaabb-39ba-44c2-9bdd-376d9ce84c73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{940271a7-755b-4fb8-8c60-0ee87c0ebc73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utilities">
+      <UniqueIdentifier>{e4124c04-bdb8-42f7-b1ad-8da9325c4d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -270,6 +276,15 @@
     <ClInclude Include="loggingwindow.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="logevent.h">
+      <Filter>Header Files\events\types</Filter>
+    </ClInclude>
+    <ClInclude Include="loglevel.h">
+      <Filter>Header Files\utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -343,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="imgui_demo.cpp">
       <Filter>Header Files\ui\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="loggingwindow.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
