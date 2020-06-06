@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp> 
 
 namespace engine {
-	void RenderSystem::action(Entity* entity) {
+	void RenderSystem::action(Entity* entity, double dt) {
 		if ((entity->getMask() & mask) != mask) return;
 
 		RenderComponent* rc = entity->getComponent<RenderComponent>();

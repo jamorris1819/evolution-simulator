@@ -14,11 +14,11 @@ namespace engine {
 	/// <summary>
 	/// Update all systems that identify as having an UPDATE action.
 	/// </summary>
-	void SystemManager::update(std::vector<std::unique_ptr<Entity>>& entities) {
+	void SystemManager::update(std::vector<std::unique_ptr<Entity>>& entities, double dt) {
 		for (auto& system : systems) {
 			if (system.get()->getAction() == SystemAction::UPDATE) {
 				for (auto& entity : entities) {
-					system.get()->action(entity.get());
+					system.get()->action(entity.get(), dt);
 				}
 			}
 		}

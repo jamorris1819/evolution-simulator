@@ -35,8 +35,8 @@ public:
 	virtual void render() override {
 		SystemGameState::render();
 	}
-	virtual void update() override {
-		SystemGameState::update();
+	virtual void update(double dt) override {
+		SystemGameState::update(dt);
 	}
 	virtual void unload() override { std::cout << "unload" << std::endl; }
 

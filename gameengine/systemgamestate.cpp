@@ -10,9 +10,9 @@ namespace engine {
 		alignCamera();
 	}
 
-	void SystemGameState::update() {
-		systemManager.update(entityManager.getEntities());
-		camera.update();
+	void SystemGameState::update(double dt) {
+		systemManager.update(entityManager.getEntities(), dt);
+		camera.update(dt);
 	}
 
 	void SystemGameState::render() {

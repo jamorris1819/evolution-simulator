@@ -4,6 +4,7 @@
 #include "window.h"
 #include <string>
 #include "gamestatemanager.h"
+#include <chrono>
 
 namespace engine {
 	class Game {
@@ -24,17 +25,16 @@ namespace engine {
 		virtual void unload() = 0;
 
 		void render() { stateManager.getState()->render(); }
-		void update() { stateManager.getState()->update(); }
+		void update(double dt) { stateManager.getState()->update(dt); }
 
 	private:
-		void gameLoop() {
-			while (window->isOpen()) {
-				update();
-
-				window->beginRender();
-				render();
-				window->endRender();
-			}
+		void gameLoop();
+		long getTime() {
+			return std::chrono::duration_cast<std::chrono::milliseconds>(
+				std::chrono::system_clock::now().time_since_epoch()
+				).count();
 		}
+
+		long lastTime;
 	};
 }

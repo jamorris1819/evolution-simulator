@@ -13,7 +13,7 @@ namespace engine {
 	public:
 		SystemGameState(Window* w, EventBus& eb) : GameState(w, eb), camera(eb) {}
 		virtual void initialise() override;
-		virtual void update() override;
+		virtual void update(double dt) override;
 		virtual void render() override;
 	protected:
 		SystemManager systemManager;

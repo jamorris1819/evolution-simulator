@@ -9,7 +9,7 @@ namespace engine {
 		void addSystem(System* system);
 		template<typename SysType>
 		SysType getSystem();
-		void update(std::vector<std::unique_ptr<Entity>>&);
+		void update(std::vector<std::unique_ptr<Entity>>&, double);
 		void render(std::vector<std::unique_ptr<Entity>>&);
 	private:
 		std::vector<std::unique_ptr<System>> systems;

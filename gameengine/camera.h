@@ -15,7 +15,7 @@ namespace engine {
 		}
 		void initialise(int w, int h);
 		void setPosition(const glm::vec2 p) { position = p; }
-		void update();
+		void update(double dt);
 		void updateShader(const Shader& shad);
 		glm::vec2 screenToWorldCoordinates(glm::vec2 screen);
 		glm::vec2 screenToWorldCoordinates(float x, float y) {

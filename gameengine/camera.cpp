@@ -13,9 +13,9 @@ namespace engine {
 		createProjection();
 	}
 
-	void Camera::update() {
-		scale = scale + (targetScale - scale) * 0.25;
-		position = position + (targetPosition - position) * glm::vec2(0.25, 0.25);
+	void Camera::update(double dt) {
+		scale = scale + (targetScale - scale) * dt * 10.0;
+		position = position + (targetPosition - position) * glm::vec2(dt, dt) * glm::vec2(10.0, 10.0);
 		eventBus.publish(new CameraEvent());
 	}
 
