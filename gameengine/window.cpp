@@ -8,6 +8,7 @@ namespace engine {
 		if (!glfwInit())
 			return;
 
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 		window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 		if (!window) {
 			glfwTerminate();
