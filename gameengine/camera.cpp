@@ -29,14 +29,12 @@ namespace engine {
 		view = translate;
 
 		// Apply the camera transformation.
-		int uView = glGetUniformLocation(shad.getId(), "uView");
-		glUniformMatrix4fv(uView, 1, GL_TRUE, &view[0][0]);
+		shad.setUniformMat4("uView", view);
 
 		createProjection();
 
 		// Apply the projection.
-		int uProjection = glGetUniformLocation(shad.getId(), "uProjection");
-		glUniformMatrix4fv(uProjection, 1, GL_TRUE, &projection[0][0]);
+		shad.setUniformMat4("uProjection", projection);
 	}
 
 	glm::vec2 Camera::screenToWorldCoordinates(glm::vec2 screen) {

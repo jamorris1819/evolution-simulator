@@ -32,6 +32,10 @@ namespace engine {
 
 	}
 
+	int ShaderManager::findUniform(std::string name, int id) {
+		return glGetUniformLocation(id, name.c_str());
+	}
+
 	const Shader& ShaderManager::getShader(std::string name) {
 		auto search = shaders.find(name);
 
@@ -45,6 +49,9 @@ namespace engine {
 	const Shader& ShaderManager::addShader(std::string name, char* vertexLocation, char* fragmentLocation) {
 		GLuint shaderId = createShader(name, vertexLocation, fragmentLocation);
 		Shader shader(shaderId);
+
+		shader.addUniform("uView", findUniform("uView", shaderId));
+		shader.addUniform("uProjection", findUniform("uProjection", shaderId));
 
 		shaders.insert({ name, shader });
 

@@ -18,5 +18,6 @@ namespace engine {
 		std::string readShader(char*);
 		GLuint compileShaderProgram(GLenum, std::string, char*);
 		GLuint createShader(std::string, char*, char*);
+		static int findUniform(std::string name, int id);
 	};
 }

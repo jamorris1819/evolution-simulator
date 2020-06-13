@@ -5,16 +5,41 @@
 #include <memory>
 
 namespace engine {
+	/// <summary>
+	/// A base class for game objects which can hold components
+	/// </summary>
 	class Entity {
 	public:
 		Entity(std::string name);
 		Entity(const Entity& entity);
+
+		/// <summary>
+		/// Gets the unique id of this entity
+		/// </summary>
 		unsigned int getId() const { return id; }
+
+		/// <summary>
+		/// Get the collection of components attached
+		/// </summary>
 		const std::vector<std::unique_ptr<Component>>& getComponents() const;
-		void addComponent(Component*);
+
+		/// <summary>
+		/// Adds the given component to this entity
+		/// </summary>
+		void addComponent(Component* component);
+
 		template<typename CompType>
 		CompType* getComponent();
+
+		/// <summary>
+		/// Gets the bitmask representing which components are atatched
+		/// </summary>
+		/// <returns></returns>
 		ComponentType getMask() { return mask; }
+
+		/// <summary>
+		/// Gets the name of the entity
+		/// </summary>
 		const std::string& getName() const { return name; }
 	private:
 		std::string name;

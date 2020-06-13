@@ -8,6 +8,9 @@ namespace engine {
     typedef std::list<HandlerFunctionBase*> HandlerList;
     class EventBus {
     public:
+        /// <summary>
+        /// Publish an event to the bus
+        /// </summary>
         template<typename EventType>
         void publish(EventType* evnt) {
             HandlerList* handlers = subscribers[typeid(EventType)];
@@ -25,6 +28,9 @@ namespace engine {
             delete evnt;
         }
 
+        /// <summary>
+        /// Subscribe to receive a callback when the given event is called
+        /// </summary>
         template<class T, class EventType>
         void subscribe(T* instance, void (T::* memberFunction)(EventType*)) {
             HandlerList* handlers = subscribers[typeid(EventType)];
