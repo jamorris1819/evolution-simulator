@@ -238,6 +238,7 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />
+    <ClInclude Include="triangle.h" />
     <ClInclude Include="uimanager.h" />
     <ClInclude Include="uiwindow.h" />
     <ClInclude Include="velocitycomponent.h" />

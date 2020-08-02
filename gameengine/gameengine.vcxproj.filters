@@ -285,6 +285,9 @@
     <ClInclude Include="loglevel.h">
       <Filter>Header Files\utilities</Filter>
     </ClInclude>
+    <ClInclude Include="triangle.h">
+      <Filter>Header Files\structures\primitives</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
