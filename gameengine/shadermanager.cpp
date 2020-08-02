@@ -52,6 +52,7 @@ namespace engine {
 
 		shader.addUniform("uView", findUniform("uView", shaderId));
 		shader.addUniform("uProjection", findUniform("uProjection", shaderId));
+		shader.addUniform("uModel", findUniform("uModel", shaderId));
 
 		shaders.insert({ name, shader });
 

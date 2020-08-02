@@ -24,7 +24,7 @@ public:
 		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 
 		engine::Entity* e = new engine::Entity("test");
-		auto rc = new engine::RenderComponent(engine::Rectangle(1, 2));
+		auto rc = new engine::RenderComponent(engine::Rectangle(10, 10));
 		rc->shaders.push_back(shader);
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));
