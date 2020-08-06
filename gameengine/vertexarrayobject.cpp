@@ -85,6 +85,9 @@ namespace engine {
 			vertexData[offset + 2] = v.getColour().x;
 			vertexData[offset + 3] = v.getColour().y;
 			vertexData[offset + 4] = v.getColour().z;
+			vertexData[offset + 5] = v.getBarycentricCoordinate().x;
+			vertexData[offset + 6] = v.getBarycentricCoordinate().y;
+			vertexData[offset + 7] = v.getBarycentricCoordinate().z;
 		}
 	}
 
@@ -136,12 +139,15 @@ namespace engine {
 		glEnableVertexAttribArray(1); // Vertex colour
 		glVertexAttribPointer(1, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
 
+		glEnableVertexAttribArray(2); // Barycentric coordinater
+		glVertexAttribPointer(2, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(5 * sizeof(float)));
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	void VertexArrayObject::setVertexData(float const* vertices) {
 		int count = vertexArray.getVertexCount();
-		count *= vertexDataCount;		// There are 5 attributes for every vertex.
+		count *= vertexDataCount;		// There are x attributes for every vertex.
 		GLint* size = new GLint;
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
