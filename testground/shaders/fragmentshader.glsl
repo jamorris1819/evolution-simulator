@@ -114,22 +114,18 @@ float fbm(vec3 x) {
 }
 
 
+  /////////////////////////////////////////////////////////////////
+ /////////////////	MY CODE	 /////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 
-
-
-
-
+// Take a colour and return a unique value to be used for noise
 float valForNoise(vec3 myvec) {
 	return myvec.b;
 	return myvec.r * 0.4 + myvec.g * 0.3 + myvec.b * 0.1;
 }
 
-
-
-
-
-
-vec3 test(vec3 barycentricCoord)
+// Determine what colour should be shown at the given barycentric coordinate
+vec3 determineColour(vec3 barycentricCoord)
 {
 	vec2 offset = oPosition / 0.2;
 
@@ -155,6 +151,6 @@ void main(void)
 		color = uOverrideColour;
 	}
 	else {
-		color = vec4(test(oBarycentricCoordinate), 1);
+		color = vec4(determineColour(oBarycentricCoordinate), 1);
 	}
 }

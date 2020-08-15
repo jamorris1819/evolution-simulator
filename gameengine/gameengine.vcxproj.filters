@@ -100,6 +100,9 @@
     <Filter Include="Header Files\structures\terrain">
       <UniqueIdentifier>{a8bcc029-71df-4493-a92a-a6abd91d9ac4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\structures\terrain">
+      <UniqueIdentifier>{cff79be6-cb40-44a8-964e-53183d1ebc50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -376,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="loggingwindow.cpp">
       <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="worldtile.cpp">
+      <Filter>Source Files\structures\terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

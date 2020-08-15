@@ -281,6 +281,7 @@
     <ClCompile Include="vertexarray.cpp" />
     <ClCompile Include="vertexarrayobject.cpp" />
     <ClCompile Include="window.cpp" />
+    <ClCompile Include="worldtile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
