@@ -2,6 +2,12 @@
 
 in vec3 oColour;
 in vec3 oBarycentricCoordinate;
+in vec2 oPosition;
+
+
+in vec3 colourA;
+in vec3 colourB;
+in vec3 colourC;
 
 out vec4 color;
 
@@ -113,7 +119,10 @@ float fbm(vec3 x) {
 
 
 
-
+float valForNoise(vec3 myvec) {
+	return myvec.b;
+	return myvec.r * 0.4 + myvec.g * 0.3 + myvec.b * 0.1;
+}
 
 
 
@@ -122,13 +131,20 @@ float fbm(vec3 x) {
 
 vec3 test(vec3 barycentricCoord)
 {
-	float n = fbm(barycentricCoord);
-	float m = max(barycentricCoord.x + n, barycentricCoord.y);
-	m = max(m, barycentricCoord.z);
+	vec2 offset = oPosition / 0.2;
+
+	vec3 noisy = barycentricCoord + 0.35
+		* vec3(
+			fbm(vec3(offset, valForNoise(colourA))),
+			fbm(vec3(offset, valForNoise(colourB))),
+			fbm(vec3(offset, valForNoise(colourC)))
+		);
+
+	float max_n = max(noisy.r, max(noisy.g, noisy.b));
 	
-	if(m == barycentricCoord.x) return vec3(1, 0, 0);
-	if(m == barycentricCoord.y) return vec3(0, 1, 0);
-	if(m == barycentricCoord.z) return vec3(0, 0, 1);
+	if(max_n == noisy.r) return colourA;
+	if(max_n == noisy.g) return colourB;
+	if(max_n == noisy.b) return colourC;
 
 	return vec3(1, 1, 1);
 }

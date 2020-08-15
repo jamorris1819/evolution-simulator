@@ -183,6 +183,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="biometype.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraevent.h" />
     <ClInclude Include="cameramoveevent.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="gamestatemanager.h" />
     <ClInclude Include="handlerfunctionbase.h" />
+    <ClInclude Include="hexagon.h" />
     <ClInclude Include="idmanager.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
@@ -246,6 +248,7 @@
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="vertexarrayobject.h" />
     <ClInclude Include="window.h" />
+    <ClInclude Include="worldtile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />

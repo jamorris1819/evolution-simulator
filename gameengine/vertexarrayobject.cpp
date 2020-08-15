@@ -88,6 +88,12 @@ namespace engine {
 			vertexData[offset + 5] = v.getBarycentricCoordinate().x;
 			vertexData[offset + 6] = v.getBarycentricCoordinate().y;
 			vertexData[offset + 7] = v.getBarycentricCoordinate().z;
+			vertexData[offset + 8] = v.getColour(1).x;
+			vertexData[offset + 9] = v.getColour(1).y;
+			vertexData[offset + 10] = v.getColour(1).z;
+			vertexData[offset + 11] = v.getColour(2).x;
+			vertexData[offset + 12] = v.getColour(2).y;
+			vertexData[offset + 13] = v.getColour(2).z;
 		}
 	}
 
@@ -139,8 +145,14 @@ namespace engine {
 		glEnableVertexAttribArray(1); // Vertex colour
 		glVertexAttribPointer(1, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(2 * sizeof(float)));
 
-		glEnableVertexAttribArray(2); // Barycentric coordinater
+		glEnableVertexAttribArray(2); // Barycentric coordinatew
 		glVertexAttribPointer(2, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(5 * sizeof(float)));
+
+		glEnableVertexAttribArray(3); // Vertex colour 2
+		glVertexAttribPointer(3, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(8 * sizeof(float)));
+
+		glEnableVertexAttribArray(4); // Vertex colour 3
+		glVertexAttribPointer(4, 3, GL_FLOAT, false, vertexDataCount * sizeof(float), (const GLvoid*)(11 * sizeof(float)));
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}

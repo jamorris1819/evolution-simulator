@@ -97,6 +97,9 @@
     <Filter Include="Header Files\utilities">
       <UniqueIdentifier>{e4124c04-bdb8-42f7-b1ad-8da9325c4d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\structures\terrain">
+      <UniqueIdentifier>{a8bcc029-71df-4493-a92a-a6abd91d9ac4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -287,6 +290,15 @@
     </ClInclude>
     <ClInclude Include="triangle.h">
       <Filter>Header Files\structures\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="hexagon.h">
+      <Filter>Header Files\structures\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="worldtile.h">
+      <Filter>Header Files\structures\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="biometype.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace engine {
 		float* vertexData;
 		GLuint vao[1];
 		GLuint vbo[2];
-		int vertexDataCount = 8;
+		int vertexDataCount = 14;
 		bool enabled;
 
 		virtual void generateArrays();

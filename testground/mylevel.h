@@ -8,6 +8,7 @@
 #include "rectangle.h"
 #include "triangle.h"
 #include "logger.h"
+#include "worldtile.h"
 #include <sstream>
 
 class MyLevel : public engine::SystemGameState {
@@ -25,7 +26,20 @@ public:
 		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 
 		engine::Entity* e = new engine::Entity("test");
-		auto rc = new engine::RenderComponent(engine::Triangle(10, 10));
+
+		engine::BiomeType biomes[] = {
+			engine::BiomeType::GRASS,
+			engine::BiomeType::WATER,
+			engine::BiomeType::GRASS,
+			engine::BiomeType::WATER,
+			engine::BiomeType::GRASS,
+			engine::BiomeType::WATER,
+			engine::BiomeType::GRASS
+		};
+		auto tile = engine::WorldTile(biomes);
+		tile.generate();
+
+		auto rc = new engine::RenderComponent(tile);
 		rc->shaders.push_back(shader);
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));
