@@ -13,10 +13,22 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\generators">
+      <UniqueIdentifier>{f2372648-383d-4852-9e7f-e67aeb4c8fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\terrain">
+      <UniqueIdentifier>{4a64563f-50d4-477d-bf60-d74dd955bdea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\terrain">
+      <UniqueIdentifier>{fcc343db-3c60-4395-9dfa-f696bc879dd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testground.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gameengine\worldtile.cpp">
+      <Filter>Source Files\terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +40,18 @@
     </ClInclude>
     <ClInclude Include="mylevel.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gameengine\noisegenerator.h">
+      <Filter>Header Files\generators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gameengine\terraingenerator.h">
+      <Filter>Header Files\generators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gameengine\worldtile.h">
+      <Filter>Header Files\terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gameengine\biometype.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

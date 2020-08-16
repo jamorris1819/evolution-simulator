@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\gameengine\worldtile.cpp" />
     <ClCompile Include="testground.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\gameengine\biometype.h" />
+    <ClInclude Include="..\gameengine\noisegenerator.h" />
+    <ClInclude Include="..\gameengine\terraingenerator.h" />
+    <ClInclude Include="..\gameengine\worldtile.h" />
     <ClInclude Include="mygame.h" />
     <ClInclude Include="mylevel.h" />
   </ItemGroup>

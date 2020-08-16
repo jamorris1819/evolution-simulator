@@ -6,33 +6,31 @@
 #include "positioncomponent.h"
 #include "shadermanager.h"
 
-namespace engine {
-	void TerrainGenerator::generate(int width, int height) {
-		int tileSize = 4;
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				engine::Entity* e = new engine::Entity("test");
+void TerrainGenerator::generate(int width, int height) {
+	int tileSize = 4;
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			engine::Entity* e = new engine::Entity("test");
 
-				engine::BiomeType biomes[7] = {};
-				auto b = noise->generateHexagon(x, y, 4);
-				for (int i = 0; i < 7; i++)
-					biomes[i] = b[i];
+			BiomeType biomes[7] = {};
+			auto b = noise->generateHexagon(x, y, 4);
+			for (int i = 0; i < 7; i++)
+				biomes[i] = b[i];
 
-				auto tile = engine::WorldTile(biomes);
-				tile.generate();
+			auto tile = WorldTile(biomes);
+			tile.generate();
 
-				auto rc = new engine::RenderComponent(tile);
+			auto rc = new engine::RenderComponent(tile);
 				
-				rc->shaders.push_back(shaderManager.getShader("basic"));
-				e->addComponent(rc);
+			rc->shaders.push_back(shaderManager.getShader("basic"));
+			e->addComponent(rc);
 
-				double posX = tileSize * x * sqrt(3);
-				if (y % 2 != 0) posX += tileSize * sqrt(3) / 2; // Offset if an odd row
-				double posY = tileSize * y * 2 * 0.75f;
+			double posX = tileSize * x * sqrt(3);
+			if (y % 2 != 0) posX += tileSize * sqrt(3) / 2; // Offset if an odd row
+			double posY = tileSize * y * 2 * 0.75f;
 
-				e->addComponent(new engine::PositionComponent(glm::vec2(posX, posY)));
-				entityManager.addEntity(e);
-			}
+			e->addComponent(new engine::PositionComponent(glm::vec2(posX, posY)));
+			entityManager.addEntity(e);
 		}
 	}
 }

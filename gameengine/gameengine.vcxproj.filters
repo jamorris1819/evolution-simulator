@@ -303,18 +303,6 @@
     <ClInclude Include="hexagon.h">
       <Filter>Header Files\structures\primitives</Filter>
     </ClInclude>
-    <ClInclude Include="worldtile.h">
-      <Filter>Header Files\structures\terrain</Filter>
-    </ClInclude>
-    <ClInclude Include="biometype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="terraingenerator.h">
-      <Filter>Header Files\generator</Filter>
-    </ClInclude>
-    <ClInclude Include="noisegenerator.h">
-      <Filter>Header Files\generator</Filter>
-    </ClInclude>
     <ClInclude Include="FastNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -394,9 +382,6 @@
     </ClCompile>
     <ClCompile Include="loggingwindow.cpp">
       <Filter>Source Files\ui</Filter>
-    </ClCompile>
-    <ClCompile Include="worldtile.cpp">
-      <Filter>Source Files\structures\terrain</Filter>
     </ClCompile>
     <ClCompile Include="terraingenerator.cpp">
       <Filter>Source Files\generator</Filter>

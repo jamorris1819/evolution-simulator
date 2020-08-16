@@ -183,7 +183,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="biometype.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraevent.h" />
     <ClInclude Include="cameramoveevent.h" />
@@ -229,7 +228,6 @@
     <ClInclude Include="mouseeventdata.h" />
     <ClInclude Include="mousescrollevent.h" />
     <ClInclude Include="moveevent.h" />
-    <ClInclude Include="noisegenerator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
     <ClInclude Include="rectangle.h" />
@@ -242,7 +240,6 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />
-    <ClInclude Include="terraingenerator.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="uimanager.h" />
     <ClInclude Include="uiwindow.h" />
@@ -251,7 +248,6 @@
     <ClInclude Include="vertexarray.h" />
     <ClInclude Include="vertexarrayobject.h" />
     <ClInclude Include="window.h" />
-    <ClInclude Include="worldtile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
@@ -287,7 +283,6 @@
     <ClCompile Include="vertexarray.cpp" />
     <ClCompile Include="vertexarrayobject.cpp" />
     <ClCompile Include="window.cpp" />
-    <ClCompile Include="worldtile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

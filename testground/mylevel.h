@@ -14,7 +14,7 @@
 
 class MyLevel : public engine::SystemGameState {
 public:
-	engine::TerrainGenerator* terrainGenerator;
+	TerrainGenerator* terrainGenerator;
 	MyLevel(engine::Window* w, engine::EventBus& eb) : SystemGameState(w, eb) {
 		std::cout << "level constructed" << std::endl;
 		eventBus.subscribe(this, &MyLevel::handleInputDown);
@@ -46,7 +46,7 @@ public:
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(5, 0)));
 		entityManager.addEntity(e);*/
-		terrainGenerator = new engine::TerrainGenerator(entityManager, shaderManager, new engine::NoiseGenerator());
+		terrainGenerator = new TerrainGenerator(entityManager, shaderManager, new NoiseGenerator());
 
 		terrainGenerator->generate(50, 50);
 
