@@ -2,7 +2,7 @@
 #include "rendercomponent.h"
 
 namespace engine {
-	RenderComponent::RenderComponent() {
+	RenderComponent::RenderComponent() : show(true) {
 		vao.initialise();
 	}
 

@@ -10,9 +10,11 @@
 #include "logger.h"
 #include "worldtile.h"
 #include <sstream>
+#include "terraingenerator.h"
 
 class MyLevel : public engine::SystemGameState {
 public:
+	engine::TerrainGenerator* terrainGenerator;
 	MyLevel(engine::Window* w, engine::EventBus& eb) : SystemGameState(w, eb) {
 		std::cout << "level constructed" << std::endl;
 		eventBus.subscribe(this, &MyLevel::handleInputDown);
@@ -25,7 +27,7 @@ public:
 
 		engine::Shader shader = shaderManager.addShader("basic", (char*)"shaders/vertexshader.glsl", (char*)"shaders/fragmentshader.glsl");
 
-		engine::Entity* e = new engine::Entity("test");
+		/*engine::Entity* e = new engine::Entity("test");
 
 		engine::BiomeType biomes[] = {
 			engine::BiomeType::GRASS,
@@ -42,8 +44,12 @@ public:
 		auto rc = new engine::RenderComponent(tile);
 		rc->shaders.push_back(shader);
 		e->addComponent(rc);
-		e->addComponent(new engine::PositionComponent(glm::vec2(0, 0)));
-		entityManager.addEntity(e);
+		e->addComponent(new engine::PositionComponent(glm::vec2(5, 0)));
+		entityManager.addEntity(e);*/
+		terrainGenerator = new engine::TerrainGenerator(entityManager, shaderManager, new engine::NoiseGenerator());
+
+		terrainGenerator->generate(50, 50);
+
 	}
 	virtual void initialise() override {
 		SystemGameState::initialise();
@@ -92,4 +98,6 @@ public:
 		ss << "Mouse scroll [" << k->dx << ", " << k->dy << "]";
 		engine::Logger::debug(ss);
 	}
+
+
 };

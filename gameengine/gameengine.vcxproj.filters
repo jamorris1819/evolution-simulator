@@ -103,6 +103,12 @@
     <Filter Include="Source Files\structures\terrain">
       <UniqueIdentifier>{cff79be6-cb40-44a8-964e-53183d1ebc50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\generator">
+      <UniqueIdentifier>{0a6dd648-8d5d-40ca-a468-1208edd5aafe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generator">
+      <UniqueIdentifier>{e2e94410-e435-4137-9803-f3431b76723c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -303,6 +309,15 @@
     <ClInclude Include="biometype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="terraingenerator.h">
+      <Filter>Header Files\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="noisegenerator.h">
+      <Filter>Header Files\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameengine.cpp">
@@ -382,6 +397,15 @@
     </ClCompile>
     <ClCompile Include="worldtile.cpp">
       <Filter>Source Files\structures\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="terraingenerator.cpp">
+      <Filter>Source Files\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="noisegenerator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

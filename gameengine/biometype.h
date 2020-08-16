@@ -1,4 +1,5 @@
 #pragma once
+#include "glm/vec3.hpp"
 
 namespace engine {
 	enum class BiomeType : unsigned {

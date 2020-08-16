@@ -195,6 +195,7 @@
     <ClInclude Include="event.h" />
     <ClInclude Include="eventbus.h" />
     <ClInclude Include="events.h" />
+    <ClInclude Include="FastNoise.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gamestate.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="mouseeventdata.h" />
     <ClInclude Include="mousescrollevent.h" />
     <ClInclude Include="moveevent.h" />
+    <ClInclude Include="noisegenerator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="positioncomponent.h" />
     <ClInclude Include="rectangle.h" />
@@ -240,6 +242,7 @@
     <ClInclude Include="system.h" />
     <ClInclude Include="systemgamestate.h" />
     <ClInclude Include="systemmanager.h" />
+    <ClInclude Include="terraingenerator.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="uimanager.h" />
     <ClInclude Include="uiwindow.h" />
@@ -254,6 +257,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entitymanager.cpp" />
+    <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameengine.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -265,6 +269,7 @@
     <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="gamestatemanager.cpp" />
     <ClCompile Include="loggingwindow.cpp" />
+    <ClCompile Include="noisegenerator.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -276,6 +281,7 @@
     <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemgamestate.cpp" />
     <ClCompile Include="systemmanager.cpp" />
+    <ClCompile Include="terraingenerator.cpp" />
     <ClCompile Include="uimanager.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarray.cpp" />

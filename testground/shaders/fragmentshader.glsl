@@ -152,5 +152,6 @@ void main(void)
 	}
 	else {
 		color = vec4(determineColour(oBarycentricCoordinate), 1);
+		//color = color * smoothstep(0.0, 0.005, min(oBarycentricCoordinate.r, min(oBarycentricCoordinate.g, oBarycentricCoordinate.b)));
 	}
 }

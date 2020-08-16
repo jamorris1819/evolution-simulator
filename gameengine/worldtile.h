@@ -10,6 +10,10 @@ namespace engine {
 			for (int i = 0; i < 7; i++)
 				biomes[i] = b[i];
 		}
+		WorldTile() : Hexagon(4), biomes() {
+			for (int i = 0; i < 7; i++)
+				biomes[i] = BiomeType::WATER;
+		}
 		virtual void generate() override;
 	private:
 		BiomeType biomes[7];

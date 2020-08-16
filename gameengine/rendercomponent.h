@@ -38,6 +38,8 @@ namespace engine {
 		/// <param name="data">Vertex data to be set</param>
 		void setData(const VertexArray& data);
 
+		bool show;
+
 		std::vector<Shader> shaders;
 		VertexArrayObject vao;
 	};
