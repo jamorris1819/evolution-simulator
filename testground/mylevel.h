@@ -46,7 +46,7 @@ public:
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(5, 0)));
 		entityManager.addEntity(e);*/
-		terrainGenerator = new TerrainGenerator(entityManager, shaderManager, new NoiseGenerator());
+		terrainGenerator = new TerrainGenerator(entityManager, shaderManager, new NoiseGenerator(new FastNoise()));
 
 		terrainGenerator->generate(50, 50);
 
