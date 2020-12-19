@@ -22,6 +22,9 @@
     <Filter Include="Source Files\terrain">
       <UniqueIdentifier>{fcc343db-3c60-4395-9dfa-f696bc879dd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\generators">
+      <UniqueIdentifier>{81fffe29-a816-41ba-879e-a0a1cb708750}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testground.cpp">
@@ -29,6 +32,12 @@
     </ClCompile>
     <ClCompile Include="..\gameengine\worldtile.cpp">
       <Filter>Source Files\terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gameengine\terraingenerator.cpp">
+      <Filter>Source Files\generators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gameengine\noisegenerator.cpp">
+      <Filter>Source Files\generators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

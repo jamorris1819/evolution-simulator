@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\gameengine\noisegenerator.cpp" />
+    <ClCompile Include="..\gameengine\terraingenerator.cpp" />
     <ClCompile Include="..\gameengine\worldtile.cpp" />
     <ClCompile Include="testground.cpp" />
   </ItemGroup>

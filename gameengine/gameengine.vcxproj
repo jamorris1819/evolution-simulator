@@ -265,7 +265,6 @@
     <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="gamestatemanager.cpp" />
     <ClCompile Include="loggingwindow.cpp" />
-    <ClCompile Include="noisegenerator.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -277,7 +276,6 @@
     <ClCompile Include="shadermanager.cpp" />
     <ClCompile Include="systemgamestate.cpp" />
     <ClCompile Include="systemmanager.cpp" />
-    <ClCompile Include="terraingenerator.cpp" />
     <ClCompile Include="uimanager.cpp" />
     <ClCompile Include="vertex.cpp" />
     <ClCompile Include="vertexarray.cpp" />

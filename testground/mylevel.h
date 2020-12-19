@@ -46,9 +46,11 @@ public:
 		e->addComponent(rc);
 		e->addComponent(new engine::PositionComponent(glm::vec2(5, 0)));
 		entityManager.addEntity(e);*/
-		terrainGenerator = new TerrainGenerator(entityManager, shaderManager, new NoiseGenerator(new FastNoise()));
+		FastNoise* noise = new FastNoise(1);
+		//noise->SetFrequency(0.0004);
+		terrainGenerator = new TerrainGenerator(entityManager, shaderManager, new NoiseGenerator(noise));
 
-		terrainGenerator->generate(50, 50);
+		terrainGenerator->generate(40, 40);
 
 	}
 	virtual void initialise() override {

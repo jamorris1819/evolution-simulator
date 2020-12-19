@@ -5,7 +5,7 @@
 #define PI 3.1415326
 
 double NoiseGenerator::generate(double x, double y) {
-    return noise.get()->GetSimplex(x, y);
+    return noise.get()->GetValueFractal(x * 0.5 , y * 0.5) + 0.4;
 }
 std::vector<BiomeType> NoiseGenerator::generateHexagon(double x, double y, int size) {
     std::vector<BiomeType> type;
@@ -28,5 +28,10 @@ std::vector<BiomeType> NoiseGenerator::generateHexagon(double x, double y, int s
 }
 
 BiomeType NoiseGenerator::getBiomeType(double height) {
+    if (height < 0.2) return BiomeType::DEEP_WATER;
+    if (height < 0.4) return BiomeType::WATER;
+    if (height < 0.45) return BiomeType::BEACH;
+    if (height < 0.6) return BiomeType::GRASS;
+    if (height < 0.8) return BiomeType::TEST;
     return height > 0.4 ? BiomeType::GRASS : BiomeType::WATER;
 }

@@ -383,14 +383,8 @@
     <ClCompile Include="loggingwindow.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="terraingenerator.cpp">
-      <Filter>Source Files\generator</Filter>
-    </ClCompile>
     <ClCompile Include="FastNoise.cpp">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="noisegenerator.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
